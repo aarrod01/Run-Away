@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Scenes/prueba luces 2d.unity
+  isLoaded: 1
+  isActive: 1
