@@ -16,7 +16,7 @@ public class MonsterMovement : MonoBehaviour
 	Transform jugadorTrans;
 	Vector2 posicionRetorno;
 
-	EstadosMonstruo estadoMonstruo;
+	public EstadosMonstruo estadoMonstruo;
 
 	void Start () 
 	{
