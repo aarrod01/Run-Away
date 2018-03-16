@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(MainCamera))]
-public class MainCamera : MonoBehaviour {
-    
-    Vector2 posicionPuntero;
+
+public class MainCamera : MonoBehaviour 
+{
+	public float smoothTime = 1;
+	public float distancia = 5f;
+
     Camera c;
     Transform cameraTransform;
     Rigidbody2D playerRb;
-    Vector2 velocity;
-    public float smoothTime = 1;
+	PlayerMovement playerMovement;
+	Vector2 velocity, posicionPuntero;
     Vector3 offset;
-    PlayerMovement playerMovement;
-    Vector2 ultimaVelocidad;
-    public float distancia = 5f;
 
     // Use this for initialization
     void Start () {
@@ -30,9 +30,8 @@ public class MainCamera : MonoBehaviour {
         offset.y = 0;
 
     }
-
-    // Update is called once per frame
-    void Update()
+		
+    void LateUpdate()
     {
         if (((Vector2)cameraTransform.position - playerRb.position).sqrMagnitude > distancia 
             && playerRb.velocity.sqrMagnitude > 0f)

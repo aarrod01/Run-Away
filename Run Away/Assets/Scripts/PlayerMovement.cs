@@ -3,22 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof (Rigidbody2D))]
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour 
+{
+	public float velocidadMaxima = 1f,
+				factorAceleracion = 0.5f,
+				factorGiro = 0.5f,
+				fraccionMinimaVelocidadHaciaDetras = 0.5f;
+	public LayerMask conQueColisiona;
 
-    Rigidbody2D player;
-    public float velocidadMaxima = 1f;
-    Vector2 direccionMirada;
-    Vector2 direccionMovimiento;
-    public float factorAceleracion = 0.5f;
-    public float factorGiro = 0.5f;
-    public float fraccionMinimaVelocidadHaciaDetras = 0.5f;
-    Rigidbody2D puntero;
+	Rigidbody2D player, puntero;
+    Vector2 direccionMirada,
+			direccionMovimiento;
     Lantern luz;
-    public LayerMask conQueColisiona;
+
     bool invisible = false;
-
-    
-
     bool movimientoLibre = true;
 
     // Use this for initialization
@@ -29,7 +27,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
         if (movimientoLibre)
         {
@@ -68,7 +66,7 @@ public class PlayerMovement : MonoBehaviour {
 
         player.velocity = velocidad;
     }
-
+	/*
     private void OnTriggerStay2D(Collider2D collision)
     {
         if((collision.tag=="Obstaculo"|| collision.tag == "MedioObstaculo" )&& movimientoLibre)
@@ -78,12 +76,13 @@ public class PlayerMovement : MonoBehaviour {
             player.velocity = player.velocity - resultados[0].normal * 5;
         }
     }
-
+*/
     public void MovimientoLibre(bool variable)
     {
         movimientoLibre = variable;
     }
-    public void Invisible(bool a) {
+    public void Invisible(bool a) 
+	{
 
         luz.gameObject.SetActive(!a);
         invisible = a;
