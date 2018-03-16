@@ -9,7 +9,7 @@ public class Ejemplo : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         master = GetComponent<Interactuable>();
-        master.Click = () => { /*Cosa que hace al interactuar*/ };
+        master.Click = (PlayerMovement a) => { /*Cosa que hace al interactuar*/ };
 	}
 	
 }

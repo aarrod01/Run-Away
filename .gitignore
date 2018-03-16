@@ -1,7 +1,7 @@
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
-
+**/Library
 # Folder config file
 Desktop.ini
 
@@ -45,3 +45,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+Run Away/Library/metadata/06/0621b4aab2236437592f1f292cb81d20
+Run Away/Library/assetDatabase3
+Run Away/Library/assetDatabase3
+Run Away/Library/assetDatabase3

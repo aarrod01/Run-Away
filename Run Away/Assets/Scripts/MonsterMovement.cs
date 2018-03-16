@@ -10,6 +10,8 @@ namespace Monster
 
 public class MonsterMovement : MonoBehaviour 
 {
+    public LayerMask conQueColisiona;
+
 	public float velMovRuta, velMovPerseguir, velGiro;
 
 	Rigidbody2D rb2D;
@@ -64,5 +66,6 @@ public class MonsterMovement : MonoBehaviour
 	{
 		rb2D.velocity = Vector2.zero;
 	}
+
 }		
 

@@ -18,7 +18,7 @@ public class CampoVision : MonoBehaviour
 		
 	void OnTriggerStay2D (Collider2D other)
 	{
-		if (other.gameObject.tag == "Player")
+		if (other.gameObject.tag == "Player"&&!other.GetComponent<PlayerMovement>().Invisible())
 		{
 			RaycastHit2D hit = Physics2D.Raycast (transform.position, jugador.position - transform.position, 100f, queGolpear);
 			if (hit.collider.gameObject.tag == "Player") 

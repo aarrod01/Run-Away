@@ -6,12 +6,13 @@ using UnityEngine;
 public class Pointer : MonoBehaviour {
 
     Interactuable objetoInteractuable = null;
-   
+    PlayerMovement player;
     Rigidbody2D puntero;
     public float lerp = 0.5f;
 
 	// Use this for initialization
 	void Start () {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         puntero = GetComponent<Rigidbody2D>();
 	}
 	
@@ -19,7 +20,7 @@ public class Pointer : MonoBehaviour {
 	void Update () {
         puntero.MovePosition(Vector2.Lerp(puntero.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), lerp));
         if (Input.GetMouseButtonDown(0) && objetoInteractuable != null)
-            objetoInteractuable.Click();
+            objetoInteractuable.Click(player);
 
 	}
 
