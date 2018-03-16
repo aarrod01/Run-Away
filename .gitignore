@@ -1,7 +1,12 @@
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
-**/Library
+
+# Cosas de Unity
+Library/
+*.sln
+*.csproj
+
 # Folder config file
 Desktop.ini
 
