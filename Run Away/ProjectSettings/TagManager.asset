@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Obstaculo
   - Path
+  - Pointer
+  - MedioObstaculo
   layers:
   - Default
   - TransparentFX
