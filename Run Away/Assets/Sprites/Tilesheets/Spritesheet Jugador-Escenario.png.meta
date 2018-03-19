@@ -1,12 +1,15 @@
 fileFormatVersion: 2
-guid: 3fd12eb8c02257c46a34821549ea2d36
-timeCreated: 1521284250
+guid: 5ea8be9cbcb42084986cd277f0d285d5
+timeCreated: 1521484400
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: PalancaRojaPrototipo 1_0
-    21300002: PalancaRojaPrototipo 1_1
-    21300004: PalancaRojaPrototipo 1_2
+    21300000: Spritesheet Jugador-Escenario_0
+    21300002: Spritesheet Jugador-Escenario_1
+    21300004: Spritesheet Jugador-Escenario_2
+    21300006: Spritesheet Jugador-Escenario_3
+    21300008: Spritesheet Jugador-Escenario_4
+    21300010: Spritesheet Jugador-Escenario_5
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -49,7 +52,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 48
+  spritePixelsToUnits: 32
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -83,13 +86,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PalancaRojaPrototipo 1_0
+      name: Spritesheet Jugador-Escenario_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 16
-        height: 64
+        y: 288
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -97,27 +100,69 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PalancaRojaPrototipo 1_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: PalancaRojaPrototipo 1_2
+      name: Spritesheet Jugador-Escenario_1
       rect:
         serializedVersion: 2
         x: 32
-        y: 0
-        width: 16
-        height: 64
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Spritesheet Jugador-Escenario_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Spritesheet Jugador-Escenario_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Spritesheet Jugador-Escenario_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Spritesheet Jugador-Escenario_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 288
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
