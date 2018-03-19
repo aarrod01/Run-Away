@@ -2,47 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(MainCamera))]
+
 
 public class MainCamera : MonoBehaviour 
 {
 	public float smoothTime = 1;
 	public float distancia = 5f;
+    public float anchoInfinito = 1f;
+    public float frecuenciaLemniscata = 1f;
+    public float velocidadGiro = 1f;
+    public float anguloGiroMaximo = 10f;
 
-    Camera c;
-    Transform cameraTransform;
-    Rigidbody2D playerRb;
+    Rigidbody2D playerRb, cameraRb, punteroRb;
+    Transform transformCamaraRelativo;
 	PlayerMovement playerMovement;
-	Vector2 velocity, posicionPuntero;
-    Vector3 offset;
+	Vector2 posicionPuntero, velocidadTraslacionSimple;
 
     // Use this for initialization
     void Start () {
- 
-        c = Camera.main;
-        cameraTransform = GetComponent<Transform>();
         GameObject player = GameObject.FindWithTag("Player");
         playerRb = player.GetComponent<Rigidbody2D>();
+        punteroRb = GameObject.FindWithTag("Pointer").GetComponent<Rigidbody2D>();
         playerMovement = player.GetComponent<PlayerMovement>();
-        velocity = Vector2.zero;
-        offset = cameraTransform.position + player.transform.position ;
-        offset.x = 0;
-        offset.y = 0;
-
+        cameraRb = GetComponent<Rigidbody2D>();
+        transformCamaraRelativo = transform.GetChild(0);
+        cameraRb.position = playerRb.position;
+        velocidadTraslacionSimple = Vector2.zero;
     }
 		
     void LateUpdate()
     {
-        if (((Vector2)cameraTransform.position - playerRb.position).sqrMagnitude > distancia 
-            && playerRb.velocity.sqrMagnitude > 0f)
+        TraslacionSimple(ref velocidadTraslacionSimple);
+        TraslacionLemniscata();
+        CameraRoll();
+        cameraRb.velocity = velocidadTraslacionSimple;
+    }
+    void TraslacionLemniscata()
+    {
+        Vector3 pos = transformCamaraRelativo.localPosition;
+        float time = Time.time * Mathf.PI * 2f * frecuenciaLemniscata;
+        pos.x = anchoInfinito * Mathf.Sqrt(2f) * Mathf.Cos(time) / (1f + Mathf.Pow(Mathf.Sin(time), 2f));
+        pos.y = anchoInfinito * Mathf.Sqrt(2f) * Mathf.Sin(time) * Mathf.Cos(time * Mathf.PI * 2f * frecuenciaLemniscata) / (1f + Mathf.Pow(Mathf.Sin(time), 2f));
+        transformCamaraRelativo.localPosition = pos;
+
+    }
+    void TraslacionSimple(ref Vector2 velocidad)
+    {
+            Vector2.SmoothDamp(cameraRb.position,
+                playerRb.position, ref velocidad, smoothTime, float.MaxValue, Time.deltaTime);
+    }
+
+    void CameraRoll()
+    {
+        if(playerRb.velocity.x>0f)
         {
-            cameraTransform.position += (Vector3)playerRb.velocity * Time.deltaTime;
-            velocity = playerRb.velocity;
-        }
-        else
+            cameraRb.rotation = Mathf.Min(cameraRb.rotation + Time.deltaTime * velocidadGiro,anguloGiroMaximo);
+        }else if(playerRb.velocity.x<0f)
         {
-            cameraTransform.position = (Vector3)Vector2.SmoothDamp(cameraTransform.position,
-                playerRb.position, ref velocity, smoothTime, float.MaxValue, Time.deltaTime) + offset;
+            cameraRb.rotation = Mathf.Max(cameraRb.rotation - Time.deltaTime * velocidadGiro, -anguloGiroMaximo);
         }
     }
 }

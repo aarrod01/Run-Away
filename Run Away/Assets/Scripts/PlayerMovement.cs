@@ -7,13 +7,14 @@ public class PlayerMovement : MonoBehaviour
 {
 	public float velocidadMaxima = 1f,
 				factorAceleracion = 0.5f,
-				factorGiro = 0.5f,
+                velocidadAngularMaxima = 1f,
+                factorAceleracionAngular = 0.5f,
+                factorGiro = 0.5f,
 				fraccionMinimaVelocidadHaciaDetras = 0.5f;
-	public LayerMask conQueColisiona;
 
 	Rigidbody2D player, puntero;
     Vector2 direccionMirada,
-			direccionMovimiento;
+            direccionMovimiento;
     Lantern luz;
 
     bool invisible = false;
@@ -38,14 +39,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Giro()
     {
-
+        float velocidadAngularPredicha;
         Vector2 direccionMovimientoObjetivo = puntero.position - player.position;
-
-        player.rotation = (Mathf.LerpAngle(player.rotation, Vector2.SignedAngle(Vector2.up, direccionMovimientoObjetivo), factorGiro));
+        float anguloPredicho = Vector2.SignedAngle(Vector2.up, direccionMovimientoObjetivo)- player.rotation;
+        if (anguloPredicho > 180f)
+            anguloPredicho -= 360f;
+        else if (anguloPredicho < -180f)
+            anguloPredicho += 360f;
+        velocidadAngularPredicha = (anguloPredicho)/Time.fixedDeltaTime;
+        player.angularVelocity = Mathf.Lerp(player.angularVelocity,Mathf.Max(Mathf.Min(velocidadAngularMaxima, velocidadAngularPredicha),-velocidadAngularMaxima),factorAceleracionAngular);
 
         direccionMirada = new Vector2(-Mathf.Sin(player.rotation * Mathf.PI/180), Mathf.Cos(player.rotation*Mathf.PI/180));
-        
-    }
+}
 
     void Movimiento()
     {
@@ -65,25 +70,15 @@ public class PlayerMovement : MonoBehaviour
 
 
         player.velocity = velocidad;
+        direccionMovimiento.Normalize();
     }
-	/*
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if((collision.tag=="Obstaculo"|| collision.tag == "MedioObstaculo" )&& movimientoLibre)
-        {
-            RaycastHit2D[] resultados= new RaycastHit2D[1];
-            GetComponent<Collider2D>().Raycast(player.position, resultados,conQueColisiona);
-            player.velocity = player.velocity - resultados[0].normal * 5;
-        }
-    }
-*/
+    
     public void MovimientoLibre(bool variable)
     {
         movimientoLibre = variable;
     }
     public void Invisible(bool a) 
 	{
-
         luz.gameObject.SetActive(!a);
         invisible = a;
     }
