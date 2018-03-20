@@ -4,6 +4,7 @@ ehthumbs.db
 
 # Cosas de Unity
 Library/
+Temp/
 *.sln
 *.csproj
 

@@ -9,6 +9,10 @@ TagManager:
   - Pointer
   - MedioObstaculo
   - foco
+  - Verde
+  - Azul
+  - Roja
+  - Amarilla
   layers:
   - Default
   - TransparentFX

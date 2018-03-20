@@ -79,7 +79,6 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Invisible(bool a) 
 	{
-        luz.gameObject.SetActive(!a);
         invisible = a;
     }
     public bool Invisible()
