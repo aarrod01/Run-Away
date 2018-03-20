@@ -5,7 +5,7 @@ using Monster;
 
 namespace Monster
 {
-	public enum EstadosMonstruo{SiguiendoJugador, EnRuta, VolviendoARuta, Ninguno};
+	public enum EstadosMonstruo{SiguiendoJugador, EnRuta, PensandoRuta ,VolviendoARuta, Ninguno};
 }
 
 public class MonsterMovement : MonoBehaviour 

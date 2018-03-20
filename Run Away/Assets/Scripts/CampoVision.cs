@@ -28,7 +28,7 @@ public class CampoVision : MonoBehaviour
 			} 
 			else if (monstruo.EstadoMonstruoActual () == EstadosMonstruo.SiguiendoJugador) 
 			{
-				monstruo.CambiarEstadoMonstruo (EstadosMonstruo.VolviendoARuta);
+				monstruo.CambiarEstadoMonstruo (EstadosMonstruo.PensandoRuta);
 				Debug.DrawRay (transform.position, (jugador.position - transform.position).normalized, Color.red);
 			}
 		}
@@ -37,6 +37,6 @@ public class CampoVision : MonoBehaviour
 	void OnTriggerExit2D (Collider2D other)
 	{
 		if (other.gameObject.tag == "Player" && monstruo.EstadoMonstruoActual() == EstadosMonstruo.SiguiendoJugador) 
-			monstruo.CambiarEstadoMonstruo(EstadosMonstruo.VolviendoARuta);
+			monstruo.CambiarEstadoMonstruo(EstadosMonstruo.PensandoRuta);
 	}
 }

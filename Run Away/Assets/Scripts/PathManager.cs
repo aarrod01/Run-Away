@@ -34,6 +34,12 @@ namespace Recorrido
             
 
         }
+
+        public Vector2 QuitarNodo()
+        {
+            siguiente = siguiente.siguiente;
+            return este = siguiente.este;
+        }
         //metodo que devulve la primera posicion de la lista, si el vector2 esta  a menos de margen unidades la lista pasa a apuntar al elemento siguiente.
         public Vector2 PosicionObjetivo(Vector2 posOrigen)
         {
@@ -66,7 +72,7 @@ public class PathManager : MonoBehaviour {
             Destroy(this.gameObject);
 
         //Busca todos los nodos del grafo.
-        GameObject[] auxiliar = GameObject.FindGameObjectsWithTag("PuntoRuta");
+        GameObject[] auxiliar = GameObject.FindGameObjectsWithTag("Path");
         puntosTotales = new PuntoRecorrido[auxiliar.Length];
         for (int i = 0; i < puntosTotales.Length; i++)
         {
@@ -282,21 +288,11 @@ public class PathManager : MonoBehaviour {
     }
 
     //Aplica el A* desde los puntosRecorrido mas cercanos a la posicion final e inicial.
-    public listaNodos EncontarCamino(Vector2 posInicial, Vector2 posFinal)
+    public listaNodos EncontarCamino(PuntoRecorrido inicio, PuntoRecorrido fin)
     {
-        //Busca cuales son los puntos del recorrido mas cercanos.
-        PuntoRecorrido inicio, final;
-        inicio = puntosTotales[0];
-        final = puntosTotales[0];
-        for (int i =1; i<puntosTotales.Length;i++)
-        {
-            if (inicio.DistanciaHasta(posInicial) > puntosTotales[i].DistanciaHasta(posInicial))
-                inicio = puntosTotales[i];
-            if (final.DistanciaHasta(posFinal) > puntosTotales[i].DistanciaHasta(posFinal))
-                final = puntosTotales[i];
-        }
+        
         //Busca el recorrido.
-        NodoRecorrido aux = crearRecorrido(inicio, final);
+        NodoRecorrido aux = crearRecorrido(inicio, fin);
         //Crea la lista en orden.
         listaNodos lista = new listaNodos();
         while (aux != null)

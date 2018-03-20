@@ -5,8 +5,8 @@ using UnityEngine;
 public class PuntoRecorrido : MonoBehaviour {
 
 	Vector2 estaPosicion;
-	PuntoRecorrido[] posicionesConectadas;
-	LayerMask[] capas;
+	public PuntoRecorrido[] posicionesConectadas;
+	public LayerMask conQueColisiona;
 
     //Metodo que pone como posiciones conectadas a aquellas con las que se puede unir el punto en linea recta sin que choque contra ningun obstáculo.
     public void ReiniciarContactos()
@@ -15,7 +15,7 @@ public class PuntoRecorrido : MonoBehaviour {
         gameObject.GetComponent<Collider2D>().enabled = false;
         estaPosicion = transform.position;
         //Busca todos los puntos del mapa.
-        GameObject[] puntosMapa = GameObject.FindGameObjectsWithTag("PuntoRuta");
+        GameObject[] puntosMapa = GameObject.FindGameObjectsWithTag("Path");
 
         //Creamos un vector auxiliar que guardara los puntos en contacto
         PuntoRecorrido[] aux = new PuntoRecorrido[puntosMapa.Length];
@@ -23,7 +23,7 @@ public class PuntoRecorrido : MonoBehaviour {
         int j = 0;
         for (int i = 0; i < puntosMapa.Length; i++)
         {
-            RaycastHit2D hit = Physics2D.Raycast(estaPosicion, (Vector2)puntosMapa[i].transform.position - estaPosicion, Mathf.Infinity, Physics2D.AllLayers);
+            RaycastHit2D hit = Physics2D.Raycast(estaPosicion, (Vector2)puntosMapa[i].transform.position - estaPosicion, Mathf.Infinity, conQueColisiona);
 
 
             if (hit.collider != null && hit.collider.gameObject == puntosMapa[i].gameObject)
@@ -40,6 +40,7 @@ public class PuntoRecorrido : MonoBehaviour {
         //Volvemos a activar su collider.
         gameObject.GetComponent<Collider2D>().enabled = true;
     }
+
     public float DistanciaHasta(PuntoRecorrido objetivo)
     {
         return (estaPosicion - objetivo.estaPosicion).sqrMagnitude;

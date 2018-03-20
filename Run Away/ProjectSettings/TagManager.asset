@@ -22,8 +22,8 @@ TagManager:
   - AmbientLight
   - Player
   - Obstacles
-  - 
-  - 
+  - Path
+  - Monsters
   - 
   - 
   - 

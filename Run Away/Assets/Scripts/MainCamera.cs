@@ -16,7 +16,7 @@ public class MainCamera : MonoBehaviour
     Rigidbody2D playerRb, cameraRb, punteroRb;
     Transform transformCamaraRelativo;
 	PlayerMovement playerMovement;
-	Vector2 posicionPuntero, velocidadTraslacionSimple;
+	Vector2 velocidadTraslacionSimple;
 
     // Use this for initialization
     void Start () {
