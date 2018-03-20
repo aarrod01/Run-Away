@@ -11,6 +11,7 @@ public class CuerpoContacto : MonoBehaviour
 	MonsterMovement monstruo;
 
 	public PuntoRecorrido[] ruta;
+    PuntoRecorrido[] puntosRuta;
     PuntoRecorrido ultimopunto;
     const float MARGEN = 0.001f;
     public listaNodos caminoDeVuelta;
@@ -25,7 +26,25 @@ public class CuerpoContacto : MonoBehaviour
 		for (int i = 1; i < transformAuxiliar.Length; i++)
 			ruta [i-1] = (Vector2) (transformAuxiliar [i].position + transformAuxiliar [0].position + posRutas);*/
 		monstruo = GetComponentInParent<MonsterMovement> ();
-	}
+        PuntoRecorrido[] aux = new PuntoRecorrido[ruta.Length];
+        int j = 0;
+        for (int i = 0; i < ruta.Length; i++)
+        {
+            int k = 0;
+            while (k < j && ruta[i] != aux[k])
+                k++;
+            if (k == j)
+            {
+                aux[j] = ruta[i];
+                j++;
+            }
+        }
+
+        puntosRuta = new PuntoRecorrido[j];
+        for (int i = 0; i < j; i++)
+            puntosRuta[i] = aux[i];
+
+    }
 
 
     private void Update()
@@ -37,7 +56,7 @@ public class CuerpoContacto : MonoBehaviour
                     puntoRutaActual = (puntoRutaActual + 1) % ruta.Length;
                 break;
             case EstadosMonstruo.PensandoRuta:
-				caminoDeVuelta = PathManager.instance.EncontarCamino(transform, ruta);
+				caminoDeVuelta = PathManager.instance.EncontarCamino(transform, puntosRuta);
                 monstruo.CambiarEstadoMonstruo(EstadosMonstruo.VolviendoARuta);
                 break;
             case EstadosMonstruo.VolviendoARuta:
@@ -84,13 +103,11 @@ public class CuerpoContacto : MonoBehaviour
         {
             case EstadosMonstruo.EnRuta:
 	            return ruta[puntoRutaActual].EstaPosicion();
-			break;
             case EstadosMonstruo.VolviendoARuta:
                 return caminoDeVuelta.este;
             default:
                 return Vector2.positiveInfinity;
         }
-		return Vector2.zero;
 	}
 		
 }

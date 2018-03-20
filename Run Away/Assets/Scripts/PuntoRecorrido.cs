@@ -57,4 +57,9 @@ public class PuntoRecorrido : MonoBehaviour {
     {
         return estaPosicion;
     }
+    public void CambiarPosicion(Vector2 a)
+    {
+        estaPosicion = a;
+        transform.position = a;
+    }
 }

@@ -13,6 +13,12 @@ namespace Recorrido
         public listaNodos siguiente;
         public Vector2 este;
 
+        public listaNodos(listaNodos a, Vector2 b)
+        {
+            siguiente = a;
+            este = b;
+        }
+
         public listaNodos()
         {
             siguiente = null;
@@ -31,8 +37,20 @@ namespace Recorrido
                 este = pos;
                 siguiente = aux;
             }
-            
+        }
 
+        public void ponerNodoAlFinal(Vector2 pos)
+        {
+            if (este.Equals(Vector2.negativeInfinity))
+                este = pos;
+            else if (siguiente == null)
+            {
+                siguiente = new listaNodos(null, pos);
+            }
+            else
+            {
+                siguiente.ponerNodoAlFinal(pos);
+            }
         }
 
         public Vector2 QuitarNodo()
@@ -72,6 +90,10 @@ public class PathManager : MonoBehaviour {
         else
             Destroy(this.gameObject);
 
+
+    }
+    void Start()
+    {
         //Busca todos los nodos del grafo.
         GameObject[] auxiliar = GameObject.FindGameObjectsWithTag("Path");
         puntosTotales = new PuntoRecorrido[auxiliar.Length];
@@ -84,7 +106,7 @@ public class PathManager : MonoBehaviour {
         NodoRecorrido a = new NodoRecorrido(null, puntosTotales[0], null, 0, 0);
         ColaNodos cola = new ColaNodos(a, null);
         for (int i = 1; i < puntosTotales.Length; i++)
-			cola.IntroducirNodoAlPrincipio(new NodoRecorrido(null,puntosTotales[i], null, 0,0));
+            cola.IntroducirNodoAlPrincipio(new NodoRecorrido(null, puntosTotales[i], null, 0, 0));
     }
     //Reinicia las conexiones entre puntos
     void ReiniciarRed()
@@ -315,16 +337,16 @@ public class PathManager : MonoBehaviour {
     //Aplica el A* desde los puntosRecorrido mas cercanos a la posicion final e inicial.
 	public listaNodos EncontarCamino(Transform inicio, PuntoRecorrido[] fin)
     {
-		PuntoRecorrido ini=Instantiate (puntoBase,inicio);
-		puntoBase.ReiniciarContactos ();
-
+		PuntoRecorrido ini=Instantiate (puntoBase);
+        puntoBase.CambiarPosicion(inicio.position);
+        puntoBase.ReiniciarContactos();
         //Busca el recorrido.
-		     NodoRecorrido aux = crearRecorrido(ini, fin);
+        NodoRecorrido aux = crearRecorrido(ini, fin);
         //Crea la lista en orden.
         listaNodos lista = new listaNodos();
         while (aux != null)
         {
-            lista.ponerNodo(aux.este.EstaPosicion());
+            lista.ponerNodoAlFinal(aux.este.EstaPosicion());
             aux = aux.padre;
         }
 		Destroy (ini);

@@ -8,20 +8,39 @@ public class AbrirPuerta : MonoBehaviour {
 	public Sprite encendido, apagado;
 
 	private Rigidbody2D rb2D;
-
+    GameObject cajaDeColision;
 
 	void Awake () {
 		rb2D = this.GetComponent<Rigidbody2D> ();
-		abierta = false;
-	}
+        cajaDeColision = transform.GetChild(0).gameObject;
+        if (abierta)
+        {
+            GetComponent<Collider2D>().enabled = false;
+            cajaDeColision.SetActive(false);
+            GetComponent<SpriteRenderer>().sprite = apagado;
+            gameObject.layer = LayerMask.NameToLayer("Default");
+        }
+        else
+        {
+            GetComponent<Collider2D>().enabled = true;
+            cajaDeColision.SetActive(true);
+            GetComponent<SpriteRenderer>().sprite = encendido;
+            gameObject.layer = LayerMask.NameToLayer("LightObstacles");
+        }
+    }
 
 	public void abrir() {
+        abierta = !abierta;
 		if (abierta) {
 			GetComponent<Collider2D> ().enabled = false;
-			GetComponent<SpriteRenderer> ().sprite = encendido;
-		} else {
+            cajaDeColision.SetActive(false);
+            GetComponent<SpriteRenderer> ().sprite = apagado;
+            gameObject.layer = LayerMask.NameToLayer("Default");
+        } else {
 			GetComponent<Collider2D> ().enabled = true;
-			GetComponent<SpriteRenderer> ().sprite = apagado;
-		}
+            cajaDeColision.SetActive(true);
+            GetComponent<SpriteRenderer> ().sprite = encendido;
+            gameObject.layer = LayerMask.NameToLayer("LightObstacles");
+        }
 	}
 }

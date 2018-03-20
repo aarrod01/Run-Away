@@ -23,7 +23,7 @@ public class Baul : MonoBehaviour {
                     a.Parar();
                     a.Invisible(true);
                     a.MovimientoLibre(false);
-                    a.GetComponent<Rigidbody2D>().position = transform.position;
+                    a.transform.position = transform.position;
                     a.GetComponent<Rigidbody2D>().Sleep();
                     a.GetComponent<Collider2D>().enabled = false;
                     a.GetComponent<SpriteRenderer>().enabled = false;

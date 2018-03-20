@@ -17,11 +17,13 @@ public class Palanca : MonoBehaviour {
 		master = GetComponent<Interactuable>();
 		master.Click = (PlayerMovement a) => {
 			GetComponent<Collider2D>().enabled = false;
+            
             Vector3 pos = transform.position;
 			RaycastHit2D hit = Physics2D.Raycast(pos,a.transform.position- pos, distanciaInteraccion, conQueColisiona);
-			if(hit.collider.tag=="Player")
+			if(hit.collider!=null&&hit.collider.tag=="Player")
 			{
-				doors = GameObject.FindGameObjectsWithTag(colorDelInterruptor);
+                transform.Rotate(new Vector3(0f, 0f, 180f));
+                doors = GameObject.FindGameObjectsWithTag(colorDelInterruptor);
 				for (int i = 0; i < doors.Length; i++)
 					doors[i].GetComponent<AbrirPuerta>().abrir();
 			}

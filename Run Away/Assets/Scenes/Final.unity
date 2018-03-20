@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b87efdd1063dd46b756d3c332a351b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  escena: Tutorial
+  escena: Intro
 --- !u!4 &981472315
 Transform:
   m_ObjectHideFlags: 0

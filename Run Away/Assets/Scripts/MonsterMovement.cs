@@ -16,7 +16,6 @@ public class MonsterMovement : MonoBehaviour
 
 	Rigidbody2D rb2D;
 	Transform jugadorTrans;
-	Vector2 posicionRetorno;
 
 	public EstadosMonstruo estadoMonstruo;
 
