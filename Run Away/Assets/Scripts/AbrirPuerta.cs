@@ -4,28 +4,24 @@ using UnityEngine;
 
 public class AbrirPuerta : MonoBehaviour {
 
-	public bool abrirIzquierda;
-	public bool interactuado;
+	public bool abierta;
+	public Sprite encendido, apagado;
 
 	private Rigidbody2D rb2D;
 
-	// Use this for initialization
-	void Start () {
-		abrirIzquierda = true;
-		interactuado = false;
 
+	void Awake () {
 		rb2D = this.GetComponent<Rigidbody2D> ();
+		abierta = false;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (interactuado) {
-			if (abrirIzquierda) {
-				rb2D.MoveRotation (rb2D.rotation + 90);
-			} else {
-				rb2D.MoveRotation (rb2D.rotation - 90);
-			}
-			this.GetComponentInChildren<AbrirPuerta>().enabled = false; 
+
+	public void abrir() {
+		if (abierta) {
+			GetComponent<Collider2D> ().enabled = false;
+			GetComponent<SpriteRenderer> ().sprite = encendido;
+		} else {
+			GetComponent<Collider2D> ().enabled = true;
+			GetComponent<SpriteRenderer> ().sprite = apagado;
 		}
 	}
 }

@@ -1,14 +1,28 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CameraController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Palanca.cs">
     <Files>
-      <File FileName="Assets\Scripts\PlayerMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CameraRotation.cs" Line="5" Column="28" />
-      <File FileName="Assets\Scripts\CameraController.cs" Line="14" Column="77" />
+      <File FileName="Assets\Scripts\PlayerMovement.cs" Line="98" Column="22" />
+      <File FileName="Assets\Scripts\CameraRotation.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\CameraController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MonsterMovement.cs" Line="20" Column="2" />
+      <File FileName="Assets\Scripts\CuerpoContacto.cs" Line="40" Column="5" />
+      <File FileName="Assets\Scripts\MainCamera.cs" Line="9" Column="30" />
+      <File FileName="Assets\Scripts\PathManager.cs" Line="316" Column="69" />
+      <File FileName="Assets\Scripts\PasarEscenaPulsando.cs" Line="4" Column="1" />
+      <File FileName="Assets\Scripts\ZonaFin.cs" Line="8" Column="23" />
+      <File FileName="Assets\Scripts\Interactuable.cs" Line="7" Column="37" />
+      <File FileName="Assets\Scripts\Pointer.cs" Line="23" Column="1" />
+      <File FileName="Assets\Scripts\Lantern.cs" Line="17" Column="9" />
+      <File FileName="Assets\Scripts\Palanca.cs" Line="21" Column="1" />
+      <File FileName="Assets\Scripts\Baul.cs" Line="16" Column="56" />
+      <File FileName="Assets\Scripts\AbrirPuerta.cs" Line="24" Column="52" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\usuario_local\Documents\GitHub\Run-Away\Run Away\Assets\Scripts\Pointer.cs" line="23" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

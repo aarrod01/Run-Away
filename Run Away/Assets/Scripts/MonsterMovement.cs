@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Monster;
-
+using UnityEngine.SceneManagement;
 namespace Monster
 {
 	public enum EstadosMonstruo{SiguiendoJugador, EnRuta, PensandoRuta ,VolviendoARuta, Ninguno};
@@ -44,6 +44,11 @@ public class MonsterMovement : MonoBehaviour
 				MoverseHacia (posPuntoRuta, velMovRuta);
 				break;
 		}
+	}
+	void OnCollisionEnter2D(Collision2D collision)
+	{
+		if (collision.gameObject.tag == "Player")
+			SceneManager.LoadScene ("Tutorial");
 	}
 
 	public void CambiarEstadoMonstruo (EstadosMonstruo estado)

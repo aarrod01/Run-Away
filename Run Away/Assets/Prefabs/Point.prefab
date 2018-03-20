@@ -77,7 +77,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925269f2b19b64040a206e93562d7b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  posicionesConectadas: []
+  posicionesConectadas:
+  - {fileID: 0}
   conQueColisiona:
     serializedVersion: 2
     m_Bits: 12288

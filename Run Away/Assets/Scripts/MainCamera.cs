@@ -7,7 +7,6 @@ using UnityEngine;
 public class MainCamera : MonoBehaviour 
 {
 	public float smoothTime = 1;
-	public float distancia = 5f;
     public float anchoInfinito = 1f;
     public float frecuenciaLemniscata = 1f;
     public float velocidadGiro = 1f;
@@ -47,9 +46,9 @@ public class MainCamera : MonoBehaviour
 
     }
     void TraslacionSimple(ref Vector2 velocidad)
-    {
-            Vector2.SmoothDamp(cameraRb.position,
-                playerRb.position, ref velocidad, smoothTime, float.MaxValue, Time.deltaTime);
+	{
+			Vector2.SmoothDamp (cameraRb.position,
+				playerRb.position, ref velocidad, smoothTime, float.MaxValue, Time.deltaTime);
     }
 
     void CameraRoll()

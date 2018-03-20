@@ -37,7 +37,7 @@ public class CuerpoContacto : MonoBehaviour
                     puntoRutaActual = (puntoRutaActual + 1) % ruta.Length;
                 break;
             case EstadosMonstruo.PensandoRuta:
-                caminoDeVuelta = PathManager.instance.EncontarCamino(ultimopunto, ruta[0]);
+				caminoDeVuelta = PathManager.instance.EncontarCamino(transform, ruta);
                 monstruo.CambiarEstadoMonstruo(EstadosMonstruo.VolviendoARuta);
                 break;
             case EstadosMonstruo.VolviendoARuta:
@@ -83,12 +83,14 @@ public class CuerpoContacto : MonoBehaviour
         switch (monstruo.EstadoMonstruoActual())
         {
             case EstadosMonstruo.EnRuta:
-                return ruta[puntoRutaActual].EstaPosicion();
+	            return ruta[puntoRutaActual].EstaPosicion();
+			break;
             case EstadosMonstruo.VolviendoARuta:
                 return caminoDeVuelta.este;
             default:
                 return Vector2.positiveInfinity;
         }
+		return Vector2.zero;
 	}
 		
 }

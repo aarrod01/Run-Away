@@ -8,6 +8,7 @@ TagManager:
   - Path
   - Pointer
   - MedioObstaculo
+  - foco
   layers:
   - Default
   - TransparentFX

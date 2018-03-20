@@ -8,6 +8,7 @@ public class Baul : MonoBehaviour {
     Interactuable master;
     public float distanciaInteraccion=1f;
     public LayerMask conQueColisiona;
+	public Transform posicionSalida;
     // Use this for initialization
     void Start () {
         master = GetComponent<Interactuable>();
@@ -21,14 +22,19 @@ public class Baul : MonoBehaviour {
                     a.Invisible(true);
                     a.MovimientoLibre(false);
                     a.GetComponent<Rigidbody2D>().position = transform.position;
+					a.GetComponent<Rigidbody2D>().Sleep();
+					a.GetComponent<Collider2D>().enabled=false;
                     a.GetComponent<SpriteRenderer>().enabled=false;
+					a.ApagarLuz();
                 }
                 else
                 {
                     a.Invisible(false);
                     a.MovimientoLibre(true);
-                    a.GetComponent<Rigidbody2D>().position = (Vector2)transform.position+Vector2.down;
+					a.GetComponent<Rigidbody2D>().position = posicionSalida.position;
+					a.GetComponent<Collider2D>().enabled=true;
                     a.GetComponent<SpriteRenderer>().enabled = true;
+					a.EncenderLuz();
                 }
                 GetComponent<Collider2D>().enabled = true;
         };
