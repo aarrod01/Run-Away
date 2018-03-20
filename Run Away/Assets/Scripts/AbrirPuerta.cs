@@ -19,9 +19,11 @@ public class AbrirPuerta : MonoBehaviour {
 		if (abierta) {
 			GetComponent<Collider2D> ().enabled = false;
 			GetComponent<SpriteRenderer> ().sprite = encendido;
+			GetComponent<AudioSource> ().Play ();
 		} else {
 			GetComponent<Collider2D> ().enabled = true;
 			GetComponent<SpriteRenderer> ().sprite = apagado;
+			GetComponent<AudioSource> ().Play ();
 		}
 	}
 }
