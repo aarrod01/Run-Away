@@ -9,15 +9,9 @@ namespace Recorrido
 {
     public class listaNodos
     {
-        const float MARGEN = 0.001f;
+        const float MARGEN = 0.01f;
         public listaNodos siguiente;
         public Vector2 este;
-
-        public listaNodos(listaNodos a, Vector2 b)
-        {
-            siguiente = a;
-            este = b;
-        }
 
         public listaNodos()
         {
@@ -37,35 +31,26 @@ namespace Recorrido
                 este = pos;
                 siguiente = aux;
             }
-        }
 
-        public void ponerNodoAlFinal(Vector2 pos)
-        {
-            if (este.Equals(Vector2.negativeInfinity))
-                este = pos;
-            else if (siguiente == null)
-            {
-                siguiente = new listaNodos(null, pos);
-            }
-            else
-            {
-                siguiente.ponerNodoAlFinal(pos);
-            }
+
         }
 
         public Vector2 QuitarNodo()
         {
+            if (siguiente == null)
+                este = Vector2.negativeInfinity;
             siguiente = siguiente.siguiente;
             return este = siguiente.este;
         }
         //metodo que devulve la primera posicion de la lista, si el vector2 esta  a menos de margen unidades la lista pasa a apuntar al elemento siguiente.
         public Vector2 PosicionObjetivo(Vector2 posOrigen)
         {
-            if((este-posOrigen).sqrMagnitude<MARGEN)
+            if ((este - posOrigen).sqrMagnitude < MARGEN)
             {
                 if (siguiente == null)
                     return Vector2.positiveInfinity;
-                else { 
+                else
+                {
                     siguiente = siguiente.siguiente;
                     return este = siguiente.este;
                 }
@@ -74,10 +59,10 @@ namespace Recorrido
         }
     }
 }
-public class PathManager : MonoBehaviour {
+public class PathManager : MonoBehaviour
+{
     //Singleton
     public static PathManager instance = null;
-	public PuntoRecorrido puntoBase;
     //guarda todos los puntos del grafo
     static PuntoRecorrido[] puntosTotales;
     void Awake()
@@ -90,10 +75,6 @@ public class PathManager : MonoBehaviour {
         else
             Destroy(this.gameObject);
 
-
-    }
-    void Start()
-    {
         //Busca todos los nodos del grafo.
         GameObject[] auxiliar = GameObject.FindGameObjectsWithTag("Path");
         puntosTotales = new PuntoRecorrido[auxiliar.Length];
@@ -106,7 +87,7 @@ public class PathManager : MonoBehaviour {
         NodoRecorrido a = new NodoRecorrido(null, puntosTotales[0], null, 0, 0);
         ColaNodos cola = new ColaNodos(a, null);
         for (int i = 1; i < puntosTotales.Length; i++)
-            cola.IntroducirNodoAlPrincipio(new NodoRecorrido(null, puntosTotales[i], null, 0, 0));
+            cola.IntroducirNodo(new NodoRecorrido(null, puntosTotales[i], null, 0, 0));
     }
     //Reinicia las conexiones entre puntos
     public void ReiniciarRed()
@@ -116,7 +97,7 @@ public class PathManager : MonoBehaviour {
             puntosTotales[i].ReiniciarContactos();
         }
     }
-    
+
     class NodoRecorrido
     {
         public NodoRecorrido padre;
@@ -139,7 +120,7 @@ public class PathManager : MonoBehaviour {
         //Metodo que devuleve los hijos del nodo que no sean el padre, calcula su coste actual y el estimado
         public NodoRecorrido[] Hijos(Vector2 destino)
         {
-            NodoRecorrido[] hijos= null;
+            NodoRecorrido[] hijos = null;
             int numeroHijos;
             PuntoRecorrido[] aux = este.PuntosConectados();
             if (padre == null)
@@ -149,20 +130,20 @@ public class PathManager : MonoBehaviour {
             hijos = new NodoRecorrido[numeroHijos];
             int indiceHijos = 0;
 
-            for(int i =0; i<aux.Length;i++)
-                if(padre==null||aux[i]!=padre.este)
+            for (int i = 0; i < aux.Length; i++)
+                if (padre == null || aux[i] != padre.este)
                 {
                     hijos[indiceHijos] = new NodoRecorrido(this, aux[i], null, g + aux[i].DistanciaHasta(este.EstaPosicion()), g + aux[i].DistanciaHasta(este.EstaPosicion()) + aux[i].DistanciaHasta(destino));
                     indiceHijos++;
                 }
             return hijos;
         }
-       
+
     }
 
     class ColaNodos
     {
-        
+
         public ColaNodos siguiente;
         public NodoRecorrido este;
         public ColaNodos(NodoRecorrido a, ColaNodos proximo)
@@ -178,7 +159,7 @@ public class PathManager : MonoBehaviour {
             else if (siguiente != null)
                 return siguiente.BuscarNodo(aBuscar);
             else
-                return null; 
+                return null;
         }
         //Metodo que quita el nodo de la lista.
         public ColaNodos QuitarNodo(ColaNodos aQuitar)
@@ -239,12 +220,12 @@ public class PathManager : MonoBehaviour {
                 {
                     return null;
                 }
-                
+
             }
         }
 
         // Introduce el nodorecorrido aintroducir conservando el orden de primero los elementos con el menor coste estimado.
-        public void IntroducirNodoOrdenado(NodoRecorrido aIntroducir)
+        public void IntroducirNodo(NodoRecorrido aIntroducir)
         {
             if (este == null)
                 este = aIntroducir;
@@ -253,7 +234,7 @@ public class PathManager : MonoBehaviour {
                 if (aIntroducir.f > este.f)
                 {
                     if (siguiente != null)
-                        siguiente.IntroducirNodoOrdenado(aIntroducir);
+                        siguiente.IntroducirNodo(aIntroducir);
                     else
                         siguiente = new ColaNodos(aIntroducir, null);
                 }
@@ -267,38 +248,14 @@ public class PathManager : MonoBehaviour {
                 }
             }
         }
-
-		public void IntroducirNodoAlPrincipio(NodoRecorrido aIntroducir)
-		{
-			if (este == null)
-				este = aIntroducir;
-			else
-			{
-				siguiente=new ColaNodos(este,siguiente);
-				este = aIntroducir;
-			}
-		}
-		public void IntroducirNodoAlFinal(NodoRecorrido aIntroducir)
-		{
-			if (este == null)
-				este = aIntroducir;
-			else if(siguiente==null)
-				siguiente=new ColaNodos(aIntroducir,null);
-			else
-			{
-				siguiente.IntroducirNodoAlFinal (aIntroducir);
-			}
-		}
     }
 
     //Algoritmo A*
-    NodoRecorrido crearRecorrido(PuntoRecorrido inicio, PuntoRecorrido[] fin)
+    NodoRecorrido crearRecorrido(PuntoRecorrido inicio, PuntoRecorrido fin)
     {
-		//Creamos las colas frontera y descubiertos(esta ultima no requeriria de cola con prioridad).
-		ColaNodos frontera = new ColaNodos(new NodoRecorrido(null, fin[0], null, 0, 0), null);
-		ColaNodos descubiertos = new ColaNodos(null, null);
-		for (int i = 1; i < fin.Length; i++)
-			frontera.IntroducirNodoOrdenado (new NodoRecorrido(null, fin[i], null, 0, 0));
+        //Creamos las colas frontera y descubiertos(esta ultima no requeriria de cola con prioridad).
+        ColaNodos frontera = new ColaNodos(new NodoRecorrido(null, inicio, null, 0, 0), null);
+        ColaNodos descubiertos = new ColaNodos(null, null);
 
         do
         {
@@ -306,12 +263,12 @@ public class PathManager : MonoBehaviour {
             NodoRecorrido aux = frontera.este;
             frontera.QuitarNodo(aux);
             //si es el objetivo ha encontrado el objetivo
-            if (aux.este == inicio)
+            if (aux.este == fin)
                 return aux;
             //Lo anyade a los nodos descubiertos
-            descubiertos.IntroducirNodoOrdenado(aux);
+            descubiertos.IntroducirNodo(aux);
             //Expande los hijos
-            NodoRecorrido[] auxs = aux.Hijos(inicio.EstaPosicion());
+            NodoRecorrido[] auxs = aux.Hijos(fin.EstaPosicion());
             //Evalua cada hijo
             for (int i = 0; i < auxs.Length; i++)
             {   //Si ya ha sido descubierto lo ignora
@@ -319,14 +276,14 @@ public class PathManager : MonoBehaviour {
                 {
                     ColaNodos auxc = frontera.BuscarNodo(auxs[i]);
                     //si no esta enfrontera y su estimacion es menor que el anterior lo sustituye 
-                    if (auxc != null&& auxc.este.f > auxs[i].f)
+                    if (auxc != null && auxc.este.f > auxs[i].f)
                     {
                         frontera.QuitarNodo(auxc);
-                        frontera.IntroducirNodoOrdenado(auxs[i]);
+                        frontera.IntroducirNodo(auxs[i]);
                     }
                     else
                         //En caso contrario lo introduce.
-                        frontera.IntroducirNodoOrdenado(auxs[i]);
+                        frontera.IntroducirNodo(auxs[i]);
                 }
             }
             //Si la frontera se queda vacia no hay solucion.
@@ -335,21 +292,18 @@ public class PathManager : MonoBehaviour {
     }
 
     //Aplica el A* desde los puntosRecorrido mas cercanos a la posicion final e inicial.
-	public listaNodos EncontarCamino(Transform inicio, PuntoRecorrido[] fin)
+    public listaNodos EncontarCamino(PuntoRecorrido inicio, PuntoRecorrido fin)
     {
-		PuntoRecorrido ini=Instantiate (puntoBase);
-        puntoBase.CambiarPosicion(inicio.position);
-        puntoBase.ReiniciarContactos();
+
         //Busca el recorrido.
-        NodoRecorrido aux = crearRecorrido(ini, fin);
+        NodoRecorrido aux = crearRecorrido(inicio, fin);
         //Crea la lista en orden.
         listaNodos lista = new listaNodos();
         while (aux != null)
         {
-            lista.ponerNodoAlFinal(aux.este.EstaPosicion());
+            lista.ponerNodo(aux.este.EstaPosicion());
             aux = aux.padre;
         }
-		Destroy (ini);
         return lista;
     }
 }

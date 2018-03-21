@@ -56,7 +56,7 @@ public class CuerpoContacto : MonoBehaviour
                     puntoRutaActual = (puntoRutaActual + 1) % ruta.Length;
                 break;
             case EstadosMonstruo.PensandoRuta:
-				caminoDeVuelta = PathManager.instance.EncontarCamino(transform, puntosRuta);
+				caminoDeVuelta = PathManager.instance.EncontarCamino(ultimopunto,ruta[0]);
                 monstruo.CambiarEstadoMonstruo(EstadosMonstruo.VolviendoARuta);
                 break;
             case EstadosMonstruo.VolviendoARuta:
@@ -73,9 +73,7 @@ public class CuerpoContacto : MonoBehaviour
         if (other.gameObject.tag == "Path") 
         {
             PuntoRecorrido punto = other.GetComponent<PuntoRecorrido>();
-            switch (monstruo.EstadoMonstruoActual()) {
-                case EstadosMonstruo.SiguiendoJugador:
-                    
+            
                     int i = IndicePuntoRuta(punto);
                     if (i != -1)
                     {
@@ -83,9 +81,6 @@ public class CuerpoContacto : MonoBehaviour
                         monstruo.CambiarEstadoMonstruo(EstadosMonstruo.EnRuta);
                     }
 
-                    break;
-
-            }
             ultimopunto = punto;
         }
 	}
