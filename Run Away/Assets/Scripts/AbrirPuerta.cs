@@ -36,11 +36,14 @@ public class AbrirPuerta : MonoBehaviour {
             cajaDeColision.SetActive(false);
             GetComponent<SpriteRenderer> ().sprite = apagado;
             gameObject.layer = LayerMask.NameToLayer("Default");
+            GetComponent<AudioSource>().Play();
         } else {
 			GetComponent<Collider2D> ().enabled = true;
             cajaDeColision.SetActive(true);
             GetComponent<SpriteRenderer> ().sprite = encendido;
             gameObject.layer = LayerMask.NameToLayer("LightObstacles");
+            GetComponent<AudioSource>().Play();
         }
+			
 	}
 }

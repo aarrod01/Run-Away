@@ -109,7 +109,7 @@ public class PathManager : MonoBehaviour {
             cola.IntroducirNodoAlPrincipio(new NodoRecorrido(null, puntosTotales[i], null, 0, 0));
     }
     //Reinicia las conexiones entre puntos
-    void ReiniciarRed()
+    public void ReiniciarRed()
     {
         for (int i = 0; i < puntosTotales.Length; i++)
         {

@@ -26,6 +26,7 @@ public class Palanca : MonoBehaviour {
                 doors = GameObject.FindGameObjectsWithTag(colorDelInterruptor);
 				for (int i = 0; i < doors.Length; i++)
 					doors[i].GetComponent<AbrirPuerta>().abrir();
+                PathManager.instance.ReiniciarRed();
 			}
 			GetComponent<Collider2D>().enabled = true;
 		};
