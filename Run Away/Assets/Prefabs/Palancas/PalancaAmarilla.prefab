@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114657087227021510}
   - component: {fileID: 114862093540309662}
   - component: {fileID: 61493412765273118}
-  m_Layer: 12
+  m_Layer: 15
   m_Name: PalancaAmarilla
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114719444161977684}
   - component: {fileID: 114402205892761984}
   - component: {fileID: 61915912931971168}
-  m_Layer: 12
+  m_Layer: 15
   m_Name: PalancaVerde
   m_TagString: Untagged
   m_Icon: {fileID: 0}

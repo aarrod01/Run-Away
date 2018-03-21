@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61922279115340170}
   - component: {fileID: 114197049497337358}
   - component: {fileID: 114513252087159502}
-  m_Layer: 12
+  m_Layer: 15
   m_Name: PalancaRoja
   m_TagString: Untagged
   m_Icon: {fileID: 0}

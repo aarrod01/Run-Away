@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114331033855792678}
   - component: {fileID: 114471768344243580}
   - component: {fileID: 61698742623513306}
-  m_Layer: 12
+  m_Layer: 15
   m_Name: "Ba\xFAl"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4975872934193712}
-  m_Layer: 12
+  m_Layer: 15
   m_Name: Salida
   m_TagString: Untagged
   m_Icon: {fileID: 0}
