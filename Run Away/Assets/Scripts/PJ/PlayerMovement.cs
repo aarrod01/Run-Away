@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         player.angularVelocity = Mathf.Lerp(player.angularVelocity,Mathf.Max(Mathf.Min(velocidadAngularMaxima, velocidadAngularPredicha),-velocidadAngularMaxima),factorAceleracionAngular);
 
         direccionMirada = new Vector2(-Mathf.Sin(player.rotation * Mathf.PI/180), Mathf.Cos(player.rotation*Mathf.PI/180));
-}
+    }
 
     void Movimiento()
     {

@@ -39,8 +39,9 @@ namespace Recorrido
         {
             if (siguiente == null)
                 este = Vector2.negativeInfinity;
+            este = siguiente.este;
             siguiente = siguiente.siguiente;
-            return este = siguiente.este;
+            return este;
         }
         //metodo que devulve la primera posicion de la lista, si el vector2 esta  a menos de margen unidades la lista pasa a apuntar al elemento siguiente.
         public Vector2 PosicionObjetivo(Vector2 posOrigen)
@@ -65,6 +66,7 @@ public class PathManager : MonoBehaviour
     public static PathManager instance = null;
     //guarda todos los puntos del grafo
     static PuntoRecorrido[] puntosTotales;
+    public LayerMask conQueColisiona;
     void Awake()
     {
         if (instance == null)
@@ -118,7 +120,7 @@ public class PathManager : MonoBehaviour
         }
 
         //Metodo que devuleve los hijos del nodo que no sean el padre, calcula su coste actual y el estimado
-        public NodoRecorrido[] Hijos(Vector2 destino)
+        public NodoRecorrido[] Hijos(PuntoRecorrido[]destino)
         {
             NodoRecorrido[] hijos = null;
             int numeroHijos;
@@ -133,7 +135,9 @@ public class PathManager : MonoBehaviour
             for (int i = 0; i < aux.Length; i++)
                 if (padre == null || aux[i] != padre.este)
                 {
-                    hijos[indiceHijos] = new NodoRecorrido(this, aux[i], null, g + aux[i].DistanciaHasta(este.EstaPosicion()), g + aux[i].DistanciaHasta(este.EstaPosicion()) + aux[i].DistanciaHasta(destino));
+                    float g_ = aux[i].DistanciaHasta(este.EstaPosicion());
+                    float f_ = PathManager.instance.DistanciaMasCorta(aux[i].EstaPosicion(), destino);
+                    hijos[indiceHijos] = new NodoRecorrido(this, aux[i], null, g + g_, g + g_ +f_);
                     indiceHijos++;
                 }
             return hijos;
@@ -150,6 +154,11 @@ public class PathManager : MonoBehaviour
         {
             este = a;
             siguiente = proximo;
+        }
+        public ColaNodos()
+        {
+            este = null;
+            siguiente = null;
         }
         //Metodo que busca si se encuenta el nodorecorrido abuscar, si no lo encuentra devuelve null si lo encuentra la referencia del nodo.
         public ColaNodos BuscarNodo(NodoRecorrido aBuscar)
@@ -248,13 +257,63 @@ public class PathManager : MonoBehaviour
                 }
             }
         }
+        
+        //Introduce los nodos en la lista que se encuentren en el punto y los que esten proyectando un raycast en las cuatro direcciones cardinales.
+        public void IntroducirNodosEnCruz(Vector2 posicion, PuntoRecorrido[] puntosDistanciaManhattan)
+        {
+            //Comprobamos que el punto no este dentro de uno de los puntos de la red.
+            int i = 0;
+            while (i<puntosTotales.Length&&!puntosTotales[i].GetComponent<Collider2D>().bounds.Contains(posicion))
+            {
+                i++;
+            }
+            //Si esta dentro introducimos ese nodo en la cola.
+            if(i < puntosTotales.Length)
+            {
+                float distancia = puntosTotales[i].DistanciaHasta(posicion);
+                IntroducirNodo(new NodoRecorrido(null, puntosTotales[i], null, distancia, distancia + PathManager.instance.DistanciaMasCorta(posicion,puntosDistanciaManhattan)));
+            }
+
+            //Creamos 4 rayos hacia las cuatro direcciones cardinales(debido a que el mapa tiene pasillos ortogonales).
+            RaycastHit2D[] hit = new RaycastHit2D[4];
+            hit[0]= Physics2D.Raycast(posicion, Vector2.up, Mathf.Infinity, PathManager.instance.conQueColisiona);
+            Debug.DrawRay(posicion, Vector2.up, Color.green, 10f);
+            hit[1] = Physics2D.Raycast(posicion, Vector2.right, Mathf.Infinity, PathManager.instance.conQueColisiona);
+            Debug.DrawRay(posicion, Vector2.right, Color.green, 10f);
+            hit[2] = Physics2D.Raycast(posicion, Vector2.down, Mathf.Infinity, PathManager.instance.conQueColisiona);
+            Debug.DrawRay(posicion, Vector2.down, Color.green, 10f);
+            hit[3] = Physics2D.Raycast(posicion, Vector2.left, Mathf.Infinity, PathManager.instance.conQueColisiona);
+            Debug.DrawRay(posicion, Vector2.left, Color.green,10f);
+
+            PuntoRecorrido aux = null;
+            for (int j = 0; j < 4; j++)
+            {
+                if (hit[j].collider != null && (aux = hit[j].collider.GetComponent<PuntoRecorrido>()) != null)
+                {
+                    float distancia = aux.DistanciaHasta(posicion);
+                    IntroducirNodo(new NodoRecorrido(null, aux, null, distancia, distancia + PathManager.instance.DistanciaMasCorta(posicion, puntosDistanciaManhattan)));
+                }
+            }
+        }
+    }
+
+    //Devuelve la diastancia mas corta de entre las distancia desde desde a puntos.
+    float DistanciaMasCorta(Vector2 desde, PuntoRecorrido[] puntos)
+    {
+        float min = Mathf.Infinity;
+
+        for (int i = 0; i < puntos.Length; i++)
+            min = Mathf.Min(min, puntos[i].DistanciaHasta(desde));
+
+        return min;
     }
 
     //Algoritmo A*
-    NodoRecorrido crearRecorrido(PuntoRecorrido inicio, PuntoRecorrido fin)
+    NodoRecorrido crearRecorrido(Vector2 posicion, PuntoRecorrido[] fin)
     {
         //Creamos las colas frontera y descubiertos(esta ultima no requeriria de cola con prioridad).
-        ColaNodos frontera = new ColaNodos(new NodoRecorrido(null, inicio, null, 0, 0), null);
+        ColaNodos frontera = new ColaNodos();
+        frontera.IntroducirNodosEnCruz(posicion, fin);
         ColaNodos descubiertos = new ColaNodos(null, null);
 
         do
@@ -263,19 +322,19 @@ public class PathManager : MonoBehaviour
             NodoRecorrido aux = frontera.este;
             frontera.QuitarNodo(aux);
             //si es el objetivo ha encontrado el objetivo
-            if (aux.este == fin)
+            if (aux.este.EstaEstePuntoEn(fin))
                 return aux;
             //Lo anyade a los nodos descubiertos
             descubiertos.IntroducirNodo(aux);
             //Expande los hijos
-            NodoRecorrido[] auxs = aux.Hijos(fin.EstaPosicion());
+            NodoRecorrido[] auxs = aux.Hijos(fin);
             //Evalua cada hijo
             for (int i = 0; i < auxs.Length; i++)
             {   //Si ya ha sido descubierto lo ignora
                 if (descubiertos.BuscarNodo(auxs[i]) == null)
                 {
                     ColaNodos auxc = frontera.BuscarNodo(auxs[i]);
-                    //si no esta enfrontera y su estimacion es menor que el anterior lo sustituye 
+                    //si no esta en frontera y su estimacion es menor que el anterior lo sustituye 
                     if (auxc != null && auxc.este.f > auxs[i].f)
                     {
                         frontera.QuitarNodo(auxc);
@@ -292,9 +351,8 @@ public class PathManager : MonoBehaviour
     }
 
     //Aplica el A* desde los puntosRecorrido mas cercanos a la posicion final e inicial.
-    public listaNodos EncontarCamino(PuntoRecorrido inicio, PuntoRecorrido fin)
+    public listaNodos EncontarCamino(Vector2 inicio, PuntoRecorrido[] fin)
     {
-
         //Busca el recorrido.
         NodoRecorrido aux = crearRecorrido(inicio, fin);
         //Crea la lista en orden.

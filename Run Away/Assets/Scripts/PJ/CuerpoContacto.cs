@@ -9,6 +9,7 @@ public class CuerpoContacto : MonoBehaviour
 
 	public int puntoRutaActual = 0;
 	MonsterMovement monstruo;
+    Rigidbody2D monstruoRB;
 
 	public PuntoRecorrido[] ruta;
     PuntoRecorrido[] puntosRuta;
@@ -26,6 +27,7 @@ public class CuerpoContacto : MonoBehaviour
 		for (int i = 1; i < transformAuxiliar.Length; i++)
 			ruta [i-1] = (Vector2) (transformAuxiliar [i].position + transformAuxiliar [0].position + posRutas);*/
 		monstruo = GetComponentInParent<MonsterMovement> ();
+        monstruoRB = monstruo.GetComponent<Rigidbody2D>();
         PuntoRecorrido[] aux = new PuntoRecorrido[ruta.Length];
         int j = 0;
         for (int i = 0; i < ruta.Length; i++)
@@ -56,8 +58,9 @@ public class CuerpoContacto : MonoBehaviour
                     puntoRutaActual = (puntoRutaActual + 1) % ruta.Length;
                 break;
             case EstadosMonstruo.PensandoRuta:
-				caminoDeVuelta = PathManager.instance.EncontarCamino(ultimopunto,ruta[0]);
-                monstruo.CambiarEstadoMonstruo(EstadosMonstruo.VolviendoARuta);
+				caminoDeVuelta = PathManager.instance.EncontarCamino(monstruoRB.position,ruta);
+                if(caminoDeVuelta!=null)
+                    monstruo.CambiarEstadoMonstruo(EstadosMonstruo.VolviendoARuta);
                 break;
             case EstadosMonstruo.VolviendoARuta:
                 if(caminoDeVuelta.este.Equals(Vector2.negativeInfinity))
@@ -68,20 +71,20 @@ public class CuerpoContacto : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D (Collider2D other)
+    void OnTriggerStay2D (Collider2D other)
 	{
         if (other.gameObject.tag == "Path") 
         {
-            PuntoRecorrido punto = other.GetComponent<PuntoRecorrido>();
-            
-                    int i = IndicePuntoRuta(punto);
-                    if (i != -1)
-                    {
-                        puntoRutaActual = i;
-                        monstruo.CambiarEstadoMonstruo(EstadosMonstruo.EnRuta);
-                    }
+            if (monstruo.EstadoMonstruoActual() != EstadosMonstruo.EnRuta)
+            {
+                PuntoRecorrido punto = other.GetComponent<PuntoRecorrido>();
 
-            ultimopunto = punto;
+                int i = IndicePuntoRuta(punto);
+                if (i != -1)
+                {
+                    puntoRutaActual = i;
+                }
+            }
         }
 	}
 		

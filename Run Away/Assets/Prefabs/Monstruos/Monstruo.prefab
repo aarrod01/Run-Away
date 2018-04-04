@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 4434984310778594}
   - component: {fileID: 58097510709393080}
   - component: {fileID: 114542501904891898}
-  m_Layer: 13
+  m_Layer: 16
   m_Name: DetectarRuta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1382589261285662}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: faf7bb238c18dda4a88a5f37f1fff8a8, type: 3}

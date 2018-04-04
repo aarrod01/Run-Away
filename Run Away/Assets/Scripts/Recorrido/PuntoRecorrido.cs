@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[RequireComponent(typeof (Collider2D))]
 public class PuntoRecorrido : MonoBehaviour {
 
 	Vector2 estaPosicion;
@@ -61,5 +61,12 @@ public class PuntoRecorrido : MonoBehaviour {
     {
         estaPosicion = a;
         transform.position = a;
+    }
+    public bool EstaEstePuntoEn(PuntoRecorrido[] aBuscar)
+    {
+        int i = 0;
+        while (i < aBuscar.Length && this != aBuscar[i])
+            i++;
+        return i != aBuscar.Length;
     }
 }

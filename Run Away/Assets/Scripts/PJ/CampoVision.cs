@@ -9,13 +9,19 @@ public class CampoVision : MonoBehaviour
 
 	MonsterMovement monstruo;
 	Transform jugador;
+    Vector2 ultimaPosicionJugador;
+    
 
-	void Start()
+    void Start()
 	{
+        ultimaPosicionJugador = Vector2.negativeInfinity;
 		monstruo = GetComponentInParent<MonsterMovement> ();
 		jugador = GameObject.FindWithTag ("Player").GetComponent<Transform> ();
 	}
-		
+    public Vector2 UltimaPosicionJugador()
+    {
+        return ultimaPosicionJugador;
+    }
 	void OnTriggerStay2D (Collider2D other)
 	{
 		if (other.gameObject.tag == "Player"&&!other.GetComponent<PlayerMovement>().Invisible())
@@ -24,19 +30,18 @@ public class CampoVision : MonoBehaviour
 			if (hit.collider.gameObject.tag == "Player") 
 			{
 				monstruo.CambiarEstadoMonstruo (EstadosMonstruo.SiguiendoJugador);
-				Debug.DrawRay (transform.position, (jugador.position - transform.position).normalized, Color.green);
-			} 
-			else if (monstruo.EstadoMonstruoActual () == EstadosMonstruo.SiguiendoJugador) 
-			{
-				monstruo.CambiarEstadoMonstruo (EstadosMonstruo.PensandoRuta);
-				Debug.DrawRay (transform.position, (jugador.position - transform.position).normalized, Color.red);
+                ultimaPosicionJugador=jugador.position;
 			}
-		}
+            /*else if (monstruo.EstadoMonstruoActual () == EstadosMonstruo.SiguiendoJugador) 
+    {
+        monstruo.CambiarEstadoMonstruo (EstadosMonstruo.PensandoRuta);
+    }*/
+        }
 	}
 	//QUE CUANDO EL RAYO SE CORTE, DEJE DE SEGUIRLO
-	void OnTriggerExit2D (Collider2D other)
+	/*void OnTriggerExit2D (Collider2D other)
 	{
 		if (other.gameObject.tag == "Player" && monstruo.EstadoMonstruoActual() == EstadosMonstruo.SiguiendoJugador) 
 			monstruo.CambiarEstadoMonstruo(EstadosMonstruo.PensandoRuta);
-	}
+	}*/
 }
