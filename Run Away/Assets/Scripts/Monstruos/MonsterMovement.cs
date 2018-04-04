@@ -5,20 +5,22 @@ using Monster;
 using UnityEngine.SceneManagement;
 namespace Monster
 {
-	public enum EstadosMonstruo{SiguiendoJugador, EnRuta, PensandoRuta ,VolviendoARuta, Desorientado,BuscandoJugador, Ninguno};
+	public enum EstadosMonstruo{SiguiendoJugador, EnRuta, PensandoRuta ,VolviendoARuta, Desorientado,Proyectado,BuscandoJugador, Ninguno};
 }
 
 public class MonsterMovement : MonoBehaviour 
 {
     public LayerMask conQueColisiona;
 
-	public float velMovRuta, velMovPerseguir, velGiro;
+	public float velMovRuta, velMovPerseguir, velGiro, tiempoAturdimiento=1f;
     public EstadosMonstruo estadoMonstruo;
+
 
     Rigidbody2D rb2D;
 	Transform jugadorTrans;
     float giroInicial,giroFinal, sentidoGiro;
-    
+    float cronometro;
+
     const float MARGEN = 0.001f;
     const float MARGENANGULO = 5f;
 
@@ -65,7 +67,10 @@ public class MonsterMovement : MonoBehaviour
                     rb2D.rotation = giroInicial;
                     CambiarEstadoMonstruo(EstadosMonstruo.PensandoRuta);
                 }
-                
+                break;
+            case EstadosMonstruo.Proyectado:
+                if (Time.time - cronometro > tiempoAturdimiento)
+                    CambiarEstadoMonstruo(EstadosMonstruo.Desorientado);
                 break;
 		}
 	}
@@ -91,7 +96,13 @@ public class MonsterMovement : MonoBehaviour
         //rb2D.velocity = Vector2.Lerp(rb2D.velocity,dir.normalized * vel,factorAceleracion);
         //rb2D.rotation=Mathf.Atan2(dir.y, dir.x)*180f/Mathf.PI-90f;
         rb2D.velocity = dir.normalized * vel;
-        rb2D.MoveRotation (Mathf.LerpAngle (rb2D.rotation, Vector2.SignedAngle (Vector2.up, dir), velGiro));
+        rb2D.rotation = (Mathf.LerpAngle (rb2D.rotation, Vector2.SignedAngle (Vector2.up, dir), velGiro));
+    }
+    public void Empujar(Vector2 origen, float velocidadProyeccion)
+    {
+        rb2D.velocity = (rb2D.position - origen).normalized * velocidadProyeccion;
+        cronometro = Time.time;
+        CambiarEstadoMonstruo(EstadosMonstruo.Proyectado);
     }
     
     void Pararse()

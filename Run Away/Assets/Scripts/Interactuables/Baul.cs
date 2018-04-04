@@ -27,7 +27,7 @@ public class Baul : MonoBehaviour {
                     a.GetComponent<Rigidbody2D>().Sleep();
                     a.GetComponent<Collider2D>().enabled = false;
                     a.GetComponent<SpriteRenderer>().enabled = false;
-                    a.ApagarLuz();
+                    a.ApagarLuzConica();
                 }
             }
             else if (a.Invisible())
@@ -37,7 +37,7 @@ public class Baul : MonoBehaviour {
                 a.GetComponent<Rigidbody2D>().position = posicionSalida.position;
                 a.GetComponent<Collider2D>().enabled = true;
                 a.GetComponent<SpriteRenderer>().enabled = true;
-                a.EncenderLuz();
+                a.EncenderLuzConica();
             }
             GetComponent<Collider2D>().enabled = true;
         };

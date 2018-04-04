@@ -89,11 +89,11 @@ public class PlayerMovement : MonoBehaviour
     {
         player.velocity = Vector2.zero;
     }
-	public void ApagarLuz(){
-		luz.ApagarLuz ();
+	public void ApagarLuzConica(){
+		luz.ApagarLuzConica ();
 	}
-	public void EncenderLuz()
+	public void EncenderLuzConica()
 	{
-		luz.EncenderLuz ();
+		luz.EncenderLuzConica ();
 	}
 }
