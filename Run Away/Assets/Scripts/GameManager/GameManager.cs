@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Monster;
 public class GameManager : MonoBehaviour {
 
 
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
         jugador = GameObject.FindObjectOfType<PlayerMovement>();
     }
 
-    public void MonstruoMuerto()
+    public void MonstruoMuerto(TipoMonstruo tipo)
     {
 
     }

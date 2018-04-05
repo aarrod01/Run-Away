@@ -6,15 +6,16 @@ using UnityEngine.SceneManagement;
 namespace Monster
 {
 	public enum EstadosMonstruo{SiguiendoJugador, EnRuta, PensandoRuta ,VolviendoARuta, Desorientado,Proyectado,BuscandoJugador, Ninguno};
+    public enum TipoMonstruo { Basico, Ninguno};
 }
 
 public class MonsterMovement : MonoBehaviour 
 {
     public LayerMask conQueColisiona;
 
-	public float velMovRuta, velMovPerseguir, velGiro, tiempoAturdimiento=1f;
+	public float velMovRuta, velMovPerseguir, velGiro,aceleracionAngular, tiempoAturdimiento=1f;
     public EstadosMonstruo estadoMonstruo;
-
+    public TipoMonstruo tipo;
 
     Rigidbody2D rb2D;
 	Transform jugadorTrans;
@@ -31,7 +32,7 @@ public class MonsterMovement : MonoBehaviour
 		estadoMonstruo = EstadosMonstruo.EnRuta;
 	}
 
-	void Update ()
+	void FixedUpdate ()
 	{	
 		Vector2 posPlayer = GetComponentInChildren<CampoVision>().UltimaPosicionJugador() - (Vector2)transform.position;
 		Vector2 posPuntoRuta = GetComponentInChildren<CuerpoContacto> ().PosicionPuntoRuta () - (Vector2)transform.position;
@@ -96,8 +97,22 @@ public class MonsterMovement : MonoBehaviour
         //rb2D.velocity = Vector2.Lerp(rb2D.velocity,dir.normalized * vel,factorAceleracion);
         //rb2D.rotation=Mathf.Atan2(dir.y, dir.x)*180f/Mathf.PI-90f;
         rb2D.velocity = dir.normalized * vel;
-        rb2D.rotation = (Mathf.LerpAngle (rb2D.rotation, Vector2.SignedAngle (Vector2.up, dir), velGiro));
+        Giro(rb2D.velocity);
     }
+
+    void Giro(Vector2 dir)
+    {
+        float velocidadAngularPredicha;
+        Vector2 direccionMovimientoObjetivo = dir;
+        float anguloPredicho = Vector2.SignedAngle(Vector2.up, direccionMovimientoObjetivo) - rb2D.rotation;
+        if (anguloPredicho > 180f)
+            anguloPredicho -= 360f;
+        else if (anguloPredicho < -180f)
+            anguloPredicho += 360f;
+        velocidadAngularPredicha = (anguloPredicho) / Time.fixedDeltaTime;
+        rb2D.angularVelocity = Mathf.Lerp(rb2D.angularVelocity, Mathf.Max(Mathf.Min(velGiro, velocidadAngularPredicha), -velGiro), aceleracionAngular);
+    }
+
     public void Empujar(Vector2 origen, float velocidadProyeccion)
     {
         rb2D.velocity = (rb2D.position - origen).normalized * velocidadProyeccion;

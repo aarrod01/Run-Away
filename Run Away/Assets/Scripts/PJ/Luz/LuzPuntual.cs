@@ -23,6 +23,6 @@ public class LuzPuntual : MonoBehaviour {
 
     public void Radio(float porcentaje)
     {
-        transform.localScale.Scale(escalaInicial * porcentaje);
+        transform.localScale = escalaInicial * porcentaje;
     }
 }

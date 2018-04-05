@@ -23,6 +23,6 @@ public class LuzConica : MonoBehaviour {
 
     public void Largo(float porcentaje)
     {
-        transform.localScale.Scale( escalaInicial * porcentaje);
+        transform.localScale=escalaInicial * porcentaje;
     }
 }

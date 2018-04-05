@@ -26,7 +26,7 @@ public class Health : MonoBehaviour {
     void Muerte()
     {
         if (monstruo == null)
-            GameManager.instance.MonstruoMuerto();
+            GameManager.instance.MonstruoMuerto(monstruo.tipo);
         Destroy(gameObject);
     }
 
