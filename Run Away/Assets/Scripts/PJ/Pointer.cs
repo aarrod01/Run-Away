@@ -26,7 +26,9 @@ public class Pointer : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        objetoInteractuable = collision.gameObject.GetComponent<Interactuable>();
+        Interactuable aux = collision.gameObject.GetComponent<Interactuable>();
+        if (aux != null)
+            objetoInteractuable = aux; ;
     }
 
     private void OnTriggerExit2D(Collider2D collision)

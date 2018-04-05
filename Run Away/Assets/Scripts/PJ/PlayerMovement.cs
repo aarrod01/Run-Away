@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof (Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour 
 {
-	public float velocidadMaxima = 1f,
+	public float velocidadaxima = 1f,
 				factorAceleracion = 0.5f,
                 velocidadAngularMaxima = 1f,
                 factorAceleracionAngular = 0.5f,
@@ -16,12 +16,14 @@ public class PlayerMovement : MonoBehaviour
     Vector2 direccionMirada,
             direccionMovimiento;
     Lantern luz;
+    float velMaxima;
 
     bool invisible = false;
     bool movimientoLibre = true;
 
     // Use this for initialization
     void Start () {
+        AumentoVelocidad(1f);
         luz = GetComponentInChildren<Lantern>();
         player = GetComponent<Rigidbody2D>();
         puntero = GameObject.FindWithTag("Pointer").GetComponent<Rigidbody2D>();
@@ -64,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 velocidad = player.velocity;
 
-        velocidad = Vector2.Lerp(velocidad, direccionMovimiento * velocidadMaxima
+        velocidad = Vector2.Lerp(velocidad, direccionMovimiento * velMaxima
                 * ((direccionMovimiento + direccionMirada).sqrMagnitude * (1 - fraccionMinimaVelocidadHaciaDetras) + fraccionMinimaVelocidadHaciaDetras)
                 , factorAceleracion);
 
@@ -96,4 +98,14 @@ public class PlayerMovement : MonoBehaviour
 	{
 		luz.EncenderLuzConica ();
 	}
+
+    public void AumentoVelocidad(float porcentaje)
+    {
+        velMaxima = porcentaje * velocidadaxima;
+    }
+
+    public Lantern Luz()
+    {
+        return luz;
+    }
 }

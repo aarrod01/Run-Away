@@ -8,7 +8,8 @@ public class Golpeable : MonoBehaviour {
     MonsterMovement monstruo;
     Health vida;
     public float distanciaInteraccion = 1f;
-    public float anguloMaximoInteraccion = 45f;
+    public float velocidadDeProyeccion;
+    public LayerMask conQueColisiona;
     // Use this for initialization
     void Start()
     {
@@ -17,13 +18,15 @@ public class Golpeable : MonoBehaviour {
         monstruo = GetComponentInParent<MonsterMovement>();
         vida= GetComponentInParent<Health>();
         master.Click = (PlayerMovement a) => {
-            if ((monstruoRB.position - a.GetComponent<Rigidbody2D>().position).sqrMagnitude <= distanciaInteraccion
-            && Mathf.DeltaAngle(monstruoRB.rotation, a.GetComponent<Rigidbody2D>().rotation) <= anguloMaximoInteraccion)
+            Vector2 pos = transform.position;
+            Vector2 posa = a.transform.position;
+            RaycastHit2D hit = Physics2D.Raycast(posa, pos-posa, distanciaInteraccion, conQueColisiona);
+            Debug.DrawRay(posa, pos-posa,Color.red,5f);
+            if (hit.collider != null && hit.collider.tag == "PuntoVulnerable")
             {
                 vida.Danyar(1);
-                monstruo.Empujar(a.GetComponent<Rigidbody2D>().position, 2f);
+                monstruo.Empujar(posa, velocidadDeProyeccion);
             }
-			
         };
         
        

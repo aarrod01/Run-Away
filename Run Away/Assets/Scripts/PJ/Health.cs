@@ -5,12 +5,29 @@ using UnityEngine;
 public class Health : MonoBehaviour {
 
 	public int health = 1;
+    MonsterMovement monstruo;
+
+    void Start()
+    {
+        monstruo = GetComponent<MonsterMovement>();   
+    }
+
 
     public void Danyar(int danyo)
     {
         health -= danyo;
         if (health <= 0)
-            Destroy(gameObject);
+        {
+            Muerte();
+        }
+            
+    }
+
+    void Muerte()
+    {
+        if (monstruo == null)
+            GameManager.instance.MonstruoMuerto();
+        Destroy(gameObject);
     }
 
 }

@@ -52,8 +52,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1488288323442548}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.18, y: -4.5, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4975872934193712}
@@ -137,7 +137,7 @@ MonoBehaviour:
   distanciaInteraccion: 1
   conQueColisiona:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 6144
   posicionSalida: {fileID: 4975872934193712}
 --- !u!114 &114471768344243580
 MonoBehaviour:

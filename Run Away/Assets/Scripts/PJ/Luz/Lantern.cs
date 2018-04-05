@@ -24,7 +24,8 @@ public class Lantern : MonoBehaviour
     }
     public void IntensidadLuz(float porcentaje)
     {
-
+        luzConica.Largo(porcentaje);
+        luzPuntual.Radio(porcentaje);
     }
 
 }
