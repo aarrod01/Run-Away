@@ -63,10 +63,10 @@ public class CuerpoContacto : MonoBehaviour
                     monstruo.CambiarEstadoMonstruo(EstadosMonstruo.VolviendoARuta);
                 break;
             case EstadosMonstruo.VolviendoARuta:
-                if(caminoDeVuelta.este.Equals(Vector2.negativeInfinity))
+                if(caminoDeVuelta.Fin())
                     monstruo.CambiarEstadoMonstruo(EstadosMonstruo.EnRuta);
-                else if (((Vector2)transform.position - caminoDeVuelta.este).sqrMagnitude < MARGEN)
-                    caminoDeVuelta.QuitarNodo();
+                else
+                    caminoDeVuelta.PosicionObjetivo(transform.position);
                 break;
         }
     }
@@ -102,7 +102,7 @@ public class CuerpoContacto : MonoBehaviour
             case EstadosMonstruo.EnRuta:
 	            return ruta[puntoRutaActual].EstaPosicion();
             case EstadosMonstruo.VolviendoARuta:
-                return caminoDeVuelta.este;
+                return caminoDeVuelta.Posicion();
             default:
                 return Vector2.positiveInfinity;
         }

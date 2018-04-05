@@ -10,53 +10,53 @@ namespace Recorrido
     public class listaNodos
     {
         const float MARGEN = 0.01f;
-        public listaNodos siguiente;
-        public Vector2 este;
-
+        Nodo primero;
+        private class Nodo
+        {
+            public Nodo siguiente;
+            public Vector2 este;
+            public Nodo(Nodo s, Vector2 e)
+            {
+                siguiente = s;
+                este = e;
+            }
+        }
+        public Vector2 Posicion()
+        {
+            if (primero != null)
+                return primero.este;
+            return Vector2.negativeInfinity;
+        }
+        public bool Fin()
+        {
+            return primero == null;
+        }
         public listaNodos()
         {
-            siguiente = null;
-            este = Vector2.negativeInfinity;
+            primero = null;
         }
 
         public void ponerNodo(Vector2 pos)
         {
-            if (este.Equals(Vector2.negativeInfinity))
-                este = pos;
-            else
-            {
-                listaNodos aux = new listaNodos();
-                aux.este = este;
-                aux.siguiente = siguiente;
-                este = pos;
-                siguiente = aux;
-            }
-
-
+            primero = new Nodo(primero, pos);
         }
 
-        public Vector2 QuitarNodo()
+        public void QuitarNodo()
         {
-            if (siguiente == null)
-                este = Vector2.negativeInfinity;
-            este = siguiente.este;
-            siguiente = siguiente.siguiente;
-            return este;
+            if (primero != null)
+                primero = primero.siguiente;
         }
         //metodo que devulve la primera posicion de la lista, si el vector2 esta  a menos de margen unidades la lista pasa a apuntar al elemento siguiente.
         public Vector2 PosicionObjetivo(Vector2 posOrigen)
         {
-            if ((este - posOrigen).sqrMagnitude < MARGEN)
+            
+            if((primero.este - posOrigen).sqrMagnitude < MARGEN)
             {
-                if (siguiente == null)
-                    return Vector2.positiveInfinity;
-                else
-                {
-                    siguiente = siguiente.siguiente;
-                    return este = siguiente.este;
-                }
+                QuitarNodo();
             }
-            return este;
+            if(primero!=null)
+                return primero.este;
+            return Vector2.negativeInfinity;
         }
     }
 }
@@ -67,7 +67,7 @@ public class PathManager : MonoBehaviour
     //guarda todos los puntos del grafo
     static PuntoRecorrido[] puntosTotales;
     public LayerMask conQueColisiona;
-    void Awake()
+    void Start()
     {
         if (instance == null)
         {
@@ -86,10 +86,10 @@ public class PathManager : MonoBehaviour
         }
         ReiniciarRed();
 
-        NodoRecorrido a = new NodoRecorrido(null, puntosTotales[0], null, 0, 0);
-        ColaNodos cola = new ColaNodos(a, null);
+        Nodo a = new Nodo(null, puntosTotales[0], null, 0, 0);
+        ColaNodos cola = new ColaNodos(a);
         for (int i = 1; i < puntosTotales.Length; i++)
-            cola.IntroducirNodo(new NodoRecorrido(null, puntosTotales[i], null, 0, 0));
+            cola.IntroducirNodo(new Nodo(null, puntosTotales[i], null, 0, 0));
     }
     //Reinicia las conexiones entre puntos
     public void ReiniciarRed()
@@ -100,17 +100,18 @@ public class PathManager : MonoBehaviour
         }
     }
 
-    class NodoRecorrido
+    class Nodo
     {
-        public NodoRecorrido padre;
+
+        public Nodo padre;
         public PuntoRecorrido este;
-        public NodoRecorrido hijo;
+        public Nodo hijo;
         //Coste actual.
         public float g = 0;
         //Coste estimado
         public float f = 0;
 
-        public NodoRecorrido(NodoRecorrido _padre, PuntoRecorrido _este, NodoRecorrido _hijo, float _g, float _f)
+        public Nodo(Nodo _padre, PuntoRecorrido _este, Nodo _hijo, float _g, float _f)
         {
             padre = _padre;
             este = _este;
@@ -120,16 +121,16 @@ public class PathManager : MonoBehaviour
         }
 
         //Metodo que devuleve los hijos del nodo que no sean el padre, calcula su coste actual y el estimado
-        public NodoRecorrido[] Hijos(PuntoRecorrido[]destino)
+        public Nodo[] Hijos(PuntoRecorrido[]destino)
         {
-            NodoRecorrido[] hijos = null;
+            Nodo[] hijos = null;
             int numeroHijos;
             PuntoRecorrido[] aux = este.PuntosConectados();
             if (padre == null)
                 numeroHijos = aux.Length;
             else
                 numeroHijos = aux.Length - 1;
-            hijos = new NodoRecorrido[numeroHijos];
+            hijos = new Nodo[numeroHijos];
             int indiceHijos = 0;
 
             for (int i = 0; i < aux.Length; i++)
@@ -137,7 +138,7 @@ public class PathManager : MonoBehaviour
                 {
                     float g_ = aux[i].DistanciaHasta(este.EstaPosicion());
                     float f_ = PathManager.instance.DistanciaMasCorta(aux[i].EstaPosicion(), destino);
-                    hijos[indiceHijos] = new NodoRecorrido(this, aux[i], null, g + g_, g + g_ +f_);
+                    hijos[indiceHijos] = new Nodo(this, aux[i], null, g + g_, g + g_ +f_);
                     indiceHijos++;
                 }
             return hijos;
@@ -147,115 +148,79 @@ public class PathManager : MonoBehaviour
 
     class ColaNodos
     {
-
-        public ColaNodos siguiente;
-        public NodoRecorrido este;
-        public ColaNodos(NodoRecorrido a, ColaNodos proximo)
+        Elemento primero;
+        private class Elemento
         {
-            este = a;
-            siguiente = proximo;
+            public Elemento siguiente;
+            public Nodo este;
+            public Elemento(Elemento s, Nodo e)
+            {
+                siguiente = s;
+                este = e;
+            }
+        }
+        public Nodo Primero()
+        {
+            if(primero!=null)
+                return primero.este;
+            return null;
         }
         public ColaNodos()
         {
-            este = null;
-            siguiente = null;
+            primero = null;
+        }
+        public ColaNodos(Nodo e)
+        {
+            primero = new Elemento(null, e);
         }
         //Metodo que busca si se encuenta el nodorecorrido abuscar, si no lo encuentra devuelve null si lo encuentra la referencia del nodo.
-        public ColaNodos BuscarNodo(NodoRecorrido aBuscar)
+        public bool EstaElNodo(Nodo aBuscar)
         {
-            if (este == aBuscar)
-                return this;
-            else if (siguiente != null)
-                return siguiente.BuscarNodo(aBuscar);
-            else
-                return null;
+            Elemento aux = primero;
+            while (aux != null && aux.este != aBuscar)
+                aux = aux.siguiente;
+            return aux != null;
         }
         //Metodo que quita el nodo de la lista.
-        public ColaNodos QuitarNodo(ColaNodos aQuitar)
+        public void QuitarNodo()
         {
-            if (this == aQuitar)
-            {
-                if (siguiente != null)
-                {
-                    siguiente = siguiente.siguiente;
-                    este = siguiente.este;
-                    return this;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            else
-            {
-                if (siguiente != null)
-                {
-                    siguiente = siguiente.QuitarNodo(aQuitar);
-                }
-                else
-                {
-                    este = null;
-                    siguiente = null;
-                }
-                return this;
-            }
+            if(primero!=null)
+                primero = primero.siguiente;
         }
 
         //Metodo que quita un elemento de la lista con referencial nodorecorrido aquitar.
-        public ColaNodos QuitarNodo(NodoRecorrido aQuitar)
+        public void QuitarNodo(Nodo aQuitar)
         {
-            if (este == aQuitar)
+            Elemento aux = primero, aux2=null;
+            while (aux != null && aux.este != aQuitar)
             {
-                if (siguiente != null)
-                {
-                    este = siguiente.este;
-                    siguiente = siguiente.siguiente;
-                    return this;
-                }
-                else
-                {
-                    este = null;
-                    return null;
-                }
+                aux2 = aux;
+                aux = aux.siguiente;
             }
-            else
+            if (aux != null&&aux2!=null)
             {
-                if (siguiente != null)
-                {
-                    siguiente = siguiente.QuitarNodo(aQuitar);
-                    return this;
-                }
-                else
-                {
-                    return null;
-                }
-
-            }
+                aux2.siguiente = aux.siguiente;
+            }    
         }
 
         // Introduce el nodorecorrido aintroducir conservando el orden de primero los elementos con el menor coste estimado.
-        public void IntroducirNodo(NodoRecorrido aIntroducir)
+        public void IntroducirNodo(Nodo aIntroducir)
         {
-            if (este == null)
-                este = aIntroducir;
-            else
-            {
-                if (aIntroducir.f > este.f)
-                {
-                    if (siguiente != null)
-                        siguiente.IntroducirNodo(aIntroducir);
-                    else
-                        siguiente = new ColaNodos(aIntroducir, null);
-                }
-                else
-                {
-                    if (este != null)
-                        siguiente = new ColaNodos(este, siguiente);
-                    else
-                        siguiente = null;
-                    este = aIntroducir;
-                }
+            Elemento aux = primero, aux2=null;
+            while (aux != null && aIntroducir.f > aux.este.f) {
+                aux2 = aux;
+                aux = aux.siguiente;
             }
+            if(aux!=null)
+            {
+                if (aux2 != null)
+                    aux2.siguiente = new Elemento(aux, aIntroducir);
+                else
+                    primero = new Elemento(primero, aIntroducir);
+            }
+            if (primero == null)
+                primero = new Elemento (null,aIntroducir);
+           
         }
         
         //Introduce los nodos en la lista que se encuentren en el punto y los que esten proyectando un raycast en las cuatro direcciones cardinales.
@@ -271,7 +236,8 @@ public class PathManager : MonoBehaviour
             if(i < puntosTotales.Length)
             {
                 float distancia = puntosTotales[i].DistanciaHasta(posicion);
-                IntroducirNodo(new NodoRecorrido(null, puntosTotales[i], null, distancia, distancia + PathManager.instance.DistanciaMasCorta(posicion,puntosDistanciaManhattan)));
+                IntroducirNodo(new Nodo(null, puntosTotales[i], null, distancia, distancia + PathManager.instance.DistanciaMasCorta(posicion,puntosDistanciaManhattan)));
+                puntosTotales[i].gameObject.SetActive(false);
             }
 
             //Creamos 4 rayos hacia las cuatro direcciones cardinales(debido a que el mapa tiene pasillos ortogonales).
@@ -291,9 +257,12 @@ public class PathManager : MonoBehaviour
                 if (hit[j].collider != null && (aux = hit[j].collider.GetComponent<PuntoRecorrido>()) != null)
                 {
                     float distancia = aux.DistanciaHasta(posicion);
-                    IntroducirNodo(new NodoRecorrido(null, aux, null, distancia, distancia + PathManager.instance.DistanciaMasCorta(posicion, puntosDistanciaManhattan)));
+                    IntroducirNodo(new Nodo(null, aux, null, distancia, distancia + PathManager.instance.DistanciaMasCorta(posicion, puntosDistanciaManhattan)));
                 }
             }
+
+            if (i < puntosTotales.Length)
+                puntosTotales[i].gameObject.SetActive(true);
         }
     }
 
@@ -309,33 +278,33 @@ public class PathManager : MonoBehaviour
     }
 
     //Algoritmo A*
-    NodoRecorrido crearRecorrido(Vector2 posicion, PuntoRecorrido[] fin)
+    Nodo crearRecorrido(Vector2 posicion, PuntoRecorrido[] fin)
     {
         //Creamos las colas frontera y descubiertos(esta ultima no requeriria de cola con prioridad).
         ColaNodos frontera = new ColaNodos();
         frontera.IntroducirNodosEnCruz(posicion, fin);
-        ColaNodos descubiertos = new ColaNodos(null, null);
+        ColaNodos descubiertos = new ColaNodos();
 
         do
         {
             //Quita el nodo de la frontera y lo evalua
-            NodoRecorrido aux = frontera.este;
-            frontera.QuitarNodo(aux);
+            Nodo aux = frontera.Primero();
+            frontera.QuitarNodo();
             //si es el objetivo ha encontrado el objetivo
             if (aux.este.EstaEstePuntoEn(fin))
                 return aux;
             //Lo anyade a los nodos descubiertos
             descubiertos.IntroducirNodo(aux);
             //Expande los hijos
-            NodoRecorrido[] auxs = aux.Hijos(fin);
+            Nodo[] auxs = aux.Hijos(fin);
             //Evalua cada hijo
             for (int i = 0; i < auxs.Length; i++)
             {   //Si ya ha sido descubierto lo ignora
-                if (descubiertos.BuscarNodo(auxs[i]) == null)
+                if (!descubiertos.EstaElNodo(auxs[i]))
                 {
-                    ColaNodos auxc = frontera.BuscarNodo(auxs[i]);
+                    Nodo auxc = auxs[i];
                     //si no esta en frontera y su estimacion es menor que el anterior lo sustituye 
-                    if (auxc != null && auxc.este.f > auxs[i].f)
+                    if (auxc.f > auxs[i].f)
                     {
                         frontera.QuitarNodo(auxc);
                         frontera.IntroducirNodo(auxs[i]);
@@ -346,7 +315,7 @@ public class PathManager : MonoBehaviour
                 }
             }
             //Si la frontera se queda vacia no hay solucion.
-        } while (frontera.este != null);
+        } while (frontera.Primero() != null);
         return null;
     }
 
@@ -354,7 +323,7 @@ public class PathManager : MonoBehaviour
     public listaNodos EncontarCamino(Vector2 inicio, PuntoRecorrido[] fin)
     {
         //Busca el recorrido.
-        NodoRecorrido aux = crearRecorrido(inicio, fin);
+        Nodo aux = crearRecorrido(inicio, fin);
         //Crea la lista en orden.
         listaNodos lista = new listaNodos();
         while (aux != null)
