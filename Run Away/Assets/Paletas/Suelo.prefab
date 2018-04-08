@@ -153,10 +153,10 @@ Tilemap:
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: 666a46b8575e4464588e60ec3b14af16, type: 2}
+    m_Data: {fileID: 11400000, guid: 8dd955e93666d484db8dd1c17ded44d7, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 1
-    m_Data: {fileID: 21300014, guid: c14461cf08938fe42b301677b7d38d86, type: 3}
+    m_Data: {fileID: 21300016, guid: 277533c6b8ac3a54290d4aa801c3d483, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 1
     m_Data:
