@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour {
+public class Health : MonoBehaviour 
+{
+    MonsterMovement monstruo;
 
 	public int health = 1;
-    MonsterMovement monstruo;
 
     void Start()
     {

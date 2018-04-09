@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbrirPuerta : MonoBehaviour {
+
+public class AbrirPuerta : MonoBehaviour 
+{
+	private Rigidbody2D rb2D;
+    GameObject cajaDeColision;
 
 	public bool abierta;
 	public Sprite encendido, apagado;
 
-	private Rigidbody2D rb2D;
-    GameObject cajaDeColision;
-
-	void Awake () {
+	void Awake () 
+	{
 		rb2D = this.GetComponent<Rigidbody2D> ();
         cajaDeColision = transform.GetChild(0).gameObject;
         if (abierta)
@@ -29,15 +31,19 @@ public class AbrirPuerta : MonoBehaviour {
         }
     }
 
-	public void abrir() {
+	public void abrir() 
+	{
         abierta = !abierta;
-		if (abierta) {
+		if (abierta) 
+		{
 			GetComponent<Collider2D> ().enabled = false;
             cajaDeColision.SetActive(false);
             GetComponent<SpriteRenderer> ().sprite = apagado;
             gameObject.layer = LayerMask.NameToLayer("Default");
             GetComponent<AudioSource>().Play();
-        } else {
+        } 
+		else 
+		{
 			GetComponent<Collider2D> ().enabled = true;
             cajaDeColision.SetActive(true);
             GetComponent<SpriteRenderer> ().sprite = encendido;

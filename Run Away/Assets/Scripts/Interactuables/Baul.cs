@@ -4,18 +4,22 @@ using UnityEngine;
 
 [RequireComponent(typeof(Interactuable))]
 
-public class Baul : MonoBehaviour {
+public class Baul : MonoBehaviour 
+{
     Interactuable master;
+
     public float distanciaInteraccion=1f;
     public LayerMask conQueColisiona;
 	public Transform posicionSalida;
-    // Use this for initialization
-    void Start () {
+
+    void Start () 
+	{
         master = GetComponent<Interactuable>();
-        master.Click = (PlayerMovement a) => {
+        master.Click = (PlayerMovement a) => 
+		{
             GetComponent<Collider2D>().enabled = false;
             Vector3 pos = transform.position;
-            RaycastHit2D hit = Physics2D.Raycast(pos,a.transform.position- pos, distanciaInteraccion, conQueColisiona);
+            RaycastHit2D hit = Physics2D.Raycast(pos, a.transform.position- pos, distanciaInteraccion, conQueColisiona);
             if (hit.collider != null && hit.collider.tag == "Player")
             {
                 if (!a.Invisible())

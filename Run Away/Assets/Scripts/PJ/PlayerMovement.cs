@@ -5,23 +5,22 @@ using UnityEngine;
 [RequireComponent(typeof (Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour 
 {
-	public float velocidadaxima = 1f,
-				factorAceleracion = 0.5f,
-                velocidadAngularMaxima = 1f,
-                factorAceleracionAngular = 0.5f,
-                factorGiro = 0.5f,
-				fraccionMinimaVelocidadHaciaDetras = 0.5f;
+	float velMaxima;
+	bool invisible = false;
+	bool movimientoLibre = true;
 
 	Rigidbody2D player, puntero;
     Vector2 direccionMirada,
             direccionMovimiento;
     Lantern luz;
-    float velMaxima;
 
-    bool invisible = false;
-    bool movimientoLibre = true;
+	public float velocidadaxima = 1f,
+				factorAceleracion = 0.5f,
+				velocidadAngularMaxima = 1f,
+				factorAceleracionAngular = 0.5f,
+				factorGiro = 0.5f,
+				fraccionMinimaVelocidadHaciaDetras = 0.5f;
 
-    // Use this for initialization
     void Start () {
         AumentoVelocidad(1f);
         luz = GetComponentInChildren<Lantern>();
