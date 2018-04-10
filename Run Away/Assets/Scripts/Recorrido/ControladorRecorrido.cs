@@ -66,9 +66,10 @@ public class ControladorRecorrido : MonoBehaviour
     public static ControladorRecorrido instance = null;
     //guarda todos los puntos del grafo
     static PuntoRecorrido[] puntosTotales;
-    public LayerMask conQueColisiona;
+    LayerMask conQueColisiona;
     void Start()
     {
+        
         if (instance == null)
         {
             instance = this;
@@ -76,7 +77,7 @@ public class ControladorRecorrido : MonoBehaviour
         }
         else
             Destroy(this.gameObject);
-
+        conQueColisiona = Colisiones.Colision.CapasRecorrido();
         //Busca todos los nodos del grafo.
         GameObject[] auxiliar = GameObject.FindGameObjectsWithTag("Path");
         puntosTotales = new PuntoRecorrido[auxiliar.Length];

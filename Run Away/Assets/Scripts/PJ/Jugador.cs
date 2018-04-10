@@ -12,12 +12,7 @@ public class Jugador : MonoBehaviour
 	Rigidbody2D jugador, puntero;
     Vector2 direccionMirada,
             direccionMovimiento;
-<<<<<<< HEAD:Run Away/Assets/Scripts/PJ/Jugador.cs
     Luz luz;
-    float velMaxima;
-=======
-    Lantern luz;
->>>>>>> 5c036531624aa2b64f7ec7211d67ba52912b1db0:Run Away/Assets/Scripts/PJ/PlayerMovement.cs
 
 	public float velocidadaxima = 1f,
 				factorAceleracion = 0.5f,
@@ -30,7 +25,7 @@ public class Jugador : MonoBehaviour
         AumentoVelocidad(1f);
         luz = GetComponentInChildren<Luz>();
         jugador = GetComponent<Rigidbody2D>();
-        puntero = GameObject.FindWithTag("Pointer").GetComponent<Rigidbody2D>();
+        puntero = GameObject.FindObjectOfType<PunteroRetardo>().GetComponent<Rigidbody2D>();
     }
 	
 	// Update is called once per frame

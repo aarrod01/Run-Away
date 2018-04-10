@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Colores;
 
-
-public class AbrirPuerta : MonoBehaviour 
+public class Puerta : MonoBehaviour 
 {
 	private Rigidbody2D rb2D;
     GameObject cajaDeColision;
 
+    public Colores.Colores color;
 	public bool abierta;
 	public Sprite encendido, apagado;
 

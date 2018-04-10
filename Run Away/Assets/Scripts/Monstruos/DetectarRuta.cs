@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Monstruos;
 using Recorrido;
-public class DetectarRuta : MonoBehaviour 
+public class CuerpoContacto : MonoBehaviour 
 {
 	public int numeroMonstruo;
 

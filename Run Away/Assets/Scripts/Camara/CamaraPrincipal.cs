@@ -21,7 +21,7 @@ public class CamaraPrincipal : MonoBehaviour
     void Start () {
         GameObject player = GameObject.FindWithTag("Player");
         rbJugador = player.GetComponent<Rigidbody2D>();
-        punteroRb = GameObject.FindWithTag("Pointer").GetComponent<Rigidbody2D>();
+        punteroRb = GameObject.FindObjectOfType<PunteroRetardo>().GetComponent<Rigidbody2D>();
         jugador = player.GetComponent<Jugador>();
         cameraRb = GetComponent<Rigidbody2D>();
         transformCamaraRelativo = transform.GetChild(0);

@@ -5,18 +5,19 @@ using Monstruos;
 
 public class CampoVision : MonoBehaviour 
 {
-	public LayerMask queGolpear;
+	LayerMask queGolpear;
 
-	MonsterMovement monstruo;
+	Monstruo monstruo;
 	Transform jugador;
     Vector2 ultimaPosicionJugador;
     
 
     void Start()
 	{
+        queGolpear = Colisiones.Colision.CapaVisionMonstruo();
         ultimaPosicionJugador = Vector2.negativeInfinity;
-		monstruo = GetComponentInParent<MonsterMovement> ();
-		jugador = GameObject.FindWithTag ("Player").GetComponent<Transform> ();
+		monstruo = GetComponentInParent<Monstruo> ();
+		jugador = GameObject.FindObjectOfType<Jugador>().GetComponent<Transform> ();
 	}
     public Vector2 UltimaPosicionJugador()
     {
@@ -24,7 +25,8 @@ public class CampoVision : MonoBehaviour
     }
 	void OnTriggerStay2D (Collider2D other)
 	{
-		if (other.gameObject.tag == "Player"&&!other.GetComponent<Jugador>().Invisible())
+        Jugador aux;
+		if ((aux=other.GetComponent<Jugador>())!=null&&!aux.Invisible())
 		{
 			RaycastHit2D hit = Physics2D.Raycast (transform.position, jugador.position - transform.position, 100f, queGolpear);
 			if (monstruo.EstadoMonstruoActual()!=EstadosMonstruo.Proyectado&&hit.collider.gameObject.tag == "Player") 

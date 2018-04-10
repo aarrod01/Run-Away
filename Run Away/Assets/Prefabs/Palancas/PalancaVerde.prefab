@@ -91,10 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanciaInteraccion: 1
-  conQueColisiona:
-    serializedVersion: 2
-    m_Bits: 2049
-  colorDelInterruptor: Verde
+  colorDelInterruptor: 2
   distanciaDeInteraccion: 0.3
 --- !u!212 &212005047179153202
 SpriteRenderer:

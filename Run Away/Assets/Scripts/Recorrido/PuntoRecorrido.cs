@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Colisiones;
 [RequireComponent(typeof (Collider2D))]
 public class PuntoRecorrido : MonoBehaviour {
 
 	Vector2 estaPosicion;
-	public PuntoRecorrido[] posicionesConectadas;
-	public LayerMask conQueColisiona;
+	PuntoRecorrido[] posicionesConectadas ;
+	LayerMask conQueColisiona = Colision.CapasRecorrido();
 
     //Metodo que pone como posiciones conectadas a aquellas con las que se puede unir el punto en linea recta sin que choque contra ningun obstáculo.
     public void ReiniciarContactos()
@@ -15,7 +16,7 @@ public class PuntoRecorrido : MonoBehaviour {
         gameObject.GetComponent<Collider2D>().enabled = false;
         estaPosicion = transform.position;
         //Busca todos los puntos del mapa.
-        GameObject[] puntosMapa = GameObject.FindGameObjectsWithTag("Path");
+        PuntoRecorrido[] puntosMapa = GameObject.FindObjectsOfType<PuntoRecorrido>();
 
         //Creamos un vector auxiliar que guardara los puntos en contacto
         PuntoRecorrido[] aux = new PuntoRecorrido[puntosMapa.Length];

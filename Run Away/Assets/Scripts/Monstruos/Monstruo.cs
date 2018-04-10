@@ -9,7 +9,7 @@ namespace Monstruos
     public enum TipoMonstruo { Basico, Ninguno};
 }
 
-public class MonsterMovement : MonoBehaviour 
+public class Monstruo : MonoBehaviour 
 {
     public LayerMask conQueColisiona;
 	public float velMovRuta, velMovPerseguir, velGiro,aceleracionAngular, tiempoAturdimiento=1f, periodoGiro=1f;
@@ -18,7 +18,6 @@ public class MonsterMovement : MonoBehaviour
 
     Rigidbody2D rb2D;
 	Transform jugadorTrans;
-    float sentidoGiro;
     float giroInicial;
     float cronometro;
 
