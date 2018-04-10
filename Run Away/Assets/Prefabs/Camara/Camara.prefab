@@ -150,7 +150,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.11764705, g: 0.26633984, b: 0.5, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -161,7 +161,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9b6871d3cdbba478825c4b041a7f90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LightPixelSize: 0.02970297
+  LightPixelSize: 0.0295858
   LightCameraSizeAdd: 3
   LightCameraFovAdd: 30
   EnableAmbientLight: 1
