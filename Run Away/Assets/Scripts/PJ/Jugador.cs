@@ -5,23 +5,27 @@ using UnityEngine;
 [RequireComponent(typeof (Rigidbody2D))]
 public class Jugador : MonoBehaviour 
 {
-	public float velocidadaxima = 1f,
-				factorAceleracion = 0.5f,
-                velocidadAngularMaxima = 1f,
-                factorAceleracionAngular = 0.5f,
-                factorGiro = 0.5f,
-				fraccionMinimaVelocidadHaciaDetras = 0.5f;
+	float velMaxima;
+	bool invisible = false;
+	bool movimientoLibre = true;
 
 	Rigidbody2D jugador, puntero;
     Vector2 direccionMirada,
             direccionMovimiento;
+<<<<<<< HEAD:Run Away/Assets/Scripts/PJ/Jugador.cs
     Luz luz;
     float velMaxima;
+=======
+    Lantern luz;
+>>>>>>> 5c036531624aa2b64f7ec7211d67ba52912b1db0:Run Away/Assets/Scripts/PJ/PlayerMovement.cs
 
-    bool invisible = false;
-    bool movimientoLibre = true;
+	public float velocidadaxima = 1f,
+				factorAceleracion = 0.5f,
+				velocidadAngularMaxima = 1f,
+				factorAceleracionAngular = 0.5f,
+				factorGiro = 0.5f,
+				fraccionMinimaVelocidadHaciaDetras = 0.5f;
 
-    // Use this for initialization
     void Start () {
         AumentoVelocidad(1f);
         luz = GetComponentInChildren<Luz>();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Colisiones;
 
+
 public delegate void funcionInteractuado(Jugador a);
 public delegate bool funcionPregunta(Jugador a);
 public delegate float funcionDistancia();
@@ -19,4 +20,6 @@ public class Interactuable : MonoBehaviour {
         RaycastHit2D hit = Physics2D.Raycast(pos, hasta.position - pos, distanciaInteraccion, capasInteraccion);
         return (hit.collider != null && hit.collider.tag == "Player")||hasta.GetComponent<Collider2D>().bounds.Contains(desde.position);
     }
+
+
 }
