@@ -6,10 +6,12 @@ public class Vida : MonoBehaviour {
 
 	public int vida = 1;
     Monstruo monstruo;
+	Jugador jugador;
 
     void Start()
     {
-        monstruo = GetComponent<Monstruo>();   
+        monstruo = GetComponent<Monstruo>();
+		jugador = GetComponent<Jugador> ();
     }
 
 
@@ -25,9 +27,12 @@ public class Vida : MonoBehaviour {
 
     void Muerte()
     {
-        if (monstruo == null)
+        if (monstruo != null)
             GameManager.instance.MonstruoMuerto(monstruo.tipo);
-        Destroy(gameObject);
+		/*else if (jugador != null)
+		*/	
+		else
+       		Destroy(gameObject);
     }
 
 }

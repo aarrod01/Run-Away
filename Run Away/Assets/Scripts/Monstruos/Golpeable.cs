@@ -17,8 +17,9 @@ public class Golpeable : MonoBehaviour {
         master = GetComponent<Interactuable>();
         monstruoRB = GetComponentInParent<Rigidbody2D>();
         monstruo = GetComponentInParent<Monstruo>();
-        vida= GetComponentInParent<Vida>();
+        vida = GetComponentInParent<Vida>();
         conQueColisiona = Colisiones.Colision.CapaGolpeMonstruo();
+
         master.Accion = (Jugador a) => {
             vida.Danyar(1);
             monstruo.Empujar(a.transform.position, velocidadDeProyeccion);

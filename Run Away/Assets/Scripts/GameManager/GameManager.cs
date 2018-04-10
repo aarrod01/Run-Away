@@ -1,18 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using Monstruos;
-public class GameManager : MonoBehaviour {
-
-
-
-
+public class GameManager : MonoBehaviour 
+{
     int monstruosVivos = 0;
     int drogaConsumida = 0;
-    Jugador jugador;
+
+    Jugador jugador = null;
+	Scene escena;
 
     public float tiempoSubidon;
-
     public static GameManager instance = null;
 
     void Start()
@@ -21,17 +20,23 @@ public class GameManager : MonoBehaviour {
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);
+			escena = SceneManager.GetActiveScene ();
+			if (jugador == null)
+				jugador = GameObject.FindObjectOfType<Jugador>();
         }
         else
             Destroy(this.gameObject);
-
-        jugador = GameObject.FindObjectOfType<Jugador>();
     }
 
     public void MonstruoMuerto(TipoMonstruo tipo)
     {
 
     }
+
+	public void ResetarEscena ()
+	{
+		SceneManager.LoadScene (escena.name);
+	}
 
     public void ConsumirDroga()
     {

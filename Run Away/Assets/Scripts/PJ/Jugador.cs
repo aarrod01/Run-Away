@@ -6,8 +6,8 @@ using UnityEngine;
 public class Jugador : MonoBehaviour 
 {
 	float velMaxima;
-	bool invisible = false;
-	bool movimientoLibre = true;
+	bool invisible = false,
+		movimientoLibre = true;
 
 	Rigidbody2D jugador, puntero;
     Vector2 direccionMirada,
@@ -19,7 +19,8 @@ public class Jugador : MonoBehaviour
 				velocidadAngularMaxima = 1f,
 				factorAceleracionAngular = 0.5f,
 				factorGiro = 0.5f,
-				fraccionMinimaVelocidadHaciaDetras = 0.5f;
+				fraccionMinimaVelocidadHaciaDetras = 0.5f,
+				vidas = 1;
 
     void Start () {
         AumentoVelocidad(1f);
@@ -27,15 +28,19 @@ public class Jugador : MonoBehaviour
         jugador = GetComponent<Rigidbody2D>();
         puntero = GameObject.FindObjectOfType<PunteroRetardo>().GetComponent<Rigidbody2D>();
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-
-        if (movimientoLibre)
-        {
-            Giro();
-            Movimiento();
-        }
+		
+	void FixedUpdate () 
+	{
+		if (vidas > 0) 
+		{
+			if (movimientoLibre) 
+			{
+				Giro ();
+				Movimiento ();
+			}
+		} 
+		else
+			GameManager.instance.ResetarEscena();
 	}
 
     void Giro()
@@ -114,4 +119,9 @@ public class Jugador : MonoBehaviour
     {
         return luz;
     }
+
+	public void Vida(int danyo)
+	{
+		vidas = vidas - danyo;
+	}
 }

@@ -33,10 +33,12 @@ public class PunteroRetardo : MonoBehaviour {
         puntero.MovePosition(Vector2.Lerp(puntero.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), lerp));
         if (objetoInteractuable != null && objetoInteractuable.EsPosibleLaInteraccion(jugador))
         {
-            
+			punteroAnimacion.SetTrigger("Interactuar");
             if (Input.GetMouseButtonDown(0))
                 objetoInteractuable.Accion(jugador);
         }
+		else
+			punteroAnimacion.SetTrigger("Estatico");
             
     }
 
@@ -47,18 +49,12 @@ public class PunteroRetardo : MonoBehaviour {
         Interactuable aux = collision.gameObject.GetComponent<Interactuable>();
 
 		if (aux != null) 
-		{
-            punteroAnimacion.SetTrigger("Interactuar");
             objetoInteractuable = aux;
-		}
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
 		if (objetoInteractuable != null && objetoInteractuable.gameObject == collision.gameObject) 
-		{
-            punteroAnimacion.SetTrigger("Estatico");
             objetoInteractuable = null;
-		}
     }
 }
