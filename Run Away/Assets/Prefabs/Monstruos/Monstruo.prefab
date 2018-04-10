@@ -489,9 +489,12 @@ MonoBehaviour:
     m_Bits: 12288
   velMovRuta: 1
   velMovPerseguir: 2
-  velGiro: 0.1
-  tiempoAturdimiento: 1
+  velGiro: 200
+  aceleracionAngular: 1
+  tiempoAturdimiento: 10
+  periodoGiro: 5
   estadoMonstruo: 0
+  tipo: 0
 --- !u!114 &114557364261237406
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -537,8 +540,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9401c5ebc0727524a9d1149865a50049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanciaInteraccion: 5
-  velocidadDeProyeccion: 20
+  distanciaInteraccion: 1
+  velocidadDeProyeccion: 5
   conQueColisiona:
     serializedVersion: 2
     m_Bits: 397312

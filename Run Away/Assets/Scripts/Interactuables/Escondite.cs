@@ -2,21 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Colisiones;
-
 [RequireComponent(typeof(Interactuable))]
-public class Droga : MonoBehaviour {
+
+public class Escondite: MonoBehaviour {
     Interactuable master;
-    public float distanciaDeInteraccion;
+    public float distanciaDeInteraccion=1f;
     LayerMask conQueColisiona;
-    private void Start()
-    {
+	public Transform posicionSalida;
+    // Use this for initialization
+    void Start () {
         conQueColisiona = Colision.CapasInteraccion();
         master = GetComponent<Interactuable>();
-        master.Accion = (Jugador a) =>
-        {
-
-                GameManager.instance.ConsumirDroga();
-                DrogaConsumida();
+        master.Accion = (Jugador a) => {
+            
+            if (!a.Invisible())
+            {
+                a.Esconderse(true);
+                a.transform.position = transform.position;
+            }
+            
+            else
+            {
+                a.Esconderse(false);
+                a.GetComponent<Rigidbody2D>().position = posicionSalida.position;
+            }
         };
         master.EsPosibleLaInteraccion = (Jugador a) =>
         {
@@ -24,9 +33,5 @@ public class Droga : MonoBehaviour {
         };
         master.DistanciaDeInteraccion = () => { return distanciaDeInteraccion; };
     }
-
-    void DrogaConsumida()
-    {
-        Destroy(gameObject);
-    }
+	
 }

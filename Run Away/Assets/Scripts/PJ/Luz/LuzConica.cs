@@ -11,14 +11,9 @@ public class LuzConica : MonoBehaviour {
         escalaInicial = transform.localScale;
     }
 
-    public void Apagar()
+    public void Activa(bool a)
     {
-        gameObject.SetActive(false);
-    }
-
-    public void Encender()
-    {
-        gameObject.SetActive(true);
+        gameObject.SetActive(a);
     }
 
     public void Largo(float porcentaje)

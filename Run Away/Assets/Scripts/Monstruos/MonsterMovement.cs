@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Monster;
-using UnityEngine.SceneManagement;
-namespace Monster
+using Monstruos;
+
+namespace Monstruos
 {
 	public enum EstadosMonstruo{SiguiendoJugador, EnRuta, PensandoRuta ,VolviendoARuta, Desorientado,Proyectado,BuscandoJugador, Ninguno};
     public enum TipoMonstruo { Basico, Ninguno};
@@ -12,14 +12,14 @@ namespace Monster
 public class MonsterMovement : MonoBehaviour 
 {
     public LayerMask conQueColisiona;
-
-	public float velMovRuta, velMovPerseguir, velGiro,aceleracionAngular, tiempoAturdimiento=1f;
+	public float velMovRuta, velMovPerseguir, velGiro,aceleracionAngular, tiempoAturdimiento=1f, periodoGiro=1f;
     public EstadosMonstruo estadoMonstruo;
     public TipoMonstruo tipo;
 
     Rigidbody2D rb2D;
 	Transform jugadorTrans;
-    float giroInicial,giroFinal, sentidoGiro;
+    float sentidoGiro;
+    float giroInicial;
     float cronometro;
 
     const float MARGEN = 0.001f;
@@ -55,17 +55,16 @@ public class MonsterMovement : MonoBehaviour
             case EstadosMonstruo.Desorientado:
                 Pararse();
                 giroInicial = rb2D.rotation;
-                sentidoGiro = Mathf.Pow(-1, Random.Range(0, 1));
-                giroFinal = giroInicial + sentidoGiro*360f;
+                cronometro = Time.time;
                 
                 CambiarEstadoMonstruo(EstadosMonstruo.BuscandoJugador);
                 break;
             case EstadosMonstruo.BuscandoJugador:
                 Pararse();
-                rb2D.MoveRotation(Mathf.Lerp(rb2D.rotation, giroFinal, velGiro));
-                if (Mathf.Abs(rb2D.rotation- giroFinal)<MARGENANGULO)
+                Vector2 aux = new Vector2(Mathf.Sin(((Time.time - cronometro) / periodoGiro + giroInicial/360f) * 2 * Mathf.PI ), Mathf.Cos(((Time.time - cronometro) / periodoGiro + giroInicial / 360f) * 2 * Mathf.PI));
+                GiroInstantaneo(aux);
+                if (Time.time-cronometro>periodoGiro)
                 {
-                    rb2D.rotation = giroInicial;
                     CambiarEstadoMonstruo(EstadosMonstruo.PensandoRuta);
                 }
                 break;
@@ -93,24 +92,19 @@ public class MonsterMovement : MonoBehaviour
     //Seguir al jugador, moverse por la ruta y volver a la ruta.
     void MoverseHacia(Vector2 dir, float vel)
     {
-
-        //rb2D.velocity = Vector2.Lerp(rb2D.velocity,dir.normalized * vel,factorAceleracion);
-        //rb2D.rotation=Mathf.Atan2(dir.y, dir.x)*180f/Mathf.PI-90f;
         rb2D.velocity = dir.normalized * vel;
         Giro(rb2D.velocity);
     }
 
     void Giro(Vector2 dir)
     {
-        float velocidadAngularPredicha;
-        Vector2 direccionMovimientoObjetivo = dir;
-        float anguloPredicho = Vector2.SignedAngle(Vector2.up, direccionMovimientoObjetivo) - rb2D.rotation;
-        if (anguloPredicho > 180f)
-            anguloPredicho -= 360f;
-        else if (anguloPredicho < -180f)
-            anguloPredicho += 360f;
-        velocidadAngularPredicha = (anguloPredicho) / Time.fixedDeltaTime;
-        rb2D.angularVelocity = Mathf.Lerp(rb2D.angularVelocity, Mathf.Max(Mathf.Min(velGiro, velocidadAngularPredicha), -velGiro), aceleracionAngular);
+        if (dir != Vector2.zero)
+            rb2D.rotation = Mathf.LerpAngle(rb2D.rotation,Mathf.Atan2(-dir.x, dir.y)*180f/Mathf.PI, aceleracionAngular);
+    }
+    void GiroInstantaneo(Vector2 dir)
+    {
+        if (dir != Vector2.zero)
+            rb2D.rotation = Mathf.Atan2(-dir.x, dir.y) * 180f / Mathf.PI;
     }
 
     public void Empujar(Vector2 origen, float velocidadProyeccion)

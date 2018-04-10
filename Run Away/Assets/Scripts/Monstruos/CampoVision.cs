@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Monster;
+using Monstruos;
 
 public class CampoVision : MonoBehaviour 
 {
@@ -24,7 +24,7 @@ public class CampoVision : MonoBehaviour
     }
 	void OnTriggerStay2D (Collider2D other)
 	{
-		if (other.gameObject.tag == "Player"&&!other.GetComponent<PlayerMovement>().Invisible())
+		if (other.gameObject.tag == "Player"&&!other.GetComponent<Jugador>().Invisible())
 		{
 			RaycastHit2D hit = Physics2D.Raycast (transform.position, jugador.position - transform.position, 100f, queGolpear);
 			if (monstruo.EstadoMonstruoActual()!=EstadosMonstruo.Proyectado&&hit.collider.gameObject.tag == "Player") 

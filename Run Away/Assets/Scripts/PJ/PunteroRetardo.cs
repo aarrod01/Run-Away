@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Pointer : MonoBehaviour {
+public class PunteroRetardo : MonoBehaviour {
 
-    Interactuable objetoInteractuable = null;
-    PlayerMovement player;
+    Interactuable objetoInteractuable = null, objetoInteractuable2 = null;
+    Jugador jugador;
     Rigidbody2D puntero;
     public float lerp = 0.5f;
 
 	// Use this for initialization
 	void Start () {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        jugador = GameObject.FindGameObjectWithTag("Player").GetComponent<Jugador>();
         puntero = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         puntero.MovePosition(Vector2.Lerp(puntero.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), lerp));
-        if (Input.GetMouseButtonDown(0) && objetoInteractuable != null)
-            objetoInteractuable.Click(player);
+        if (Input.GetMouseButtonDown(0) && objetoInteractuable != null && objetoInteractuable.EsPosibleLaInteraccion(jugador))
+        {
+            objetoInteractuable.Accion(jugador);
+        }
 
 	}
 
@@ -28,7 +30,7 @@ public class Pointer : MonoBehaviour {
     {
         Interactuable aux = collision.gameObject.GetComponent<Interactuable>();
         if (aux != null)
-            objetoInteractuable = aux; ;
+            objetoInteractuable = aux;
     }
 
     private void OnTriggerExit2D(Collider2D collision)

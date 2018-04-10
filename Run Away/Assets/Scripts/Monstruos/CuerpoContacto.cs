@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Monster;
+using Monstruos;
 using Recorrido;
 public class CuerpoContacto : MonoBehaviour 
 {
@@ -58,7 +58,7 @@ public class CuerpoContacto : MonoBehaviour
                     puntoRutaActual = (puntoRutaActual + 1) % ruta.Length;
                 break;
             case EstadosMonstruo.PensandoRuta:
-				caminoDeVuelta = PathManager.instance.EncontarCamino(monstruoRB.position,ruta);
+				caminoDeVuelta = ControladorRecorrido.instance.EncontarCamino(monstruoRB.position,ruta);
                 if(caminoDeVuelta!=null)
                     monstruo.CambiarEstadoMonstruo(EstadosMonstruo.VolviendoARuta);
                 break;

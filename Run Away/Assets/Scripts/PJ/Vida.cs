@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour {
+public class Vida : MonoBehaviour {
 
-	public int health = 1;
+	public int vida = 1;
     MonsterMovement monstruo;
 
     void Start()
@@ -15,8 +15,8 @@ public class Health : MonoBehaviour {
 
     public void Danyar(int danyo)
     {
-        health -= danyo;
-        if (health <= 0)
+        vida -= danyo;
+        if (vida <= 0)
         {
             Muerte();
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-public class MainCamera : MonoBehaviour 
+public class CamaraPrincipal : MonoBehaviour 
 {
 	public float smoothTime = 1;
     public float anchoInfinito = 1f;
@@ -12,20 +12,20 @@ public class MainCamera : MonoBehaviour
     public float velocidadGiro = 1f;
     public float anguloGiroMaximo = 10f;
 
-    Rigidbody2D playerRb, cameraRb, punteroRb;
+    Rigidbody2D rbJugador, cameraRb, punteroRb;
     Transform transformCamaraRelativo;
-	PlayerMovement playerMovement;
+	Jugador jugador;
 	Vector2 velocidadTraslacionSimple;
 
     // Use this for initialization
     void Start () {
         GameObject player = GameObject.FindWithTag("Player");
-        playerRb = player.GetComponent<Rigidbody2D>();
+        rbJugador = player.GetComponent<Rigidbody2D>();
         punteroRb = GameObject.FindWithTag("Pointer").GetComponent<Rigidbody2D>();
-        playerMovement = player.GetComponent<PlayerMovement>();
+        jugador = player.GetComponent<Jugador>();
         cameraRb = GetComponent<Rigidbody2D>();
         transformCamaraRelativo = transform.GetChild(0);
-        cameraRb.position = playerRb.position;
+        cameraRb.position = rbJugador.position;
         velocidadTraslacionSimple = Vector2.zero;
     }
 		
@@ -48,15 +48,15 @@ public class MainCamera : MonoBehaviour
     void TraslacionSimple(ref Vector2 velocidad)
 	{
 			Vector2.SmoothDamp (cameraRb.position,
-				playerRb.position, ref velocidad, smoothTime, float.MaxValue, Time.deltaTime);
+                rbJugador.position, ref velocidad, smoothTime, float.MaxValue, Time.deltaTime);
     }
 
     void CameraRoll()
     {
-        if(playerRb.velocity.x>0f)
+        if(rbJugador.velocity.x>0f)
         {
             cameraRb.rotation = Mathf.Min(cameraRb.rotation + Time.deltaTime * velocidadGiro,anguloGiroMaximo);
-        }else if(playerRb.velocity.x<0f)
+        }else if(rbJugador.velocity.x<0f)
         {
             cameraRb.rotation = Mathf.Max(cameraRb.rotation - Time.deltaTime * velocidadGiro, -anguloGiroMaximo);
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof (Rigidbody2D))]
-public class PlayerMovement : MonoBehaviour 
+public class Jugador : MonoBehaviour 
 {
 	public float velocidadaxima = 1f,
 				factorAceleracion = 0.5f,
@@ -12,10 +12,10 @@ public class PlayerMovement : MonoBehaviour
                 factorGiro = 0.5f,
 				fraccionMinimaVelocidadHaciaDetras = 0.5f;
 
-	Rigidbody2D player, puntero;
+	Rigidbody2D jugador, puntero;
     Vector2 direccionMirada,
             direccionMovimiento;
-    Lantern luz;
+    Luz luz;
     float velMaxima;
 
     bool invisible = false;
@@ -24,8 +24,8 @@ public class PlayerMovement : MonoBehaviour
     // Use this for initialization
     void Start () {
         AumentoVelocidad(1f);
-        luz = GetComponentInChildren<Lantern>();
-        player = GetComponent<Rigidbody2D>();
+        luz = GetComponentInChildren<Luz>();
+        jugador = GetComponent<Rigidbody2D>();
         puntero = GameObject.FindWithTag("Pointer").GetComponent<Rigidbody2D>();
     }
 	
@@ -42,16 +42,16 @@ public class PlayerMovement : MonoBehaviour
     void Giro()
     {
         float velocidadAngularPredicha;
-        Vector2 direccionMovimientoObjetivo = puntero.position - player.position;
-        float anguloPredicho = Vector2.SignedAngle(Vector2.up, direccionMovimientoObjetivo)- player.rotation;
+        Vector2 direccionMovimientoObjetivo = puntero.position - jugador.position;
+        float anguloPredicho = Vector2.SignedAngle(Vector2.up, direccionMovimientoObjetivo)- jugador.rotation;
         if (anguloPredicho > 180f)
             anguloPredicho -= 360f;
         else if (anguloPredicho < -180f)
             anguloPredicho += 360f;
         velocidadAngularPredicha = (anguloPredicho)/Time.fixedDeltaTime;
-        player.angularVelocity = Mathf.Lerp(player.angularVelocity,Mathf.Max(Mathf.Min(velocidadAngularMaxima, velocidadAngularPredicha),-velocidadAngularMaxima),factorAceleracionAngular);
+        jugador.angularVelocity = Mathf.Lerp(jugador.angularVelocity,Mathf.Max(Mathf.Min(velocidadAngularMaxima, velocidadAngularPredicha),-velocidadAngularMaxima),factorAceleracionAngular);
 
-        direccionMirada = new Vector2(-Mathf.Sin(player.rotation * Mathf.PI/180), Mathf.Cos(player.rotation*Mathf.PI/180));
+        direccionMirada = new Vector2(-Mathf.Sin(jugador.rotation * Mathf.PI/180), Mathf.Cos(jugador.rotation*Mathf.PI/180));
     }
 
     void Movimiento()
@@ -64,14 +64,14 @@ public class PlayerMovement : MonoBehaviour
         if (direccionMovimiento.sqrMagnitude>1)
             direccionMovimiento.Normalize();
 
-        Vector2 velocidad = player.velocity;
+        Vector2 velocidad = jugador.velocity;
 
         velocidad = Vector2.Lerp(velocidad, direccionMovimiento * velMaxima
                 * ((direccionMovimiento + direccionMirada).sqrMagnitude * (1 - fraccionMinimaVelocidadHaciaDetras) + fraccionMinimaVelocidadHaciaDetras)
                 , factorAceleracion);
 
 
-        player.velocity = velocidad;
+        jugador.velocity = velocidad;
         direccionMovimiento.Normalize();
     }
     
@@ -80,8 +80,19 @@ public class PlayerMovement : MonoBehaviour
         movimientoLibre = variable;
     }
     public void Invisible(bool a) 
-	{
+	{        
         invisible = a;
+    }
+
+    public void Esconderse(bool a)
+    {
+        Parar();
+        Invisible(a);
+        movimientoLibre=!a;
+        GetComponent<Rigidbody2D>().Sleep();
+        GetComponent<Collider2D>().enabled = !a;
+        GetComponent<SpriteRenderer>().enabled = !a;
+        LuzConica(!a);
     }
     public bool Invisible()
     {
@@ -89,14 +100,10 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Parar()
     {
-        player.velocity = Vector2.zero;
+        jugador.velocity = Vector2.zero;
     }
-	public void ApagarLuzConica(){
-		luz.ApagarLuzConica ();
-	}
-	public void EncenderLuzConica()
-	{
-		luz.EncenderLuzConica ();
+	public void LuzConica(bool a){
+		luz.LuzConica (a);
 	}
 
     public void AumentoVelocidad(float porcentaje)
@@ -104,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
         velMaxima = porcentaje * velocidadaxima;
     }
 
-    public Lantern Luz()
+    public Luz Luz()
     {
         return luz;
     }

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4147605570162300}
   - component: {fileID: 212187340873699294}
   - component: {fileID: 61838100101538694}
-  - component: {fileID: 114331033855792678}
+  - component: {fileID: 114031445359559500}
   - component: {fileID: 114471768344243580}
   - component: {fileID: 61698742623513306}
   m_Layer: 15
@@ -123,7 +123,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.33768082, y: 1.0808532}
   m_EdgeRadius: 0
---- !u!114 &114331033855792678
+--- !u!114 &114031445359559500
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -134,10 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cc18be1d0633024b84147f24a7d1353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanciaInteraccion: 1
-  conQueColisiona:
-    serializedVersion: 2
-    m_Bits: 6144
+  distanciaDeInteraccion: 1
   posicionSalida: {fileID: 4975872934193712}
 --- !u!114 &114471768344243580
 MonoBehaviour:

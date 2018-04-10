@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lantern : MonoBehaviour
+public class Luz : MonoBehaviour
 {
 
 
@@ -14,14 +14,11 @@ public class Lantern : MonoBehaviour
         luzConica = GetComponentInChildren<LuzConica>();
         luzPuntual = GetComponentInChildren<LuzPuntual>();
     }
-    public void ApagarLuzConica()
+    public void LuzConica(bool a)
     {
-        luzConica.Apagar();
+        luzConica.Activa(a);
     }
-    public void EncenderLuzConica()
-    {
-        luzConica.Encender();
-    }
+    
     public void IntensidadLuz(float porcentaje)
     {
         luzConica.Largo(porcentaje);

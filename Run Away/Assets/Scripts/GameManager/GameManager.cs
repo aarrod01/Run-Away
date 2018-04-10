@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Monster;
+using Monstruos;
 public class GameManager : MonoBehaviour {
 
 
@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
 
     int monstruosVivos = 0;
     int drogaConsumida = 0;
-    PlayerMovement jugador;
+    Jugador jugador;
 
     public float tiempoSubidon;
 
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour {
         else
             Destroy(this.gameObject);
 
-        jugador = GameObject.FindObjectOfType<PlayerMovement>();
+        jugador = GameObject.FindObjectOfType<Jugador>();
     }
 
     public void MonstruoMuerto(TipoMonstruo tipo)

@@ -6,7 +6,7 @@ public class Golpeable : MonoBehaviour {
     Interactuable master;
     Rigidbody2D monstruoRB;
     MonsterMovement monstruo;
-    Health vida;
+    Vida vida;
     public float distanciaInteraccion = 1f;
     public float velocidadDeProyeccion;
     public LayerMask conQueColisiona;
@@ -16,17 +16,19 @@ public class Golpeable : MonoBehaviour {
         master = GetComponent<Interactuable>();
         monstruoRB = GetComponentInParent<Rigidbody2D>();
         monstruo = GetComponentInParent<MonsterMovement>();
-        vida= GetComponentInParent<Health>();
-        master.Click = (PlayerMovement a) => {
+        vida= GetComponentInParent<Vida>();
+        master.Accion = (Jugador a) => {
+            vida.Danyar(1);
+            monstruo.Empujar(a.transform.position, velocidadDeProyeccion);
+           
+        };
+        master.EsPosibleLaInteraccion = (Jugador a) =>
+        {
             Vector2 pos = transform.position;
             Vector2 posa = a.transform.position;
-            RaycastHit2D hit = Physics2D.Raycast(posa, pos-posa, distanciaInteraccion, conQueColisiona);
-            Debug.DrawRay(posa, pos-posa,Color.red,5f);
-            if (hit.collider != null && hit.collider.tag == "PuntoVulnerable")
-            {
-                vida.Danyar(1);
-                monstruo.Empujar(posa, velocidadDeProyeccion);
-            }
+            RaycastHit2D hit = Physics2D.Raycast(posa, pos - posa, distanciaInteraccion, conQueColisiona);
+            Debug.DrawRay(posa, pos - posa, Color.red, 5f);
+            return hit.collider != null && hit.collider.tag == "PuntoVulnerable";
         };
         
        

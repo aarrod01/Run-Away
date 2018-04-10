@@ -60,10 +60,10 @@ namespace Recorrido
         }
     }
 }
-public class PathManager : MonoBehaviour
+public class ControladorRecorrido : MonoBehaviour
 {
     //Singleton
-    public static PathManager instance = null;
+    public static ControladorRecorrido instance = null;
     //guarda todos los puntos del grafo
     static PuntoRecorrido[] puntosTotales;
     public LayerMask conQueColisiona;
@@ -137,7 +137,7 @@ public class PathManager : MonoBehaviour
                 if (padre == null || aux[i] != padre.este)
                 {
                     float g_ = aux[i].DistanciaHasta(este.EstaPosicion());
-                    float f_ = PathManager.instance.DistanciaMasCorta(aux[i].EstaPosicion(), destino);
+                    float f_ = ControladorRecorrido.instance.DistanciaMasCorta(aux[i].EstaPosicion(), destino);
                     hijos[indiceHijos] = new Nodo(this, aux[i], null, g + g_, g + g_ +f_);
                     indiceHijos++;
                 }
@@ -236,19 +236,19 @@ public class PathManager : MonoBehaviour
             if(i < puntosTotales.Length)
             {
                 float distancia = puntosTotales[i].DistanciaHasta(posicion);
-                IntroducirNodo(new Nodo(null, puntosTotales[i], null, distancia, distancia + PathManager.instance.DistanciaMasCorta(posicion,puntosDistanciaManhattan)));
+                IntroducirNodo(new Nodo(null, puntosTotales[i], null, distancia, distancia + ControladorRecorrido.instance.DistanciaMasCorta(posicion,puntosDistanciaManhattan)));
                 puntosTotales[i].gameObject.SetActive(false);
             }
 
             //Creamos 4 rayos hacia las cuatro direcciones cardinales(debido a que el mapa tiene pasillos ortogonales).
             RaycastHit2D[] hit = new RaycastHit2D[4];
-            hit[0]= Physics2D.Raycast(posicion, Vector2.up, Mathf.Infinity, PathManager.instance.conQueColisiona);
+            hit[0]= Physics2D.Raycast(posicion, Vector2.up, Mathf.Infinity, ControladorRecorrido.instance.conQueColisiona);
             Debug.DrawRay(posicion, Vector2.up, Color.green, 10f);
-            hit[1] = Physics2D.Raycast(posicion, Vector2.right, Mathf.Infinity, PathManager.instance.conQueColisiona);
+            hit[1] = Physics2D.Raycast(posicion, Vector2.right, Mathf.Infinity, ControladorRecorrido.instance.conQueColisiona);
             Debug.DrawRay(posicion, Vector2.right, Color.green, 10f);
-            hit[2] = Physics2D.Raycast(posicion, Vector2.down, Mathf.Infinity, PathManager.instance.conQueColisiona);
+            hit[2] = Physics2D.Raycast(posicion, Vector2.down, Mathf.Infinity, ControladorRecorrido.instance.conQueColisiona);
             Debug.DrawRay(posicion, Vector2.down, Color.green, 10f);
-            hit[3] = Physics2D.Raycast(posicion, Vector2.left, Mathf.Infinity, PathManager.instance.conQueColisiona);
+            hit[3] = Physics2D.Raycast(posicion, Vector2.left, Mathf.Infinity, ControladorRecorrido.instance.conQueColisiona);
             Debug.DrawRay(posicion, Vector2.left, Color.green,10f);
 
             PuntoRecorrido aux = null;
@@ -257,7 +257,7 @@ public class PathManager : MonoBehaviour
                 if (hit[j].collider != null && (aux = hit[j].collider.GetComponent<PuntoRecorrido>()) != null)
                 {
                     float distancia = aux.DistanciaHasta(posicion);
-                    IntroducirNodo(new Nodo(null, aux, null, distancia, distancia + PathManager.instance.DistanciaMasCorta(posicion, puntosDistanciaManhattan)));
+                    IntroducirNodo(new Nodo(null, aux, null, distancia, distancia + ControladorRecorrido.instance.DistanciaMasCorta(posicion, puntosDistanciaManhattan)));
                 }
             }
 

@@ -11,15 +11,11 @@ public class LuzPuntual : MonoBehaviour {
         escalaInicial = transform.localScale;
     }
 
-    public void Apagar()
+    public void Activa(bool a)
     {
-        gameObject.SetActive(false);
+        gameObject.SetActive(a);
     }
 
-    public void Encender()
-    {
-        gameObject.SetActive(true);
-    }
 
     public void Radio(float porcentaje)
     {
