@@ -10,7 +10,7 @@ public class Golpear : MonoBehaviour
 	//Animator animacionMonstruo;
 
 	public int danyoMonstruo = 1;
-	public float golpeRetardo = 0.2;
+	public float golpeRetardo = 0.2f;
 
 	void Start () 
 	{
