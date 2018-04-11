@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Colisiones;
 
 public delegate void funcionInteractuado(Jugador a);
 public delegate bool funcionPregunta(Jugador a);

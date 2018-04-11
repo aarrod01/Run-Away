@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Colisiones;
 [RequireComponent(typeof(Interactuable))]
 
 public class Escondite: MonoBehaviour {
@@ -11,7 +10,7 @@ public class Escondite: MonoBehaviour {
 	public Transform posicionSalida;
     // Use this for initialization
     void Start () {
-        conQueColisiona = Colision.CapasInteraccion();
+        conQueColisiona = LayerMask.GetMask("Obstaculos", "Objetos");
         master = GetComponent<Interactuable>();
         master.Accion = (Jugador a) => {
             

@@ -1,17 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Colisiones;
 [RequireComponent(typeof (Collider2D))]
 public class PuntoRecorrido : MonoBehaviour {
 
 	Vector2 estaPosicion;
 	PuntoRecorrido[] posicionesConectadas ;
-	LayerMask conQueColisiona = Colision.CapasRecorrido();
+	LayerMask conQueColisiona;
 
     //Metodo que pone como posiciones conectadas a aquellas con las que se puede unir el punto en linea recta sin que choque contra ningun obstáculo.
     public void ReiniciarContactos()
     {
+        conQueColisiona = LayerMask.GetMask("Obstaculos", "Recorrido");
         //Desactiva su collider para que el rayo a proyectar no interfiera.
         gameObject.GetComponent<Collider2D>().enabled = false;
         estaPosicion = transform.position;

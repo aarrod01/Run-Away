@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Colisiones;
 
 [RequireComponent(typeof(Interactuable))]
 public class Droga : MonoBehaviour {
@@ -10,7 +9,7 @@ public class Droga : MonoBehaviour {
     LayerMask conQueColisiona;
     private void Start()
     {
-        conQueColisiona = Colision.CapasInteraccion();
+        conQueColisiona = LayerMask.GetMask("Obstaculos","Objetos");
         master = GetComponent<Interactuable>();
         master.Accion = (Jugador a) =>
         {

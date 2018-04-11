@@ -18,6 +18,7 @@ public class Monstruo : MonoBehaviour
 
     Rigidbody2D rb2D;
 	Transform jugadorTrans;
+    DetectorParedes detectorParedes;
     float giroInicial;
     float cronometro;
 
@@ -28,18 +29,19 @@ public class Monstruo : MonoBehaviour
 	{
 		rb2D = GetComponent <Rigidbody2D> ();
 		jugadorTrans = GameObject.FindWithTag ("Player").GetComponent<Transform> ();
+        detectorParedes = GetComponentInChildren<DetectorParedes>();
 		estadoMonstruo = EstadosMonstruo.EnRuta;
 	}
 
 	void FixedUpdate ()
 	{	
-		Vector2 posPlayer = GetComponentInChildren<CampoVision>().UltimaPosicionJugador() - (Vector2)transform.position;
-		Vector2 posPuntoRuta = GetComponentInChildren<CuerpoContacto> ().PosicionPuntoRuta () - (Vector2)transform.position;
+		Vector2 posPlayer = GetComponentInChildren<CampoVision>().UltimaPosicionJugador();
+		Vector2 posPuntoRuta = GetComponentInChildren<DetectarRuta> ().PosicionPuntoRuta ();
 
 		switch (estadoMonstruo) 
 		{
 			case EstadosMonstruo.EnRuta:
-				MoverseHacia (posPuntoRuta, velMovRuta);
+				MoverseHacia (detectorParedes.EvitarColision(posPuntoRuta), velMovRuta);
 				break;
 			case EstadosMonstruo.SiguiendoJugador:
                 if ((GetComponentInChildren<CampoVision>().UltimaPosicionJugador() - rb2D.position).sqrMagnitude < MARGEN)
@@ -91,7 +93,7 @@ public class Monstruo : MonoBehaviour
     //Seguir al jugador, moverse por la ruta y volver a la ruta.
     void MoverseHacia(Vector2 dir, float vel)
     {
-        rb2D.velocity = dir.normalized * vel;
+        rb2D.velocity = (dir-(Vector2)transform.position).normalized * vel;
         Giro(rb2D.velocity);
     }
 

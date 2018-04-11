@@ -14,7 +14,7 @@ public class CampoVision : MonoBehaviour
 
     void Start()
 	{
-        queGolpear = Colisiones.Colision.CapaVisionMonstruo();
+        queGolpear = LayerMask.GetMask("Obstaculos","Jugador");
         ultimaPosicionJugador = Vector2.negativeInfinity;
 		monstruo = GetComponentInParent<Monstruo> ();
 		jugador = GameObject.FindObjectOfType<Jugador>().GetComponent<Transform> ();

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Colisiones;
 using Colores;
 
 [RequireComponent(typeof(Interactuable))]
@@ -20,7 +19,7 @@ public class Palanca : MonoBehaviour
 	void Start () {
         puertas = GameObject.FindObjectsOfType<Puerta>();
 
-        conQueColisiona = Colision.CapasInteraccion();
+        conQueColisiona = LayerMask.GetMask("Obstaculos","Objetos");
         master = GetComponent<Interactuable>();
 		master.Accion = (Jugador a) => {
 
