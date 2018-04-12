@@ -13,7 +13,6 @@ public class DetectarRuta : MonoBehaviour
 
 	public PuntoRecorrido[] ruta;
     PuntoRecorrido[] puntosRuta;
-    PuntoRecorrido ultimopunto;
     const float MARGEN = 0.001f;
     public listaNodos caminoDeVuelta;
 

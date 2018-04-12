@@ -7,7 +7,6 @@ using Colores;
 public class Palanca : MonoBehaviour 
 {
 	Interactuable master;
-	bool puedeInteractuar;
 
 	Puerta[] puertas; 
 

@@ -24,47 +24,67 @@ namespace Patron
             }
         }
 
-        public void PatronX(Direccion[] direccionesAbiertas, Contenido tipoDeRelleno)
+        public void PatronX(Direccion[] direccionesAbiertas)
         {
 
-            RellenarCentro(tipoDeRelleno);
+            RellenarCentro();
             for (int i = 0; i < direccionesAbiertas.Length; i++)
-                RellenarDireccion(direccionesAbiertas[i], tipoDeRelleno);
+                RellenarDireccion(direccionesAbiertas[i]);
         }
         public Contenido ContenidoS(int x, int y)
         {
             return mascara[x, y];
         }
-        void RellenarDireccion(Direccion direccion, Contenido tipoDeRelleno)
+        void RellenarDireccion(Direccion direccion)
         {
             switch (direccion)
             {
                 case Direccion.Arriba:
-                    mascara[1, 0] = tipoDeRelleno;
-                    mascara[2, 0] = tipoDeRelleno;
+                    mascara[1, 0] = Contenido.Vacio;
+                    mascara[2, 0] = Contenido.Vacio;
+                    if (mascara[1, 3] == Contenido.Desconocido)
+                    {
+                        mascara[1, 3] = Contenido.Lleno;
+                        mascara[2, 3] = Contenido.Lleno;
+                    }
                     break;
                 case Direccion.Derecha:
-                    mascara[3, 1] = tipoDeRelleno;
-                    mascara[3, 2] = tipoDeRelleno;
+                    mascara[3, 1] = Contenido.Vacio;
+                    mascara[3, 2] = Contenido.Vacio;
+                    if (mascara[0, 1] == Contenido.Desconocido)
+                    {
+                        mascara[0, 1] = Contenido.Lleno;
+                        mascara[0, 2] = Contenido.Lleno;
+                    }
                     break;
                 case Direccion.Abajo:
-                    mascara[1, 3] = tipoDeRelleno;
-                    mascara[2, 3] = tipoDeRelleno;
+                    mascara[1, 3] = Contenido.Vacio;
+                    mascara[2, 3] = Contenido.Vacio;
+                    if (mascara[1,0] == Contenido.Desconocido)
+                    {
+                        mascara[1, 0] = Contenido.Lleno;
+                        mascara[2, 0] = Contenido.Lleno;
+                    }
                     break;
                 case Direccion.Izquierda:
-                    mascara[0, 1] = tipoDeRelleno;
-                    mascara[0, 2] = tipoDeRelleno;
+                    mascara[0, 1] = Contenido.Vacio;
+                    mascara[0, 2] = Contenido.Vacio;
+                    if (mascara[3, 1] == Contenido.Desconocido)
+                    {
+                        mascara[3, 1] = Contenido.Lleno;
+                        mascara[3, 2] = Contenido.Lleno;
+                    }
                     break;
             }
         }
 
-        void RellenarCentro(Contenido tipoDeRelleno)
+        public void RellenarCentro()
         {
             for (int i = 1; i < tamanyo - 1; i++)
             {
                 for (int j = 1; j < tamanyo - 1; j++)
                 {
-                    mascara[i, j] = tipoDeRelleno;
+                    mascara[i, j] = Contenido.Vacio;
                 }
             }
         }
@@ -78,25 +98,31 @@ public class BusquedaDePatrones : MonoBehaviour
 
     public GameObject prefab;
 
-    Tile[] casillas;
+    TileBase[] casillas;
     BoundsInt limite;
     Patron4[] patrones;
     Vector2 posicionSuperiorIzquierda;
     Vector2 vectorDesdeEsquinaSuperiorIzquierdaACentro;
+    float ancho;
     void Awake()
     {
 
         patrones = TodosLosPatrones();
         Tilemap aux = GetComponent<Tilemap>();
         limite = aux.cellBounds;
-        posicionSuperiorIzquierda = new Vector2(limite.xMin, limite.yMax);
-        vectorDesdeEsquinaSuperiorIzquierdaACentro = (Vector2.right + Vector2.down) * aux.layoutGrid.cellSize.x * (1.5f);
-        casillas = (Tile[])aux.GetTilesBlock(limite);
+        posicionSuperiorIzquierda = aux.LocalToWorld(new Vector2(aux.localBounds.min.x, aux.localBounds.min.y));
+        ancho = aux.LocalToWorld(aux.cellSize).x;
+        vectorDesdeEsquinaSuperiorIzquierdaACentro = aux.LocalToWorld((Vector2.right + Vector2.up) * ancho);
+        casillas = aux.GetTilesBlock(limite);
         CrearEnCentroPatron(prefab);
     }
 
     Patron4[] TodosLosPatrones()
-    {
+    {/*
+        Patron4[] ret = new Patron4[1];
+        ret[0] = new Patron4();
+            ret[0].RellenarCentro();
+        */
         Patron4[] ret = new Patron4[13];
         int i = 0;
         Direccion[] direcciones = new Direccion[1];
@@ -104,7 +130,7 @@ public class BusquedaDePatrones : MonoBehaviour
         {
             direcciones[0] = (Direccion)(i % 4);
             ret[i] = new Patron4();
-            ret[i].PatronX(direcciones, Contenido.Vacio);
+            ret[i].PatronX(direcciones);
             i++;
         }
         direcciones = new Direccion[2];
@@ -113,7 +139,7 @@ public class BusquedaDePatrones : MonoBehaviour
             direcciones[0] = (Direccion)(i % 4);
             direcciones[1] = (Direccion)((i + 1) % 4);
             ret[i] = new Patron4();
-            ret[i].PatronX(direcciones, Contenido.Vacio);
+            ret[i].PatronX(direcciones);
             i++;
         }
         direcciones = new Direccion[3];
@@ -123,17 +149,17 @@ public class BusquedaDePatrones : MonoBehaviour
             direcciones[1] = (Direccion)((i + 1) % 4);
             direcciones[1] = (Direccion)((i + 2) % 4);
             ret[i] = new Patron4();
-            ret[i].PatronX(direcciones, Contenido.Vacio);
+            ret[i].PatronX(direcciones);
             i++;
         }
-        direcciones = new Direccion[3];
+        direcciones = new Direccion[4];
         direcciones[0] = Direccion.Abajo;
         direcciones[1] = Direccion.Arriba;
         direcciones[2] = Direccion.Derecha;
         direcciones[3] = Direccion.Izquierda;
         ret[i] = new Patron4();
-        ret[i].PatronX(direcciones, Contenido.Vacio);
-
+        ret[i].PatronX(direcciones);
+        
         return ret;
     }
 
@@ -148,8 +174,8 @@ public class BusquedaDePatrones : MonoBehaviour
         {
             for (int j = 0; j < Patron4.tamanyo && fin; j++)
             {
-                if (patron.ContenidoS(i, j) == Contenido.Vacio && HayCasilla(i, j)
-                    || patron.ContenidoS(i, j) == Contenido.Lleno && !HayCasilla(i, j))
+                if (patron.ContenidoS(i, j) == Contenido.Vacio && HayCasilla(x+i, y+j)
+                    || patron.ContenidoS(i, j) == Contenido.Lleno && !HayCasilla(x+i, y+j))
                     fin = false;
             }
         }
@@ -167,14 +193,18 @@ public class BusquedaDePatrones : MonoBehaviour
 
     public void CrearEnCentroPatron(GameObject prefab)
     {
-
-        for (int i = 0; i < limite.size.x; i++)
+        GameObject padre = new GameObject();
+        padre.name = "Puntos Ruta";
+        for (int i = 0; i < limite.size.x-3; i++)
         {
-            for (int j = 0; j < limite.size.y; j++)
+            for (int j = 0; j < limite.size.y-3; j++)
             {
                 if (EstaAlgunPatronEn(i, j))
                 {
-                    Instantiate(prefab, posicionSuperiorIzquierda + Vector2.right * i + Vector2.down * j + vectorDesdeEsquinaSuperiorIzquierdaACentro, Quaternion.identity);
+                    GameObject a=
+                    Instantiate(prefab, posicionSuperiorIzquierda + Vector2.right * i*ancho + Vector2.up * j*ancho + vectorDesdeEsquinaSuperiorIzquierdaACentro, Quaternion.identity);
+                    a.transform.parent = padre.transform;
+                    a.name = "("+i + ", " + j+")";
                 }
             }
         }

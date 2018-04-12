@@ -5,7 +5,7 @@ using UnityEngine;
 public class PuntoRecorrido : MonoBehaviour {
 
 	Vector2 estaPosicion;
-	PuntoRecorrido[] posicionesConectadas ;
+	public PuntoRecorrido[] posicionesConectadas ;
 	LayerMask conQueColisiona;
 
     //Metodo que pone como posiciones conectadas a aquellas con las que se puede unir el punto en linea recta sin que choque contra ningun obstáculo.
