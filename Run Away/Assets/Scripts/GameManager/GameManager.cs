@@ -21,17 +21,26 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this.gameObject);
 			escena = SceneManager.GetActiveScene ();
-			if (jugador == null)
-				jugador = GameObject.FindObjectOfType<Jugador>();
+			//SceneManager.activeSceneChanged += 
         }
         else
             Destroy(this.gameObject);
     }
 
+	public void IniciarEscena()
+	{
+		jugador = GameObject.FindObjectOfType<Jugador>();
+	}
+
     public void MonstruoMuerto(TipoMonstruo tipo)
     {
 
     }
+
+	public void JugadorMuerto()
+	{
+		ResetarEscena ();
+	}
 
 	public void ResetarEscena ()
 	{

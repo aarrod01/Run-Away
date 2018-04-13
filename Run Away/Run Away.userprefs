@@ -1,13 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Monstruos\Golpear.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameManager\GameManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\PJ\Jugador.cs" Line="46" Column="16" />
-      <File FileName="Assets\Scripts\Monstruos\Golpear.cs" Line="38" Column="3" />
-      <File FileName="Assets\Scripts\GameManager\GameManager.cs" Line="23" Column="10" />
-      <File FileName="Assets\Scripts\PJ\Vida.cs" Line="26" Column="6" />
-      <File FileName="Assets\Scripts\Monstruos\Golpe.cs" Line="26" Column="26" />
-      <File FileName="Assets\Scripts\Monstruos\DetectarGolpear.cs" Line="19" Column="25" />
+      <File FileName="Assets\Scripts\Monstruos\Golpear.cs" Line="22" Column="2" />
+      <File FileName="Assets\Scripts\GameManager\GameManager.cs" Line="42" Column="20" />
+      <File FileName="Assets\Scripts\PJ\Vida.cs" Line="22" Column="10" />
+      <File FileName="Assets\Scripts\Monstruos\Golpe.cs" Line="17" Column="21" />
+      <File FileName="Assets\Scripts\Monstruos\DetectarGolpear.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GameManager\PasarEscenaPulsando.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
