@@ -13,8 +13,8 @@ public class Golpe : MonoBehaviour
 
 	void OnTriggerExit2D(Collider2D other)
 	{
-		/*if (jugador != null)
-			jugador = null;*/
+		if (jugador != null && jugador.gameObject == other.gameObject)
+			jugador = null;
 	}
 
 	public bool LeGolpea()
