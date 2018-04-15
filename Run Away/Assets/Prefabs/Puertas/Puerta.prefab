@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 114626615401332258}
   - component: {fileID: 82217284040025308}
   m_Layer: 12
-  m_Name: PuertaAmarilla
+  m_Name: Puerta
   m_TagString: Obstaculo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
