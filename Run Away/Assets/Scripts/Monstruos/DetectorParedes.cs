@@ -3,45 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DetectorParedes : MonoBehaviour {
+
     public float longitudRayo = 1f;
-    Transform[] detector;
     LayerMask conQueColisiona;
     float distanciaAlCentro;
-	// Use this for initialization
-	void Start () {
-        conQueColisiona = LayerMask.GetMask("Obstaculos");
-        GameObject[] auxO = new GameObject[] { new GameObject(), new GameObject()};
-        
-        detector = new Transform[2];
-        detector[0] = auxO[0].transform;
-        detector[1] = auxO[1].transform;
-        detector[0].parent = transform.parent;
-        detector[1].parent = transform.parent;
-        Collider2D aux = GetComponentInParent<Collider2D>();
-        detector[0].position = new Vector2(aux.bounds.min.x,0f);
-        detector[1].position = new Vector2(aux.bounds.max.x,0f);
-        distanciaAlCentro = (aux.bounds.max.x - aux.bounds.min.x)*2f;
 
+	// Use this for initialization
+	void Start ()
+    {
+        conQueColisiona = LayerMask.GetMask("Obstaculos");
+        Collider2D aux = GetComponentInParent<Collider2D>();
+        distanciaAlCentro = (aux.bounds.max.x - aux.bounds.min.x)/2f*1.5f;
 	}
 
     public Vector2 EvitarColision(Vector2 destino)
     {
-        RaycastHit2D[] hit = new RaycastHit2D[] { Physics2D.Raycast(detector[0].position, transform.up, longitudRayo, conQueColisiona),
-            Physics2D.Raycast(detector[1].position, transform.up, longitudRayo, conQueColisiona) };
-        Debug.DrawRay(detector[0].position, transform.up*longitudRayo,Color.red);
-        Debug.DrawRay(detector[1].position, transform.up*longitudRayo, Color.red);
+        Vector2 origen = transform.position;
+        Vector2 direccionAPunto = destino-origen;
+        Vector2 perpendicular = (new Vector2(-direccionAPunto.y,direccionAPunto.x)).normalized*distanciaAlCentro;
+
+        RaycastHit2D[] hit = new RaycastHit2D[] { Physics2D.Raycast(origen + perpendicular, direccionAPunto, longitudRayo, conQueColisiona),
+            Physics2D.Raycast(origen - perpendicular, direccionAPunto, longitudRayo, conQueColisiona) };
+        Debug.DrawRay(origen + perpendicular, direccionAPunto, Color.red);
+        Debug.DrawRay(origen - perpendicular, direccionAPunto, Color.red);
         Debug.DrawRay(transform.parent.position, transform.up*10f, Color.red);
-        Vector2 distanciaMasLejana = transform.position, estaPosicion=transform.position;
+        Vector2 distanciaMasCercana = Vector2.positiveInfinity, estaPosicion=transform.position;
         int indiceMasCercano=-1;
         for (int i =0; i<hit.Length;i++)
         {
             if (hit[i].collider!=null && 
-                Vector2.Distance(distanciaMasLejana, estaPosicion) < Vector2.Distance(hit[i].point, estaPosicion))
+                Vector2.Distance(distanciaMasCercana, estaPosicion) > Vector2.Distance(hit[i].point, estaPosicion))
                 indiceMasCercano = i;
         }
-        if (indiceMasCercano != -1)
-            return (hit[indiceMasCercano].normal.normalized * distanciaAlCentro+hit[indiceMasCercano].point);
-        else
+        if (indiceMasCercano != -1) {
+            Vector2 normalMuro = hit[indiceMasCercano].normal, puntoMuro = hit[indiceMasCercano].point;
+            Debug.DrawRay(new Vector2((perpendicular.y * Vector2.Dot(normalMuro, puntoMuro) - normalMuro.y * Vector2.Dot(perpendicular, origen)) / (perpendicular.y * normalMuro.x - normalMuro.y * perpendicular.x),
+                (perpendicular.x * Vector2.Dot(normalMuro, puntoMuro) - normalMuro.y * Vector2.Dot(perpendicular, origen)) / (perpendicular.x * normalMuro.y - normalMuro.x * perpendicular.y)), normalMuro.normalized * distanciaAlCentro, Color.green);
+            return new Vector2((perpendicular.y * Vector2.Dot(normalMuro, puntoMuro) - normalMuro.y * Vector2.Dot(perpendicular, origen)) / (perpendicular.y * normalMuro.x - normalMuro.y * perpendicular.x),
+                (perpendicular.x *Vector2.Dot(normalMuro,puntoMuro)-normalMuro.y*Vector2.Dot(perpendicular,origen))/(perpendicular.x*normalMuro.y-normalMuro.x*perpendicular.y))+normalMuro.normalized*distanciaAlCentro;
+
+        } else
             return destino;
     }
 }

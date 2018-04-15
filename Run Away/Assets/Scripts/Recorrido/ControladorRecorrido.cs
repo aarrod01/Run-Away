@@ -60,6 +60,7 @@ namespace Recorrido
         }
     }
 }
+delegate void funcionVacia();
 public class ControladorRecorrido : MonoBehaviour
 {
     //Singleton
@@ -85,12 +86,25 @@ public class ControladorRecorrido : MonoBehaviour
         {
             puntosTotales[i] = auxiliar[i].GetComponent<PuntoRecorrido>();
         }
-        ReiniciarRed();
+        CrearRedInicial();
 
         Nodo a = new Nodo(null, puntosTotales[0], null, 0, 0);
         ColaNodos cola = new ColaNodos(a);
         for (int i = 1; i < puntosTotales.Length; i++)
             cola.IntroducirNodo(new Nodo(null, puntosTotales[i], null, 0, 0));
+    }
+
+    public PuntoRecorrido[] PuntosTotales()
+    {
+        return puntosTotales;
+    }
+    //Reinicia las conexiones entre puntos
+    public void CrearRedInicial()
+    {
+        for (int i = 0; i < puntosTotales.Length; i++)
+        {
+            puntosTotales[i].CrearPrimerosContactos();
+        }
     }
     //Reinicia las conexiones entre puntos
     public void ReiniciarRed()
@@ -227,18 +241,20 @@ public class ControladorRecorrido : MonoBehaviour
         //Introduce los nodos en la lista que se encuentren en el punto y los que esten proyectando un raycast en las cuatro direcciones cardinales.
         public void IntroducirNodosEnCruz(Vector2 posicion, PuntoRecorrido[] puntosDistanciaManhattan)
         {
+            funcionVacia LlamadaDesactivar = () => { };
             //Comprobamos que el punto no este dentro de uno de los puntos de la red.
-            int i = 0;
-            while (i<puntosTotales.Length&&!puntosTotales[i].GetComponent<Collider2D>().bounds.Contains(posicion))
+            int i = 0, puntosDentro=0;
+            while (i<puntosTotales.Length)
             {
+                if(puntosTotales[i].GetComponent<Collider2D>().bounds.Contains(posicion))
+                {
+                    float distancia = puntosTotales[i].DistanciaHasta(posicion);
+                    IntroducirNodo(new Nodo(null, puntosTotales[i], null, distancia, distancia + ControladorRecorrido.instance.DistanciaMasCorta(posicion, puntosDistanciaManhattan)));
+                    puntosTotales[i].gameObject.SetActive(false);
+                    LlamadaDesactivar = () => { LlamadaDesactivar(); puntosTotales[i].gameObject.SetActive(true); };
+                    puntosDentro++;
+                }
                 i++;
-            }
-            //Si esta dentro introducimos ese nodo en la cola.
-            if(i < puntosTotales.Length)
-            {
-                float distancia = puntosTotales[i].DistanciaHasta(posicion);
-                IntroducirNodo(new Nodo(null, puntosTotales[i], null, distancia, distancia + ControladorRecorrido.instance.DistanciaMasCorta(posicion,puntosDistanciaManhattan)));
-                puntosTotales[i].gameObject.SetActive(false);
             }
 
             //Creamos 4 rayos hacia las cuatro direcciones cardinales(debido a que el mapa tiene pasillos ortogonales).
@@ -262,8 +278,7 @@ public class ControladorRecorrido : MonoBehaviour
                 }
             }
 
-            if (i < puntosTotales.Length)
-                puntosTotales[i].gameObject.SetActive(true);
+            LlamadaDesactivar();
         }
     }
 
