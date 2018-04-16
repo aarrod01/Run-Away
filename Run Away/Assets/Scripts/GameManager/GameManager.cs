@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using Monstruos;
-public class GameManager : MonoBehaviour 
+public delegate void funcionVacia();
+public class GameManager : MonoBehaviour
 {
     int monstruosVivos = 0;
     int drogaConsumida = 0;
 
     Jugador jugador = null;
-	Scene escena;
+    Scene escena;
+    bool drogado = false;
 
+    public funcionVacia Bajon = () => {};
     public float tiempoSubidon;
     public static GameManager instance = null;
 
@@ -49,10 +52,19 @@ public class GameManager : MonoBehaviour
 
     public void ConsumirDroga()
     {
+        drogado = true;
         drogaConsumida++;
         jugador.Luz().IntensidadLuz(1.5f);
         jugador.AumentoVelocidad(1.5f);
         Invoke("Bajon", TiempoSubidon());
+        ControladorPalanca.instante.EncenderPalancas();
+        Bajon = () =>
+        {
+            ControladorPalanca.instante.ApagarPalancas();
+            drogado = false;
+            jugador.Luz().IntensidadLuz(0.9f);
+            jugador.AumentoVelocidad(0.9f);
+        };
     }
 
     float TiempoSubidon()
@@ -60,10 +72,9 @@ public class GameManager : MonoBehaviour
         return tiempoSubidon;
     }
 
-    void Bajon()
+    public bool Drogado()
     {
-        jugador.Luz().IntensidadLuz(0.9f);
-        jugador.AumentoVelocidad(0.9f);
+        return drogado;
     }
 
 }

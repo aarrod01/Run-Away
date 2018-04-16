@@ -15,6 +15,7 @@ public class Monstruo : MonoBehaviour
 	public float velMovRuta, velMovPerseguir, velGiro,aceleracionAngular, tiempoAturdimiento=1f, periodoGiro=1f;
     public EstadosMonstruo estadoMonstruo;
     public TipoMonstruo tipo;
+    public int Prioridad;
 
     Rigidbody2D rb2D;
 	Transform jugadorTrans;
@@ -22,7 +23,6 @@ public class Monstruo : MonoBehaviour
     float cronometro;
 
     const float MARGEN = 0.001f;
-    const float MARGENANGULO = 5f;
 
     void Start () 
 	{

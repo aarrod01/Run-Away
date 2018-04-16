@@ -8,7 +8,6 @@ using Colores;
 public class Palanca : MonoBehaviour 
 {
 	Interactuable master;
-	bool puedeInteractuar;
 
 	Puerta[] puertas; 
 
@@ -34,5 +33,15 @@ public class Palanca : MonoBehaviour
             return master.InteraccionPorLineaDeVision(a.transform, transform, distanciaDeInteraccion, conQueColisiona);
         };
         master.DistanciaDeInteraccion = () => { return distanciaDeInteraccion; };
+    }
+
+    public void Iluminar()
+    {
+
+    }
+
+    public void Apagar()
+    {
+
     }
 }
