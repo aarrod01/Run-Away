@@ -14,6 +14,9 @@ public class PuntoRecorrido : MonoBehaviour {
     int puntosDentro=0;
     float unCuarto;
 
+    [HideInInspector]
+    public Collider2D caja;
+
     public void CrearPrimerosContactos()
     {
         conQueColisiona = LayerMask.GetMask("Obstaculos", "Recorrido");
@@ -175,4 +178,9 @@ public class PuntoRecorrido : MonoBehaviour {
             i++;
         return i != aBuscar.Length;
     }
+    public bool EstaDentro()
+    {
+        return true;
+    }
+
 }

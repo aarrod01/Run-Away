@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Monstruos;
 using Recorrido;
+
 public class DetectarRuta : MonoBehaviour 
 {
 	public int numeroMonstruo;
@@ -99,5 +100,43 @@ public class DetectarRuta : MonoBehaviour
                 return Vector2.positiveInfinity;
         }
 	}
-		
+
+    public void CrearPuntosRuta(PuntoRecorrido nuevo)
+    {
+        if (ruta == null)
+        {
+            ruta = new PuntoRecorrido[1];
+            ruta[0] = nuevo;
+        }
+        else
+        {
+            if(ruta[ruta.Length-1]!=nuevo)
+            {
+                PuntoRecorrido[] aux = new PuntoRecorrido[ruta.Length + 1];
+                for (int i = 0; i < ruta.Length; i++)
+                    aux[i] = ruta[i];
+                aux[ruta.Length] = nuevo;
+                ruta = new PuntoRecorrido[aux.Length];
+                for (int i = 0; i < ruta.Length; i++)
+                    ruta[i] = aux[i];
+            }
+        }
+    }
+    public void QuitarUltimoPuntoRuta()
+    {
+        if(ruta!=null)
+        {
+            if (ruta.Length == 1)
+                ruta = null;
+            else
+            {
+                PuntoRecorrido[] aux = new PuntoRecorrido[ruta.Length - 1];
+                for (int i = 0; i < aux.Length; i++)
+                    aux[i] = ruta[i];
+                ruta = new PuntoRecorrido[aux.Length];
+                for (int i = 0; i < ruta.Length; i++)
+                    ruta[i] = aux[i];
+            }
+        }
+    }
 }
