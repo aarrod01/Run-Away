@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.Tilemaps;
 
 [CustomEditor(typeof(PoligonoRecorrido))]
 public class InstpectorDeRectas : Editor
@@ -21,6 +22,7 @@ public class InstpectorDeRectas : Editor
     {
         PoligonoRecorrido recorrido = target as PoligonoRecorrido;
         DetectarRuta detector = recorrido.GetComponent<DetectarRuta>();
+        Tilemap mapa = GameObject.FindGameObjectWithTag("Pared").GetComponent<Tilemap>();
          
         recorrido.transform.position = (Vector2)recorrido.transform.position;
         Transform agarraderaTransform = recorrido.transform;
@@ -42,6 +44,7 @@ public class InstpectorDeRectas : Editor
             Handles.color = Color.white;
             Handles.DrawLine(puntos[i], puntos[(i+1) % puntos.Length]);
             Vector2 distancia = puntos[(i + 1) % puntos.Length] - puntos[i];
+            
             Handles.ArrowHandleCap(0, puntos[i], 
                 Quaternion.LookRotation( distancia),
                 3, 
@@ -61,8 +64,17 @@ public class InstpectorDeRectas : Editor
 
         }
 
+        BoundsInt limite = mapa.cellBounds;
+        Vector2 posicionSuperiorIzquierda = mapa.LocalToWorld(new Vector2(mapa.localBounds.min.x, mapa.localBounds.min.y));
+        float ancho = mapa.LocalToWorld(mapa.cellSize).x;
+        Vector2 vectorDesdeEsquinaSuperiorIzquierdaACentro = mapa.LocalToWorld((Vector2.right + Vector2.up) * ancho);
+        TileBase[] casillas = mapa.GetTilesBlock(limite);
 
+        for (int i = 0; i < recorrido.numeroDePuntos; i++)
+        {
+            Vector2Int aux = Vector2Int.FloorToInt((puntos[i] - posicionSuperiorIzquierda) / ancho);
 
+        }
     }
 }
 

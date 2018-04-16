@@ -30,7 +30,7 @@ public class PuntoRecorrido : MonoBehaviour {
         //Creamos un vector auxiliar que guardara los puntos en contacto
         PuntoRecorrido[] aux = new PuntoRecorrido[puntosMapa.Length];
         int j = 0;
-        PuntoRecorrido[] puntosTotales = ControladorRecorrido.instance.PuntosTotales();
+        PuntoRecorrido[] puntosTotales = GameObject.FindObjectsOfType<PuntoRecorrido>();
 
         //
 
@@ -110,6 +110,7 @@ public class PuntoRecorrido : MonoBehaviour {
     }
 
     //Metodo que pone como posiciones conectadas a aquellas con las que se puede unir el punto en linea recta sin que choque contra ningun obstáculo.
+    [ExecuteInEditMode]
     public void ReiniciarContactos()
     {
         gameObject.GetComponent<Collider2D>().enabled = false;

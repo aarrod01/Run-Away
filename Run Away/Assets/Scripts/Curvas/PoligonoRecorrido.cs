@@ -7,9 +7,6 @@ public class PoligonoRecorrido : MonoBehaviour {
     public uint numeroDePuntos;
     public Vector2[] puntos;
 
-    [HideInInspector]
-    public DetectarRuta detector;
-
     void Start()
     {
         Destroy(this);
@@ -40,5 +37,4 @@ public class PoligonoRecorrido : MonoBehaviour {
     {
         return puntos;
     }
-
 }
