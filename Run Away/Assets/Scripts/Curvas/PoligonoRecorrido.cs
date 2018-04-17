@@ -6,7 +6,17 @@ public class PoligonoRecorrido : MonoBehaviour {
 
     public uint numeroDePuntos;
     public Vector2[] puntos;
+    DetectarRuta detector;
 
+    public void Detector(DetectarRuta de)
+    {
+        detector = de;
+    }
+
+    public DetectarRuta Detector()
+    {
+        return detector;
+    }
     void Start()
     {
         Destroy(this);

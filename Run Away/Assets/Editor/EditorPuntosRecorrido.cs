@@ -22,15 +22,20 @@ public class EditorPuntosRecorrido : Editor
             }
             puntosRecorrido.Inicializar();
             puntosRecorrido.CrearEnCentroPatron((GameObject)Resources.Load("Punto Recorrido"));
-            for(int i = 0; i<puntosRecorrido.matrizDePuntos.GetLength(0);i++)
+            for(int i = 0; i<PadrePuntosRecorrido.matrizDePuntos.GetLength(0);i++)
             {
-                for(int j =0; j<puntosRecorrido.matrizDePuntos.GetLength(1);j++)
+                for(int j =0; j< PadrePuntosRecorrido.matrizDePuntos.GetLength(1);j++)
                 {
-                    if (puntosRecorrido.matrizDePuntos[i, j] != null)
-                        puntosRecorrido.matrizDePuntos[i, j].GetComponent<PuntoRecorrido>().CrearPrimerosContactos();
+                    if (PadrePuntosRecorrido.matrizDePuntos[i, j] != null)
+                        PadrePuntosRecorrido.matrizDePuntos[i, j].GetComponent<PuntoRecorrido>().CrearPrimerosContactos();
                 }
             }
 
         }
+    }
+    private void OnSceneGUI()
+    {
+        DetectarRuta punto = target as DetectarRuta;
+
     }
 }

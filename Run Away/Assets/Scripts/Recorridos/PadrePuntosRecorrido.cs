@@ -157,7 +157,7 @@ public class PadrePuntosRecorrido : MonoBehaviour
     Vector2 posicionSuperiorIzquierda;
     Vector2 vectorDesdeEsquinaSuperiorIzquierdaACentro;
     float ancho;
-    public GameObject[,] matrizDePuntos;
+    public static GameObject[,] matrizDePuntos;
 
     public TileBase[] Casillas()
     {

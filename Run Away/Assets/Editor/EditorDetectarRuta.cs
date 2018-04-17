@@ -16,5 +16,6 @@ public class EditorDetectarRuta : Editor {
     private void OnSceneGUI()
     {
         DetectarRuta punto = target as DetectarRuta;
+
     }
 }
