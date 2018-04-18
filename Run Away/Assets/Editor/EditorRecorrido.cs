@@ -38,6 +38,8 @@ public class InstpectorDeRectas : Editor
 
 
         PuntoRecorrido[] puntosRecorrido = GameObject.FindObjectsOfType<PuntoRecorrido>();
+        PuntoRecorrido[] puntosAuxiliares = new PuntoRecorrido[puntosRecorrido.Length];
+        int j = 0;
         for (int i = 0; i < puntos.Length; i++)
         {
             Handles.color = Color.white;
@@ -58,10 +60,19 @@ public class InstpectorDeRectas : Editor
             }
             else
             {
-                recorrido.Puntos()[i] = AjustarseAPuntoRecorrido(puntos[i], puntosRecorrido);
+                puntosAuxiliares[j] = AjustarseAPuntoRecorrido(puntos[i], puntosRecorrido);
+                recorrido.Puntos()[i] = puntosAuxiliares[j].transform.position;
+                j++;
                 DibujarAgarraderaPunto(i, puntos[i], agarraderaDeRotacion, 0.5f, EventType.Repaint);
             }
         }
+
+        PuntoRecorrido[] puntosFinales = new PuntoRecorrido[j];
+        for (int i = 0; i < j; i++)
+            puntosFinales[i] = puntosAuxiliares[i];
+
+        detector.CrearPuntosRuta(puntosFinales);
+
     }
 
     void DibujarAgarraderaPunto(int controlID, Vector3 position, Quaternion rotation, float size, EventType eventType)
@@ -69,18 +80,19 @@ public class InstpectorDeRectas : Editor
         Handles.CircleHandleCap(controlID, position, rotation, size, eventType);
     }
 
-    Vector3 AjustarseAPuntoRecorrido(Vector3 punto,PuntoRecorrido[] pR)
+    PuntoRecorrido AjustarseAPuntoRecorrido(Vector3 punto,PuntoRecorrido[] pR)
     {
 
         float distancia = float.PositiveInfinity;
-        Vector3 v = punto;
+
+        PuntoRecorrido v = null;
         for (int i=0; i<pR.Length; i++)
         {
             float aux= (punto - pR[i].transform.position).sqrMagnitude;
             if(aux<distancia)
             {
                 distancia = aux;
-                v = pR[i].transform.position;
+                v = pR[i];
             }
         }
         return v;

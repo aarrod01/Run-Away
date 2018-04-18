@@ -100,8 +100,11 @@ public class DetectarRuta : MonoBehaviour
                 return Vector2.positiveInfinity;
         }
 	}
-
-    public void CrearPuntosRuta(PuntoRecorrido nuevo)
+    public void CrearPuntosRuta(PuntoRecorrido[] puntosReco)
+    {
+        ruta = puntosReco;
+    }
+    public void AnyadirPuntoRuta(PuntoRecorrido nuevo)
     {
         if (ruta == null)
         {
