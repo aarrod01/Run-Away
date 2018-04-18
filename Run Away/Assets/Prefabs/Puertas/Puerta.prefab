@@ -19,10 +19,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4924752069351416}
+  - component: {fileID: 114626615401332258}
   - component: {fileID: 212385787866890036}
   - component: {fileID: 95152539979370634}
   - component: {fileID: 61861561823433790}
-  - component: {fileID: 114626615401332258}
   - component: {fileID: 82217284040025308}
   m_Layer: 12
   m_Name: Puerta
@@ -37,13 +37,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1977930533832638}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.5, y: -18.5, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 7.5, y: -21.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!61 &61861561823433790
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -179,8 +179,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: 3
   abierta: 1
-  encendido: {fileID: 21300066, guid: e8bdb50a4ae68a34698041ff15f7abbe, type: 3}
-  apagado: {fileID: 21300068, guid: e8bdb50a4ae68a34698041ff15f7abbe, type: 3}
 --- !u!212 &212385787866890036
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -215,7 +213,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300066, guid: e8bdb50a4ae68a34698041ff15f7abbe, type: 3}
+  m_Sprite: {fileID: 21300016, guid: e8bdb50a4ae68a34698041ff15f7abbe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

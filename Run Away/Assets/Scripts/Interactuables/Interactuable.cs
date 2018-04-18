@@ -20,7 +20,7 @@ public class Interactuable : MonoBehaviour
         Vector3 pos = desde.position;
         RaycastHit2D hit = Physics2D.Raycast(pos, hasta.position - pos, distanciaInteraccion, capasInteraccion);
 		Debug.DrawRay (pos, (hasta.position - pos).normalized * distanciaInteraccion, Color.blue, 10f);
-        return (hit.collider != null && hit.collider.tag == "Player")||hasta.GetComponent<Collider2D>().bounds.Contains(desde.position);
+        return (hit.collider != null && hit.collider.gameObject==gameObject)||hasta.GetComponent<Collider2D>().bounds.Contains(desde.position);
     }
 
 

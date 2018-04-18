@@ -286,6 +286,7 @@ public class PadrePuntosRecorrido : MonoBehaviour
         a.name = "(" + x + ", " + y + ")";
         return a;
     }
+
     public void CrearEnCentroPatron(GameObject prefab)
     {
         for (int i = 0; i < limite.size.x - 3; i++)

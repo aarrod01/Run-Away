@@ -32,10 +32,10 @@ public class GameManager : MonoBehaviour
         }
         else
             Destroy(this.gameObject);
-        SceneManager.activeSceneChanged += IniciarEscena;
+        instance.IniciarEscena();
     }
 
-	public void IniciarEscena(Scene actual, Scene siguiente)
+	public void IniciarEscena()
 	{
         Monstruo[] monstruos = GameObject.FindObjectsOfType<Monstruo>();
         for(int i = 0; i<monstruos.Length; i++)
@@ -86,15 +86,16 @@ public class GameManager : MonoBehaviour
         drogaConsumida++;
         jugador.Luz().IntensidadLuz(1.5f);
         jugador.AumentoVelocidad(1.5f);
-        Invoke("Bajon", TiempoSubidon());
-        ControladorPalanca.instante.EncenderPalancas();
+        
+        ControladorPalanca.instance.EncenderPalancas();
         Bajon = () =>
         {
-            ControladorPalanca.instante.ApagarPalancas();
+            ControladorPalanca.instance.ApagarPalancas();
             drogado = false;
             jugador.Luz().IntensidadLuz(0.9f);
             jugador.AumentoVelocidad(0.9f);
         };
+        Invoke("Bajon", TiempoSubidon());
     }
 
     float TiempoSubidon()

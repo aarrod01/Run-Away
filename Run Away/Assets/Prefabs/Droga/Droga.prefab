@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 58113908024572460}
   - component: {fileID: 114881748235125516}
   - component: {fileID: 114891515792813986}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Droga
   m_TagString: Untagged
   m_Icon: {fileID: 0}

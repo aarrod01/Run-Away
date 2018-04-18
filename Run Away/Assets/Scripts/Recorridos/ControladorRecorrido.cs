@@ -61,8 +61,6 @@ namespace Recorrido
     }
 }
 
-delegate void funcionVacia();
-
 public class ControladorRecorrido : MonoBehaviour
 {
     //Singleton

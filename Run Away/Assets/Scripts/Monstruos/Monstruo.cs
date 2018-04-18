@@ -11,7 +11,7 @@ namespace Monstruos
 
 public class Monstruo : MonoBehaviour 
 {
-	public float velMovRuta, velMovPerseguir, velGiro,aceleracionAngular, tiempoAturdimiento=1f, periodoGiro=1f;
+	public float velocidadEnRuta, velocidadPersecucion, velocidadGiro,aceleracionAngular, velocidadHuida, tiempoAturdimiento=1f, periodoGiro=1f;
     public EstadosMonstruo estadoMonstruo;
     public TipoMonstruo tipo;
     public int prioridad;
@@ -42,17 +42,17 @@ public class Monstruo : MonoBehaviour
 		switch (estadoMonstruo) 
 		{
 			case EstadosMonstruo.EnRuta:
-				MoverseHacia (detectorParedes.EvitarColision(posPuntoRuta), velMovRuta);
+				MoverseHacia (detectorParedes.EvitarColision(posPuntoRuta), velocidadEnRuta);
 				break;
 			case EstadosMonstruo.SiguiendoJugador:
                 if ((GetComponentInChildren<CampoVision>().UltimaPosicionJugador() - rb2D.position).sqrMagnitude < MARGEN)
                 {
                     CambiarEstadoMonstruo(EstadosMonstruo.Desorientado);
                 }
-                MoverseHacia(detectorParedes.EvitarColision(posPlayer), velMovPerseguir);
+                MoverseHacia(detectorParedes.EvitarColision(posPlayer), velocidadPersecucion);
                 break;
 			case EstadosMonstruo.VolviendoARuta:
-				MoverseHacia (posPuntoRuta, velMovRuta);
+				MoverseHacia (posPuntoRuta, velocidadEnRuta);
 				break;
             case EstadosMonstruo.Desorientado:
                 Pararse();
@@ -75,7 +75,7 @@ public class Monstruo : MonoBehaviour
                     CambiarEstadoMonstruo(EstadosMonstruo.Desorientado);
                 break;
             case EstadosMonstruo.Huyendo:
-                MoverseHacia((2*rb2D.position-posPlayer), velMovHuida);
+                MoverseHacia((2*rb2D.position-posPlayer), velocidadHuida);
                 GameManager.instance.MontruoHuye(tipo);
                 GetComponent<Collider2D>().enabled = false;
                 Destroy(gameObject, 10f);

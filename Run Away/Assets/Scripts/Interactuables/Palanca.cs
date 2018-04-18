@@ -23,7 +23,7 @@ public class Palanca : MonoBehaviour
         palancaAnimacion = GetComponent<Animator>();
         palancaAnimacion.SetBool("activada", posicionInicial);
         palancaAnimacion.SetInteger("color",(int)color);
-        conQueColisiona = Colision.CapasInteraccion();
+        conQueColisiona = LayerMask.GetMask("Obstaculos", "Objetos");
         master = GetComponent<Interactuable>();
 		master.Accion = (Jugador a) => {
                 posicionInicial = !posicionInicial;
