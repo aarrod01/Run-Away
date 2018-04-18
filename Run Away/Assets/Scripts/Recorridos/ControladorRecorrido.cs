@@ -60,7 +60,9 @@ namespace Recorrido
         }
     }
 }
+
 delegate void funcionVacia();
+
 public class ControladorRecorrido : MonoBehaviour
 {
     //Singleton
@@ -68,6 +70,7 @@ public class ControladorRecorrido : MonoBehaviour
     //guarda todos los puntos del grafo
     static PuntoRecorrido[] puntosTotales;
     LayerMask conQueColisiona;
+
     void Start()
     {
         
@@ -98,6 +101,7 @@ public class ControladorRecorrido : MonoBehaviour
     {
         return puntosTotales;
     }
+
     //Reinicia las conexiones entre puntos
     public void CrearRedInicial()
     {
@@ -106,6 +110,7 @@ public class ControladorRecorrido : MonoBehaviour
             puntosTotales[i].CrearPrimerosContactos();
         }
     }
+
     //Reinicia las conexiones entre puntos
     public void ReiniciarRed()
     {
@@ -349,4 +354,5 @@ public class ControladorRecorrido : MonoBehaviour
         }
         return lista;
     }
+
 }

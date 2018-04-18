@@ -56,10 +56,14 @@ public class InstpectorDeRectas : Editor
             puntos[i] = Handles.FreeMoveHandle(i, puntos[i], agarraderaDeRotacion, 0.5f, Vector3.one*0.1f, DibujarAgarraderaPunto);
             if (EditorGUI.EndChangeCheck())
             {
+                Undo.RecordObject(detector, "Move Point");
+                EditorUtility.SetDirty(detector);
                 recorrido.Puntos()[i] = puntos[i];
             }
             else
             {
+                Undo.RecordObject(detector, "Move Point");
+                EditorUtility.SetDirty(detector);
                 puntosAuxiliares[j] = AjustarseAPuntoRecorrido(puntos[i], puntosRecorrido);
                 recorrido.Puntos()[i] = puntosAuxiliares[j].transform.position;
                 j++;

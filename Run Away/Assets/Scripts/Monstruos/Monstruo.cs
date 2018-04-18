@@ -11,11 +11,11 @@ namespace Monstruos
 
 public class Monstruo : MonoBehaviour 
 {
-    public LayerMask conQueColisiona;
 	public float velMovRuta, velMovPerseguir, velGiro,aceleracionAngular, tiempoAturdimiento=1f, periodoGiro=1f;
     public EstadosMonstruo estadoMonstruo;
     public TipoMonstruo tipo;
 
+    LayerMask conQueColisiona;
     Rigidbody2D rb2D;
 	Transform jugadorTrans;
     DetectorParedes detectorParedes;
@@ -27,6 +27,7 @@ public class Monstruo : MonoBehaviour
 
     void Start () 
 	{
+        conQueColisiona = LayerMask.GetMask("Obstaculos", "Recorrido");
 		rb2D = GetComponent <Rigidbody2D> ();
 		jugadorTrans = GameObject.FindWithTag ("Player").GetComponent<Transform> ();
         detectorParedes = GetComponentInChildren<DetectorParedes>();
@@ -48,8 +49,8 @@ public class Monstruo : MonoBehaviour
                 {
                     CambiarEstadoMonstruo(EstadosMonstruo.Desorientado);
                 }
-                MoverseHacia (posPlayer, velMovPerseguir);
-				break;
+                MoverseHacia(detectorParedes.EvitarColision(posPlayer), velMovPerseguir);
+                break;
 			case EstadosMonstruo.VolviendoARuta:
 				MoverseHacia (posPuntoRuta, velMovRuta);
 				break;
@@ -75,6 +76,7 @@ public class Monstruo : MonoBehaviour
                 break;
 		}
 	}
+
 	void OnCollisionEnter2D(Collision2D collision)
 	{
 		/*if (collision.gameObject.tag == "Player")
@@ -85,6 +87,7 @@ public class Monstruo : MonoBehaviour
 	{
 		estadoMonstruo = estado;
 	}
+
 	public EstadosMonstruo EstadoMonstruoActual ()
 	{
 		return estadoMonstruo;
@@ -102,6 +105,7 @@ public class Monstruo : MonoBehaviour
         if (dir != Vector2.zero)
             rb2D.rotation = Mathf.LerpAngle(rb2D.rotation,Mathf.Atan2(-dir.x, dir.y)*180f/Mathf.PI, aceleracionAngular);
     }
+
     void GiroInstantaneo(Vector2 dir)
     {
         if (dir != Vector2.zero)

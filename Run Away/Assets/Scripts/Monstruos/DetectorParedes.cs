@@ -13,7 +13,7 @@ public class DetectorParedes : MonoBehaviour {
     {
         conQueColisiona = LayerMask.GetMask("Obstaculos");
         Collider2D aux = GetComponentInParent<Collider2D>();
-        distanciaAlCentro = (aux.bounds.max.x - aux.bounds.min.x)/2f*1.5f;
+        distanciaAlCentro = (aux.bounds.max.x - aux.bounds.min.x)/2f;
 	}
 
     public Vector2 EvitarColision(Vector2 destino)

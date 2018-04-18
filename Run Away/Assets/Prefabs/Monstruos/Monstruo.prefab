@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 4411409912222528}
   - component: {fileID: 58031213122129782}
   - component: {fileID: 114666929696253086}
+  - component: {fileID: 114033928695012682}
   m_Layer: 16
   m_Name: DetectarRuta
   m_TagString: Untagged
@@ -232,7 +233,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1585649484054646}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -285,8 +286,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1408450001780656}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 4, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4411409912222528}
   - {fileID: 4667905469717916}
@@ -595,6 +596,34 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114033928695012682
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1585649484054646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4b2103f4bbd1294ca3d7d99d6b340c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numeroDePuntos: 15
+  puntos:
+  - {x: 4, y: 0}
+  - {x: -12, y: 0}
+  - {x: -12, y: 6}
+  - {x: 10, y: 6}
+  - {x: 10, y: 12}
+  - {x: 16, y: 12}
+  - {x: 16, y: 6}
+  - {x: 22, y: 6}
+  - {x: 22, y: -6}
+  - {x: 16, y: -6}
+  - {x: 16, y: 0}
+  - {x: 10, y: 0}
+  - {x: 10, y: -6}
+  - {x: -6, y: -6}
+  - {x: -6, y: 0}
 --- !u!114 &114061547102795032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -675,7 +704,7 @@ MonoBehaviour:
   aceleracionAngular: 1
   tiempoAturdimiento: 10
   periodoGiro: 5
-  estadoMonstruo: 0
+  estadoMonstruo: 1
   tipo: 0
 --- !u!114 &114557364261237406
 MonoBehaviour:
@@ -699,7 +728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6254c86f4cef36c40a689c4c4db55b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  longitudRayo: 1
+  longitudRayo: 2.5
 --- !u!114 &114666929696253086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -711,9 +740,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c1d59e98bc0d24eb71a18bd96a73ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numeroMonstruo: 0
-  puntoRutaActual: 0
   ruta:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
 --- !u!114 &114709205207975218
 MonoBehaviour:

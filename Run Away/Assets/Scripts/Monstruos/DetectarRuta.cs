@@ -6,42 +6,22 @@ using Recorrido;
 
 public class DetectarRuta : MonoBehaviour 
 {
-	public int numeroMonstruo;
-
-	public int puntoRutaActual = 0;
+	int puntoRutaActual = 1;
 	Monstruo monstruo;
     Rigidbody2D monstruoRB;
+    listaNodos caminoDeVuelta;
+    [HideInInspector]
+    public PuntoRecorrido[] ruta;
 
-	public PuntoRecorrido[] ruta;
-    PuntoRecorrido[] puntosRuta;
     const float MARGEN = 0.001f;
-    public listaNodos caminoDeVuelta;
-
+    
 	void Start(){
 
 		monstruo = GetComponentInParent<Monstruo> ();
         monstruoRB = monstruo.GetComponent<Rigidbody2D>();
-        PuntoRecorrido[] aux = new PuntoRecorrido[ruta.Length];
-        int j = 0;
-        for (int i = 0; i < ruta.Length; i++)
-        {
-            int k = 0;
-            while (k < j && ruta[i] != aux[k])
-                k++;
-            if (k == j)
-            {
-                aux[j] = ruta[i];
-                j++;
-            }
-        }
-
-        puntosRuta = new PuntoRecorrido[j];
-        for (int i = 0; i < j; i++)
-            puntosRuta[i] = aux[i];
 
     }
-
-
+    
     private void Update()
     {
         switch (monstruo.EstadoMonstruoActual())
@@ -72,11 +52,7 @@ public class DetectarRuta : MonoBehaviour
             {
                 PuntoRecorrido punto = other.GetComponent<PuntoRecorrido>();
 
-                int i = IndicePuntoRuta(punto);
-                if (i != -1)
-                {
-                    puntoRutaActual = i;
-                }
+                puntoRutaActual = IndicePuntoRuta(punto);
             }
         }
 	}
@@ -88,6 +64,7 @@ public class DetectarRuta : MonoBehaviour
             i++;
         return i;
     }
+
     public Vector2 PosicionPuntoRuta()
     {
         switch (monstruo.EstadoMonstruoActual())
@@ -100,10 +77,12 @@ public class DetectarRuta : MonoBehaviour
                 return Vector2.positiveInfinity;
         }
 	}
+
     public void CrearPuntosRuta(PuntoRecorrido[] puntosReco)
     {
         ruta = puntosReco;
     }
+
     public void AnyadirPuntoRuta(PuntoRecorrido nuevo)
     {
         if (ruta == null)
@@ -125,6 +104,7 @@ public class DetectarRuta : MonoBehaviour
             }
         }
     }
+
     public void QuitarUltimoPuntoRuta()
     {
         if(ruta!=null)
@@ -142,4 +122,5 @@ public class DetectarRuta : MonoBehaviour
             }
         }
     }
+
 }
