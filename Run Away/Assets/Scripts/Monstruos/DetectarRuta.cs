@@ -10,6 +10,7 @@ public class DetectarRuta : MonoBehaviour
 	Monstruo monstruo;
     Rigidbody2D monstruoRB;
     listaNodos caminoDeVuelta;
+
     [HideInInspector]
     public PuntoRecorrido[] ruta;
 

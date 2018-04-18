@@ -5,7 +5,7 @@ using Monstruos;
 
 namespace Monstruos
 {
-	public enum EstadosMonstruo{SiguiendoJugador, EnRuta, PensandoRuta ,VolviendoARuta, Desorientado,Proyectado,BuscandoJugador, Ninguno};
+	public enum EstadosMonstruo{SiguiendoJugador, EnRuta, PensandoRuta ,VolviendoARuta, Desorientado,Proyectado,BuscandoJugador, Huyendo ,Ninguno};
     public enum TipoMonstruo { Basico, Ninguno};
 }
 
@@ -14,6 +14,7 @@ public class Monstruo : MonoBehaviour
 	public float velMovRuta, velMovPerseguir, velGiro,aceleracionAngular, tiempoAturdimiento=1f, periodoGiro=1f;
     public EstadosMonstruo estadoMonstruo;
     public TipoMonstruo tipo;
+    public int prioridad;
 
     LayerMask conQueColisiona;
     Rigidbody2D rb2D;
@@ -23,7 +24,6 @@ public class Monstruo : MonoBehaviour
     float cronometro;
 
     const float MARGEN = 0.001f;
-    const float MARGENANGULO = 5f;
 
     void Start () 
 	{
@@ -74,13 +74,14 @@ public class Monstruo : MonoBehaviour
                 if (Time.time - cronometro > tiempoAturdimiento)
                     CambiarEstadoMonstruo(EstadosMonstruo.Desorientado);
                 break;
+            case EstadosMonstruo.Huyendo:
+                MoverseHacia((2*rb2D.position-posPlayer), velMovHuida);
+                GameManager.instance.MontruoHuye(tipo);
+                GetComponent<Collider2D>().enabled = false;
+                Destroy(gameObject, 10f);
+                Destroy(this);
+                break;
 		}
-	}
-
-	void OnCollisionEnter2D(Collision2D collision)
-	{
-		/*if (collision.gameObject.tag == "Player")
-			SceneManager.LoadScene ("Tutorial");*/
 	}
 
 	public void CambiarEstadoMonstruo (EstadosMonstruo estado)

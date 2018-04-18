@@ -6,19 +6,15 @@ public class Golpe : MonoBehaviour
 {
 	Jugador jugador;
 
-	void Start () 
-	{
-		
-	}
-
-	void Update () 
-	{
-		
-	}
-
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		jugador = other.gameObject.GetComponent<Jugador> ();	
+	}
+
+	void OnTriggerExit2D(Collider2D other)
+	{
+		if (jugador != null && jugador.gameObject == other.gameObject)
+			jugador = null;
 	}
 
 	public bool LeGolpea()

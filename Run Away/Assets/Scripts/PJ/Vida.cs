@@ -21,16 +21,15 @@ public class Vida : MonoBehaviour {
         if (vida <= 0)
         {
             Muerte();
-        }
-            
+        }     
     }
 
     void Muerte()
     {
-        if (monstruo != null)
-            GameManager.instance.MonstruoMuerto(monstruo.tipo);
-		/*else if (jugador != null)
-		*/	
+		if (monstruo != null)
+			GameManager.instance.MonstruoMuerto (monstruo.tipo);
+		else if (jugador != null)
+			GameManager.instance.JugadorMuerto ();
 		else
        		Destroy(gameObject);
     }

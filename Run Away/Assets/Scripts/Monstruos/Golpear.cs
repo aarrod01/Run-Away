@@ -19,12 +19,6 @@ public class Golpear : MonoBehaviour
 		//animacionMonstruo = GetComponentInParent <Animator>();
 		golpe = GetComponentInChildren<Golpe>();
 	}
-	
-
-	void Update () 
-	{
-		
-	}
 
 	public void Golpeando ()
 	{
@@ -39,10 +33,5 @@ public class Golpear : MonoBehaviour
 			//animacionMonstruo.SetTrigger ("Golpear");
 			vidaJugador.Danyar(danyoMonstruo);
 		}
-	}
-
-	public void Ejemplo()
-	{
-		
 	}
 }

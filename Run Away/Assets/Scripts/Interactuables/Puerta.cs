@@ -3,54 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using Colores;
 
+[RequireComponent(typeof(Animator))]
+
 public class Puerta : MonoBehaviour 
 {
 	private Rigidbody2D rb2D;
-    GameObject cajaDeColision;
+    
+    Animator puertaAnimacion;
 
     public Colores.Colores color;
 	public bool abierta;
-	public Sprite encendido, apagado;
 
-	void Awake () 
-	{
-		rb2D = this.GetComponent<Rigidbody2D> ();
-        cajaDeColision = transform.GetChild(0).gameObject;
-        if (abierta)
-        {
-            GetComponent<Collider2D>().enabled = false;
-            cajaDeColision.SetActive(false);
-            GetComponent<SpriteRenderer>().sprite = apagado;
-            gameObject.layer = LayerMask.NameToLayer("Default");
-        }
-        else
-        {
-            GetComponent<Collider2D>().enabled = true;
-            cajaDeColision.SetActive(true);
-            GetComponent<SpriteRenderer>().sprite = encendido;
-            gameObject.layer = LayerMask.NameToLayer("LightObstacles");
-        }
+    void Awake()
+    {
+        puertaAnimacion = GetComponent<Animator>();
+        rb2D = GetComponent<Rigidbody2D>();
+        
+        puertaAnimacion.SetBool("Abierta", abierta);
+        puertaAnimacion.SetInteger("Color", (int)color);
+        GetComponent<Collider2D>().enabled = !abierta;
+
     }
 
-	public void abrir() 
-	{
+    public void abrir()
+    {
         abierta = !abierta;
-		if (abierta) 
-		{
-			GetComponent<Collider2D> ().enabled = false;
-            cajaDeColision.SetActive(false);
-            GetComponent<SpriteRenderer> ().sprite = apagado;
-            gameObject.layer = LayerMask.NameToLayer("Default");
-            GetComponent<AudioSource>().Play();
-        } 
-		else 
-		{
-			GetComponent<Collider2D> ().enabled = true;
-            cajaDeColision.SetActive(true);
-            GetComponent<SpriteRenderer> ().sprite = encendido;
-            gameObject.layer = LayerMask.NameToLayer("LightObstacles");
-            GetComponent<AudioSource>().Play();
-        }
-			
-	}
+
+        puertaAnimacion.SetBool("Abierta", abierta);
+        GetComponent<Collider2D>().enabled = !abierta;
+        GetComponent<AudioSource>().Play();
+    }
 }

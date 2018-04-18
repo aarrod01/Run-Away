@@ -7,24 +7,33 @@ using Colores;
 public class Palanca : MonoBehaviour 
 {
 	Interactuable master;
+    LayerMask conQueColisiona;
+    Puerta[] puertas;
+    Animator palancaAnimacion;
 
-	Puerta[] puertas; 
-
-	public float distanciaInteraccion=1f;
-	LayerMask conQueColisiona;
-	public  Colores.Colores colorDelInterruptor;
+    public float distanciaInteraccion = 1f;
+	public  Colores.Colores color;
 	public float distanciaDeInteraccion=0.3f;
+    public bool posicionInicial;
 
 	void Start () {
-        puertas = GameObject.FindObjectsOfType<Puerta>();
 
         conQueColisiona = LayerMask.GetMask("Obstaculos","Objetos");
+        puertas = GameObject.FindObjectsOfType<Puerta>();
+        palancaAnimacion = GetComponent<Animator>();
+        palancaAnimacion.SetBool("activada", posicionInicial);
+        palancaAnimacion.SetInteger("color",(int)color);
+        conQueColisiona = Colision.CapasInteraccion();
         master = GetComponent<Interactuable>();
 		master.Accion = (Jugador a) => {
+                posicionInicial = !posicionInicial;
+                palancaAnimacion.SetBool("activada", posicionInicial);
 
-                transform.Rotate(new Vector3(0f, 0f, 180f));
-				for (int i = 0; i < puertas.Length; i++)
-					puertas[i].abrir();
+            for (int i = 0; i < puertas.Length; i++)
+            {
+                if(puertas[i].color == color)
+                    puertas[i].abrir();
+            }
                 ControladorRecorrido.instance.ReiniciarRed();
 		};
         master.EsPosibleLaInteraccion = (Jugador a) =>
@@ -32,5 +41,15 @@ public class Palanca : MonoBehaviour
             return master.InteraccionPorLineaDeVision(a.transform, transform, distanciaDeInteraccion, conQueColisiona);
         };
         master.DistanciaDeInteraccion = () => { return distanciaDeInteraccion; };
+    }
+
+    public void Iluminar()
+    {
+
+    }
+
+    public void Apagar()
+    {
+
     }
 }

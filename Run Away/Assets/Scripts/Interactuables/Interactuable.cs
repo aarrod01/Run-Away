@@ -10,9 +10,9 @@ public delegate float funcionDistancia();
 
 public class Interactuable : MonoBehaviour 
 {
-    public funcionInteractuado Accion = (Jugador a)=> { };
-    public funcionPregunta EsPosibleLaInteraccion = (Jugador a) => { return false; };
-    public funcionDistancia DistanciaDeInteraccion = () => { return -1f; };
+    public funcionInteractuado Accion;
+    public funcionPregunta EsPosibleLaInteraccion;
+    public funcionDistancia DistanciaDeInteraccion;
 
     //Tipos de Condiciones generales.
     public bool InteraccionPorLineaDeVision(Transform desde, Transform hasta, float distanciaInteraccion ,LayerMask capasInteraccion)
