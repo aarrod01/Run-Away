@@ -8,44 +8,66 @@ using Colores;
 
 public class EditorPuertas : Editor
 {
+    static Sprite[] sprites;
+
+    private void OnEnable()
+    {
+        sprites = Resources.LoadAll<Sprite>("Sprites/Tilesheets/Spritesheet");
+    }
     private void OnSceneGUI()
     {
         Puerta puerta = target as Puerta;
+
         puerta.GetComponent<Animator>().SetInteger("Color", (int)puerta.color);
         SpriteRenderer spritePuerta = puerta.GetComponent<SpriteRenderer>();
 
-       switch (puerta.color)
+        string nombre;
+
+        switch (puerta.color)
         {
-           case Colores.Colores.Amarillo:
+            case Colores.Colores.Amarillo:
                 if (puerta.abierta)
-                    spritePuerta.sprite = (Sprite)Resources.Load("Sprites/Tilesheets/PuerAmAb");
+                    nombre = "PuerAmAb";
                 else
-                    spritePuerta.sprite = (Sprite)Resources.Load("Sprites/Tilesheets/PuerAmCer");
+                    nombre = "PuerAmCer";
                 break;
-           case Colores.Colores.Azul:
+            case Colores.Colores.Azul:
                 if (puerta.abierta)
-                    spritePuerta.sprite = (Sprite)Resources.Load("Sprites/Tilesheets/PuerAzAb");
+                    nombre = "PuerAzAb";
                 else
-                    spritePuerta.sprite = (Sprite)Resources.Load("Sprites/Tilesheets/PuerAzCer");
+                    nombre = "PuerAzCer";
                 break;
-           case Colores.Colores.Rojo:
+            case Colores.Colores.Rojo:
                 if (puerta.abierta)
-                    spritePuerta.sprite = (Sprite)Resources.Load("Sprites/Tilesheets/PuerRoAb");
+                    nombre = "PuerRoAb";
                 else
-                    spritePuerta.sprite = (Sprite)Resources.Load("Sprites/Tilesheets/PuerRoCer");
+                    nombre = "PuerRoCer";
                 break;
-           case Colores.Colores.Verde:
+            case Colores.Colores.Verde:
                 if (puerta.abierta)
-                    spritePuerta.sprite = (Sprite)Resources.Load("Sprites/Tilesheets/PuerVerAb");
+                    nombre = "PuerVerAb";
                 else
-                    spritePuerta.sprite = (Sprite)Resources.Load("Sprites/Tilesheets/PuerVerCer");
+                    nombre = "PuerVerCer";
                 break;
-           case Colores.Colores.Final:
+            case Colores.Colores.Final:
                 if (puerta.abierta)
-                    spritePuerta.sprite = (Sprite)Resources.Load("Sprites/Tilesheets/PuerFin3");
+                    nombre = "PuerFin3";
                 else
-                    spritePuerta.sprite = (Sprite)Resources.Load("Sprites/Tilesheets/PuerFin1");
-               break;
-            }
+                    nombre = "PuerFin1";
+                break;
+            default:
+                if (puerta.abierta)
+                    nombre = "PuerBlaAb";
+                else
+                    nombre = "PuerBlaCer";
+                break;
+        }
+
+        int i = 0;
+        while (i < sprites.Length && sprites[i].name != nombre)
+            i++;
+        spritePuerta.sprite = sprites[i];
     }
+
+    
 }

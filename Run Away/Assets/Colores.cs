@@ -4,5 +4,5 @@ using UnityEngine;
 
 namespace Colores
 {
-    public enum Colores {Azul, Rojo, Verde, Amarillo, Final };
+    public enum Colores {Azul, Rojo, Verde, Amarillo, Blanco, Final };
 }
