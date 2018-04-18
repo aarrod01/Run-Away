@@ -1,49 +1,49 @@
 fileFormatVersion: 2
 guid: e8bdb50a4ae68a34698041ff15f7abbe
-timeCreated: 1523831920
-licenseType: Free
+timeCreated: 1524040398
+licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Spritesheet_0
-    21300002: Spritesheet_1
-    21300004: Spritesheet_2
-    21300006: Spritesheet_3
-    21300008: Spritesheet_10
-    21300010: Spritesheet_11
-    21300012: Spritesheet_12
-    21300014: Spritesheet_13
-    21300016: Spritesheet_14
-    21300018: Spritesheet_15
-    21300020: Spritesheet_16
-    21300022: Spritesheet_17
-    21300024: Spritesheet_18
-    21300026: Spritesheet_19
-    21300028: Spritesheet_20
-    21300030: Spritesheet_21
-    21300032: Spritesheet_22
-    21300034: Spritesheet_23
-    21300036: Spritesheet_24
-    21300038: Spritesheet_27
-    21300040: Spritesheet_28
-    21300042: Spritesheet_29
-    21300044: Spritesheet_30
-    21300046: Spritesheet_31
-    21300048: Spritesheet_32
-    21300050: Spritesheet_33
-    21300052: Spritesheet_34
-    21300054: Spritesheet_35
-    21300056: Spritesheet_36
-    21300058: Spritesheet_37
-    21300060: Spritesheet_38
-    21300062: Spritesheet_39
-    21300064: Spritesheet_40
-    21300066: Spritesheet_48
-    21300068: Spritesheet_49
-    21300070: Spritesheet_50
-    21300072: Spritesheet_51
-    21300074: Spritesheet_52
-    21300076: Spritesheet_53
-    21300078: Spritesheet_54
+    21300000: Suelo
+    21300002: Pared
+    21300004: Pared1
+    21300006: Pared2
+    21300008: Droga1
+    21300010: Droga2
+    21300012: Droga3
+    21300014: PuerAmCer
+    21300016: PuerAmAb
+    21300018: PuerAzCer
+    21300020: PuerAzAb
+    21300022: PuerRoCe
+    21300024: PuerRoAb
+    21300026: Droga4
+    21300028: Droga5
+    21300030: Droga6
+    21300032: PalBlaDes
+    21300034: PalBla
+    21300036: PalBlaAct
+    21300038: PalAmDes
+    21300040: PalAm
+    21300042: PalAmAct
+    21300044: PalVerDes
+    21300046: PalVer
+    21300048: PalVerAct
+    21300050: PuerVerCer
+    21300052: PuerVerAb
+    21300054: PalAzDes
+    21300056: PalAz
+    21300058: PalAzAct
+    21300060: PalRoDes
+    21300062: PalRo
+    21300064: PalRoAct
+    21300066: PuerBlaCer
+    21300068: PuerBlaAb
+    21300070: PuerFin1
+    21300072: PuerFin2
+    21300074: PuerFin3
+    21300076: ArmCer
+    21300078: ArmAb
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -120,7 +120,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Spritesheet_0
+      name: Suelo
       rect:
         serializedVersion: 2
         x: 0
@@ -134,7 +134,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_1
+      name: Pared
       rect:
         serializedVersion: 2
         x: 64
@@ -148,7 +148,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_2
+      name: Pared1
       rect:
         serializedVersion: 2
         x: 128
@@ -162,7 +162,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_3
+      name: Pared2
       rect:
         serializedVersion: 2
         x: 192
@@ -176,7 +176,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_10
+      name: Droga1
       rect:
         serializedVersion: 2
         x: 0
@@ -190,7 +190,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_11
+      name: Droga2
       rect:
         serializedVersion: 2
         x: 64
@@ -204,7 +204,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_12
+      name: Droga3
       rect:
         serializedVersion: 2
         x: 128
@@ -218,91 +218,91 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_13
+      name: PuerAmCer
       rect:
         serializedVersion: 2
         x: 256
         y: 320
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_14
+      name: PuerAmAb
       rect:
         serializedVersion: 2
         x: 320
         y: 320
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_15
+      name: PuerAzCer
       rect:
         serializedVersion: 2
         x: 384
         y: 320
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_16
+      name: PuerAzAb
       rect:
         serializedVersion: 2
         x: 448
         y: 320
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_17
+      name: PuerRoCe
       rect:
         serializedVersion: 2
         x: 512
         y: 320
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_18
+      name: PuerRoAb
       rect:
         serializedVersion: 2
         x: 576
         y: 320
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_19
+      name: Droga4
       rect:
         serializedVersion: 2
         x: 0
@@ -316,7 +316,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_20
+      name: Droga5
       rect:
         serializedVersion: 2
         x: 64
@@ -330,7 +330,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_21
+      name: Droga6
       rect:
         serializedVersion: 2
         x: 128
@@ -344,7 +344,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_22
+      name: PalBlaDes
       rect:
         serializedVersion: 2
         x: 192
@@ -358,7 +358,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_23
+      name: PalBla
       rect:
         serializedVersion: 2
         x: 256
@@ -372,7 +372,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_24
+      name: PalBlaAct
       rect:
         serializedVersion: 2
         x: 320
@@ -386,7 +386,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_27
+      name: PalAmDes
       rect:
         serializedVersion: 2
         x: 0
@@ -400,7 +400,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_28
+      name: PalAm
       rect:
         serializedVersion: 2
         x: 64
@@ -414,7 +414,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_29
+      name: PalAmAct
       rect:
         serializedVersion: 2
         x: 128
@@ -428,7 +428,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_30
+      name: PalVerDes
       rect:
         serializedVersion: 2
         x: 192
@@ -442,7 +442,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_31
+      name: PalVer
       rect:
         serializedVersion: 2
         x: 256
@@ -456,7 +456,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_32
+      name: PalVerAct
       rect:
         serializedVersion: 2
         x: 320
@@ -470,35 +470,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_33
+      name: PuerVerCer
       rect:
         serializedVersion: 2
         x: 384
         y: 192
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_34
+      name: PuerVerAb
       rect:
         serializedVersion: 2
         x: 448
         y: 192
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_35
+      name: PalAzDes
       rect:
         serializedVersion: 2
         x: 0
@@ -512,7 +512,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_36
+      name: PalAz
       rect:
         serializedVersion: 2
         x: 64
@@ -526,7 +526,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_37
+      name: PalAzAct
       rect:
         serializedVersion: 2
         x: 128
@@ -540,7 +540,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_38
+      name: PalRoDes
       rect:
         serializedVersion: 2
         x: 192
@@ -554,7 +554,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_39
+      name: PalRo
       rect:
         serializedVersion: 2
         x: 256
@@ -568,7 +568,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_40
+      name: PalRoAct
       rect:
         serializedVersion: 2
         x: 320
@@ -582,7 +582,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_48
+      name: PuerBlaCer
       rect:
         serializedVersion: 2
         x: 384
@@ -596,21 +596,21 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_49
+      name: PuerBlaAb
       rect:
         serializedVersion: 2
         x: 448
         y: 64
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_50
+      name: PuerFin1
       rect:
         serializedVersion: 2
         x: 0
@@ -624,7 +624,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_51
+      name: PuerFin2
       rect:
         serializedVersion: 2
         x: 64
@@ -638,7 +638,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_52
+      name: PuerFin3
       rect:
         serializedVersion: 2
         x: 128
@@ -652,7 +652,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_53
+      name: ArmCer
       rect:
         serializedVersion: 2
         x: 192
@@ -666,7 +666,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Spritesheet_54
+      name: ArmAb
       rect:
         serializedVersion: 2
         x: 256

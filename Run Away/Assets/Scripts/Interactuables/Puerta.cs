@@ -3,32 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using Colores;
 
+[RequireComponent(typeof(Animator))]
+
 public class Puerta : MonoBehaviour 
 {
 	private Rigidbody2D rb2D;
+
     GameObject cajaDeColision;
+    Animator puertaAnimacion;
 
     public Colores.Colores color;
 	public bool abierta;
-	public Sprite encendido, apagado;
 
 	void Awake () 
 	{
-		rb2D = this.GetComponent<Rigidbody2D> ();
+        puertaAnimacion = GetComponent<Animator>();
+		rb2D = GetComponent<Rigidbody2D> ();
         cajaDeColision = transform.GetChild(0).gameObject;
+
         if (abierta)
         {
+            puertaAnimacion.SetBool("Abierta", true);
             GetComponent<Collider2D>().enabled = false;
             cajaDeColision.SetActive(false);
-            GetComponent<SpriteRenderer>().sprite = apagado;
-            gameObject.layer = LayerMask.NameToLayer("Default");
         }
         else
         {
+            puertaAnimacion.SetBool("Abierta", false);
             GetComponent<Collider2D>().enabled = true;
             cajaDeColision.SetActive(true);
-            GetComponent<SpriteRenderer>().sprite = encendido;
-            gameObject.layer = LayerMask.NameToLayer("LightObstacles");
         }
     }
 
@@ -37,18 +40,16 @@ public class Puerta : MonoBehaviour
         abierta = !abierta;
 		if (abierta) 
 		{
-			GetComponent<Collider2D> ().enabled = false;
+            puertaAnimacion.SetBool("Abierta", true);
+            GetComponent<Collider2D> ().enabled = false;
             cajaDeColision.SetActive(false);
-            GetComponent<SpriteRenderer> ().sprite = apagado;
-            gameObject.layer = LayerMask.NameToLayer("Default");
             GetComponent<AudioSource>().Play();
         } 
 		else 
 		{
-			GetComponent<Collider2D> ().enabled = true;
+            puertaAnimacion.SetBool("Abierta", false);
+            GetComponent<Collider2D> ().enabled = true;
             cajaDeColision.SetActive(true);
-            GetComponent<SpriteRenderer> ().sprite = encendido;
-            gameObject.layer = LayerMask.NameToLayer("LightObstacles");
             GetComponent<AudioSource>().Play();
         }
 			
