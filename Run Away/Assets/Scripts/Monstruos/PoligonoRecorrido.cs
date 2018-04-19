@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(DetectarRuta))]
+[System.Serializable]
 public class PoligonoRecorrido : MonoBehaviour {
 
+    [SerializeField]
     public uint numeroDePuntos;
+
+    [SerializeField]
     public Vector2[] puntos;
     DetectarRuta detector;
 

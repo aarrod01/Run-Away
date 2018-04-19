@@ -33,6 +33,8 @@ public class InstpectorDeRectas : Editor
         }
         for (int i = 0; i < recorrido.numeroDePuntos; i++)
         {
+            Undo.RecordObject(target, "Move Point");
+            EditorUtility.SetDirty(target);
             puntos[i] = recorrido.Puntos()[i];
         }
 
