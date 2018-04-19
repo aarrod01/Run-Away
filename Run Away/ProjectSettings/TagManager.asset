@@ -9,6 +9,7 @@ TagManager:
   - PuntoVulnerable
   - Pared
   - Path
+  - onlyTrigger
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - DetectorRuta
   - PuntoVulnerable
   - PuntoInvulnerable
-  - 
+  - Suelo
   - 
   - 
   - 

@@ -49,17 +49,18 @@ namespace Recorrido
         //metodo que devulve la primera posicion de la lista, si el vector2 esta  a menos de margen unidades la lista pasa a apuntar al elemento siguiente.
         public Vector2 PosicionObjetivo(Vector2 posOrigen)
         {
-            
-            if((primero.este - posOrigen).sqrMagnitude < MARGEN)
+
+            if ((primero.este - posOrigen).sqrMagnitude < MARGEN)
             {
                 QuitarNodo();
             }
-            if(primero!=null)
+            if (primero != null)
                 return primero.este;
             return Vector2.negativeInfinity;
         }
     }
 }
+
 public class ControladorRecorrido : MonoBehaviour
 {
     //Singleton
@@ -67,9 +68,10 @@ public class ControladorRecorrido : MonoBehaviour
     //guarda todos los puntos del grafo
     static PuntoRecorrido[] puntosTotales;
     LayerMask conQueColisiona;
+
     void Start()
     {
-        
+
         if (instance == null)
         {
             instance = this;
@@ -77,7 +79,7 @@ public class ControladorRecorrido : MonoBehaviour
         }
         else
             Destroy(this.gameObject);
-        conQueColisiona = Colisiones.Colision.CapasRecorrido();
+        conQueColisiona = LayerMask.GetMask("Obstaculos", "Recorrido");
         //Busca todos los nodos del grafo.
         GameObject[] auxiliar = GameObject.FindGameObjectsWithTag("Path");
         puntosTotales = new PuntoRecorrido[auxiliar.Length];
@@ -85,13 +87,28 @@ public class ControladorRecorrido : MonoBehaviour
         {
             puntosTotales[i] = auxiliar[i].GetComponent<PuntoRecorrido>();
         }
-        ReiniciarRed();
+        CrearRedInicial();
 
         Nodo a = new Nodo(null, puntosTotales[0], null, 0, 0);
         ColaNodos cola = new ColaNodos(a);
         for (int i = 1; i < puntosTotales.Length; i++)
             cola.IntroducirNodo(new Nodo(null, puntosTotales[i], null, 0, 0));
     }
+
+    public PuntoRecorrido[] PuntosTotales()
+    {
+        return puntosTotales;
+    }
+
+    //Reinicia las conexiones entre puntos
+    public void CrearRedInicial()
+    {
+        for (int i = 0; i < puntosTotales.Length; i++)
+        {
+            puntosTotales[i].CrearPrimerosContactos();
+        }
+    }
+
     //Reinicia las conexiones entre puntos
     public void ReiniciarRed()
     {
@@ -122,7 +139,7 @@ public class ControladorRecorrido : MonoBehaviour
         }
 
         //Metodo que devuleve los hijos del nodo que no sean el padre, calcula su coste actual y el estimado
-        public Nodo[] Hijos(PuntoRecorrido[]destino)
+        public Nodo[] Hijos(PuntoRecorrido[] destino)
         {
             Nodo[] hijos = null;
             int numeroHijos;
@@ -139,7 +156,7 @@ public class ControladorRecorrido : MonoBehaviour
                 {
                     float g_ = aux[i].DistanciaHasta(este.EstaPosicion());
                     float f_ = ControladorRecorrido.instance.DistanciaMasCorta(aux[i].EstaPosicion(), destino);
-                    hijos[indiceHijos] = new Nodo(this, aux[i], null, g + g_, g + g_ +f_);
+                    hijos[indiceHijos] = new Nodo(this, aux[i], null, g + g_, g + g_ + f_);
                     indiceHijos++;
                 }
             return hijos;
@@ -162,7 +179,7 @@ public class ControladorRecorrido : MonoBehaviour
         }
         public Nodo Primero()
         {
-            if(primero!=null)
+            if (primero != null)
                 return primero.este;
             return null;
         }
@@ -185,34 +202,35 @@ public class ControladorRecorrido : MonoBehaviour
         //Metodo que quita el nodo de la lista.
         public void QuitarNodo()
         {
-            if(primero!=null)
+            if (primero != null)
                 primero = primero.siguiente;
         }
 
         //Metodo que quita un elemento de la lista con referencial nodorecorrido aquitar.
         public void QuitarNodo(Nodo aQuitar)
         {
-            Elemento aux = primero, aux2=null;
+            Elemento aux = primero, aux2 = null;
             while (aux != null && aux.este != aQuitar)
             {
                 aux2 = aux;
                 aux = aux.siguiente;
             }
-            if (aux != null&&aux2!=null)
+            if (aux != null && aux2 != null)
             {
                 aux2.siguiente = aux.siguiente;
-            }    
+            }
         }
 
         // Introduce el nodorecorrido aintroducir conservando el orden de primero los elementos con el menor coste estimado.
         public void IntroducirNodo(Nodo aIntroducir)
         {
-            Elemento aux = primero, aux2=null;
-            while (aux != null && aIntroducir.f > aux.este.f) {
+            Elemento aux = primero, aux2 = null;
+            while (aux != null && aIntroducir.f > aux.este.f)
+            {
                 aux2 = aux;
                 aux = aux.siguiente;
             }
-            if(aux!=null)
+            if (aux != null)
             {
                 if (aux2 != null)
                     aux2.siguiente = new Elemento(aux, aIntroducir);
@@ -220,37 +238,39 @@ public class ControladorRecorrido : MonoBehaviour
                     primero = new Elemento(primero, aIntroducir);
             }
             if (primero == null)
-                primero = new Elemento (null,aIntroducir);
-           
+                primero = new Elemento(null, aIntroducir);
+
         }
-        
+
         //Introduce los nodos en la lista que se encuentren en el punto y los que esten proyectando un raycast en las cuatro direcciones cardinales.
         public void IntroducirNodosEnCruz(Vector2 posicion, PuntoRecorrido[] puntosDistanciaManhattan)
         {
+            funcionVacia LlamadaDesactivar = () => { };
             //Comprobamos que el punto no este dentro de uno de los puntos de la red.
-            int i = 0;
-            while (i<puntosTotales.Length&&!puntosTotales[i].GetComponent<Collider2D>().bounds.Contains(posicion))
+            int i = 0, puntosDentro = 0;
+            while (i < puntosTotales.Length)
             {
+                if (puntosTotales[i].GetComponent<Collider2D>().bounds.Contains(posicion))
+                {
+                    float distancia = puntosTotales[i].DistanciaHasta(posicion);
+                    IntroducirNodo(new Nodo(null, puntosTotales[i], null, distancia, distancia + ControladorRecorrido.instance.DistanciaMasCorta(posicion, puntosDistanciaManhattan)));
+                    puntosTotales[i].gameObject.SetActive(false);
+                    LlamadaDesactivar = () => { LlamadaDesactivar(); puntosTotales[i].gameObject.SetActive(true); };
+                    puntosDentro++;
+                }
                 i++;
-            }
-            //Si esta dentro introducimos ese nodo en la cola.
-            if(i < puntosTotales.Length)
-            {
-                float distancia = puntosTotales[i].DistanciaHasta(posicion);
-                IntroducirNodo(new Nodo(null, puntosTotales[i], null, distancia, distancia + ControladorRecorrido.instance.DistanciaMasCorta(posicion,puntosDistanciaManhattan)));
-                puntosTotales[i].gameObject.SetActive(false);
             }
 
             //Creamos 4 rayos hacia las cuatro direcciones cardinales(debido a que el mapa tiene pasillos ortogonales).
             RaycastHit2D[] hit = new RaycastHit2D[4];
-            hit[0]= Physics2D.Raycast(posicion, Vector2.up, Mathf.Infinity, ControladorRecorrido.instance.conQueColisiona);
+            hit[0] = Physics2D.Raycast(posicion, Vector2.up, Mathf.Infinity, ControladorRecorrido.instance.conQueColisiona);
             Debug.DrawRay(posicion, Vector2.up, Color.green, 10f);
             hit[1] = Physics2D.Raycast(posicion, Vector2.right, Mathf.Infinity, ControladorRecorrido.instance.conQueColisiona);
             Debug.DrawRay(posicion, Vector2.right, Color.green, 10f);
             hit[2] = Physics2D.Raycast(posicion, Vector2.down, Mathf.Infinity, ControladorRecorrido.instance.conQueColisiona);
             Debug.DrawRay(posicion, Vector2.down, Color.green, 10f);
             hit[3] = Physics2D.Raycast(posicion, Vector2.left, Mathf.Infinity, ControladorRecorrido.instance.conQueColisiona);
-            Debug.DrawRay(posicion, Vector2.left, Color.green,10f);
+            Debug.DrawRay(posicion, Vector2.left, Color.green, 10f);
 
             PuntoRecorrido aux = null;
             for (int j = 0; j < 4; j++)
@@ -262,8 +282,7 @@ public class ControladorRecorrido : MonoBehaviour
                 }
             }
 
-            if (i < puntosTotales.Length)
-                puntosTotales[i].gameObject.SetActive(true);
+            LlamadaDesactivar();
         }
     }
 
@@ -334,4 +353,5 @@ public class ControladorRecorrido : MonoBehaviour
         }
         return lista;
     }
+
 }
