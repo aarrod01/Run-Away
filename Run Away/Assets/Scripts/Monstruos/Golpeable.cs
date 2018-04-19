@@ -18,7 +18,7 @@ public class Golpeable : MonoBehaviour {
         monstruoRB = GetComponentInParent<Rigidbody2D>();
         monstruo = GetComponentInParent<Monstruo>();
         vida = GetComponentInParent<Vida>();
-        conQueColisiona = Colisiones.Colision.CapaGolpeMonstruo();
+        conQueColisiona = LayerMask.GetMask("Obstaculos", "PuntoVulnerable","PuntoInvulnerable");
 
         master.Accion = (Jugador a) => {
             vida.Danyar(1);

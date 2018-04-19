@@ -20,7 +20,7 @@ public class Droga : MonoBehaviour {
         };
         master.EsPosibleLaInteraccion = (Jugador a) =>
         {
-            return master.InteraccionPorLineaDeVision(a.transform, transform, distanciaDeInteraccion, conQueColisiona);
+            return master.InteraccionPorLineaDeVision(transform, a.transform, distanciaDeInteraccion, conQueColisiona);
         };
         master.DistanciaDeInteraccion = () => { return distanciaDeInteraccion; };
     }

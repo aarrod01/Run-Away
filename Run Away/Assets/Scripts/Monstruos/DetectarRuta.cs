@@ -3,44 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using Monstruos;
 using Recorrido;
-public class CuerpoContacto : MonoBehaviour 
-{
-	public int numeroMonstruo;
 
+public class DetectarRuta : MonoBehaviour 
+{
 	public int puntoRutaActual = 0;
 	Monstruo monstruo;
     Rigidbody2D monstruoRB;
+    listaNodos caminoDeVuelta;
+    [HideInInspector]
+    public PuntoRecorrido[] ruta;
 
-	public PuntoRecorrido[] ruta;
-    PuntoRecorrido[] puntosRuta;
     const float MARGEN = 0.001f;
-    public listaNodos caminoDeVuelta;
-
+    
 	void Start(){
 
 		monstruo = GetComponentInParent<Monstruo> ();
         monstruoRB = monstruo.GetComponent<Rigidbody2D>();
-        PuntoRecorrido[] aux = new PuntoRecorrido[ruta.Length];
-        int j = 0;
-        for (int i = 0; i < ruta.Length; i++)
-        {
-            int k = 0;
-            while (k < j && ruta[i] != aux[k])
-                k++;
-            if (k == j)
-            {
-                aux[j] = ruta[i];
-                j++;
-            }
-        }
-
-        puntosRuta = new PuntoRecorrido[j];
-        for (int i = 0; i < j; i++)
-            puntosRuta[i] = aux[i];
 
     }
-
-
+    
     private void Update()
     {
         switch (monstruo.EstadoMonstruoActual())
@@ -71,11 +52,7 @@ public class CuerpoContacto : MonoBehaviour
             {
                 PuntoRecorrido punto = other.GetComponent<PuntoRecorrido>();
 
-                int i = IndicePuntoRuta(punto);
-                if (i != -1)
-                {
-                    puntoRutaActual = i;
-                }
+                puntoRutaActual = IndicePuntoRuta(punto);
             }
         }
 	}
@@ -87,6 +64,7 @@ public class CuerpoContacto : MonoBehaviour
             i++;
         return i;
     }
+
     public Vector2 PosicionPuntoRuta()
     {
         switch (monstruo.EstadoMonstruoActual())
@@ -99,5 +77,50 @@ public class CuerpoContacto : MonoBehaviour
                 return Vector2.positiveInfinity;
         }
 	}
-		
+
+    public void CrearPuntosRuta(PuntoRecorrido[] puntosReco)
+    {
+        ruta = puntosReco;
+    }
+
+    public void AnyadirPuntoRuta(PuntoRecorrido nuevo)
+    {
+        if (ruta == null)
+        {
+            ruta = new PuntoRecorrido[1];
+            ruta[0] = nuevo;
+        }
+        else
+        {
+            if(ruta[ruta.Length-1]!=nuevo)
+            {
+                PuntoRecorrido[] aux = new PuntoRecorrido[ruta.Length + 1];
+                for (int i = 0; i < ruta.Length; i++)
+                    aux[i] = ruta[i];
+                aux[ruta.Length] = nuevo;
+                ruta = new PuntoRecorrido[aux.Length];
+                for (int i = 0; i < ruta.Length; i++)
+                    ruta[i] = aux[i];
+            }
+        }
+    }
+
+    public void QuitarUltimoPuntoRuta()
+    {
+        if(ruta!=null)
+        {
+            if (ruta.Length == 1)
+                ruta = null;
+            else
+            {
+                PuntoRecorrido[] aux = new PuntoRecorrido[ruta.Length - 1];
+                for (int i = 0; i < aux.Length; i++)
+                    aux[i] = ruta[i];
+                ruta = new PuntoRecorrido[aux.Length];
+                for (int i = 0; i < ruta.Length; i++)
+                    ruta[i] = aux[i];
+            }
+        }
+    }
+
 }

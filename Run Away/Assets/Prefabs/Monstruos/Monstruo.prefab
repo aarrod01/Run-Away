@@ -19,9 +19,25 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4146522212573562}
-  - component: {fileID: 114742727965488972}
+  - component: {fileID: 114053296174841208}
   m_Layer: 14
   m_Name: Golpear
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1215498326826098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4406152579991496}
+  - component: {fileID: 114375683961130116}
+  m_Layer: 14
+  m_Name: Detector Paredes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,7 +68,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4230872376021790}
-  - component: {fileID: 114061547102795032}
+  - component: {fileID: 114542750915435152}
   - component: {fileID: 58986711693660836}
   m_Layer: 17
   m_Name: PuntoVulnerable
@@ -73,7 +89,7 @@ GameObject:
   - component: {fileID: 50359504471124794}
   - component: {fileID: 60660987365368532}
   - component: {fileID: 82737888746292258}
-  - component: {fileID: 114495506380840106}
+  - component: {fileID: 114263810235786124}
   - component: {fileID: 114124364766849550}
   - component: {fileID: 111083450470066266}
   m_Layer: 14
@@ -91,8 +107,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4310992111453314}
-  - component: {fileID: 114709205207975218}
   - component: {fileID: 114251828231848616}
+  - component: {fileID: 114308933721742942}
   - component: {fileID: 58225182944704498}
   m_Layer: 15
   m_Name: DetectarGolpes
@@ -110,7 +126,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4411409912222528}
   - component: {fileID: 58031213122129782}
-  - component: {fileID: 114666929696253086}
+  - component: {fileID: 114253998789897514}
+  - component: {fileID: 114655188760177032}
   m_Layer: 16
   m_Name: DetectarRuta
   m_TagString: Untagged
@@ -127,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4817200344935730}
   - component: {fileID: 58441046747754280}
-  - component: {fileID: 114156670604290288}
+  - component: {fileID: 114381157228064400}
   m_Layer: 14
   m_Name: DetectarGolpear
   m_TagString: Untagged
@@ -144,7 +161,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4491010604486040}
   - component: {fileID: 70850373842350348}
-  - component: {fileID: 114741857308519492}
   m_Layer: 18
   m_Name: PuntoInvulnerable
   m_TagString: Untagged
@@ -161,7 +177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4667905469717916}
   - component: {fileID: 60883003787945004}
-  - component: {fileID: 114557364261237406}
+  - component: {fileID: 114700333659088302}
   m_Layer: 14
   m_Name: CampoVision
   m_TagString: Untagged
@@ -178,7 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4756648691272902}
   - component: {fileID: 70530377541602600}
-  - component: {fileID: 114325494576309664}
+  - component: {fileID: 114769637958943790}
   m_Layer: 14
   m_Name: Golpe
   m_TagString: Untagged
@@ -229,6 +245,19 @@ Transform:
   m_Father: {fileID: 4720688162146964}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4406152579991496
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1215498326826098}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4720688162146964}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4411409912222528
 Transform:
   m_ObjectHideFlags: 1
@@ -275,7 +304,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1408450001780656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 3.12, z: 0}
+  m_LocalPosition: {x: -3, y: -6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4411409912222528}
@@ -283,6 +312,7 @@ Transform:
   - {fileID: 4310992111453314}
   - {fileID: 4146522212573562}
   - {fileID: 4963073391830784}
+  - {fileID: 4406152579991496}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -613,17 +643,19 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &114061547102795032
+--- !u!114 &114053296174841208
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1400689218489880}
+  m_GameObject: {fileID: 1093805930323662}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8fda3e9cbb603a428871b6e205d6875, type: 3}
+  m_Script: {fileID: 11500000, guid: 41ab421192ec0894aa543bd135b3015e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  danyoMonstruo: 1
+  golpeRetardo: 1
 --- !u!114 &114124364766849550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -636,17 +668,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vida: 1
---- !u!114 &114156670604290288
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1745075289891108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 790b70f6745f61846b7d8824cef27d81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114178283124653090
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -658,6 +679,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65afe4611b7cab6438f8e747c12ff7b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conQueColisiona:
+    m_Bits: 0
 --- !u!114 &114251828231848616
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -669,52 +692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b7548fa5cb9bb4b9efe47baf671a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114325494576309664
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1985142453695010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8b4d8d09915bc54da0cc44733f39cbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114495506380840106
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1408450001780656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eff04e02ad945294ebc7153742dce999, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  conQueColisiona:
-    serializedVersion: 2
-    m_Bits: 12288
-  velMovRuta: 0
-  velMovPerseguir: 0
-  velGiro: 200
-  aceleracionAngular: 1
-  tiempoAturdimiento: 10
-  periodoGiro: 5
-  estadoMonstruo: 0
-  tipo: 0
-  prioridad: 0
---- !u!114 &114557364261237406
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1927348872768102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90fc5d8ec00132a4792f77975efe0200, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114666929696253086
+--- !u!114 &114253998789897514
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -722,23 +700,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 1585649484054646}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18c1d59e98bc0d24eb71a18bd96a73ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 007716a8f66150c4887488798efae77e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monstruo: {fileID: 0}
-  monstruoRB: {fileID: 0}
-  puntosRuta: []
-  ultimopunto: {fileID: 0}
-  numeroMonstruo: 0
+  puntoRutaActual: 0
   ruta:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  puntoRutaActual: 0
---- !u!114 &114709205207975218
+--- !u!114 &114263810235786124
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1408450001780656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f6295f0cd86184899686cb3c74e6d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conQueColisiona:
+    serializedVersion: 2
+    m_Bits: 6144
+  velMovRuta: 1
+  velMovPerseguir: 2
+  velMovHuida: 3
+  velGiro: 0.5
+  aceleracionAngular: 0.5
+  tiempoAturdimiento: 1
+  periodoGiro: 1
+  estadoMonstruo: 1
+  tipo: 0
+  prioridad: 0
+--- !u!114 &114308933721742942
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -746,37 +741,84 @@ MonoBehaviour:
   m_GameObject: {fileID: 1427131054204308}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9401c5ebc0727524a9d1149865a50049, type: 3}
+  m_Script: {fileID: 11500000, guid: 83e45af494946bf4fb85d5971577416e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   distanciaInteraccion: 1
-  velocidadDeProyeccion: 5
---- !u!114 &114741857308519492
+  velocidadDeProyeccion: 0
+--- !u!114 &114375683961130116
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1793034063284156}
+  m_GameObject: {fileID: 1215498326826098}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f329f086acbf634448100a219181a69d, type: 3}
+  m_Script: {fileID: 11500000, guid: f40fafb514118e3489d3d77c5400a5bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  danyoMonstruo: 1
-  golpeRetardo: 0.2
---- !u!114 &114742727965488972
+  longitudRayo: 1
+--- !u!114 &114381157228064400
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1093805930323662}
+  m_GameObject: {fileID: 1745075289891108}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f329f086acbf634448100a219181a69d, type: 3}
+  m_Script: {fileID: 11500000, guid: 35b9a7134f7297042b700ed1a55d6bd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  danyoMonstruo: 1
-  golpeRetardo: 0.2
+--- !u!114 &114542750915435152
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1400689218489880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 501dcff9133bb904181a37db0283bc01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114655188760177032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1585649484054646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf93efd175b4c44c8a4248ea9acdbf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numeroDePuntos: 4
+  puntos:
+  - {x: -3, y: -3}
+  - {x: 5, y: -3}
+  - {x: 5, y: -6}
+  - {x: -3, y: -6}
+--- !u!114 &114700333659088302
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1927348872768102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3497b294a9632648aa382aab924ca11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114769637958943790
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1985142453695010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d18a56a14f96fc34cab77a8d721d84e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212576744397975488
 SpriteRenderer:
   m_ObjectHideFlags: 1

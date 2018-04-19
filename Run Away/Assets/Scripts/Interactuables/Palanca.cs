@@ -11,8 +11,7 @@ public class Palanca : MonoBehaviour
     LayerMask conQueColisiona;
     Puerta[] puertas;
     Animator palancaAnimacion;
-
-    public float distanciaInteraccion = 1f;
+    
 	public  Colores.Colores color;
 	public float distanciaDeInteraccion=0.3f;
     public bool posicionInicial;
