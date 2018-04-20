@@ -5,7 +5,7 @@ using Monstruos;
 
 namespace Monstruos
 {
-    public enum EstadosMonstruo { SiguiendoJugador, EnRuta, PensandoRuta, VolviendoARuta, Desorientado, Proyectado, BuscandoJugador, Huyendo, Ninguno };
+    public enum EstadosMonstruo { SiguiendoJugador, EnRuta, PensandoRuta, VolviendoARuta, Desorientado, Proyectado, BuscandoJugador, Huyendo, Quieto, Ninguno };
     public enum TipoMonstruo { Basico, Ninguno };
 }
 
@@ -119,11 +119,6 @@ public class Monstruo : MonoBehaviour
     }
 
     void Pararse()
-    {
-        rb2D.velocity = Vector2.zero;
-    }
-
-    void Stop()
     {
         rb2D.velocity = Vector2.zero;
     }

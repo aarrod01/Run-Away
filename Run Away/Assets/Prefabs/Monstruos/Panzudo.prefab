@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 114582482017773118}
   - component: {fileID: 111307083167298268}
   m_Layer: 14
-  m_Name: Monstruo
+  m_Name: Panzudo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -417,9 +417,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.6}
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 1.02
 --- !u!58 &58499585863416766
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -704,10 +704,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numeroDePuntos: 4
   puntos:
-  - {x: -2, y: 0}
-  - {x: -2, y: 0}
-  - {x: -2, y: 0}
-  - {x: -2, y: 0}
+  - {x: 10, y: -12}
+  - {x: -6, y: -12}
+  - {x: -6, y: -6}
+  - {x: 10, y: -6}
 --- !u!114 &114273796460615538
 MonoBehaviour:
   m_ObjectHideFlags: 1
