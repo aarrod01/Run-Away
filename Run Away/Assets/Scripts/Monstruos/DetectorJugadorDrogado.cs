@@ -14,7 +14,7 @@ public class DetectorJugadorDrogado : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.tag == "Jugador")
+        if (other.tag == "Player")
         {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, other.transform.position - transform.position, Mathf.Infinity, conQueColisiona);
             if (hit.collider.gameObject == other.gameObject)

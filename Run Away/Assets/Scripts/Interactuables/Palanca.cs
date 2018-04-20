@@ -11,13 +11,15 @@ public class Palanca : MonoBehaviour
     LayerMask conQueColisiona;
     Puerta[] puertas;
     Animator palancaAnimacion;
+    GameObject luz;
     
 	public  Colores.Colores color;
 	public float distanciaDeInteraccion=0.3f;
     public bool posicionInicial;
 
 	void Start () {
-
+        luz = GetComponentInChildren<DynamicLight2D.DynamicLight>().gameObject;
+        Apagar();
         puertas = GameObject.FindObjectsOfType<Puerta>();
         palancaAnimacion = GetComponent<Animator>();
         palancaAnimacion.SetBool("activada", posicionInicial);
@@ -44,11 +46,11 @@ public class Palanca : MonoBehaviour
 
     public void Iluminar()
     {
-
+        luz.SetActive(true);
     }
 
     public void Apagar()
     {
-
+        luz.SetActive(false);
     }
 }

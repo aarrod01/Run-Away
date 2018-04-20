@@ -7,6 +7,7 @@ public class Golpear : MonoBehaviour
 	Vida vidaJugador;
 	Jugador jugador;
 	Golpe golpe;
+    bool golpeando;
 	//Animator animacionMonstruo;
 
 	public int danyoMonstruo = 1;
@@ -18,6 +19,7 @@ public class Golpear : MonoBehaviour
 		jugador = GameObject.FindWithTag ("Player").GetComponent<Jugador> ();
 		//animacionMonstruo = GetComponentInParent <Animator>();
 		golpe = GetComponentInChildren<Golpe>();
+        golpeando = false;
 	}
 	
 
@@ -28,6 +30,7 @@ public class Golpear : MonoBehaviour
 
 	public void Golpeando ()
 	{
+        golpeando = true;
 		Invoke ("Impacto", golpeRetardo);
 	}
 
@@ -39,8 +42,13 @@ public class Golpear : MonoBehaviour
 			//animacionMonstruo.SetTrigger ("Golpear");
 			vidaJugador.Danyar(danyoMonstruo);
 		}
+        golpeando = false;
 	}
 
+    public bool EstaGolpeando()
+    {
+        return golpeando;
+    }
 	public void Ejemplo()
 	{
 		

@@ -7,8 +7,8 @@ using Monstruos;
 public delegate void funcionVacia();
 public class GameManager : MonoBehaviour
 {
-    int[] monstruosMuertos;
-    int[] monstruosHuidos;
+    int[] monstruosMuertos, monstruosMuertosTemporales;
+    int[] monstruosHuidos, monstruosHuidosTemporales;
     int[] monstruosIgnorados;
     int drogaConsumida = 0;
 
@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);
+
             int n = Enum.GetValues(typeof(TipoMonstruo)).Length;
             monstruosMuertos = new int[n];
             monstruosIgnorados = new int[n];
@@ -32,11 +33,15 @@ public class GameManager : MonoBehaviour
         }
         else
             Destroy(this.gameObject);
-        SceneManager.activeSceneChanged += IniciarEscena;
+        instance.IniciarEscena();
     }
 
-	public void IniciarEscena(Scene actual, Scene siguiente)
+	public void IniciarEscena()
 	{
+
+        int n = Enum.GetValues(typeof(TipoMonstruo)).Length;
+        monstruosMuertosTemporales = new int[n];
+        monstruosHuidosTemporales = new int[n];
         Monstruo[] monstruos = GameObject.FindObjectsOfType<Monstruo>();
         for(int i = 0; i<monstruos.Length; i++)
         {
@@ -45,15 +50,30 @@ public class GameManager : MonoBehaviour
         }
 		jugador = GameObject.FindObjectOfType<Jugador>();
 	}
+    public void TerminarExitosamenteEscena()
+    {
+
+        int n = Enum.GetValues(typeof(TipoMonstruo)).Length;
+        for(int i =0; i<n; i++)
+        {
+            monstruosMuertos[i] += monstruosMuertosTemporales[i];
+            monstruosHuidos[i] += monstruosHuidosTemporales[i];
+        }
+        Monstruo[] monstruos = GameObject.FindObjectsOfType<Monstruo>();
+        for(int i = 0; i<monstruos.Length; i++)
+        {
+            monstruosIgnorados[(int)monstruos[i].tipo]++;
+        }
+    }
 
     public void MonstruoMuerto(TipoMonstruo tipo)
     {
-        monstruosMuertos[(int)tipo]++;
+        monstruosMuertosTemporales[(int)tipo]++;
     }
 
     public void MontruoHuye(TipoMonstruo tipo)
     {
-        monstruosHuidos[(int)tipo]++;
+        monstruosHuidosTemporales[(int)tipo]++;
     }
 
     void MonstruosIgnorados()
@@ -86,15 +106,20 @@ public class GameManager : MonoBehaviour
         drogaConsumida++;
         jugador.Luz().IntensidadLuz(1.5f);
         jugador.AumentoVelocidad(1.5f);
-        Invoke("Bajon", TiempoSubidon());
-        ControladorPalanca.instante.EncenderPalancas();
+        Invoke("Bajonazo",TiempoSubidon());
+        ControladorPalanca.instance.EncenderPalancas();
         Bajon = () =>
         {
-            ControladorPalanca.instante.ApagarPalancas();
+            ControladorPalanca.instance.ApagarPalancas();
             drogado = false;
             jugador.Luz().IntensidadLuz(0.9f);
             jugador.AumentoVelocidad(0.9f);
         };
+    }
+
+    void Bajonazo()
+    {
+        Bajon();
     }
 
     float TiempoSubidon()
@@ -109,7 +134,7 @@ public class GameManager : MonoBehaviour
 
     int PrioridadMaxima()
     {
-        return 0;
+        return drogaConsumida;
     }
 
 }

@@ -5,22 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class ControladorPalanca : MonoBehaviour {
 
-	public static ControladorPalanca instante = null;
+	public static ControladorPalanca instance = null;
     Palanca[] todasLasPalancas;
 
     void Start()
     {
-        if (instante == null)
+        if (instance == null)
         {
-            instante = this;
+            instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
         else
             Destroy(gameObject);
-        SceneManager.activeSceneChanged += TodasLasPalancas;
+        instance.TodasLasPalancas();
     }
 
-    void TodasLasPalancas(Scene actual, Scene posterior)
+    void TodasLasPalancas()
     {
         todasLasPalancas = GameManager.FindObjectsOfType<Palanca>();
     }

@@ -19,7 +19,7 @@ public class Fantasma : MonoBehaviour
     public float tasaDescensoDeCabreo;
 
     Rigidbody2D fantasmaRB;
-    public float cabreo;
+    float cabreo;
     Rigidbody2D jugadorRB;
 
     // Use this for initialization
