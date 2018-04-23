@@ -11,7 +11,7 @@ public class Escondite: MonoBehaviour {
 	public Transform posicionSalida;
     // Use this for initialization
     void Start () {
-        conQueColisiona = Colision.CapasInteraccion();
+        conQueColisiona = LayerMask.GetMask("Obstaculos", "Jugador");
         master = GetComponent<Interactuable>();
         master.Accion = (Jugador a) => {
             
@@ -29,7 +29,7 @@ public class Escondite: MonoBehaviour {
         };
         master.EsPosibleLaInteraccion = (Jugador a) =>
         {
-            return master.InteraccionPorLineaDeVision(a.transform, transform, distanciaDeInteraccion, conQueColisiona);
+            return master.InteraccionPorLineaDeVision(a.transform, distanciaDeInteraccion, conQueColisiona);
         };
         master.DistanciaDeInteraccion = () => { return distanciaDeInteraccion; };
     }

@@ -10,7 +10,7 @@ public class Droga : MonoBehaviour {
     LayerMask conQueColisiona;
     private void Start()
     {
-        conQueColisiona = Colision.CapasInteraccion();
+        conQueColisiona = LayerMask.GetMask("Obstaculos", "Jugador");
         master = GetComponent<Interactuable>();
         master.Accion = (Jugador a) =>
         {
@@ -20,7 +20,7 @@ public class Droga : MonoBehaviour {
         };
         master.EsPosibleLaInteraccion = (Jugador a) =>
         {
-            return master.InteraccionPorLineaDeVision(transform, a.transform, distanciaDeInteraccion, conQueColisiona);
+            return master.InteraccionPorLineaDeVision(a.transform, distanciaDeInteraccion, conQueColisiona);
         };
         master.DistanciaDeInteraccion = () => { return distanciaDeInteraccion; };
     }

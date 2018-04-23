@@ -24,7 +24,7 @@ public class Palanca : MonoBehaviour
         palancaAnimacion = GetComponent<Animator>();
         palancaAnimacion.SetBool("activada", posicionInicial);
         palancaAnimacion.SetInteger("color",(int)color);
-        conQueColisiona = Colision.CapasInteraccion();
+        conQueColisiona = LayerMask.GetMask("Obstaculos", "Jugador");
         master = GetComponent<Interactuable>();
 		master.Accion = (Jugador a) => {
                 posicionInicial = !posicionInicial;
@@ -39,7 +39,7 @@ public class Palanca : MonoBehaviour
 		};
         master.EsPosibleLaInteraccion = (Jugador a) =>
         {
-            return master.InteraccionPorLineaDeVision(a.transform, transform, distanciaDeInteraccion, conQueColisiona);
+            return master.InteraccionPorLineaDeVision(a.transform, distanciaDeInteraccion, conQueColisiona);
         };
         master.DistanciaDeInteraccion = () => { return distanciaDeInteraccion; };
     }
