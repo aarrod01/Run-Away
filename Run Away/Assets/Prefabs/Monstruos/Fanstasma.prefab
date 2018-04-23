@@ -420,7 +420,6 @@ MonoBehaviour:
   cabreoUmbral: 10
   tasaAumentoDeCabreo: 5
   tasaDescensoDeCabreo: 1
-  cabreo: 0
 --- !u!114 &114406659005751022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -554,7 +553,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 737e40b49777944119664998065bdccc, type: 3}
+  m_Sprite: {fileID: 21300036, guid: e2825e3427fd792448e1fd566fd77eae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
