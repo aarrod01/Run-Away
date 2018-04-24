@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 82582331110207278}
   - component: {fileID: 114627004520714636}
   - component: {fileID: 114582482017773118}
-  - component: {fileID: 111307083167298268}
+  - component: {fileID: 95471853233689616}
   m_Layer: 14
   m_Name: Panzudo
   m_TagString: Untagged
@@ -624,20 +624,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!111 &111307083167298268
-Animation:
+--- !u!95 &95471853233689616
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1988119876634904}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: af07809f7d96f2449bcecfa83fcf3c3c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114036264946516434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -689,7 +692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83e45af494946bf4fb85d5971577416e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanciaInteraccion: 1
+  distanciaInteraccion: 10
   velocidadDeProyeccion: 0
 --- !u!114 &114248341324490684
 MonoBehaviour:
@@ -775,7 +778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ab421192ec0894aa543bd135b3015e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  danyoMonstruo: 1
+  danyo: 1
   golpeRetardo: 1
 --- !u!114 &114627004520714636
 MonoBehaviour:
@@ -826,7 +829,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 10cb4007aa85d43a98e1ef5f090edaf2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

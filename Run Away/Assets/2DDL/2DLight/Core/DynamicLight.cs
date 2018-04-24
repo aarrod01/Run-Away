@@ -1074,7 +1074,7 @@ namespace DynamicLight2D
 							permissionToAddListeners = false;
 							AddListeners();
 						}
-
+                        
 				#endif
 						fixedLimitations();
 

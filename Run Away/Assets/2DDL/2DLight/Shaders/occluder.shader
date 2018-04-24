@@ -66,7 +66,7 @@ Shader "2D Dynamic Lights/Masks/Occluder"
                 OUT.texcoord = IN.texcoord;
                 OUT.color = IN.color * _Color;
                 #ifdef PIXELSNAP_ON
-                OUT.vertex = UnityPixelSnap( OUT.vertex );
+					OUT.vertex = UnityPixelSnap( OUT.vertex );
                 #endif
 
                 return OUT;

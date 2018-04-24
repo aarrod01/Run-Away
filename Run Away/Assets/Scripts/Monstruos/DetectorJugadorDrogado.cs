@@ -17,7 +17,7 @@ public class DetectorJugadorDrogado : MonoBehaviour
         if (other.tag == "Player")
         {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, other.transform.position - transform.position, Mathf.Infinity, conQueColisiona);
-            if (hit.collider.gameObject == other.gameObject)
+            if (hit.collider.gameObject == other.gameObject && GameManager.instance.Drogado())
             {
                 Monstruo aux = GetComponentInParent<Monstruo>();
                 GameManager.instance.MontruoHuye(aux.tipo);

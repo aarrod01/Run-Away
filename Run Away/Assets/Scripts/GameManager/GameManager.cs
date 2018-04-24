@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
 
 	public void JugadorMuerto()
 	{
-		ResetarEscena ();
+		Invoke("ResetarEscena", 5f);
 	}
 
 	public void ResetarEscena ()

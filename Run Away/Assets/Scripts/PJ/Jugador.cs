@@ -1,32 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Monstruos;
 
 [RequireComponent(typeof (Rigidbody2D))]
 public class Jugador : MonoBehaviour 
 {
 	float velMaxima;
-	bool invisible = false,
+	public bool invisible = false,
 		movimientoLibre = true;
-
+    Animator animador;
 	Rigidbody2D jugador, puntero;
     Vector2 direccionMirada,
             direccionMovimiento;
     Luz luz;
+    GolpeJugador golpe;
 
-	public float velocidadaxima = 1f,
-				factorAceleracion = 0.5f,
-				velocidadAngularMaxima = 1f,
-				factorAceleracionAngular = 0.5f,
-				factorGiro = 0.5f,
-				fraccionMinimaVelocidadHaciaDetras = 0.5f,
-				vidas = 1;
+    public float velocidadaxima = 1f,
+                factorAceleracion = 0.5f,
+                velocidadAngularMaxima = 1f,
+                factorAceleracionAngular = 0.5f,
+                factorGiro = 0.5f,
+                fraccionMinimaVelocidadHaciaDetras = 0.5f,
+                vidas = 1, fuerzaEmpujon = 200f;
 
     void Start () {
         AumentoVelocidad(1f);
         luz = GetComponentInChildren<Luz>();
         jugador = GetComponent<Rigidbody2D>();
+        animador = GetComponent<Animator>();
         puntero = GameObject.FindObjectOfType<PunteroRetardo>().GetComponent<Rigidbody2D>();
+        golpe = GetComponentInChildren<GolpeJugador>();
+        golpe.Iniciar();
     }
 		
 	void FixedUpdate () 
@@ -83,6 +88,7 @@ public class Jugador : MonoBehaviour
     {
         movimientoLibre = variable;
     }
+
     public void Invisible(bool a) 
 	{        
         invisible = a;
@@ -98,14 +104,17 @@ public class Jugador : MonoBehaviour
         GetComponent<SpriteRenderer>().enabled = !a;
         LuzConica(!a);
     }
+
     public bool Invisible()
     {
         return invisible;
     }
+
     public void Parar()
     {
         jugador.velocity = Vector2.zero;
     }
+
 	public void LuzConica(bool a){
 		luz.LuzConica (a);
 	}
@@ -120,8 +129,39 @@ public class Jugador : MonoBehaviour
         return luz;
     }
 
-	public void Vida(int danyo)
-	{
-		vidas = vidas - danyo;
-	}
+    public void Atacar()
+    {
+        animador.SetTrigger("atacando");
+        golpe.Golpear(1f, 1f, 1);
+    }
+
+    public void Andar()
+    {
+
+    }
+
+    public void Interactuar()
+    {
+        animador.SetTrigger("interactuando");
+    }
+
+    public void Morir(TipoMonstruo tipo)
+    {
+        animador.SetTrigger("muriendo");
+        animador.SetInteger("tipoMonstruo", (int)tipo);
+        jugador.Sleep();
+        GetComponent<Collider2D>().enabled = false;
+        Destroy(this);
+        GameManager.instance.JugadorMuerto();
+    }
+
+    public float AnguloMovimiento()
+    {
+        return Mathf.Atan2(direccionMirada.y, direccionMirada.x);
+    }
+
+    public float Velocidad()
+    {
+        return jugador.velocity.sqrMagnitude;
+    }
 }

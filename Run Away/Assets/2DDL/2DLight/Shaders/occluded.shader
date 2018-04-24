@@ -6,7 +6,7 @@ Shader "2D Dynamic Lights/Masks/Occluded"
     {
         [PerRendererData] _MainTex ( "Sprite Texture", 2D ) = "white" {}
         _Color ( "Tint", Color ) = ( 1, 1, 1, 1 )
-       // [MaterialToggle] PixelSnap ( "Pixel snap", Float ) = 0
+        [MaterialToggle] PixelSnap ( "Pixel snap", Float ) = 0
         _OccludedColor ( "Occluded Tint", Color ) = ( 0, 0, 0, 0.5 )
     }
 
@@ -39,7 +39,7 @@ v2f vert( appdata_t IN )
     OUT.texcoord = IN.texcoord;
     OUT.color = IN.color * _Color;
     #ifdef PIXELSNAP_ON
-    //OUT.vertex = UnityPixelSnap( OUT.vertex );
+		OUT.vertex = UnityPixelSnap( OUT.vertex );
     #endif
 
     return OUT;

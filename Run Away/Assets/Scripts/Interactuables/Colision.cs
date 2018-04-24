@@ -6,14 +6,15 @@ using UnityEngine;
 public class Colision : MonoBehaviour {
 
     Collider2D[] cajaColision;
-    public bool posicion;
+    public bool ActivoInicialmente;
 	// Use this for initialization
-	void Start () {
+	public void Iniciar (bool abierta) {
         cajaColision = GetComponents<Collider2D>();
-	}
+        gameObject.SetActive(ActivoInicialmente^abierta);
+    }
 	
-    public void Activar(bool act)
+    public void Cambiar()
     {
-        gameObject.SetActive(act);
+        gameObject.SetActive(!gameObject.activeSelf);
     }
 }

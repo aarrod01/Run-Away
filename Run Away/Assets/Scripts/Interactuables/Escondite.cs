@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Colisiones;
 [RequireComponent(typeof(Interactuable))]
 
 public class Escondite: MonoBehaviour {
@@ -18,6 +17,7 @@ public class Escondite: MonoBehaviour {
             if (!a.Invisible())
             {
                 a.Esconderse(true);
+                a.Interactuar();
                 a.transform.position = transform.position;
             }
             

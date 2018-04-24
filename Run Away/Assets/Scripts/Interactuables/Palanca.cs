@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Colisiones;
 using Colores;
 
 [RequireComponent(typeof(Interactuable))]
@@ -27,13 +26,15 @@ public class Palanca : MonoBehaviour
         conQueColisiona = LayerMask.GetMask("Obstaculos", "Jugador");
         master = GetComponent<Interactuable>();
 		master.Accion = (Jugador a) => {
-                posicionInicial = !posicionInicial;
+
+            a.Interactuar();
+            posicionInicial = !posicionInicial;
                 palancaAnimacion.SetBool("activada", posicionInicial);
 
             for (int i = 0; i < puertas.Length; i++)
             {
                 if(puertas[i].color == color)
-                    puertas[i].abrir();
+                    puertas[i].Abrir();
             }
                 ControladorRecorrido.instance.ReiniciarRed();
 		};

@@ -6,7 +6,7 @@ using Monstruos;
 namespace Monstruos
 {
     public enum EstadosMonstruo { SiguiendoJugador, EnRuta, PensandoRuta, VolviendoARuta, Desorientado, Proyectado, BuscandoJugador, Huyendo, Quieto, Ninguno };
-    public enum TipoMonstruo { Basico, Ninguno };
+    public enum TipoMonstruo { Panzudo, Fantasma, Ninguno };
 }
 
 public class Monstruo : MonoBehaviour
@@ -19,6 +19,7 @@ public class Monstruo : MonoBehaviour
 
     Rigidbody2D rb2D;
     Rigidbody2D jugadorRB;
+    Animator animador;
     float giroInicial;
     float cronometro;
     DetectarRuta detectorRuta;
@@ -29,6 +30,7 @@ public class Monstruo : MonoBehaviour
 
     void Start()
     {
+        animador = GetComponent<Animator>();
         detectorRuta = GetComponentInChildren<DetectarRuta>();
         campoVision = GetComponentInChildren<CampoVision>();
         detectorParedes = GetComponentInChildren<DetectorParedes>();
@@ -121,6 +123,21 @@ public class Monstruo : MonoBehaviour
     void Pararse()
     {
         rb2D.velocity = Vector2.zero;
+    }
+
+    public void Morir()
+    {
+        animador.SetTrigger("muriendo");
+        GameManager.instance.MonstruoMuerto(tipo);
+        Destroy(this);
+        rb2D.Sleep();
+        GetComponent<Collider2D>().enabled = false;
+        Destroy(gameObject, 5f);
+    }
+
+    public void Atacar()
+    {
+        animador.SetTrigger("atacando");
     }
 
 }

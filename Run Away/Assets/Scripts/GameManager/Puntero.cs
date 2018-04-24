@@ -28,12 +28,12 @@ public class Puntero : MonoBehaviour
 		if (scene.name == "Nivel1" || scene.name == "Nivel2" || scene.name == "NivelFinal" || scene.name == "Demo") 
 		{
 			Cursor.visible = true;
-			Cursor.SetCursor (punterojuego, Vector2.zero, CursorMode.Auto);
+			Cursor.SetCursor (punterojuego, Vector2.one * (((float)punterojuego.width) / 2f), CursorMode.Auto);
 		} 
 		else if (scene.name == "MenuPrincipal") 
 		{
 			Cursor.visible = true;
-			Cursor.SetCursor (punteroFueraJuego, Vector2.zero, CursorMode.Auto);
+			Cursor.SetCursor (punteroFueraJuego, Vector2.one * (((float)punteroFueraJuego.width) / 2f), CursorMode.Auto);
 		}
 		else
 			Cursor.visible = false;

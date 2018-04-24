@@ -9,6 +9,7 @@ public class Puerta : MonoBehaviour
 {
 	private Rigidbody2D rb2D;
     Animator puertaAnimacion;
+    Colision[] colisiones;
 
     public Colores.Colores color;
 	public bool abierta;
@@ -17,17 +18,20 @@ public class Puerta : MonoBehaviour
     {
         puertaAnimacion = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
+        colisiones = GetComponentsInChildren<Colision>();
+        for (int i = 0; i < colisiones.Length; i++)
+            colisiones[i].Iniciar(abierta);
         puertaAnimacion.SetBool("Abierta", abierta);
         puertaAnimacion.SetInteger("Color", (int)color);
-        GetComponent<Collider2D>().enabled = !abierta;
 
     }
 
-    public void abrir()
+    public void Abrir()
     {
         abierta = !abierta;
+        for (int i = 0; i < colisiones.Length; i++)
+            colisiones[i].Cambiar();
         puertaAnimacion.SetBool("Abierta", abierta);
-        GetComponent<Collider2D>().enabled = !abierta;
         GetComponent<AudioSource>().Play();
     }
 }

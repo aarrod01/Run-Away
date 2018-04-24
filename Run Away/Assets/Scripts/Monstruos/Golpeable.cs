@@ -18,20 +18,15 @@ public class Golpeable : MonoBehaviour {
         monstruoRB = GetComponentInParent<Rigidbody2D>();
         monstruo = GetComponentInParent<Monstruo>();
         vida = GetComponentInParent<Vida>();
-        conQueColisiona = LayerMask.GetMask("Obstaculos", "PuntoVulnerable","PuntoInvulnerable");
+        conQueColisiona = LayerMask.GetMask("Obstaculos", "Jugador");
 
         master.Accion = (Jugador a) => {
-            vida.Danyar(1);
-            monstruo.Empujar(a.transform.position, velocidadDeProyeccion);
+            a.Atacar();
            
         };
         master.EsPosibleLaInteraccion = (Jugador a) =>
         {
-            Vector2 pos = transform.position;
-            Vector2 posa = a.transform.position;
-            RaycastHit2D hit = Physics2D.Raycast(posa, pos - posa, distanciaInteraccion, conQueColisiona);
-            Debug.DrawRay(posa, pos - posa, Color.red, 5f);
-            return hit.collider != null && hit.collider.GetComponent<Golpeable>()==this;
+            return master.InteraccionPorLineaDeVision(a.transform, distanciaInteraccion, conQueColisiona);
         };
         
        

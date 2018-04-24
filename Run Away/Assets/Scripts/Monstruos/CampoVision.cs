@@ -29,13 +29,11 @@ public class CampoVision : MonoBehaviour
         if ((aux = other.GetComponent<Jugador>()) != null && !aux.Invisible())
         {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, jugador.position - transform.position, 100f, queGolpear);
-            if (monstruo.EstadoMonstruoActual() != EstadosMonstruo.Proyectado && hit.collider.gameObject.tag == "Player")
+            if (monstruo.EstadoMonstruoActual() != EstadosMonstruo.Proyectado && monstruo.EstadoMonstruoActual() != EstadosMonstruo.Huyendo && hit.collider.gameObject.tag == "Player")
             {
                 monstruo.CambiarEstadoMonstruo(EstadosMonstruo.SiguiendoJugador);
                 ultimaPosicionJugador = jugador.position;
             }
-
         }
     }
-
 }

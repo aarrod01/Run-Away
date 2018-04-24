@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Monstruos;
 
 public class Vida : MonoBehaviour {
 
@@ -15,23 +16,27 @@ public class Vida : MonoBehaviour {
     }
 
 
-    public void Danyar(int danyo)
+    public void Danyar(int danyo, TipoMonstruo tipo)
     {
         vida -= danyo;
         if (vida <= 0)
         {
-            Muerte();
+            Muerte( tipo);
         }     
     }
 
-    void Muerte()
+    void Muerte(TipoMonstruo tipo)
     {
-		if (monstruo != null)
-			GameManager.instance.MonstruoMuerto (monstruo.tipo);
-		else if (jugador != null)
-			GameManager.instance.JugadorMuerto ();
-		else
-       		Destroy(gameObject);
+        if (monstruo != null)
+        {
+            monstruo.Morir();
+        }
+        else if (jugador != null)
+        {
+            jugador.Morir(tipo);
+        }
+        else
+            Destroy(gameObject);
     }
 
 }

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Colisiones;
 
 [RequireComponent(typeof(Interactuable))]
 public class Droga : MonoBehaviour {
@@ -14,8 +13,6 @@ public class Droga : MonoBehaviour {
         master = GetComponent<Interactuable>();
         master.Accion = (Jugador a) =>
         {
-
-                GameManager.instance.ConsumirDroga();
                 DrogaConsumida();
         };
         master.EsPosibleLaInteraccion = (Jugador a) =>
@@ -27,6 +24,7 @@ public class Droga : MonoBehaviour {
 
     void DrogaConsumida()
     {
+        GameManager.instance.ConsumirDroga();
         Destroy(gameObject);
     }
 }
