@@ -5,12 +5,15 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using Monstruos;
 public delegate void funcionVacia();
+
+
 public class GameManager : MonoBehaviour
 {
     int[] monstruosMuertos, monstruosMuertosTemporales;
     int[] monstruosHuidos, monstruosHuidosTemporales;
     int[] monstruosIgnorados;
-    int drogaConsumida = 0;
+    public int drogaConsumida = 0;
+	public int nivel = 0;
 
     Jugador jugador = null;
     bool drogado = false;
@@ -98,6 +101,23 @@ public class GameManager : MonoBehaviour
 	public void ResetarEscena ()
 	{
 		SceneManager.LoadScene (SceneManager.GetActiveScene().name);
+	}
+
+	public void CambiarEscena(string nombreEscena){
+		switch (nombreEscena) {
+		case "Inicio":
+			nivel = 0;
+			break;
+			SceneManager.LoadScene ("Inicio");
+		case "Nivel1":
+			nivel = 1;
+			SceneManager.LoadScene ("Nivel1");
+			break;
+		case "Nivel2":
+			nivel = 2;
+			SceneManager.LoadScene ("Nivel2");
+			break;
+		}
 	}
 
     public void ConsumirDroga()
