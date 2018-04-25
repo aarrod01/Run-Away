@@ -4,12 +4,14 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class PuntoRecorrido : MonoBehaviour
 {
-
+    [SerializeField]
     public PuntoRecorrido[] posicionesConectadas;
     public PuntoRecorrido[] posiblesPosicionesConectadas;
-
+    [SerializeField]
     Vector2[] cuatroPosiciones;
+    [SerializeField]
     Vector2[] cuatroCardinales;
+    [SerializeField]
     LayerMask conQueColisiona;
     int puntosDentro = 0;
     float unCuarto;
@@ -89,6 +91,9 @@ public class PuntoRecorrido : MonoBehaviour
                     if (!(Mathf.Approximately(aux[j].transform.position.x - transform.position.x, 0f) || Mathf.Approximately(aux[j].transform.position.y - transform.position.y, 0f)))
                         aux[j] = aux1;
                     j++;
+                } else
+                {
+                    cuatroPosiciones[i] = Vector2.negativeInfinity;
                 }
             }
         }
@@ -109,17 +114,19 @@ public class PuntoRecorrido : MonoBehaviour
     }
 
     //Metodo que pone como posiciones conectadas a aquellas con las que se puede unir el punto en linea recta sin que choque contra ningun obstáculo.
-    [ExecuteInEditMode]
     public void ReiniciarContactos()
     {
         gameObject.GetComponent<Collider2D>().enabled = false;
         int j = puntosDentro;
+        PuntoRecorrido[] aux = new PuntoRecorrido[4];
         for (int i = 0; i < puntosDentro; i++)
         {
+            aux[i] = posiblesPosicionesConectadas[i];
             posiblesPosicionesConectadas[i].GetComponent<Collider2D>().enabled = false;
         }
 
         PuntoRecorrido aux1;
+        
         for (int i = 0; i < 4; i++)
         {
             if (!Vector2.Equals(cuatroPosiciones[i], Vector2.negativeInfinity))
@@ -128,21 +135,21 @@ public class PuntoRecorrido : MonoBehaviour
                     Physics2D.Raycast((Vector2)transform.position+cuatroCardinales[(i+3)%4], cuatroCardinales[i], Mathf.Infinity, conQueColisiona)
                 };
                 if (hit[0].collider != null && hit[1].collider != null
-                    && (posiblesPosicionesConectadas[j] = hit[0].collider.gameObject.GetComponent<PuntoRecorrido>()) != null
+                    && (aux[j] = hit[0].collider.gameObject.GetComponent<PuntoRecorrido>()) != null
                     && (aux1 = hit[1].collider.gameObject.GetComponent<PuntoRecorrido>()) != null)
                 {
                     if (!(Mathf.Approximately(posiblesPosicionesConectadas[j].transform.position.x - transform.position.x, 0f)
                         || Mathf.Approximately(posiblesPosicionesConectadas[j].transform.position.y - transform.position.y, 0f)))
-                        posiblesPosicionesConectadas[j] = aux1;
+                        aux[j] = aux1;
                     j++;
                 }
             }
         }
 
         //Actualizamos las posiciones conectadas
-        posiblesPosicionesConectadas = new PuntoRecorrido[j];
+        posicionesConectadas = new PuntoRecorrido[j];
         for (int i = 0; i < j; i++)
-            posicionesConectadas[i] = posiblesPosicionesConectadas[i];
+            posicionesConectadas[i] = aux[i];
         //Volvemos a activar su collider.
         gameObject.GetComponent<Collider2D>().enabled = true;
         for (int i = 0; i < j; i++)

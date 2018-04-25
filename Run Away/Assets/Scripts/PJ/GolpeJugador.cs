@@ -40,8 +40,7 @@ public class GolpeJugador : MonoBehaviour {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, otro.transform.position - transform.position, Mathf.Infinity, LayerMask.GetMask("Obstaculos","PuntoVulnerable", "PuntoInvulnerable"));
             if(hit.collider==otro)
             {
-                otro.GetComponent<PuntoVulnerable>().Danyar(danyo);
-                otro.GetComponentInParent<Monstruo>().Empujar(transform.position, GetComponentInParent<Jugador>().fuerzaEmpujon);
+                otro.GetComponentInParent<Monstruo>().Atacado(GetComponentInParent<Jugador>());
                 Fin();
             }
         }

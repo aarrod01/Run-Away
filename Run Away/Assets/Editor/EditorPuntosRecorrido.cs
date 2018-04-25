@@ -14,6 +14,9 @@ public class EditorPuntosRecorrido : Editor
 
         if (GUILayout.Button("Crear Red"))
         {
+            Puerta[] puertas = GameObject.FindObjectsOfType<Puerta>();
+            for (int i = 0; i < puertas.Length; i++)
+                puertas[i].gameObject.SetActive(false);
             PadrePuntosRecorrido puntosRecorrido = (PadrePuntosRecorrido)target;
             var tempList = puntosRecorrido.transform.Cast<Transform>().ToList();
             foreach (var child in tempList)
@@ -24,12 +27,21 @@ public class EditorPuntosRecorrido : Editor
             puntosRecorrido.CrearEnCentroPatron((GameObject)Resources.Load("Punto Recorrido"));
             for(int i = 0; i<PadrePuntosRecorrido.matrizDePuntos.GetLength(0);i++)
             {
-                for(int j =0; j< PadrePuntosRecorrido.matrizDePuntos.GetLength(1);j++)
+                for (int j = 0; j < PadrePuntosRecorrido.matrizDePuntos.GetLength(1); j++)
                 {
+                    PuntoRecorrido aux;
                     if (PadrePuntosRecorrido.matrizDePuntos[i, j] != null)
-                        PadrePuntosRecorrido.matrizDePuntos[i, j].GetComponent<PuntoRecorrido>().CrearPrimerosContactos();
+                    {
+                        aux = PadrePuntosRecorrido.matrizDePuntos[i, j].GetComponent<PuntoRecorrido>();
+                        Undo.RecordObject(aux, "Add Point");
+                        EditorUtility.SetDirty(aux);
+                        aux.CrearPrimerosContactos();
+                    }
                 }
             }
+
+            for (int i = 0; i < puertas.Length; i++)
+                puertas[i].gameObject.SetActive(true);
 
         }
     }

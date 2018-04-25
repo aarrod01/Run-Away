@@ -35,7 +35,7 @@ public class Golpear : MonoBehaviour
 	{
 		if (golpe.LeGolpea ()) 
 		{
-			vidaJugador.Danyar(danyo, GetComponentInParent<Monstruo>().tipo);
+			vidaJugador.Danyar(danyo, GetComponentInParent<Monstruo>().Tipo());
 		}
         golpeando = false;
 	}

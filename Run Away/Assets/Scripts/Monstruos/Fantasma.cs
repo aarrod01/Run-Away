@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Monstruos;
 
+[RequireComponent(typeof(Monstruo))]
 [RequireComponent(typeof(Rigidbody2D))]
-
+[RequireComponent(typeof(Animator))]
 public class Fantasma : MonoBehaviour
 {
     const float MARGENESCUCHA = 0.005f;
 
-    public EstadosMonstruo estadoMonstruo;
-    public TipoMonstruo tipo;
+    public EstadosMonstruo estadoInicial;
     public float velocidadPersecucion;
     public float velocidadHuida;
     public float cabreoMaximo;
@@ -23,32 +23,58 @@ public class Fantasma : MonoBehaviour
     Rigidbody2D jugadorRB;
 
     // Use this for initialization
-    void Start () {
-        fantasmaRB = GetComponent<Rigidbody2D>();
-        cabreo = 0f;
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate ()
+    void Start ()
     {
-        CambioCabreo();
-        switch(estadoMonstruo)
+        fantasmaRB = GetComponent<Rigidbody2D>();
+        Animator animador = GetComponent<Animator>();
+        Vida vida = GetComponent<Vida>();
+        DetectarRuta detectorRuta = GetComponent<DetectarRuta>();
+
+        Monstruo este = GetComponent<Monstruo>();
+        este.Tipo(TipoMonstruo.Fantasma);
+
+        este.CambiarEstadoMonstruo(estadoInicial);
+        este.Comportamiento = () => {
+            este.CambiarEstadoMonstruo(CambioCabreo());
+            switch (este.EstadoMonstruoActual())
+            {
+                case EstadosMonstruo.SiguiendoJugador:
+                    MoverseHacia(jugadorRB.position, velocidadPersecucion);
+                    break;
+                case EstadosMonstruo.Quieto:
+                    Parar();
+                    break;
+                case EstadosMonstruo.Huyendo:
+                    MoverseHacia((2 * fantasmaRB.position - jugadorRB.position), velocidadHuida);
+                    GameManager.instance.MontruoHuye(TipoMonstruo.Fantasma);
+                    GetComponent<Collider2D>().enabled = false;
+                    Destroy(gameObject, 10f);
+                    Destroy(this);
+                    break;
+            }
+        };
+
+        este.Morir = () =>
         {
-            case EstadosMonstruo.SiguiendoJugador:
-                MoverseHacia(jugadorRB.position, velocidadPersecucion);
-                break;
-            case EstadosMonstruo.Quieto:
-                Parar();
-                break;
-            case EstadosMonstruo.Huyendo:
-                MoverseHacia((2 * fantasmaRB.position - jugadorRB.position), velocidadHuida);
-                GameManager.instance.MontruoHuye(tipo);
-                GetComponent<Collider2D>().enabled = false;
-                Destroy(gameObject, 10f);
-                Destroy(this);
-                break;
-        }
-	}
+            animador.SetTrigger("muriendo");
+            GameManager.instance.MonstruoMuerto(TipoMonstruo.Fantasma);
+            este.enabled = false;
+            fantasmaRB.Sleep();
+            GetComponent<Collider2D>().enabled = false;
+            Destroy(gameObject, 5f);
+        };
+
+        este.Atacar = () =>
+        {
+            animador.SetTrigger("atacando");
+        };
+
+        este.Atacado = (Jugador a) =>
+        {
+            vida.Danyar(a.Danyo(), TipoMonstruo.Panzudo);
+            este.CambiarEstadoMonstruo(EstadosMonstruo.Proyectado);
+        };
+    }
 
     void MoverseHacia(Vector2 dir, float vel)
     {
@@ -67,21 +93,19 @@ public class Fantasma : MonoBehaviour
         fantasmaRB.velocity = Vector2.zero;
     }
 
-    void CambioCabreo()
+    EstadosMonstruo CambioCabreo()
     {
-        if(jugadorRB != null&&jugadorRB.velocity.sqrMagnitude>MARGENESCUCHA)
+        if(jugadorRB != null&&jugadorRB.velocity.sqrMagnitude > MARGENESCUCHA)
             cabreo = Mathf.Min(cabreo+tasaAumentoDeCabreo*Time.fixedDeltaTime, cabreoMaximo);
         else
             cabreo = Mathf.Max(cabreo - tasaDescensoDeCabreo * Time.fixedDeltaTime, 0f);
 
         if (cabreo >= cabreoUmbral)
-            estadoMonstruo = EstadosMonstruo.SiguiendoJugador;
+            return EstadosMonstruo.SiguiendoJugador;
         else
-            estadoMonstruo = EstadosMonstruo.Quieto;
+            return EstadosMonstruo.Quieto;
     }
-
-  
-
+    
     void OnTriggerEnter2D(Collider2D otro)
     {
         if (otro.tag == "Player")

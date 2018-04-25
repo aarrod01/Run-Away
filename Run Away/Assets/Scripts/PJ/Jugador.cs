@@ -15,6 +15,7 @@ public class Jugador : MonoBehaviour
             direccionMovimiento;
     Luz luz;
     GolpeJugador golpe;
+    Piernas piernas;
 
     public float velocidadaxima = 1f,
                 factorAceleracion = 0.5f,
@@ -23,6 +24,7 @@ public class Jugador : MonoBehaviour
                 factorGiro = 0.5f,
                 fraccionMinimaVelocidadHaciaDetras = 0.5f,
                 vidas = 1, fuerzaEmpujon = 200f;
+    int danyo = 1;
 
     void Start () {
         AumentoVelocidad(1f);
@@ -31,6 +33,7 @@ public class Jugador : MonoBehaviour
         animador = GetComponent<Animator>();
         puntero = GameObject.FindObjectOfType<PunteroRetardo>().GetComponent<Rigidbody2D>();
         golpe = GetComponentInChildren<GolpeJugador>();
+        piernas = GetComponentInChildren<Piernas>();
         golpe.Iniciar();
     }
 		
@@ -94,14 +97,15 @@ public class Jugador : MonoBehaviour
         invisible = a;
     }
 
-    public void Esconderse(bool a)
+    public void Esconderse(bool a, Vector2 en)
     {
-        Parar();
+        transform.position = en;
         Invisible(a);
         movimientoLibre=!a;
-        GetComponent<Rigidbody2D>().Sleep();
-        GetComponent<Collider2D>().enabled = !a;
+        jugador.Sleep();
+        jugador.simulated = !a;
         GetComponent<SpriteRenderer>().enabled = !a;
+        piernas.Invisible(a);
         LuzConica(!a);
     }
 
@@ -163,5 +167,14 @@ public class Jugador : MonoBehaviour
     public float Velocidad()
     {
         return jugador.velocity.sqrMagnitude;
+    }
+
+    public float FuerzaEmpujon()
+    {
+        return fuerzaEmpujon;
+    }
+    public int Danyo()
+    {
+        return danyo;
     }
 }

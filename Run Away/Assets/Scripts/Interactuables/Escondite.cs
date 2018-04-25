@@ -8,6 +8,7 @@ public class Escondite: MonoBehaviour {
     public float distanciaDeInteraccion=1f;
     LayerMask conQueColisiona;
 	public Transform posicionSalida;
+    public Transform posicionDentro;
     // Use this for initialization
     void Start () {
         conQueColisiona = LayerMask.GetMask("Obstaculos", "Jugador");
@@ -16,15 +17,14 @@ public class Escondite: MonoBehaviour {
             
             if (!a.Invisible())
             {
-                a.Esconderse(true);
+                a.Esconderse(true,posicionDentro.position);
                 a.Interactuar();
-                a.transform.position = transform.position;
+                
             }
             
             else
             {
-                a.Esconderse(false);
-                a.GetComponent<Rigidbody2D>().position = posicionSalida.position;
+                a.Esconderse(false, posicionSalida.position);
             }
         };
         master.EsPosibleLaInteraccion = (Jugador a) =>

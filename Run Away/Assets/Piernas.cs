@@ -8,14 +8,17 @@ public class Piernas : MonoBehaviour {
     Animator piernas;
 	// Use this for initialization
 	void Start () {
-
         jugador = GetComponentInParent<Jugador>();
         piernas = GetComponent<Animator>();
-
 	}
 	
 	// Update is called once per frame
 	void Update () {
         piernas.SetFloat("velocidad", jugador.Velocidad());
 	}
+
+    public void Invisible(bool a)
+    {
+        piernas.GetComponent<SpriteRenderer>().enabled = !a;
+    }
 }

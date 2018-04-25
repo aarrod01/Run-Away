@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         Monstruo[] monstruos = GameObject.FindObjectsOfType<Monstruo>();
         for(int i = 0; i<monstruos.Length; i++)
         {
-            monstruosIgnorados[(int)monstruos[i].tipo]++;
+            monstruosIgnorados[(int)monstruos[i].Tipo()]++;
         }
     }
 
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
         Monstruo[] aux = GameObject.FindObjectsOfType<Monstruo>();
         for(int i =0; i<aux.Length;i++)
         {
-            MonstruoIgnorado(aux[i].tipo);
+            MonstruoIgnorado(aux[i].Tipo());
         }
     }
     void MonstruoIgnorado(TipoMonstruo tipo)

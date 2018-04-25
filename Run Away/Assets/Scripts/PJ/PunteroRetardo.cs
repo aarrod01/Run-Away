@@ -23,10 +23,15 @@ public class PunteroRetardo : MonoBehaviour {
         }
         else
             Destroy(this.gameObject);
+        instance.Iniciar();
+	}
+
+    void Iniciar()
+    {
         jugador = GameObject.FindObjectOfType<Jugador>();
         puntero = GetComponent<Rigidbody2D>();
-		punteroAnimacion = GetComponent<Animator> ();
-	}
+        punteroAnimacion = GetComponent<Animator>();
+    }
 
 	void Update () 
 	{

@@ -11,79 +11,16 @@ namespace Monstruos
 
 public class Monstruo : MonoBehaviour
 {
-    public LayerMask conQueColisiona;
-    public float velMovRuta, velMovPerseguir, velMovHuida, velGiro, aceleracionAngular, tiempoAturdimiento = 1f, periodoGiro = 1f;
-    public EstadosMonstruo estadoMonstruo;
-    public TipoMonstruo tipo;
+    TipoMonstruo tipo;
+    EstadosMonstruo estadoMonstruo;
     public int prioridad;
 
-    Rigidbody2D rb2D;
-    Rigidbody2D jugadorRB;
-    Animator animador;
-    float giroInicial;
-    float cronometro;
-    DetectarRuta detectorRuta;
-    CampoVision campoVision;
-    DetectorParedes detectorParedes;
+    public const float MARGEN = 0.001f;
 
-    const float MARGEN = 0.001f;
-
-    void Start()
-    {
-        animador = GetComponent<Animator>();
-        detectorRuta = GetComponentInChildren<DetectarRuta>();
-        campoVision = GetComponentInChildren<CampoVision>();
-        detectorParedes = GetComponentInChildren<DetectorParedes>();
-        rb2D = GetComponent<Rigidbody2D>();
-        jugadorRB = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
-        estadoMonstruo = EstadosMonstruo.EnRuta;
-    }
-
+    public funcionVacia Comportamiento;
     void FixedUpdate()
     {
-        switch (estadoMonstruo)
-        {
-            case EstadosMonstruo.EnRuta:
-                MoverseHacia(detectorParedes.EvitarColision(detectorRuta.PosicionPuntoRuta()), velMovRuta);
-                break;
-            case EstadosMonstruo.SiguiendoJugador:
-                if ((campoVision.UltimaPosicionJugador() - rb2D.position).sqrMagnitude < MARGEN)
-                {
-                    CambiarEstadoMonstruo(EstadosMonstruo.Desorientado);
-                }
-                MoverseHacia(detectorParedes.EvitarColision(campoVision.UltimaPosicionJugador()), velMovPerseguir);
-                break;
-            case EstadosMonstruo.VolviendoARuta:
-                MoverseHacia(detectorParedes.EvitarColision(detectorRuta.PosicionPuntoRuta()), velMovRuta);
-                break;
-            case EstadosMonstruo.Desorientado:
-                Pararse();
-                giroInicial = rb2D.rotation;
-                cronometro = Time.time;
-
-                CambiarEstadoMonstruo(EstadosMonstruo.BuscandoJugador);
-                break;
-            case EstadosMonstruo.BuscandoJugador:
-                Pararse();
-                Vector2 aux = new Vector2(Mathf.Sin(((Time.time - cronometro) / periodoGiro + giroInicial / 360f) * 2 * Mathf.PI), Mathf.Cos(((Time.time - cronometro) / periodoGiro + giroInicial / 360f) * 2 * Mathf.PI));
-                GiroInstantaneo(aux);
-                if (Time.time - cronometro > periodoGiro)
-                {
-                    CambiarEstadoMonstruo(EstadosMonstruo.PensandoRuta);
-                }
-                break;
-            case EstadosMonstruo.Proyectado:
-                if (Time.time - cronometro > tiempoAturdimiento)
-                    CambiarEstadoMonstruo(EstadosMonstruo.Desorientado);
-                break;
-            case EstadosMonstruo.Huyendo:
-                MoverseHacia((2 * rb2D.position - jugadorRB.position), velMovHuida);
-                GameManager.instance.MontruoHuye(tipo);
-                GetComponent<Collider2D>().enabled = false;
-                Destroy(gameObject, 10f);
-                Destroy(this);
-                break;
-        }
+        Comportamiento();
     }
 
     public void CambiarEstadoMonstruo(EstadosMonstruo estado)
@@ -95,50 +32,23 @@ public class Monstruo : MonoBehaviour
         return estadoMonstruo;
     }
 
-    //Seguir al jugador, moverse por la ruta y volver a la ruta.
-    void MoverseHacia(Vector2 dir, float vel)
+    public void Tipo(TipoMonstruo _tipo)
     {
-        rb2D.velocity = (dir - (Vector2)transform.position).normalized * vel;
-        GiroInstantaneo(rb2D.velocity);
+        tipo = _tipo;
     }
 
-    void Giro(Vector2 dir)
+    public TipoMonstruo Tipo()
     {
-        if (dir != Vector2.zero)
-            rb2D.rotation = Mathf.LerpAngle(rb2D.rotation, Mathf.Atan2(-dir.x, dir.y) * 180f / Mathf.PI, aceleracionAngular);
-    }
-    void GiroInstantaneo(Vector2 dir)
-    {
-        if (dir != Vector2.zero)
-            rb2D.rotation = Mathf.Atan2(-dir.x, dir.y) * 180f / Mathf.PI;
+        return tipo;
     }
 
-    public void Empujar(Vector2 origen, float velocidadProyeccion)
-    {
-        rb2D.velocity = (rb2D.position - origen).normalized * velocidadProyeccion;
-        cronometro = Time.time;
-        CambiarEstadoMonstruo(EstadosMonstruo.Proyectado);
-    }
+    public funcionInteractuado Atacado;
 
-    void Pararse()
-    {
-        rb2D.velocity = Vector2.zero;
-    }
+    public funcionVacia Morir;
 
-    public void Morir()
-    {
-        animador.SetTrigger("muriendo");
-        GameManager.instance.MonstruoMuerto(tipo);
-        Destroy(this);
-        rb2D.Sleep();
-        GetComponent<Collider2D>().enabled = false;
-        Destroy(gameObject, 5f);
-    }
-
-    public void Atacar()
-    {
-        animador.SetTrigger("atacando");
-    }
+    public funcionVacia Atacar;
+    
+    
 
 }
 

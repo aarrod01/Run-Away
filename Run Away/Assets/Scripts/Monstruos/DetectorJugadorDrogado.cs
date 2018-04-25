@@ -20,7 +20,7 @@ public class DetectorJugadorDrogado : MonoBehaviour
             if (hit.collider.gameObject == other.gameObject && GameManager.instance.Drogado())
             {
                 Monstruo aux = GetComponentInParent<Monstruo>();
-                GameManager.instance.MontruoHuye(aux.tipo);
+                GameManager.instance.MontruoHuye(aux.Tipo());
                 aux.CambiarEstadoMonstruo(Monstruos.EstadosMonstruo.Huyendo);
             }
         }

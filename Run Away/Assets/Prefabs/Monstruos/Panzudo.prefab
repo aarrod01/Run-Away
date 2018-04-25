@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 60877856484380574}
   - component: {fileID: 82582331110207278}
   - component: {fileID: 114627004520714636}
+  - component: {fileID: 114877508434621602}
   - component: {fileID: 114582482017773118}
   - component: {fileID: 95471853233689616}
   m_Layer: 14
@@ -791,19 +792,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f6295f0cd86184899686cb3c74e6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conQueColisiona:
-    serializedVersion: 2
-    m_Bits: 6144
+  prioridad: 0
+--- !u!114 &114877508434621602
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1988119876634904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5ef3e3b1e11d4949bcea854389b7877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   velMovRuta: 1
   velMovPerseguir: 2
-  velMovHuida: 3
-  velGiro: 0.5
-  aceleracionAngular: 0.5
+  velMovHuida: 2
+  velGiro: 1
+  aceleracionAngular: 1
   tiempoAturdimiento: 1
   periodoGiro: 1
-  estadoMonstruo: 1
-  tipo: 0
-  prioridad: 0
+  estadoInicial: 1
 --- !u!114 &114917484888687942
 MonoBehaviour:
   m_ObjectHideFlags: 1

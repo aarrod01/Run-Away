@@ -141,8 +141,9 @@ GameObject:
   - component: {fileID: 58527795793349984}
   - component: {fileID: 58316965585319404}
   - component: {fileID: 50625482416017964}
-  - component: {fileID: 114643863804739744}
   - component: {fileID: 114285776430727976}
+  - component: {fileID: 95515249368347766}
+  - component: {fileID: 114197063692782818}
   m_Layer: 20
   m_Name: Fanstasma
   m_TagString: Untagged
@@ -195,8 +196,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1931954430778334}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.92, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -22.5757, y: -11.918253, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4643378059334178}
@@ -401,6 +402,35 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 1.69}
   m_Size: {x: 2, y: 1}
   m_Direction: 1
+--- !u!95 &95515249368347766
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1931954430778334}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7bf31258ae4812a4eb2bcc1bb89489e5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114197063692782818
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1931954430778334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f6295f0cd86184899686cb3c74e6d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prioridad: 0
 --- !u!114 &114285776430727976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -412,8 +442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb27efd071fd81c4786b5fabd4fcc7ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  estadoMonstruo: 0
-  tipo: 0
+  estadoInicial: 8
   velocidadPersecucion: 5
   velocidadHuida: 1
   cabreoMaximo: 20
@@ -466,24 +495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b7548fa5cb9bb4b9efe47baf671a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114643863804739744
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1931954430778334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd5e52c0f4033ca4baa683f3d3996485, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadaxima: 1
-  factorAceleracion: 0.5
-  velocidadAngularMaxima: 1
-  factorAceleracionAngular: 0.5
-  factorGiro: 0.5
-  fraccionMinimaVelocidadHaciaDetras: 0.5
-  vidas: 1
 --- !u!114 &114681351576727348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -517,7 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ab421192ec0894aa543bd135b3015e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  danyoMonstruo: 1
+  danyo: 1
   golpeRetardo: 1
 --- !u!212 &212862165102912222
 SpriteRenderer:
@@ -556,7 +567,7 @@ SpriteRenderer:
   m_Sprite: {fileID: 21300036, guid: e2825e3427fd792448e1fd566fd77eae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 3.42, y: 3.32}
   m_AdaptiveModeThreshold: 0.5
