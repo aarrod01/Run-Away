@@ -30,7 +30,7 @@ public class Puntero : MonoBehaviour
 			Cursor.visible = true;
 			Cursor.SetCursor (punterojuego, Vector2.zero, CursorMode.Auto);
 		} 
-		else if (scene.name == "MenuPrincipal") 
+		else if (scene.name == "Inicio") 
 		{
 			Cursor.visible = true;
 			Cursor.SetCursor (punteroFueraJuego, Vector2.zero, CursorMode.Auto);

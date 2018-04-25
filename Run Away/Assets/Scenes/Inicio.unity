@@ -222,7 +222,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Cargar Partida
+  m_Text: 'Continuar
 
 '
 --- !u!222 &292816258
@@ -520,7 +520,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea1b4275a946250438744264276b1dd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 1045974432}
 --- !u!1 &576054092
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,12 +757,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2755082d1e39bef42b48ca68ddb5f82c, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &1045974432 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114210274846014348, guid: 2755082d1e39bef42b48ca68ddb5f82c,
-    type: 2}
-  m_PrefabInternal: {fileID: 1045974431}
-  m_Script: {fileID: 11500000, guid: 90121eff9feae8649a0b5571cb4b08cb, type: 3}
 --- !u!1 &1054022912
 GameObject:
   m_ObjectHideFlags: 0

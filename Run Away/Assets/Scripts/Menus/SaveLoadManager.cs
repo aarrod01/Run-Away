@@ -9,7 +9,7 @@ public static class SaveLoadManager{
 
 	public static void SaveGame(GameManager gm){
 		BinaryFormatter bf = new BinaryFormatter ();
-		FileStream stream = new FileStream (Application.persistentDataPath + "/scene.sav", FileMode.Create);
+		FileStream stream = new FileStream (Application.dataPath + "/Saves/scene.sav", FileMode.Create);
 
 		SceneData data = new SceneData (gm);
 
@@ -18,10 +18,10 @@ public static class SaveLoadManager{
 	}
 
 	public static int[] LoadGame(){
-		if (File.Exists (Application.persistentDataPath + "/scene.sav")) {
+		if (File.Exists (Application.dataPath + "/Saves/scene.sav")) {
 			Debug.Log("El archivo existe: " + Application.persistentDataPath);
 			BinaryFormatter bf = new BinaryFormatter ();
-			FileStream stream = new FileStream (Application.persistentDataPath + "/scene.sav", FileMode.Open);
+			FileStream stream = new FileStream (Application.dataPath + "/Saves/scene.sav", FileMode.Open);
 
 			SceneData data = bf.Deserialize (stream) as SceneData;
 

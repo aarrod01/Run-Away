@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class MenuPausa : MonoBehaviour {
 
 	public Canvas cv;
-	public GameManager gm;
 
 	void Update(){
 		if (Input.GetKeyDown ("p"))
@@ -25,7 +24,9 @@ public class MenuPausa : MonoBehaviour {
 
 	public void SalirAlMenu (){
 		//Guardar
-		SaveLoadManager.SaveGame(gm);
-		SceneManager.LoadScene ("Inicio");
+		Time.timeScale = 1.0f;
+		cv.gameObject.SetActive (false);
+		SaveLoadManager.SaveGame(GameManager.instance);
+        GameManager.instance.CambiarEscena("Inicio");
 	}
 }

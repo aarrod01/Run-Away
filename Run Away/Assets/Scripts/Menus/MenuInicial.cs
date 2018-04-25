@@ -5,17 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class MenuInicial : MonoBehaviour{
 
-	public GameManager gm;
-
 	public void NuevaPartida(){
-		gm.CambiarEscena("Nivel1");
+		GameManager.instance.CambiarEscena("Nivel1");
 	}
 
 	public void CargarPartida(){
 		int[] loadedStats = SaveLoadManager.LoadGame ();
 
-		string nivel = loadedStats [0].ToString ();
-		gm.CambiarEscena (nivel);
+		switch (loadedStats[0])
+        {
+            case 0:
+				Debug.LogError ("Se ha cargado la pantalla de inicio");
+                break;
+            case 1:
+                GameManager.instance.CambiarEscena("Nivel1");
+                break;
+            case 2:
+                GameManager.instance.CambiarEscena("Nivel2");
+                break;
+        }
+		
 		//SceneManager.LoadScene (nivel.ToString());
 	}
 

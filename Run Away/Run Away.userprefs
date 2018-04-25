@@ -8,9 +8,9 @@
       <File FileName="Assets\Scripts\Monstruos\Golpe.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Monstruos\DetectarGolpear.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\GameManager\PasarEscenaPulsando.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Menus\MenuInicial.cs" Line="18" Column="28" />
-      <File FileName="Assets\Scripts\Menus\SaveLoadManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Menus\MenuPausa.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Menus\MenuInicial.cs" Line="15" Column="3" />
+      <File FileName="Assets\Scripts\Menus\SaveLoadManager.cs" Line="25" Column="4" />
+      <File FileName="Assets\Scripts\Menus\MenuPausa.cs" Line="30" Column="52" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
