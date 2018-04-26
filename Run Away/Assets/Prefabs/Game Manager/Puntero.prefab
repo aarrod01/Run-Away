@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1516302170891658}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.09332417, y: -1.2349379, z: -0.20703125}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,4 +52,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   punterojuego: {fileID: 2800000, guid: 07ecbf54c58cdc54f8de0f3dc2dff4c8, type: 3}
-  punteroFueraJuego: {fileID: 2800000, guid: 07ecbf54c58cdc54f8de0f3dc2dff4c8, type: 3}
+  punteroFueraJuego: {fileID: 2800000, guid: 4016f4ef5112f6849a087ba824421980, type: 3}

@@ -24,7 +24,7 @@ public class Puntero : MonoBehaviour
 		Scene scene = SceneManager.GetActiveScene ();
 
 		//Hacer modificacion en un futuro cuando esté el menu de juego.
-		if (scene.name == "Nivel1" || scene.name == "Nivel2" || scene.name == "NivelFinal" || scene.name == "Demo") 
+		if (scene.name == "Nivel1" || scene.name == "Nivel2" || scene.name == "NivelFinal" || scene.name == "Nivel3") 
 		{
 			Cursor.visible = true;
 			Cursor.SetCursor (punterojuego, Vector2.one * (((float)punterojuego.width) / 2f), CursorMode.Auto);
