@@ -22,6 +22,7 @@ public class Luz : MonoBehaviour
     public void IntensidadLuz(float porcentaje)
     {
         luzConica.Largo(porcentaje);
+        luzConica.Ancho(porcentaje);
         luzPuntual.Radio(porcentaje);
     }
 

@@ -50,5 +50,9 @@ public class Monstruo : MonoBehaviour
 
     public funcionVacia FinalAtaque;
 
+    public funcionVacia EntrandoLuz;
+
+    public funcionVacia SaliendoLuz;
+
 }
 

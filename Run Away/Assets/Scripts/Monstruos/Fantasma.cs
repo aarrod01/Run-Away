@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Monstruos;
 
-public delegate void funcionLuz(GameObject caster, DynamicLight2D.DynamicLight light);
+public delegate void funcionLuz(GameObject caster);
 
 [RequireComponent(typeof(Monstruo))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -44,12 +44,14 @@ public class Fantasma : MonoBehaviour
             {
                 case EstadosMonstruo.SiguiendoJugador:
                     MoverseHacia(jugadorRB.position, velocidadPersecucion);
+                    generadorOndas.GenerarOndas();
                     break;
                 case EstadosMonstruo.Quieto:
                     Parar();
                     generadorOndas.PararOndas();
                     break;
                 case EstadosMonstruo.Huyendo:
+                    generadorOndas.GenerarOndas();
                     MoverseHacia((2 * fantasmaRB.position - jugadorRB.position), velocidadHuida);
                     GameManager.instance.MontruoHuye(TipoMonstruo.Fantasma);
                     GetComponent<Collider2D>().enabled = false;
@@ -61,7 +63,7 @@ public class Fantasma : MonoBehaviour
 
         este.Morir = () =>
         {
-            generadorOndas.PararOndas();
+            generadorOndas.enabled = false;
             animador.SetTrigger("muriendo");
             GameManager.instance.MonstruoMuerto(TipoMonstruo.Fantasma);
             este.enabled = false;
@@ -88,16 +90,16 @@ public class Fantasma : MonoBehaviour
             vida.Invulnerable(true);
         };
 
-        OnEnter = (GameObject caster, DynamicLight2D.DynamicLight light) =>
+        este.EntrandoLuz = () =>
         {
             if (este.EstadoMonstruoActual() == EstadosMonstruo.SiguiendoJugador || este.EstadoMonstruoActual() == EstadosMonstruo.Huyendo)
-                generadorOndas.PararOndas();
+                generadorOndas.RestarLuz();
         };
 
-        OnExit = (GameObject caster, DynamicLight2D.DynamicLight light) =>
+        este.SaliendoLuz = () =>
         {
             if (este.EstadoMonstruoActual() == EstadosMonstruo.SiguiendoJugador || este.EstadoMonstruoActual() == EstadosMonstruo.Huyendo)
-                generadorOndas.GenerarOndas();
+                generadorOndas.SumarLuz();
         };
     }
 
@@ -146,9 +148,4 @@ public class Fantasma : MonoBehaviour
             jugadorRB = null;
         }
     }
-
-    public funcionLuz OnEnter;
-
-    public funcionLuz OnExit;
-
 }
