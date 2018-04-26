@@ -47,7 +47,6 @@ public class Fantasma : MonoBehaviour
                     GameManager.instance.MontruoHuye(TipoMonstruo.Fantasma);
                     GetComponent<Collider2D>().enabled = false;
                     Destroy(gameObject, 10f);
-                    Destroy(this);
                     break;
                 default:
                     este.CambiarEstadoMonstruo(cabreometro.CambioCabreo());

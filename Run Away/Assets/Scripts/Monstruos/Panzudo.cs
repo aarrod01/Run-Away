@@ -118,7 +118,6 @@ public class Panzudo : MonoBehaviour {
                     GameManager.instance.MontruoHuye(TipoMonstruo.Panzudo);
                     GetComponent<Collider2D>().enabled = false;
                     Destroy(gameObject, 10f);
-                    Destroy(this);
                     break;
                 case EstadosMonstruo.Atacando:
                     MoverseHacia(jugadorRB.position, velMovPerseguir);
