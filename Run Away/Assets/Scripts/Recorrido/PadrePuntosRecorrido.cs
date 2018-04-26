@@ -31,6 +31,39 @@ namespace Patron
             for (int i = 0; i < direccionesAbiertas.Length; i++)
                 RellenarDireccion(direccionesAbiertas[i]);
         }*/
+        public void RellenarEsquinasPuras(int numero, Contenido contenido)
+        {
+            numero = (int)((uint)numero) % 4;
+
+            switch (numero)
+            {
+                case 0:
+                    mascara[0, 0] = contenido;
+                    mascara[1, 0] = contenido;
+                    mascara[0, 1] = contenido;
+                    mascara[3, 3] = contenido;
+                    break;
+                case 1:
+                    mascara[3, 0] = contenido;
+                    mascara[3, 1] = contenido;
+                    mascara[2, 0] = contenido;
+                    mascara[0, 3] = contenido;
+                    break;
+                case 2:
+                    mascara[3, 3] = contenido;
+                    mascara[2, 3] = contenido;
+                    mascara[3, 2] = contenido;
+                    mascara[0, 0] = contenido;
+                    break;
+                case 3:
+                    mascara[0, 3] = contenido;
+                    mascara[1, 3] = contenido;
+                    mascara[0, 2] = contenido;
+                    mascara[3, 0] = contenido;
+                    break;
+            }
+        }
+
         public Contenido ContenidoS(int x, int y)
         {
             return mascara[x, y];
@@ -228,11 +261,17 @@ public class PadrePuntosRecorrido : MonoBehaviour
 
     Patron4[] PatronExcepciones()
     {
-        Patron4[] ret = new Patron4[4];
+        Patron4[] ret = new Patron4[8];
         for (int i = 0; i < 4; i++)
         {
             ret[i] = new Patron4();
             ret[i].RellenarFines(i, Contenido.Lleno);
+        }
+
+        for(int i =4; i<8; i++)
+        {
+            ret[i] = new Patron4();
+            ret[i].RellenarEsquinasPuras(i, Contenido.Lleno);
         }
         return ret;
     }
