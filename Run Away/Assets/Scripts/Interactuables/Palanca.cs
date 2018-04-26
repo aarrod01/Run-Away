@@ -15,6 +15,7 @@ public class Palanca : MonoBehaviour
 	public  Colores.Colores color;
 	public float distanciaDeInteraccion=0.3f;
     public bool posicionInicial;
+    public AudioSource sonido;
 
 	void Start () {
         luz = GetComponentInChildren<DynamicLight2D.DynamicLight>().gameObject;
@@ -26,15 +27,15 @@ public class Palanca : MonoBehaviour
         conQueColisiona = LayerMask.GetMask("Obstaculos", "Jugador");
         master = GetComponent<Interactuable>();
 		master.Accion = (Jugador a) => {
-
+            sonido.Play();
             a.Interactuar();
             posicionInicial = !posicionInicial;
                 palancaAnimacion.SetBool("activada", posicionInicial);
-
+            Vector2 pos = a.GetComponent<Rigidbody2D>().position;
             for (int i = 0; i < puertas.Length; i++)
             {
                 if(puertas[i].color == color)
-                    puertas[i].Abrir();
+                    puertas[i].Abrir(pos);
             }
                 ControladorRecorrido.instance.ReiniciarRed();
 		};
@@ -43,6 +44,7 @@ public class Palanca : MonoBehaviour
             return master.InteraccionPorLineaDeVision(a.transform, distanciaDeInteraccion, conQueColisiona);
         };
         master.DistanciaDeInteraccion = () => { return distanciaDeInteraccion; };
+        sonido.Stop();
     }
 
     public void Iluminar()

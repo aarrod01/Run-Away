@@ -7,8 +7,11 @@ using Monstruos;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 public class Panzudo : MonoBehaviour {
-    
-    public float velMovRuta, velMovPerseguir, velMovHuida, velGiro, aceleracionAngular, tiempoAturdimiento = 1f, periodoGiro = 1f;
+
+    public AudioSource gritoCarga, sonidoPasos, respiracionBusqueda;
+    bool cargando, andando;
+
+    public float intensidadSonido = 10f, velMovRuta, velMovPerseguir, velMovHuida, velGiro, aceleracionAngular, tiempoAturdimiento = 1f, periodoGiro = 1f;
     public EstadosMonstruo estadoInicial;
     
     Rigidbody2D rb2D;
@@ -39,12 +42,29 @@ public class Panzudo : MonoBehaviour {
 
         este.CambiarEstadoMonstruo(estadoInicial);
         este.Comportamiento = () => {
+            float volumen = Mathf.Min(5f / (jugadorRB.position - rb2D.position).sqrMagnitude, 1f);
+            sonidoPasos.volume = volumen;
+            gritoCarga.volume = volumen;
+            respiracionBusqueda.volume = volumen;
+
             switch (este.EstadoMonstruoActual())
             {
                 case EstadosMonstruo.EnRuta:
+                    if (!andando)
+                    {
+                        sonidoPasos.Play();
+                        andando = !andando;
+                        respiracionBusqueda.Stop();
+                    }
                     MoverseHacia(detectorParedes.EvitarColision(detectorRuta.PosicionPuntoRuta()), velMovRuta);
                     break;
                 case EstadosMonstruo.SiguiendoJugador:
+                    if (!cargando)
+                    {
+                        sonidoPasos.Stop();
+                        cargando = true;
+                        gritoCarga.Play();
+                    }
                     if ((campoVision.UltimaPosicionJugador() - rb2D.position).sqrMagnitude < Monstruo.MARGEN)
                     {
                         este.CambiarEstadoMonstruo(EstadosMonstruo.Desorientado);
@@ -52,15 +72,35 @@ public class Panzudo : MonoBehaviour {
                     MoverseHacia(detectorParedes.EvitarColision(campoVision.UltimaPosicionJugador()), velMovPerseguir);
                     break;
                 case EstadosMonstruo.VolviendoARuta:
+                    if (!andando)
+                    {
+                        sonidoPasos.Play();
+                        andando = !andando;
+                        respiracionBusqueda.Stop();
+                    }
                     MoverseHacia(detectorParedes.EvitarColision(detectorRuta.PosicionPuntoRuta()), velMovRuta);
                     break;
                 case EstadosMonstruo.Desorientado:
                     Pararse();
+                    if (andando)
+                    {
+                        sonidoPasos.Stop();
+                        andando = !andando;
+                        cargando = false;
+                        respiracionBusqueda.Play();
+                    }
                     giroInicial = rb2D.rotation;
                     cronometro = Time.time;
                     este.CambiarEstadoMonstruo(EstadosMonstruo.BuscandoJugador);
                     break;
                 case EstadosMonstruo.BuscandoJugador:
+                    if (andando)
+                    {
+                        sonidoPasos.Stop();
+                        andando = !andando;
+                        cargando = false;
+                        respiracionBusqueda.Play();
+                    }
                     Pararse();
                     Vector2 aux = new Vector2(Mathf.Sin(((Time.time - cronometro) / periodoGiro + giroInicial / 360f) * 2 * Mathf.PI), Mathf.Cos(((Time.time - cronometro) / periodoGiro + giroInicial / 360f) * 2 * Mathf.PI));
                     GiroInstantaneo(aux);
@@ -98,7 +138,7 @@ public class Panzudo : MonoBehaviour {
         };
 
         este.Atacar = () =>
-        {
+        { 
             animador.SetTrigger("atacando");
         };
 
@@ -113,6 +153,11 @@ public class Panzudo : MonoBehaviour {
         {
             este.CambiarEstadoMonstruo(EstadosMonstruo.Desorientado);
         };
+
+        gritoCarga.Stop();
+        sonidoPasos.Stop();
+        respiracionBusqueda.Stop();
+
     }
     void Empujar(Vector2 origen, float velocidadProyeccion)
     {

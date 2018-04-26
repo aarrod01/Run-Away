@@ -28,7 +28,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1773455150608598
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 212385787866890036}
   - component: {fileID: 95152539979370634}
   - component: {fileID: 114626615401332258}
-  - component: {fileID: 82217284040025308}
+  - component: {fileID: 82433362489473650}
   m_Layer: 12
   m_Name: Puerta
   m_TagString: Obstaculo
@@ -181,7 +181,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2.3248556}
   m_EdgeRadius: 0
---- !u!82 &82217284040025308
+--- !u!82 &82433362489473650
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -191,7 +191,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7fcb93bf49c514f488440360d5f8f075, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -248,7 +248,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -314,7 +314,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 2
-  abierta: 1
+  abierta: 0
+  sonido: {fileID: 82433362489473650}
+  intensidadDelSonido: 10
 --- !u!212 &212385787866890036
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -349,7 +351,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300052, guid: e8bdb50a4ae68a34698041ff15f7abbe, type: 3}
+  m_Sprite: {fileID: 21300050, guid: e8bdb50a4ae68a34698041ff15f7abbe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

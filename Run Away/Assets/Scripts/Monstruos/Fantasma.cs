@@ -10,6 +10,7 @@ public delegate void funcionLuz(GameObject caster);
 [RequireComponent(typeof(Animator))]
 public class Fantasma : MonoBehaviour
 {
+    public AudioSource grito;
     public EstadosMonstruo estadoInicial;
     public float velocidadPersecucion;
     public float velocidadHuida;
@@ -31,12 +32,13 @@ public class Fantasma : MonoBehaviour
         GeneradoOndas generadorOndas = GetComponentInChildren<GeneradoOndas>();
         Monstruo este = GetComponent<Monstruo>();
         Cabreo cabreometro = GetComponentInChildren<Cabreo>();
+        Rigidbody2D jugadorP = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         cabreometro.Iniciar(cabreoMaximo, cabreoUmbral, tasaAumentoDeCabreo, tasaDescensoDeCabreo);
         este.Tipo(TipoMonstruo.Fantasma);
 
         este.CambiarEstadoMonstruo(estadoInicial);
         este.Comportamiento = () => {
-            
+            grito.volume = cabreometro.Nivel() / (fantasmaRB.position - jugadorP.position).sqrMagnitude;
             switch (este.EstadoMonstruoActual())
             {
                 case EstadosMonstruo.Huyendo:
@@ -65,6 +67,8 @@ public class Fantasma : MonoBehaviour
                     break;
             }
         };
+
+        grito.Play();
 
         este.Morir = () =>
         {

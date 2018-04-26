@@ -13,6 +13,8 @@ public class Puerta : MonoBehaviour
 
     public Colores.Colores color;
 	public bool abierta;
+    public AudioSource sonido;
+    public float intensidadDelSonido = 10f;
 
     void Awake()
     {
@@ -26,12 +28,13 @@ public class Puerta : MonoBehaviour
 
     }
 
-    public void Abrir()
+    public void Abrir(Vector2 pos)
     {
+        sonido.volume = intensidadDelSonido / (pos - (Vector2)transform.position).sqrMagnitude;
+        sonido.Play();
         abierta = !abierta;
         for (int i = 0; i < colisiones.Length; i++)
             colisiones[i].Cambiar();
         puertaAnimacion.SetBool("Abierta", abierta);
-        GetComponent<AudioSource>().Play();
     }
 }

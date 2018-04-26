@@ -57,4 +57,9 @@ public class Cabreo : MonoBehaviour {
         return jugadorRB;
     }
 
+    public float Nivel()
+    {
+        return cabreo;
+    }
+
 }
