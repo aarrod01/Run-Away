@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     int[] monstruosMuertos, monstruosMuertosTemporales;
     int[] monstruosHuidos, monstruosHuidosTemporales;
     int[] monstruosIgnorados;
-    int drogaConsumida = 0;
+    public int drogaConsumida = 0;
+	public int nivel = 0;
 
     Jugador jugador = null;
     bool drogado = false;
@@ -50,6 +51,28 @@ public class GameManager : MonoBehaviour
         }
 		jugador = GameObject.FindObjectOfType<Jugador>();
 	}
+public void CambiarEscena(string nombreEscena)
+    {
+        switch (nombreEscena)
+        {
+            case "Inicio":
+                nivel = 0;
+                Debug.Log("Se ha cambiado a la escena: " + nivel);
+                SceneManager.LoadScene("Inicio");
+                break;
+            case "Nivel1":
+                nivel = 1;
+                Debug.Log("Se ha cambiado a la escena: " + nivel);
+                SceneManager.LoadScene("Nivel1");
+                break;
+            case "Nivel2":
+                nivel = 2;
+                Debug.Log("Se ha cambiado a la escena: " + nivel);
+                SceneManager.LoadScene("Nivel2");
+                break;
+        }
+    }
+    
     public void TerminarExitosamenteEscena()
     {
 

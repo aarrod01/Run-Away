@@ -17,7 +17,6 @@ public class Puntero : MonoBehaviour
 		}
 		else
 			Destroy(this.gameObject);
-		
 	}
 
 	void Update () 
@@ -30,7 +29,7 @@ public class Puntero : MonoBehaviour
 			Cursor.visible = true;
 			Cursor.SetCursor (punterojuego, Vector2.one * (((float)punterojuego.width) / 2f), CursorMode.Auto);
 		} 
-		else if (scene.name == "MenuPrincipal") 
+		else if (scene.name == "Inicio") 
 		{
 			Cursor.visible = true;
 			Cursor.SetCursor (punteroFueraJuego, Vector2.one * (((float)punteroFueraJuego.width) / 2f), CursorMode.Auto);
