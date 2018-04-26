@@ -10,9 +10,6 @@ public delegate void funcionLuz(GameObject caster);
 [RequireComponent(typeof(Animator))]
 public class Fantasma : MonoBehaviour
 {
-    
-    const float MARGENESCUCHA = 0.005f;
-
     public EstadosMonstruo estadoInicial;
     public float velocidadPersecucion;
     public float velocidadHuida;
@@ -23,8 +20,6 @@ public class Fantasma : MonoBehaviour
 
 
     Rigidbody2D fantasmaRB;
-    float cabreo;
-    Rigidbody2D jugadorRB;
 
     // Use this for initialization
     void Start ()
@@ -35,15 +30,17 @@ public class Fantasma : MonoBehaviour
         DetectarRuta detectorRuta = GetComponent<DetectarRuta>();
         GeneradoOndas generadorOndas = GetComponentInChildren<GeneradoOndas>();
         Monstruo este = GetComponent<Monstruo>();
+        Cabreo cabreometro = GetComponentInChildren<Cabreo>();
+        cabreometro.Iniciar(cabreoMaximo, cabreoUmbral, tasaAumentoDeCabreo, tasaDescensoDeCabreo);
         este.Tipo(TipoMonstruo.Fantasma);
 
         este.CambiarEstadoMonstruo(estadoInicial);
         este.Comportamiento = () => {
-            este.CambiarEstadoMonstruo(CambioCabreo());
+            este.CambiarEstadoMonstruo(cabreometro.CambioCabreo());
             switch (este.EstadoMonstruoActual())
             {
                 case EstadosMonstruo.SiguiendoJugador:
-                    MoverseHacia(jugadorRB.position, velocidadPersecucion);
+                    MoverseHacia(cabreometro.JugadorRB().position, velocidadPersecucion);
                     generadorOndas.GenerarOndas();
                     break;
                 case EstadosMonstruo.Quieto:
@@ -52,7 +49,7 @@ public class Fantasma : MonoBehaviour
                     break;
                 case EstadosMonstruo.Huyendo:
                     generadorOndas.GenerarOndas();
-                    MoverseHacia((2 * fantasmaRB.position - jugadorRB.position), velocidadHuida);
+                    MoverseHacia((2 * fantasmaRB.position - cabreometro.JugadorRB().position), velocidadHuida);
                     GameManager.instance.MontruoHuye(TipoMonstruo.Fantasma);
                     GetComponent<Collider2D>().enabled = false;
                     Destroy(gameObject, 10f);
@@ -92,14 +89,12 @@ public class Fantasma : MonoBehaviour
 
         este.EntrandoLuz = () =>
         {
-            if (este.EstadoMonstruoActual() == EstadosMonstruo.SiguiendoJugador || este.EstadoMonstruoActual() == EstadosMonstruo.Huyendo)
-                generadorOndas.RestarLuz();
+            generadorOndas.SumarLuz();
         };
 
         este.SaliendoLuz = () =>
         {
-            if (este.EstadoMonstruoActual() == EstadosMonstruo.SiguiendoJugador || este.EstadoMonstruoActual() == EstadosMonstruo.Huyendo)
-                generadorOndas.SumarLuz();
+            generadorOndas.RestarLuz();
         };
     }
 
@@ -120,32 +115,5 @@ public class Fantasma : MonoBehaviour
         fantasmaRB.velocity = Vector2.zero;
     }
 
-    EstadosMonstruo CambioCabreo()
-    {
-        if(jugadorRB != null&&jugadorRB.velocity.sqrMagnitude > MARGENESCUCHA)
-            cabreo = Mathf.Min(cabreo+tasaAumentoDeCabreo*Time.fixedDeltaTime, cabreoMaximo);
-        else
-            cabreo = Mathf.Max(cabreo - tasaDescensoDeCabreo * Time.fixedDeltaTime, 0f);
-
-        if (cabreo >= cabreoUmbral)
-            return EstadosMonstruo.SiguiendoJugador;
-        else
-            return EstadosMonstruo.Quieto;
-    }
     
-    void OnTriggerEnter2D(Collider2D otro)
-    {
-        if (otro.tag == "Player")
-        {
-            jugadorRB = otro.GetComponent<Rigidbody2D>();
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D otro)
-    {
-        if (otro.tag == "Jugador")
-        {
-            jugadorRB = null;
-        }
-    }
 }

@@ -32,13 +32,13 @@ TagManager:
   - PuntoInvulnerable
   - Suelo
   - MonstruosFasicos
-  - Golpe
+  - GolpeJugador
   - ObstaculosMenores
   - DetectorMonstruos
-  - 
-  - 
-  - 
-  - 
+  - DetectorJugador
+  - DetectorGolpesJugador
+  - DetectorGolpesMonstruo
+  - GolpesMonstruo
   - 
   - 
   - 

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4712025710227350}
   - component: {fileID: 70600801635399068}
   - component: {fileID: 114406659005751022}
-  m_Layer: 14
+  m_Layer: 27
   m_Name: Golpe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4042118982474704}
   - component: {fileID: 114681351576727348}
   - component: {fileID: 58142825064979790}
-  m_Layer: 17
+  m_Layer: 25
   m_Name: PuntoVulnerable
   m_TagString: PuntoVulnerable
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 114633462149679376}
   - component: {fileID: 114598365176205976}
   - component: {fileID: 58436161288254808}
-  m_Layer: 15
+  m_Layer: 25
   m_Name: DetectarGolpes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,8 +73,25 @@ GameObject:
   - component: {fileID: 4438042827600930}
   - component: {fileID: 58902456776502130}
   - component: {fileID: 114561981328829150}
-  m_Layer: 14
+  m_Layer: 24
   m_Name: Detector Jugador Drogado
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1521098214046688
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4316011529761128}
+  - component: {fileID: 114068416124636064}
+  - component: {fileID: 58880785492734946}
+  m_Layer: 24
+  m_Name: Cabreo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,7 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4643378059334178}
   - component: {fileID: 114986347776827012}
-  m_Layer: 14
+  m_Layer: 27
   m_Name: Golpear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4142778810232990}
   - component: {fileID: 60073936518459524}
-  m_Layer: 18
+  m_Layer: 25
   m_Name: PuntoInvulnerable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +140,7 @@ GameObject:
   - component: {fileID: 114042509893726240}
   - component: {fileID: 95336965552111772}
   - component: {fileID: 212688185068797890}
-  m_Layer: 20
+  m_Layer: 31
   m_Name: GeneradorOndas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +157,7 @@ GameObject:
   - component: {fileID: 4808709607978858}
   - component: {fileID: 58115027166912534}
   - component: {fileID: 114929818619504602}
-  m_Layer: 14
+  m_Layer: 27
   m_Name: DetectarGolpear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +173,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4467511898277440}
   - component: {fileID: 212862165102912222}
-  - component: {fileID: 58527795793349984}
   - component: {fileID: 58316965585319404}
   - component: {fileID: 50625482416017964}
   - component: {fileID: 114285776430727976}
@@ -196,6 +212,19 @@ Transform:
   m_Father: {fileID: 4707891048351144}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4316011529761128
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1521098214046688}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4467511898277440}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4438042827600930
 Transform:
   m_ObjectHideFlags: 1
@@ -223,6 +252,7 @@ Transform:
   - {fileID: 4438042827600930}
   - {fileID: 4707891048351144}
   - {fileID: 4974100969032802}
+  - {fileID: 4316011529761128}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -375,12 +405,12 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
---- !u!58 &58527795793349984
+--- !u!58 &58880785492734946
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1931954430778334}
+  m_GameObject: {fileID: 1521098214046688}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -493,6 +523,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392b5352a7350644b90eb78a292453ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114068416124636064
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1521098214046688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a495da7edd0c841acb88f80b631121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114197063692782818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -523,7 +564,6 @@ MonoBehaviour:
   cabreoUmbral: 10
   tasaAumentoDeCabreo: 5
   tasaDescensoDeCabreo: 1
-  light2d_instance: {fileID: 0}
 --- !u!114 &114406659005751022
 MonoBehaviour:
   m_ObjectHideFlags: 1

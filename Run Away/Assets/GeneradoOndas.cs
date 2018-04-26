@@ -5,32 +5,34 @@ using UnityEngine;
 public class GeneradoOndas : MonoBehaviour {
 
     Animator ondas;
-    int numeroOndas;
+    int numeroLuces;
 
 	// Use this for initialization
 	void Start () {
         ondas = GetComponent<Animator>();
-        numeroOndas = 0;
+        numeroLuces = 0;
 	}
 
     public void SumarLuz()
     {
-        numeroOndas++;
+        numeroLuces++;
+        if(numeroLuces>0)
+            ondas.SetTrigger("Parar");
     }
     public void RestarLuz()
     {
-        numeroOndas--;
-        if(numeroOndas<=0)
-            ondas.SetTrigger("Parar");
+        numeroLuces--;
+        if(numeroLuces<=0)
+            ondas.SetTrigger("Generar");
     }
 
     public void GenerarOndas()
     {
-        if (numeroOndas > 0)
+        if (numeroLuces <= 0)
             ondas.SetTrigger("Generar");
     }
     public void PararOndas()
     {
-        ondas.SetTrigger("Parar");
+            ondas.SetTrigger("Parar");
     }
 }
