@@ -80,6 +80,9 @@ public class Panzudo : MonoBehaviour {
                     Destroy(gameObject, 10f);
                     Destroy(this);
                     break;
+                case EstadosMonstruo.Atacando:
+                    MoverseHacia(jugadorRB.position, velMovPerseguir);
+                    break;
             }
         };
 
@@ -104,6 +107,11 @@ public class Panzudo : MonoBehaviour {
             Empujar(a.transform.position, a.fuerzaEmpujon);
             vida.Danyar(a.Danyo(), TipoMonstruo.Panzudo);
             este.CambiarEstadoMonstruo(EstadosMonstruo.Proyectado);
+        };
+
+        este.FinalAtaque = () =>
+        {
+            este.CambiarEstadoMonstruo(EstadosMonstruo.Desorientado);
         };
     }
     void Empujar(Vector2 origen, float velocidadProyeccion)

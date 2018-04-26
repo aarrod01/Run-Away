@@ -5,7 +5,7 @@ using Monstruos;
 
 namespace Monstruos
 {
-    public enum EstadosMonstruo { SiguiendoJugador, EnRuta, PensandoRuta, VolviendoARuta, Desorientado, Proyectado, BuscandoJugador, Huyendo, Quieto, Ninguno };
+    public enum EstadosMonstruo { SiguiendoJugador, EnRuta, PensandoRuta, VolviendoARuta, Atacando ,Desorientado, Proyectado, BuscandoJugador, Huyendo, Quieto, Ninguno };
     public enum TipoMonstruo { Panzudo, Fantasma, Ninguno };
 }
 
@@ -47,8 +47,8 @@ public class Monstruo : MonoBehaviour
     public funcionVacia Morir;
 
     public funcionVacia Atacar;
-    
-    
+
+    public funcionVacia FinalAtaque;
 
 }
 

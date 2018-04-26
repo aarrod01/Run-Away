@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Monstruos;
 
 public class Golpear : MonoBehaviour 
 {
@@ -26,6 +27,7 @@ public class Golpear : MonoBehaviour
 
 	public void Golpeando ()
 	{
+        monstruo.CambiarEstadoMonstruo(EstadosMonstruo.Atacando);
         golpeando = true;
         monstruo.Atacar();
 		Invoke ("Impacto", golpeRetardo);
@@ -33,12 +35,13 @@ public class Golpear : MonoBehaviour
 
 	void Impacto ()
 	{
-		if (golpe.LeGolpea ()) 
+		if (golpe.LeGolpea () && monstruo.isActiveAndEnabled) 
 		{
 			vidaJugador.Danyar(danyo, GetComponentInParent<Monstruo>().Tipo());
 		}
         golpeando = false;
-	}
+        monstruo.FinalAtaque();
+    }
 
     public bool EstaGolpeando()
     {

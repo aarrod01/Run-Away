@@ -8,6 +8,7 @@ public class Vida : MonoBehaviour {
 	public int vida = 1;
     Monstruo monstruo;
 	Jugador jugador;
+    bool invulnerable = false;
 
     void Start()
     {
@@ -18,11 +19,14 @@ public class Vida : MonoBehaviour {
 
     public void Danyar(int danyo, TipoMonstruo tipo)
     {
-        vida -= danyo;
-        if (vida <= 0)
+        if (!invulnerable)
         {
-            Muerte( tipo);
-        }     
+            vida -= danyo;
+            if (vida <= 0)
+            {
+                Muerte(tipo);
+            }
+        }
     }
 
     void Muerte(TipoMonstruo tipo)
@@ -37,6 +41,10 @@ public class Vida : MonoBehaviour {
         }
         else
             Destroy(gameObject);
+    }
+    public void Invulnerable(bool inv)
+    {
+        invulnerable = inv;
     }
 
 }

@@ -103,7 +103,6 @@ public class Jugador : MonoBehaviour
         Invisible(a);
         movimientoLibre=!a;
         jugador.Sleep();
-        jugador.simulated = !a;
         GetComponent<SpriteRenderer>().enabled = !a;
         piernas.Invisible(a);
         LuzConica(!a);

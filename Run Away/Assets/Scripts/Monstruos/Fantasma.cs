@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Monstruos;
 
+public delegate void funcionLuz(GameObject caster, DynamicLight2D.DynamicLight light);
+
 [RequireComponent(typeof(Monstruo))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 public class Fantasma : MonoBehaviour
 {
+    
     const float MARGENESCUCHA = 0.005f;
 
     public EstadosMonstruo estadoInicial;
@@ -17,6 +20,7 @@ public class Fantasma : MonoBehaviour
     public float cabreoUmbral;
     public float tasaAumentoDeCabreo;
     public float tasaDescensoDeCabreo;
+
 
     Rigidbody2D fantasmaRB;
     float cabreo;
@@ -29,7 +33,7 @@ public class Fantasma : MonoBehaviour
         Animator animador = GetComponent<Animator>();
         Vida vida = GetComponent<Vida>();
         DetectarRuta detectorRuta = GetComponent<DetectarRuta>();
-
+        GeneradoOndas generadorOndas = GetComponentInChildren<GeneradoOndas>();
         Monstruo este = GetComponent<Monstruo>();
         este.Tipo(TipoMonstruo.Fantasma);
 
@@ -43,6 +47,7 @@ public class Fantasma : MonoBehaviour
                     break;
                 case EstadosMonstruo.Quieto:
                     Parar();
+                    generadorOndas.PararOndas();
                     break;
                 case EstadosMonstruo.Huyendo:
                     MoverseHacia((2 * fantasmaRB.position - jugadorRB.position), velocidadHuida);
@@ -56,10 +61,12 @@ public class Fantasma : MonoBehaviour
 
         este.Morir = () =>
         {
+            generadorOndas.PararOndas();
             animador.SetTrigger("muriendo");
             GameManager.instance.MonstruoMuerto(TipoMonstruo.Fantasma);
             este.enabled = false;
             fantasmaRB.Sleep();
+            fantasmaRB.simulated = false;
             GetComponent<Collider2D>().enabled = false;
             Destroy(gameObject, 5f);
         };
@@ -67,12 +74,30 @@ public class Fantasma : MonoBehaviour
         este.Atacar = () =>
         {
             animador.SetTrigger("atacando");
+            vida.Invulnerable(false);
         };
 
         este.Atacado = (Jugador a) =>
         {
             vida.Danyar(a.Danyo(), TipoMonstruo.Panzudo);
             este.CambiarEstadoMonstruo(EstadosMonstruo.Proyectado);
+        };
+
+        este.FinalAtaque = () =>
+        {
+            vida.Invulnerable(true);
+        };
+
+        OnEnter = (GameObject caster, DynamicLight2D.DynamicLight light) =>
+        {
+            if (este.EstadoMonstruoActual() == EstadosMonstruo.SiguiendoJugador || este.EstadoMonstruoActual() == EstadosMonstruo.Huyendo)
+                generadorOndas.PararOndas();
+        };
+
+        OnExit = (GameObject caster, DynamicLight2D.DynamicLight light) =>
+        {
+            if (este.EstadoMonstruoActual() == EstadosMonstruo.SiguiendoJugador || este.EstadoMonstruoActual() == EstadosMonstruo.Huyendo)
+                generadorOndas.GenerarOndas();
         };
     }
 
@@ -121,4 +146,9 @@ public class Fantasma : MonoBehaviour
             jugadorRB = null;
         }
     }
+
+    public funcionLuz OnEnter;
+
+    public funcionLuz OnExit;
+
 }
