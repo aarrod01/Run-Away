@@ -154,8 +154,10 @@ public class Jugador : MonoBehaviour
         animador.SetInteger("tipoMonstruo", (int)tipo);
         jugador.Sleep();
         GetComponent<Collider2D>().enabled = false;
+        puntero.GetComponent<PunteroRetardo>().Muerto(true);
         Destroy(this);
         GameManager.instance.JugadorMuerto();
+        piernas.Invisible(true);
     }
 
     public float AnguloMovimiento()

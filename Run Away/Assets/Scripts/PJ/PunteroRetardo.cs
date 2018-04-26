@@ -9,7 +9,7 @@ public class PunteroRetardo : MonoBehaviour {
 
     Interactuable objetoInteractuable = null;
     Jugador jugador;
-
+    bool muerto;
     Rigidbody2D puntero;
 	Animator punteroAnimacion;
 
@@ -31,19 +31,23 @@ public class PunteroRetardo : MonoBehaviour {
         jugador = GameObject.FindObjectOfType<Jugador>();
         puntero = GetComponent<Rigidbody2D>();
         punteroAnimacion = GetComponent<Animator>();
+        muerto = false;
     }
 
 	void Update () 
 	{
         puntero.MovePosition(Vector2.Lerp(puntero.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), lerp));
-        if (objetoInteractuable != null && objetoInteractuable.EsPosibleLaInteraccion(jugador))
+        if (!muerto)
         {
-			punteroAnimacion.SetTrigger("Interactuar");
-            if (Input.GetMouseButtonDown(0))
-                objetoInteractuable.Accion(jugador);
+            if (objetoInteractuable != null && objetoInteractuable.EsPosibleLaInteraccion(jugador))
+            {
+                punteroAnimacion.SetTrigger("Interactuar");
+                if (Input.GetMouseButtonDown(0))
+                    objetoInteractuable.Accion(jugador);
+            }
+            else
+                punteroAnimacion.SetTrigger("Estatico");
         }
-		else
-			punteroAnimacion.SetTrigger("Estatico");
             
     }
 
@@ -61,5 +65,9 @@ public class PunteroRetardo : MonoBehaviour {
     {
 		if (objetoInteractuable != null && objetoInteractuable.gameObject == collision.gameObject) 
             objetoInteractuable = null;
+    }
+    public void Muerto(bool m)
+    {
+        muerto = m;
     }
 }

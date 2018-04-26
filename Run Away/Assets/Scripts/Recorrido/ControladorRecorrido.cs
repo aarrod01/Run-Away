@@ -191,7 +191,8 @@ public class ControladorRecorrido : MonoBehaviour
         //Introduce los nodos en la lista que se encuentren en el punto y los que esten proyectando un raycast en las cuatro direcciones cardinales.
         public void IntroducirNodosEnCruz(Vector2 posicion, PuntoRecorrido[] puntosDistanciaManhattan)
         {
-            funcionVacia LlamadaDesactivar = () => { };
+            funcionVacia LlamadaDesactivar;
+            LlamadaDesactivar = () => { };
             //Comprobamos que el punto no este dentro de uno de los puntos de la red.
             int i = 0, puntosDentro = 0;
             while (i < puntosTotales.Length)
@@ -201,7 +202,8 @@ public class ControladorRecorrido : MonoBehaviour
                     float distancia = puntosTotales[i].DistanciaHasta(posicion);
                     IntroducirNodo(new Nodo(null, puntosTotales[i], null, distancia, distancia + ControladorRecorrido.instance.DistanciaMasCorta(posicion, puntosDistanciaManhattan)));
                     puntosTotales[i].gameObject.SetActive(false);
-                    LlamadaDesactivar = () => { LlamadaDesactivar(); puntosTotales[i].gameObject.SetActive(true); };
+                    funcionVacia auxf =() => { puntosTotales[i].gameObject.SetActive(true); };
+                    LlamadaDesactivar += auxf;
                     puntosDentro++;
                 }
                 i++;

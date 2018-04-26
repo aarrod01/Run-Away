@@ -124,7 +124,15 @@ public class Panzudo : MonoBehaviour {
     //Seguir al jugador, moverse por la ruta y volver a la ruta.
     void MoverseHacia(Vector2 dir, float vel)
     {
-        rb2D.velocity = (dir - (Vector2)transform.position).normalized * vel;
+        try
+        {
+            rb2D.velocity = (dir - (Vector2)transform.position).normalized * vel;
+        }
+        catch
+        {
+            rb2D.velocity = Vector2.zero;
+        }
+
         GiroInstantaneo(rb2D.velocity);
     }
 

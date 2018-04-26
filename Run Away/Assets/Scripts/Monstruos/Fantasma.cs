@@ -36,17 +36,9 @@ public class Fantasma : MonoBehaviour
 
         este.CambiarEstadoMonstruo(estadoInicial);
         este.Comportamiento = () => {
-            este.CambiarEstadoMonstruo(cabreometro.CambioCabreo());
+            
             switch (este.EstadoMonstruoActual())
             {
-                case EstadosMonstruo.SiguiendoJugador:
-                    MoverseHacia(cabreometro.JugadorRB().position, velocidadPersecucion);
-                    generadorOndas.GenerarOndas();
-                    break;
-                case EstadosMonstruo.Quieto:
-                    Parar();
-                    generadorOndas.PararOndas();
-                    break;
                 case EstadosMonstruo.Huyendo:
                     generadorOndas.GenerarOndas();
                     MoverseHacia((2 * fantasmaRB.position - cabreometro.JugadorRB().position), velocidadHuida);
@@ -54,6 +46,22 @@ public class Fantasma : MonoBehaviour
                     GetComponent<Collider2D>().enabled = false;
                     Destroy(gameObject, 10f);
                     Destroy(this);
+                    break;
+                default:
+                    este.CambiarEstadoMonstruo(cabreometro.CambioCabreo());
+                    switch (este.EstadoMonstruoActual())
+                    {
+                        case EstadosMonstruo.Quieto:
+                            Parar();
+                            generadorOndas.PararOndas();
+                            break;
+
+                        case EstadosMonstruo.SiguiendoJugador:
+                            MoverseHacia(cabreometro.JugadorRB().position, velocidadPersecucion);
+                            generadorOndas.GenerarOndas();
+                            break;
+
+                    }
                     break;
             }
         };
@@ -100,7 +108,14 @@ public class Fantasma : MonoBehaviour
 
     void MoverseHacia(Vector2 dir, float vel)
     {
-        fantasmaRB.velocity = (dir - fantasmaRB.position).normalized * vel;
+        try
+        {
+            fantasmaRB.velocity = (dir - fantasmaRB.position).normalized * vel;
+        }
+        catch
+        {
+            fantasmaRB.velocity = Vector2.zero;
+        }
         GiroInstantaneo(fantasmaRB.velocity);
     }
 

@@ -323,7 +323,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1362958359229634}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: -12.2, y: -9, z: -0.1}
+  m_LocalPosition: {x: 22.3, y: -12.6, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4866651424240676}
@@ -723,7 +723,7 @@ MonoBehaviour:
   LightMaterial: {fileID: 2100000, guid: a946e4587422e5b45a1b675576e3c4ca, type: 2}
   light2DType: 0
   SortOrderID: 0
-  strokeRender: 0.05
+  strokeRender: 0.5
   LightRadius: 1
   Segments: 30
   Layer:
@@ -807,7 +807,7 @@ MonoBehaviour:
   LightMaterial: {fileID: 2100000, guid: a946e4587422e5b45a1b675576e3c4ca, type: 2}
   light2DType: 0
   SortOrderID: 0
-  strokeRender: 0.05
+  strokeRender: 0.5
   LightRadius: 1
   Segments: 30
   Layer:
@@ -859,7 +859,7 @@ MonoBehaviour:
   LightMaterial: {fileID: 2100000, guid: a946e4587422e5b45a1b675576e3c4ca, type: 2}
   light2DType: 0
   SortOrderID: 0
-  strokeRender: 0.05
+  strokeRender: 0.5
   LightRadius: 1
   Segments: 30
   Layer:
@@ -933,7 +933,7 @@ MonoBehaviour:
   LightMaterial: {fileID: 2100000, guid: a946e4587422e5b45a1b675576e3c4ca, type: 2}
   light2DType: 0
   SortOrderID: 0
-  strokeRender: 0.05
+  strokeRender: 0.5
   LightRadius: 6.4
   Segments: 30
   Layer:
@@ -985,7 +985,7 @@ MonoBehaviour:
   LightMaterial: {fileID: 2100000, guid: a946e4587422e5b45a1b675576e3c4ca, type: 2}
   light2DType: 0
   SortOrderID: 0
-  strokeRender: 0.05
+  strokeRender: 0.5
   LightRadius: 1
   Segments: 30
   Layer:

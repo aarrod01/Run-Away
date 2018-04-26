@@ -49,7 +49,7 @@ public class LuzPuntual : MonoBehaviour {
     private void OnTriggerExit2D(Collider2D collision)
     {
         Monstruo aux;
-        if ((aux = collision.GetComponent<Monstruo>()) != null)
+        if (collision!=null&&(aux = collision.GetComponent<Monstruo>()) != null)
         {
             aux.SaliendoLuz();
         }
