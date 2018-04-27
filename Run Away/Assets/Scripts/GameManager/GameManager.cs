@@ -51,9 +51,9 @@ public class GameManager : MonoBehaviour
         }
 		jugador = GameObject.FindObjectOfType<Jugador>();
 	}
-public void CambiarEscena(string nombreEscena)
+public void CambiarEscena(string nombreEscenaActual)
     {
-        switch (nombreEscena)
+        switch (nombreEscenaActual)
         {
             case "Inicio":
                 nivel = 0;
@@ -92,11 +92,11 @@ public void CambiarEscena(string nombreEscena)
         {
             
             case "Nivel1":
-                nivel = 1;
+                nivel = 2;
                 SceneManager.LoadScene("Nivel2");
                 break;
             case "Nivel2":
-                nivel = 2;
+                nivel = 0;
                 SceneManager.LoadScene("Inicio");
                 break;
         }

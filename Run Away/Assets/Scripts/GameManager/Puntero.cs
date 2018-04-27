@@ -8,7 +8,7 @@ public class Puntero : MonoBehaviour
 	public static Puntero instance = null;
 	public Texture2D punterojuego, punteroFueraJuego;
 
-	void Start () 
+	void Awake () 
 	{
 		if (instance == null)
 		{
@@ -19,7 +19,7 @@ public class Puntero : MonoBehaviour
 			Destroy(this.gameObject);
 	}
 
-	void Update () 
+	void Start () 
 	{
 		Scene scene = SceneManager.GetActiveScene ();
 

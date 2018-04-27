@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 114671212164567608}
   - component: {fileID: 114059253635176534}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Salir
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 114206723848856066}
   - component: {fileID: 114348850955241188}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Reanudar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -277,7 +277,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114402253662963358

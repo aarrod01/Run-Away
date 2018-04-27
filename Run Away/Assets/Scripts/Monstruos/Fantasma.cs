@@ -11,6 +11,7 @@ public delegate void funcionLuz(GameObject caster);
 public class Fantasma : MonoBehaviour
 {
     public AudioSource grito;
+    public float intensidadSonido = 10f;
     public EstadosMonstruo estadoInicial;
     public float velocidadPersecucion;
     public float velocidadHuida;
@@ -38,7 +39,7 @@ public class Fantasma : MonoBehaviour
 
         este.CambiarEstadoMonstruo(estadoInicial);
         este.Comportamiento = () => {
-            grito.volume = cabreometro.Nivel() / (fantasmaRB.position - jugadorP.position).sqrMagnitude;
+            grito.volume = intensidadSonido*cabreometro.Nivel() / (fantasmaRB.position - jugadorP.position).sqrMagnitude;
             switch (este.EstadoMonstruoActual())
             {
                 case EstadosMonstruo.Huyendo:

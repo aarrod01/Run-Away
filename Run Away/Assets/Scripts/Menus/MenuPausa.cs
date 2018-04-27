@@ -9,8 +9,10 @@ public class MenuPausa : MonoBehaviour {
 	public Canvas cv;
 
 	void Update(){
-		if (Input.GetKeyDown ("p"))
-			PausarPartida ();
+        if (Input.GetKeyDown("p"))
+            PausarPartida();
+        else if (Input.GetKeyDown(KeyCode.Escape)&&Time.timeScale==0.0f)
+            SalirAlMenu();
 
 	}
 
@@ -30,7 +32,7 @@ public class MenuPausa : MonoBehaviour {
 		//Guardar
 		Time.timeScale = 1.0f;
 		cv.gameObject.SetActive (false);
-		SaveLoadManager.SaveGame(GameManager.instance);
-		GameManager.instance.CambiarEscena ("Inicio");
+        GameManager.instance.CambiarEscena("Inicio");
+        SaveLoadManager.SaveGame(GameManager.instance);
 	}
 }
