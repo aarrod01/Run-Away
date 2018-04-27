@@ -972,7 +972,7 @@ MonoBehaviour:
   intensidadSonido: 50
   velMovRuta: 1
   velMovPerseguir: 2
-  velMovHuida: 1
+  velMovHuida: 2
   velGiro: 0.1
   aceleracionAngular: 1
   tiempoAturdimiento: 1

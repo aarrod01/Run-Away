@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
         Monstruo[] monstruos = GameObject.FindObjectsOfType<Monstruo>();
         for(int i = 0; i<monstruos.Length; i++)
         {
-            if(monstruos[i].prioridad>PrioridadMaxima())
+            if(monstruos[i].prioridad>PrioridadMaxima(monstruos[i].Tipo()))
                 Destroy(monstruos[i].gameObject);
         }
 		jugador = GameObject.FindObjectOfType<Jugador>();
@@ -86,6 +86,19 @@ public void CambiarEscena(string nombreEscena)
         for(int i = 0; i<monstruos.Length; i++)
         {
             monstruosIgnorados[(int)monstruos[i].Tipo()]++;
+        }
+
+        switch (SceneManager.GetActiveScene().name)
+        {
+            
+            case "Nivel1":
+                nivel = 1;
+                SceneManager.LoadScene("Nivel2");
+                break;
+            case "Nivel2":
+                nivel = 2;
+                SceneManager.LoadScene("Inicio");
+                break;
         }
     }
 
@@ -155,9 +168,9 @@ public void CambiarEscena(string nombreEscena)
         return drogado;
     }
 
-    int PrioridadMaxima()
+    int PrioridadMaxima(TipoMonstruo tipo)
     {
-        return drogaConsumida;
+        return 2*monstruosHuidos[(int)tipo] + monstruosIgnorados[(int)tipo];
     }
 
 }

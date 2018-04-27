@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 4814615628572242}
   - component: {fileID: 50879002805493060}
   - component: {fileID: 114472384987037102}
+  - component: {fileID: 114581288792537152}
   m_Layer: 0
   m_Name: Camara
   m_TagString: Untagged
@@ -262,6 +263,18 @@ MonoBehaviour:
   frecuenciaLemniscata: 0.2
   velocidadGiro: 0.5
   anguloGiroMaximo: 3
+--- !u!114 &114581288792537152
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1210872112023570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 479e3b2abf7811b4493bfe72f1bb1319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cv: {fileID: 0}
 --- !u!124 &124956717684362218
 Behaviour:
   m_ObjectHideFlags: 1

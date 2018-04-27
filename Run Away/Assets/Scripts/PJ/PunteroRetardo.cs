@@ -15,7 +15,7 @@ public class PunteroRetardo : MonoBehaviour {
 
     public float lerp = 0.5f;
 
-	void Start () {
+	void Awake () {
         if (instance == null)
         {
             instance = this;

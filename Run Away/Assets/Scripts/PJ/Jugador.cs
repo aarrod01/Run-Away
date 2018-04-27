@@ -31,7 +31,7 @@ public class Jugador : MonoBehaviour
         luz = GetComponentInChildren<Luz>();
         jugador = GetComponent<Rigidbody2D>();
         animador = GetComponent<Animator>();
-        puntero = GameObject.FindObjectOfType<PunteroRetardo>().GetComponent<Rigidbody2D>();
+        puntero = PunteroRetardo.instance.GetComponent<Rigidbody2D>();
         golpe = GetComponentInChildren<GolpeJugador>();
         piernas = GetComponentInChildren<Piernas>();
         golpe.Iniciar();
