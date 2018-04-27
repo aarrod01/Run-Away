@@ -45,6 +45,7 @@ public class Palanca : MonoBehaviour
         };
         master.DistanciaDeInteraccion = () => { return distanciaDeInteraccion; };
         sonido.Stop();
+        Apagar();
     }
 
     public void Iluminar()
