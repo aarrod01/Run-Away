@@ -17,9 +17,10 @@ public class Puntero : MonoBehaviour
 		}
 		else
 			Destroy(this.gameObject);
+        instance.Inicio();
 	}
 
-	void Start () 
+	void Inicio () 
 	{
 		Scene scene = SceneManager.GetActiveScene ();
 

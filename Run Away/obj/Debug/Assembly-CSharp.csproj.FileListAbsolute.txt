@@ -360,3 +360,6 @@ E:\P1\Run-Away\Run Away\Temp\bin\Debug\UnityEditor.VR.xml
 E:\P1\Run-Away\Run Away\Temp\bin\Debug\BugReportUtils.pdb
 E:\P1\Run-Away\Run Away\Temp\bin\Debug\UnityEditor.iOS.Extensions.Xcode.xml
 E:\P1\Run-Away\Run Away\obj\Debug\Assembly-CSharp.pdb
+C:\Users\usuario_local\Documents\GitHub\Run-Away\Run Away\Temp\bin\Debug\BugReportUtils.dll
+C:\Users\usuario_local\Documents\GitHub\Run-Away\Run Away\Temp\bin\Debug\Resources2DDL.dll
+C:\Users\usuario_local\Documents\GitHub\Run-Away\Run Away\Temp\bin\Debug\BugReportUtils.pdb

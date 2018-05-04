@@ -135,7 +135,7 @@ public class Jugador : MonoBehaviour
     public void Atacar()
     {
         animador.SetTrigger("atacando");
-        golpe.Golpear(1f, 1f, 1);
+        golpe.Golpear(0f, 1f, 1);
     }
 
     public void Andar()

@@ -128,6 +128,7 @@ public class Panzudo : MonoBehaviour {
         este.Morir = () =>
         {
             animador.SetTrigger("muriendo");
+			sonidoPasos.Stop();
             GameManager.instance.MonstruoMuerto(TipoMonstruo.Panzudo);
             Destroy(detectorGolpes.gameObject);
             este.enabled = false;
