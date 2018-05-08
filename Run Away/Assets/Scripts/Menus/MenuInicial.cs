@@ -15,7 +15,6 @@ public class MenuInicial : MonoBehaviour{
 
 		switch (loadedStats [0]) {
 		case 0:
-			Debug.LogError ("Se ha cargado la pantalla de inicio");
 			break;
 		case 1:
 			GameManager.instance.CambiarEscena ("Nivel1");

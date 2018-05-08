@@ -32,7 +32,7 @@ public class MenuPausa : MonoBehaviour {
 		//Guardar
 		Time.timeScale = 1.0f;
 		cv.gameObject.SetActive (false);
+		SaveLoadManager.SaveGame(GameManager.instance);
         GameManager.instance.CambiarEscena("Inicio");
-        SaveLoadManager.SaveGame(GameManager.instance);
 	}
 }

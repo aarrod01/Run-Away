@@ -19,7 +19,6 @@ public static class SaveLoadManager{
 
 	public static int[] LoadGame(){
 		if (File.Exists (Application.dataPath + "/Saves/scene.sav")) {
-			Debug.Log("El archivo existe: " + Application.persistentDataPath);
 			BinaryFormatter bf = new BinaryFormatter ();
 			FileStream stream = new FileStream (Application.dataPath + "/Saves/scene.sav", FileMode.Open);
 
