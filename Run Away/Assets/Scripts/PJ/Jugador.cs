@@ -52,7 +52,7 @@ public class Jugador : MonoBehaviour
 	}
 
     void Giro()
-    {
+	{
         float velocidadAngularPredicha;
         Vector2 direccionMovimientoObjetivo = puntero.position - jugador.position;
         float anguloPredicho = Vector2.SignedAngle(Vector2.up, direccionMovimientoObjetivo)- jugador.rotation;
