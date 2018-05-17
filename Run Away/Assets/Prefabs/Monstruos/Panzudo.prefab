@@ -422,7 +422,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.6}
   serializedVersion: 2
-  m_Radius: 1.02
+  m_Radius: 0.8
 --- !u!58 &58499585863416766
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -544,8 +544,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1}
-  m_Size: {x: 2, y: 1}
+  m_Offset: {x: 0, y: 0.8}
+  m_Size: {x: 1.5, y: 1}
   m_Direction: 1
 --- !u!82 &82198316401344142
 AudioSource:
@@ -558,8 +558,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b59a9dd54c5dbb443800c9c1ef2cd143, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.37
+  m_Pitch: 0.5
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -718,13 +718,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 46547bde7d80d894a9a4a0dd079669f8, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.87
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 119
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -870,10 +870,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numeroDePuntos: 4
   puntos:
-  - {x: 10, y: -12}
-  - {x: -6, y: -12}
-  - {x: -6, y: -6}
-  - {x: 10, y: -6}
+  - {x: 28, y: -6}
+  - {x: 28, y: 12}
+  - {x: 22, y: 12}
+  - {x: 22, y: -6}
 --- !u!114 &114273796460615538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -918,7 +918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ed72350466390439301e369729018f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vida: 1
+  vida: 3
 --- !u!114 &114595632117475118
 MonoBehaviour:
   m_ObjectHideFlags: 1

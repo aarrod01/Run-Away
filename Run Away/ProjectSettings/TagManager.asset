@@ -10,6 +10,7 @@ TagManager:
   - Pared
   - Path
   - onlyTrigger
+  - Menu
   layers:
   - Default
   - TransparentFX

@@ -9,36 +9,55 @@ public class MenuPausa : MonoBehaviour {
 	public GameObject panelPausa;
 	public GameObject panelOpciones;
 
-	void Update(){
-		if (Input.GetKeyDown("p")  || Input.GetKeyDown(KeyCode.Escape))
-            PausarPartida();
-        else if (Input.GetKeyDown(KeyCode.Escape)&&Time.timeScale==0.0f)
-            SalirAlMenu();
+    bool salirOpciones = true;
 
+	void Update()
+    {
+		if (Input.GetKeyDown(KeyCode.Escape))
+            PausarPartida();
 	}
 
-	public void PausarPartida(){
-		if (Time.timeScale == 1.0f) {
+	public void PausarPartida()
+    {
 			Time.timeScale = 0.0f;
 			panelPausa.SetActive (true);
 			Debug.Log (Application.persistentDataPath);
 			Debug.Log (Application.dataPath);
-		} else {
-			Time.timeScale = 1.0f;
-			panelPausa.SetActive (false);
-		}
 	}
 
-	public void MenuOpciones (){
+	public void MenuOpciones ()
+    {
 		panelPausa.SetActive (false);
+        salirOpciones = false;
 		panelOpciones.SetActive (true);
 	}
 
-	public void SalirAlMenu (){
+	public void SalirAlMenu ()
+    {
 		//Guardar
-		Time.timeScale = 1.0f;
-		panelPausa.SetActive (false);
+        SalirMenuPausa();
 		SaveLoadManager.SaveGame(GameManager.instance);
         GameManager.instance.CambiarEscena("Inicio");
 	}
+
+    public void SalirOpciones()
+    {
+        panelOpciones.SetActive(false);
+        salirOpciones = true;
+        PausarPartida();
+    }
+
+    public void SalirMenuPausa()
+    {
+        Time.timeScale = 1.0f;
+        panelPausa.SetActive(false);
+    }
+
+    public bool PausaActivada()
+    {
+        if (Time.timeScale == 0.0f)
+            return true;
+        else
+            return false;
+    }
 }
