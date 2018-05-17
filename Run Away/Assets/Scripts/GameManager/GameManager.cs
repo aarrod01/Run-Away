@@ -7,18 +7,27 @@ using Monstruos;
 public delegate void funcionVacia();
 public class GameManager : MonoBehaviour
 {
-    int[] monstruosMuertos, monstruosMuertosTemporales;
-    int[] monstruosHuidos, monstruosHuidosTemporales;
-    int[] monstruosIgnorados;
-    public int drogaConsumida = 0;
-	public int nivel = 0;
+    public funcionVacia Bajon = () => { };
+    public static GameManager instance = null;
+
+    public int drogaConsumida = 0,
+	          nivel = 0;
+    public float tiempoSubidon, 
+                velocidadMinimaDroga, 
+                velocidadMaximaDroga,
+                numeroDrogaMaxima,
+                intensidadLuzMaxima,
+                intensidadLuzMinima;
 
     Jugador jugador = null;
+
     bool drogado = false;
 
-    public funcionVacia Bajon = () => {};
-    public float tiempoSubidon;
-    public static GameManager instance = null;
+    int[] monstruosMuertos,
+        monstruosMuertosTemporales,
+        monstruosHuidos,
+        monstruosHuidosTemporales,
+        monstruosIgnorados;
 
     void Start()
     {
@@ -140,17 +149,22 @@ public void CambiarEscena(string nombreEscenaActual)
     {
         drogado = true;
         drogaConsumida++;
-        jugador.Luz().IntensidadLuz(1.5f);
-        jugador.AumentoVelocidad(1.5f);
+        jugador.Luz().IntensidadLuz(1f - (1f - intensidadLuzMaxima) * atenuacionDroga());
+        jugador.AumentoVelocidad(1f - (1f - velocidadMaximaDroga) * atenuacionDroga());
         Invoke("Bajonazo",TiempoSubidon());
         ControladorPalanca.instance.EncenderPalancas();
         Bajon = () =>
         {
             ControladorPalanca.instance.ApagarPalancas();
             drogado = false;
-            jugador.Luz().IntensidadLuz(0.9f);
-            jugador.AumentoVelocidad(0.9f);
+            jugador.Luz().IntensidadLuz(1f - (1f - intensidadLuzMinima) * atenuacionDroga());
+            jugador.AumentoVelocidad(1f - (1f - velocidadMinimaDroga) * atenuacionDroga());
         };
+    }
+
+    float atenuacionDroga()
+    {
+        return drogaConsumida / numeroDrogaMaxima;
     }
 
     void Bajonazo()

@@ -8,11 +8,12 @@ public delegate void funcionLuz(GameObject caster);
 [RequireComponent(typeof(Monstruo))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
+
 public class Fantasma : MonoBehaviour
 {
     public AudioSource grito;
-    public float intensidadSonido = 10f;
     public EstadosMonstruo estadoInicial;
+    public float intensidadSonido = 10f;
     public float velocidadPersecucion;
     public float velocidadHuida;
     public float cabreoMaximo;

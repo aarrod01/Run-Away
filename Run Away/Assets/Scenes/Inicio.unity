@@ -187,8 +187,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.0000076293945, y: 0}
+  m_SizeDelta: {x: 107.1, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &292816257
 MonoBehaviour:
@@ -210,8 +210,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 2eee27f0fa0324b4999efcce870b7224, type: 3}
-    m_FontSize: 30
+    m_Font: {fileID: 12800000, guid: f3ba79c65540a794da24e3815fb99a7b, type: 3}
+    m_FontSize: 25
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -222,9 +222,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Cargar      Partida
-
-'
+  m_Text: Cargar Partida
 --- !u!222 &292816258
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -255,18 +253,18 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 322655145}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.00003080303, w: -1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1439732759}
   m_Father: {fileID: 1309057591}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.0955, y: 0.19966975}
-  m_AnchorMax: {x: 0.27925, y: 0.24300002}
-  m_AnchoredPosition: {x: -2, y: 4.5}
-  m_SizeDelta: {x: 1.3999939, y: 4.283798}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.004}
+  m_AnchorMin: {x: 0.04425, y: 0.1913359}
+  m_AnchorMax: {x: 0.36675003, y: 0.24800001}
+  m_AnchoredPosition: {x: 0, y: 0.45335388}
+  m_SizeDelta: {x: 0.80000305, y: -0.3000002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &322655147
 MonoBehaviour:
@@ -408,8 +406,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 2eee27f0fa0324b4999efcce870b7224, type: 3}
-    m_FontSize: 25
+    m_Font: {fileID: 12800000, guid: f3ba79c65540a794da24e3815fb99a7b, type: 3}
+    m_FontSize: 20
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -927,8 +925,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 2eee27f0fa0324b4999efcce870b7224, type: 3}
-    m_FontSize: 30
+    m_Font: {fileID: 12800000, guid: f3ba79c65540a794da24e3815fb99a7b, type: 3}
+    m_FontSize: 25
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -939,9 +937,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Nueva     Partida
-
-'
+  m_Text: Nueva Partida
 --- !u!222 &1439732761
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1042,10 +1038,10 @@ RectTransform:
   m_Father: {fileID: 1309057591}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.0955, y: 0.116000004}
-  m_AnchorMax: {x: 0.27925, y: 0.16133487}
-  m_AnchoredPosition: {x: -2.0180664, y: 1.706604}
-  m_SizeDelta: {x: 1.3999939, y: 1.199997}
+  m_AnchorMin: {x: 0.04425, y: 0.116000004}
+  m_AnchorMax: {x: 0.36675003, y: 0.16133487}
+  m_AnchoredPosition: {x: 0, y: -0.6000061}
+  m_SizeDelta: {x: 0.80000305, y: 1.1999998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1779972698
 MonoBehaviour:

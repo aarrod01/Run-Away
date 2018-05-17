@@ -24,7 +24,7 @@ public class EditorPuntosRecorrido : Editor
                 DestroyImmediate(child.gameObject);
             }
             puntosRecorrido.Inicializar();
-            puntosRecorrido.CrearEnCentroPatron((GameObject)Resources.Load("Punto Recorrido"));
+            puntosRecorrido.CrearEnCentroPatron((GameObject)Resources.Load("Prefabs/Recorrido/Punto Recorrido"));
             for(int i = 0; i<PadrePuntosRecorrido.matrizDePuntos.GetLength(0);i++)
             {
                 for (int j = 0; j < PadrePuntosRecorrido.matrizDePuntos.GetLength(1); j++)

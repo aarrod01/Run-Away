@@ -17,7 +17,7 @@ public class Jugador : MonoBehaviour
     GolpeJugador golpe;
     Piernas piernas;
 
-    public float velocidadaxima = 1f,
+    public float velocidadMaxima = 1f,
                 factorAceleracion = 0.5f,
                 velocidadAngularMaxima = 1f,
                 factorAceleracionAngular = 0.5f,
@@ -124,7 +124,7 @@ public class Jugador : MonoBehaviour
 
     public void AumentoVelocidad(float porcentaje)
     {
-        velMaxima = porcentaje * velocidadaxima;
+        velMaxima = porcentaje * velocidadMaxima;
     }
 
     public Luz Luz()

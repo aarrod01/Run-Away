@@ -24,13 +24,6 @@ namespace Patron
             }
         }
 
-        /*public void PatronX(Direccion[] direccionesAbiertas)
-        {
-
-            RellenarCentro();
-            for (int i = 0; i < direccionesAbiertas.Length; i++)
-                RellenarDireccion(direccionesAbiertas[i]);
-        }*/
         public void RellenarEsquinasPuras(int numero, Contenido contenido)
         {
             numero = (int)((uint)numero) % 4;
@@ -221,7 +214,6 @@ public class PadrePuntosRecorrido : MonoBehaviour
         vectorDesdeEsquinaInferiorIzquierdaACentro = (Vector2.right + Vector2.up) * 2 * ancho;
         casillas = aux.GetTilesBlock(limite);
         matrizDePuntos = new GameObject[DimensionX(), DimensionY()];
-        //CrearEnCentroPatron(prefab);
     }
     private void Start()
     {
