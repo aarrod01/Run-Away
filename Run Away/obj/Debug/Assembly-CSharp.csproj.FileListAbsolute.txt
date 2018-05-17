@@ -363,8 +363,6 @@ E:\P1\Run-Away\Run Away\obj\Debug\Assembly-CSharp.pdb
 C:\Users\usuario_local\Documents\GitHub\Run-Away\Run Away\Temp\bin\Debug\BugReportUtils.dll
 C:\Users\usuario_local\Documents\GitHub\Run-Away\Run Away\Temp\bin\Debug\Resources2DDL.dll
 C:\Users\usuario_local\Documents\GitHub\Run-Away\Run Away\Temp\bin\Debug\BugReportUtils.pdb
-E:\P1\Run-Away\Run Away\Temp\bin\Debug\com.unity.postprocessing.Editor.pdb
-E:\P1\Run-Away\Run Away\Temp\bin\Debug\com.unity.postprocessing.Runtime.pdb
 C:\Users\lebam\Documents\GitHub\Run-Away\Run Away\Temp\bin\Debug\BugReportUtils.dll
 C:\Users\lebam\Documents\GitHub\Run-Away\Run Away\Temp\bin\Debug\Resources2DDL.dll
 C:\Users\lebam\Documents\GitHub\Run-Away\Run Away\Temp\bin\Debug\com.unity.postprocessing.Editor.pdb

@@ -1,6 +1,6 @@
-﻿<Properties StartupItem="Run Away.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Menus\ParpadeoMenu.cs">
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Resources\SoundMixer\VolumeControl.cs">
     <Files>
       <File FileName="Assets\Scripts\Monstruos\Golpear.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\GameManager\GameManager.cs" Line="1" Column="1" />
@@ -16,9 +16,9 @@
       <File FileName="Assets\Scripts\Monstruos\Golpeable.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PJ\Jugador.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Monstruos\Panzudo.cs" Line="1" Column="1" />
-      <File FileName="Assets\SoundMixer\VolumeControl.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Menus\MenuPausa.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Menus\ParpadeoMenu.cs" Line="23" Column="24" />
+      <File FileName="Assets\Scripts\Menus\ParpadeoMenu.cs" Line="1" Column="1" />
+      <File FileName="Assets\Resources\SoundMixer\VolumeControl.cs" Line="8" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
