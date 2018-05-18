@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
         }
 		jugador = GameObject.FindObjectOfType<Jugador>();
 	}
-public void CambiarEscena(string nombreEscenaActual)
+    public void CambiarEscena(string nombreEscenaActual)
     {
         switch (nombreEscenaActual)
         {
@@ -151,6 +151,7 @@ public void CambiarEscena(string nombreEscenaActual)
         drogaConsumida++;
         jugador.Luz().IntensidadLuz(1f - (1f - intensidadLuzMaxima) * atenuacionDroga());
         jugador.AumentoVelocidad(1f - (1f - velocidadMaximaDroga) * atenuacionDroga());
+        SoundManager.instance.CambiarTonoCancionPrincipal(SoundManager.instance.tonoDrogado);
         Invoke("Bajonazo",TiempoSubidon());
         ControladorPalanca.instance.EncenderPalancas();
         Bajon = () =>
@@ -159,6 +160,7 @@ public void CambiarEscena(string nombreEscenaActual)
             drogado = false;
             jugador.Luz().IntensidadLuz(1f - (1f - intensidadLuzMinima) * atenuacionDroga());
             jugador.AumentoVelocidad(1f - (1f - velocidadMinimaDroga) * atenuacionDroga());
+            SoundManager.instance.CambiarTonoCancionPrincipal(SoundManager.instance.tonoPredeterminado);
         };
     }
 

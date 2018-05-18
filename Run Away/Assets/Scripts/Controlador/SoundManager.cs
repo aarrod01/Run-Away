@@ -425,6 +425,11 @@ public class SoundManager : MonoBehaviour {
             jugadorRB = jugador.GetComponent<Rigidbody2D>();
     }
 
+    public void CambiarTonoCancionPrincipal(float tono)
+    {
+        cancion.pitch = tono;
+    }
+
     public void IntroducirGeneradorSonidos(Transform generador, params Sonidosss[] sonidos)
     {
         for(int i = 0; i<sonidos.Length; i++)
