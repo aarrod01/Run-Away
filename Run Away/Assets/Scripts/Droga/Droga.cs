@@ -3,17 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Interactuable))]
-public class Droga : MonoBehaviour {
-    Interactuable master;
+
+public class Droga : MonoBehaviour 
+{
+    public AudioClip cogerDroga;
+    [Range (0, 1)]
+    public float volumenCogerDroga;
     public float distanciaDeInteraccion;
+
+    static Sonidosss cogerDrogaSonido = null;
+    Interactuable master;
     LayerMask conQueColisiona;
+
     private void Start()
     {
+        if (cogerDrogaSonido == null)
+            cogerDrogaSonido = new Sonidosss(cogerDroga, false, true, volumenCogerDroga, 1f, SoundManager.instance.VolumenSonidos);
+
         conQueColisiona = LayerMask.GetMask("Obstaculos", "Jugador");
         master = GetComponent<Interactuable>();
         master.Accion = (Jugador a) =>
         {
-                DrogaConsumida();
+            cogerDrogaSonido.Activar();
+            DrogaConsumida();
         };
         master.EsPosibleLaInteraccion = (Jugador a) =>
         {

@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 4
-  distanciaDeInteraccion: 1
+  distanciaDeInteraccion: 2
   posicionInicial: 0
   sonido: {fileID: 82317482870924906}
 --- !u!212 &212846606034728054
