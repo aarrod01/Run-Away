@@ -17,9 +17,10 @@ public class Droga : MonoBehaviour
 
     private void Start()
     {
-        if (cogerDrogaSonido == null)
+        if (cogerDrogaSonido == null) { 
             cogerDrogaSonido = new Sonidosss(cogerDroga, false, true, volumenCogerDroga, 1f, SoundManager.instance.VolumenSonidos);
-
+            DontDestroyOnLoad(cogerDrogaSonido.gO);
+        }
         conQueColisiona = LayerMask.GetMask("Obstaculos", "Jugador");
         master = GetComponent<Interactuable>();
         master.Accion = (Jugador a) =>

@@ -59,7 +59,7 @@ public class Cabreo : MonoBehaviour {
 
     public float Nivel()
     {
-        return cabreo;
+        return cabreo/cabreoMaximo;
     }
 
 }

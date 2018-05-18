@@ -87,6 +87,7 @@ public class Sonidosss
             return activo;
         }
     }
+    public GameObject gO { get { return audioSource.gameObject; } }
 
     public Sonidosss(AudioClip _sonido, bool _bucle, bool _solapamiento, float _volumenBase, float _tono, float _volumenGlobal)
     {
@@ -122,6 +123,12 @@ public class Sonidosss
     {
         audioSource.Stop();
         activo = false;
+    }
+
+    public void Destruir()
+    {
+        audioSource.Stop();
+        Object.Destroy(audioSource.gameObject);
     }
 }
 
@@ -368,6 +375,7 @@ public class SoundManager : MonoBehaviour {
     private Rigidbody2D jugadorRB;
     public static SoundManager instance = null;
     [SerializeField]
+    [Range(0, 1)]
     float volumenSonidos;
 
     public float VolumenSonidos
@@ -432,8 +440,7 @@ public class SoundManager : MonoBehaviour {
 
     public void IntroducirGeneradorSonidos(Transform generador, params Sonidosss[] sonidos)
     {
-        for(int i = 0; i<sonidos.Length; i++)
-            focos.IntroducirFoco(generador, new FocosDeSonido.Foco.Sonidoss(sonidos[i]));
+        focos.IntroducirFoco(generador, new FocosDeSonido.Foco.Sonidoss(sonidos));
     }
     
     void FixedUpdate()
@@ -461,6 +468,7 @@ public class SoundManager : MonoBehaviour {
             while (auxS != null)
             {
                 auxS.Sonido.VolumenGlobal = vol;
+                auxS.Sonido.CambiarVolumen(AtenuacionDistancia(aux.PosicionT.position));
                 auxS = auxS.Siguiente;
             }
             aux = aux.Siguiente;
@@ -470,8 +478,7 @@ public class SoundManager : MonoBehaviour {
     float AtenuacionDistancia(Vector2 origen)
     {
         float distancia = (origen - jugadorRB.position).sqrMagnitude;
-        return 100f / (distancia * distancia);
+        return 1f / (distancia * distancia);
     }
-
     
 }

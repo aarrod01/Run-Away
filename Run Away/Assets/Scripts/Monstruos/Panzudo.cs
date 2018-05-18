@@ -7,9 +7,18 @@ using Monstruos;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 public class Panzudo : MonoBehaviour {
-
-    public AudioSource gritoCarga, sonidoPasos, respiracionBusqueda;
+    
+    public AudioClip gritoCarga;
+    [Range(0, 1)]
+    public float volumenGritoCarga;
+    public AudioClip pasos;
+    [Range(0, 1)]
+    public float volumenPasos;
+    public AudioClip respiracionBusqueda;
+    [Range(0, 1)]
+    public float volumenRespiracionBusqueda;
     bool cargando, andando;
+    Sonidosss sonidoCarga, sonidoPasos, sonidoRespiracion;
 
     public float intensidadSonido = 10f, velMovRuta, velMovPerseguir, velMovHuida, velGiro, aceleracionAngular, tiempoAturdimiento = 1f, periodoGiro = 1f;
     public EstadosMonstruo estadoInicial;
@@ -19,6 +28,11 @@ public class Panzudo : MonoBehaviour {
 
     private void Start()
     {
+        sonidoCarga = new Sonidosss(gritoCarga, false, false, volumenGritoCarga, 1f, SoundManager.instance.VolumenSonidos);
+        sonidoPasos = new Sonidosss(pasos, true, false, volumenPasos, 1f, SoundManager.instance.VolumenSonidos);
+        sonidoRespiracion = new Sonidosss(respiracionBusqueda, false, false, volumenRespiracionBusqueda, 1f, SoundManager.instance.VolumenSonidos);
+        SoundManager.instance.IntroducirGeneradorSonidos(transform, sonidoCarga, sonidoPasos, sonidoRespiracion);
+
         Rigidbody2D jugadorRB;
         Animator animador;
         float giroInicial = 0;
@@ -43,27 +57,24 @@ public class Panzudo : MonoBehaviour {
         este.CambiarEstadoMonstruo(estadoInicial);
         este.Comportamiento = () => {
             float volumen = Mathf.Min(5f / (jugadorRB.position - rb2D.position).sqrMagnitude, 1f);
-            sonidoPasos.volume = volumen;
-            gritoCarga.volume = volumen;
-            respiracionBusqueda.volume = volumen;
 
             switch (este.EstadoMonstruoActual())
             {
                 case EstadosMonstruo.EnRuta:
                     if (!andando)
                     {
-                        sonidoPasos.Play();
+                        sonidoPasos.Activar();
                         andando = !andando;
-                        respiracionBusqueda.Stop();
+                        sonidoRespiracion.Desactivar();
                     }
                     MoverseHacia(detectorParedes.EvitarColision(detectorRuta.PosicionPuntoRuta()), velMovRuta);
                     break;
                 case EstadosMonstruo.SiguiendoJugador:
                     if (!cargando)
                     {
-                        sonidoPasos.Stop();
+                        sonidoPasos.Desactivar();
                         cargando = true;
-                        gritoCarga.Play();
+                        sonidoCarga.Activar();
                     }
                     if ((campoVision.UltimaPosicionJugador() - rb2D.position).sqrMagnitude < Monstruo.MARGEN)
                     {
@@ -74,9 +85,9 @@ public class Panzudo : MonoBehaviour {
                 case EstadosMonstruo.VolviendoARuta:
                     if (!andando)
                     {
-                        sonidoPasos.Play();
+                        sonidoPasos.Activar();
                         andando = !andando;
-                        respiracionBusqueda.Stop();
+                        sonidoRespiracion.Desactivar();
                     }
                     MoverseHacia(detectorParedes.EvitarColision(detectorRuta.PosicionPuntoRuta()), velMovRuta);
                     break;
@@ -84,10 +95,10 @@ public class Panzudo : MonoBehaviour {
                     Pararse();
                     if (andando)
                     {
-                        sonidoPasos.Stop();
+                        sonidoPasos.Desactivar();
                         andando = !andando;
                         cargando = false;
-                        respiracionBusqueda.Play();
+                        sonidoRespiracion.Activar();
                     }
                     giroInicial = rb2D.rotation;
                     cronometro = Time.time;
@@ -96,10 +107,10 @@ public class Panzudo : MonoBehaviour {
                 case EstadosMonstruo.BuscandoJugador:
                     if (andando)
                     {
-                        sonidoPasos.Stop();
+                        sonidoPasos.Desactivar();
                         andando = !andando;
                         cargando = false;
-                        respiracionBusqueda.Play();
+                        sonidoRespiracion.Activar();
                     }
                     Pararse();
                     Vector2 aux = new Vector2(Mathf.Sin(((Time.time - cronometro) / periodoGiro + giroInicial / 360f) * 2 * Mathf.PI), Mathf.Cos(((Time.time - cronometro) / periodoGiro + giroInicial / 360f) * 2 * Mathf.PI));
@@ -128,7 +139,9 @@ public class Panzudo : MonoBehaviour {
         este.Morir = () =>
         {
             animador.SetTrigger("muriendo");
-			sonidoPasos.Stop();
+            sonidoPasos.Destruir();
+            sonidoCarga.Destruir();
+            sonidoRespiracion.Destruir();
             GameManager.instance.MonstruoMuerto(TipoMonstruo.Panzudo);
             Destroy(detectorGolpes.gameObject);
             este.enabled = false;
@@ -153,10 +166,6 @@ public class Panzudo : MonoBehaviour {
         {
             este.CambiarEstadoMonstruo(EstadosMonstruo.Desorientado);
         };
-
-        gritoCarga.Stop();
-        sonidoPasos.Stop();
-        respiracionBusqueda.Stop();
 
     }
     void Empujar(Vector2 origen, float velocidadProyeccion)

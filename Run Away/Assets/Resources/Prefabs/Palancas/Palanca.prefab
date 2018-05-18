@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 61493412765273118}
   - component: {fileID: 114657087227021510}
   - component: {fileID: 114862093540309662}
-  - component: {fileID: 82317482870924906}
   m_Layer: 15
   m_Name: Palanca
   m_TagString: Untagged
@@ -143,86 +142,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.47, y: 1.25}
   m_EdgeRadius: 0
---- !u!82 &82317482870924906
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1376055819423606}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b30d646b99c19a0438891c3b35ae28a6, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.15
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 81
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!95 &95027998539084090
 Animator:
   serializedVersion: 3
@@ -314,10 +233,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b3143f92eda084aae69fb6bb77e8a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: 4
+  color: 3
   distanciaDeInteraccion: 2
   posicionInicial: 0
-  sonido: {fileID: 82317482870924906}
+  sonido: {fileID: 8300000, guid: b30d646b99c19a0438891c3b35ae28a6, type: 3}
+  volumen: 0
+  tiempoDeReactivacion: 1
 --- !u!212 &212846606034728054
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -352,7 +273,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300044, guid: e8bdb50a4ae68a34698041ff15f7abbe, type: 3}
+  m_Sprite: {fileID: 21300038, guid: e8bdb50a4ae68a34698041ff15f7abbe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

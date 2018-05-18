@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
                 numeroDrogaMaxima,
                 intensidadLuzMaxima,
                 intensidadLuzMinima;
+    public int NumeroDeMuertes{ get { return numeroDeMuertes; } }
 
     Jugador jugador = null;
 
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
         monstruosHuidos,
         monstruosHuidosTemporales,
         monstruosIgnorados;
+    int numeroDeMuertes = 0;
 
     void Start()
     {
@@ -138,6 +140,7 @@ public class GameManager : MonoBehaviour
 	public void JugadorMuerto()
 	{
 		Invoke("ResetarEscena", 5f);
+        numeroDeMuertes++;
 	}
 
 	public void ResetarEscena ()
@@ -186,7 +189,7 @@ public class GameManager : MonoBehaviour
 
     int PrioridadMaxima(TipoMonstruo tipo)
     {
-        return 2*monstruosHuidos[(int)tipo] + monstruosIgnorados[(int)tipo];
+        return 6;//2*monstruosHuidos[(int)tipo] + monstruosIgnorados[(int)tipo];
     }
 
 }

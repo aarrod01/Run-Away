@@ -11,13 +11,23 @@ public class Palanca : MonoBehaviour
     Puerta[] puertas;
     Animator palancaAnimacion;
     GameObject luz;
+    static Sonidosss sonidoPalanca = null;
+    float tiempo;
     
 	public  Colores.Colores color;
 	public float distanciaDeInteraccion=0.3f;
     public bool posicionInicial;
-    public AudioSource sonido;
+    public AudioClip sonido;
+    [Range(0,1)]
+    public float volumen;
+    public float tiempoDeReactivacion;
 
 	void Start () {
+        if (sonidoPalanca == null)
+        {
+            sonidoPalanca = new Sonidosss(sonido, false, true, volumen, 1f, SoundManager.instance.VolumenMusica);
+            DontDestroyOnLoad(sonidoPalanca.gO);
+        }
         luz = GetComponentInChildren<DynamicLight2D.DynamicLight>().gameObject;
         Apagar();
         puertas = GameObject.FindObjectsOfType<Puerta>();
@@ -27,7 +37,8 @@ public class Palanca : MonoBehaviour
         conQueColisiona = LayerMask.GetMask("Obstaculos", "Jugador");
         master = GetComponent<Interactuable>();
 		master.Accion = (Jugador a) => {
-            sonido.Play();
+            tiempo = Time.time;
+            sonidoPalanca.Activar();
             a.Interactuar();
             posicionInicial = !posicionInicial;
                 palancaAnimacion.SetBool("activada", posicionInicial);
@@ -41,10 +52,9 @@ public class Palanca : MonoBehaviour
 		};
         master.EsPosibleLaInteraccion = (Jugador a) =>
         {
-            return master.InteraccionPorLineaDeVision(a.transform, distanciaDeInteraccion, conQueColisiona);
+            return (Time.time - tiempo)>tiempoDeReactivacion && master.InteraccionPorLineaDeVision(a.transform, distanciaDeInteraccion, conQueColisiona);
         };
         master.DistanciaDeInteraccion = () => { return distanciaDeInteraccion; };
-        sonido.Stop();
         Apagar();
     }
 
