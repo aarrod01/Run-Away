@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Sonidosss
 {
@@ -89,14 +90,16 @@ public class Sonidosss
     }
     public GameObject gO { get { return audioSource.gameObject; } }
 
-    public Sonidosss(AudioClip _sonido, bool _bucle, bool _solapamiento, float _volumenBase, float _tono, float _volumenGlobal)
+    public Sonidosss(AudioClip _sonido, AudioMixer mixer, bool _bucle, bool _solapamiento, float _volumenBase, float _tono, float _volumenGlobal)
     {
+
         sonido = _sonido;
         bucle = _bucle;
         solapamiento = _solapamiento;
         Volumen = _volumenBase;
         tono = _tono;
         audioSource = new GameObject(_sonido.name, typeof(AudioSource)).GetComponent<AudioSource>();
+        
         audioSource.clip = sonido;
         audioSource.loop = bucle;
         audioSource.playOnAwake = false;
@@ -377,6 +380,7 @@ public class SoundManager : MonoBehaviour {
     [SerializeField]
     [Range(0, 1)]
     float volumenSonidos;
+    public AudioMixer mainMixer, musicMixer, effectMixer;
 
     public float VolumenSonidos
     {
@@ -478,7 +482,7 @@ public class SoundManager : MonoBehaviour {
     float AtenuacionDistancia(Vector2 origen)
     {
         float distancia = (origen - jugadorRB.position).sqrMagnitude;
-        return 1f / (distancia * distancia);
+        return 1f / (distancia );
     }
     
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Introduccion : MonoBehaviour {
 
+    public GameObject siguiente;
     void Awake()
     {
         if (GameManager.instance.NumeroDeMuertes > 0)
@@ -15,5 +16,7 @@ public class Introduccion : MonoBehaviour {
     public void Desactivar()
     {
         gameObject.SetActive(false);
+        siguiente.SetActive(true);
+
     }
 }

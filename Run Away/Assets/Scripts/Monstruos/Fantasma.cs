@@ -29,6 +29,7 @@ public class Fantasma : MonoBehaviour
     void Start ()
     {
         audioGrito = new Sonidosss(grito, true, true, volumenGrito, 1f, SoundManager.instance.VolumenSonidos);
+        SoundManager.instance.IntroducirGeneradorSonidos(transform, audioGrito);
         fantasmaRB = GetComponent<Rigidbody2D>();
         Animator animador = GetComponent<Animator>();
         Vida vida = GetComponent<Vida>();

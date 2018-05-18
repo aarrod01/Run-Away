@@ -20,7 +20,7 @@ public class Panzudo : MonoBehaviour {
     bool cargando, andando;
     Sonidosss sonidoCarga, sonidoPasos, sonidoRespiracion;
 
-    public float intensidadSonido = 10f, velMovRuta, velMovPerseguir, velMovHuida, velGiro, aceleracionAngular, tiempoAturdimiento = 1f, periodoGiro = 1f;
+    public float velMovRuta, velMovPerseguir, velMovHuida, velGiro, aceleracionAngular, tiempoAturdimiento = 1f, periodoGiro = 1f;
     public EstadosMonstruo estadoInicial;
     
     Rigidbody2D rb2D;
@@ -29,10 +29,10 @@ public class Panzudo : MonoBehaviour {
     private void Start()
     {
         sonidoCarga = new Sonidosss(gritoCarga, false, false, volumenGritoCarga, 1f, SoundManager.instance.VolumenSonidos);
-        sonidoPasos = new Sonidosss(pasos, true, false, volumenPasos, 1f, SoundManager.instance.VolumenSonidos);
+        sonidoPasos = new Sonidosss(pasos, true, true, volumenPasos, 1f, SoundManager.instance.VolumenSonidos);
         sonidoRespiracion = new Sonidosss(respiracionBusqueda, false, false, volumenRespiracionBusqueda, 1f, SoundManager.instance.VolumenSonidos);
         SoundManager.instance.IntroducirGeneradorSonidos(transform, sonidoCarga, sonidoPasos, sonidoRespiracion);
-
+        sonidoPasos.Activar();
         Rigidbody2D jugadorRB;
         Animator animador;
         float giroInicial = 0;
@@ -56,23 +56,20 @@ public class Panzudo : MonoBehaviour {
 
         este.CambiarEstadoMonstruo(estadoInicial);
         este.Comportamiento = () => {
-            float volumen = Mathf.Min(5f / (jugadorRB.position - rb2D.position).sqrMagnitude, 1f);
 
             switch (este.EstadoMonstruoActual())
             {
                 case EstadosMonstruo.EnRuta:
-                    if (!andando)
-                    {
-                        sonidoPasos.Activar();
-                        andando = !andando;
+                    
+                        //sonidoPasos.Activar();
+                        andando = true;
                         sonidoRespiracion.Desactivar();
-                    }
+                    
                     MoverseHacia(detectorParedes.EvitarColision(detectorRuta.PosicionPuntoRuta()), velMovRuta);
                     break;
                 case EstadosMonstruo.SiguiendoJugador:
                     if (!cargando)
                     {
-                        sonidoPasos.Desactivar();
                         cargando = true;
                         sonidoCarga.Activar();
                     }
