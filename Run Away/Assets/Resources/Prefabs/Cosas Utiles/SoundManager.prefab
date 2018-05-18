@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4949323640943934}
   - component: {fileID: 114013884718420274}
+  - component: {fileID: 82631772670230378}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -40,6 +41,87 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &82631772670230378
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1990857158975248}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243936140021729562, guid: e431037ea50383f44a50163112953ff2,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 02bcca74f03d7724daea2f8b50fc2534, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114013884718420274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51,8 +133,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf762b80890d8641abdda50563c2ac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cancionPrincipal: {fileID: 8300000, guid: 02bcca74f03d7724daea2f8b50fc2534, type: 3}
-  volumenPredeterminado: 0.025
+  cancionPrincipal: {fileID: 82631772670230378}
   tonoPredeterminado: 0.3
   tonoDrogado: 2
-  volumenSonidos: 0.19
+  volumenPredeterminado: 0.025
+  volumenMusicaPredeterminado: 0
+  volumenSonidosPredeterminado: 0
+  mainMixer: {fileID: 24100000, guid: e431037ea50383f44a50163112953ff2, type: 2}
+  musicMixer: {fileID: 24100000, guid: 003df90a53e7e904ab9b3a5b4f019694, type: 2}
+  effectMixer: {fileID: 24100000, guid: bf16d5b722dd53d469545cc1744f8675, type: 2}

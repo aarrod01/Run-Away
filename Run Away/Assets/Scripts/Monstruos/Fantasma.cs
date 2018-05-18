@@ -11,8 +11,6 @@ public delegate void funcionLuz(GameObject caster);
 
 public class Fantasma : MonoBehaviour
 {
-    public AudioClip grito;
-    [Range(0, 1)] public float volumenGrito;
     public EstadosMonstruo estadoInicial;
     public float velocidadPersecucion;
     public float velocidadHuida;
@@ -20,16 +18,13 @@ public class Fantasma : MonoBehaviour
     public float cabreoUmbral;
     public float tasaAumentoDeCabreo;
     public float tasaDescensoDeCabreo;
-
+    public AudioSource audioGrito;
 
     Rigidbody2D fantasmaRB;
-    Sonidosss audioGrito;
 
     // Use this for initialization
     void Start ()
     {
-        audioGrito = new Sonidosss(grito, true, true, volumenGrito, 1f, SoundManager.instance.VolumenSonidos);
-        SoundManager.instance.IntroducirGeneradorSonidos(transform, audioGrito);
         fantasmaRB = GetComponent<Rigidbody2D>();
         Animator animador = GetComponent<Animator>();
         Vida vida = GetComponent<Vida>();
@@ -43,7 +38,7 @@ public class Fantasma : MonoBehaviour
 
         este.CambiarEstadoMonstruo(estadoInicial);
         este.Comportamiento = () => {
-            audioGrito.CambiarVolumen(cabreometro.Nivel());
+            audioGrito.volume = cabreometro.Nivel();
             switch (este.EstadoMonstruoActual())
             {
                 case EstadosMonstruo.Huyendo:
@@ -51,7 +46,7 @@ public class Fantasma : MonoBehaviour
                     MoverseHacia((2 * fantasmaRB.position - cabreometro.JugadorRB().position), velocidadHuida);
                     GameManager.instance.MontruoHuye(TipoMonstruo.Fantasma);
                     GetComponent<Collider2D>().enabled = false;
-                    audioGrito.Destruir();
+                    audioGrito.Stop();
                     Destroy(gameObject, 10f);
                     break;
                 default:
@@ -73,7 +68,7 @@ public class Fantasma : MonoBehaviour
             }
         };
 
-        audioGrito.Activar();
+        audioGrito.Play();
 
         este.Morir = () =>
         {
@@ -84,7 +79,6 @@ public class Fantasma : MonoBehaviour
             fantasmaRB.Sleep();
             fantasmaRB.simulated = false;
             GetComponent<Collider2D>().enabled = false;
-            audioGrito.Destruir();
             Destroy(gameObject, 5f);
         };
 

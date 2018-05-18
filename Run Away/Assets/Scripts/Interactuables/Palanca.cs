@@ -11,7 +11,7 @@ public class Palanca : MonoBehaviour
     Puerta[] puertas;
     Animator palancaAnimacion;
     GameObject luz;
-    static Sonidosss sonidoPalanca = null;
+    //static Sonidosss sonidoPalanca = null;
     float tiempo;
     
 	public  Colores.Colores color;
@@ -23,11 +23,11 @@ public class Palanca : MonoBehaviour
     public float tiempoDeReactivacion;
 
 	void Start () {
-        if (sonidoPalanca == null)
+       /* if (sonidoPalanca == null)
         {
             sonidoPalanca = new Sonidosss(sonido, false, true, volumen, 1f, SoundManager.instance.VolumenMusica);
             DontDestroyOnLoad(sonidoPalanca.gO);
-        }
+        }*/
         luz = GetComponentInChildren<DynamicLight2D.DynamicLight>().gameObject;
         Apagar();
         puertas = GameObject.FindObjectsOfType<Puerta>();
@@ -38,7 +38,7 @@ public class Palanca : MonoBehaviour
         master = GetComponent<Interactuable>();
 		master.Accion = (Jugador a) => {
             tiempo = Time.time;
-            sonidoPalanca.Activar();
+            //sonidoPalanca.Activar();
             a.Interactuar();
             posicionInicial = !posicionInicial;
                 palancaAnimacion.SetBool("activada", posicionInicial);

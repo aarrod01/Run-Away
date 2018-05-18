@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 212278712030186832}
   - component: {fileID: 70838572275001410}
   - component: {fileID: 50990931343968640}
+  - component: {fileID: 81757741645497362}
   - component: {fileID: 95192628278269736}
   - component: {fileID: 114960163475586206}
   - component: {fileID: 114195683676013694}
@@ -323,7 +324,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1362958359229634}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 1, y: 6, z: 0}
+  m_LocalPosition: {x: -11.82, y: -8.94, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4866651424240676}
@@ -645,6 +646,13 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.06}
   m_Size: {x: 0.92, y: 0.45}
   m_Direction: 1
+--- !u!81 &81757741645497362
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1362958359229634}
+  m_Enabled: 1
 --- !u!95 &95192628278269736
 Animator:
   serializedVersion: 3
@@ -755,14 +763,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invisible: 0
   movimientoLibre: 1
-  velocidadaxima: 2
+  velocidadMaxima: 1
   factorAceleracion: 0.5
   velocidadAngularMaxima: 500
   factorAceleracionAngular: 0.7
   factorGiro: 0.5
   fraccionMinimaVelocidadHaciaDetras: 0.7
   vidas: 1
-  fuerzaEmpujon: 3
+  fuerzaEmpujon: 5
 --- !u!114 &114394218749114680
 MonoBehaviour:
   m_ObjectHideFlags: 1

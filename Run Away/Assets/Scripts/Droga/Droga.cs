@@ -11,21 +11,21 @@ public class Droga : MonoBehaviour
     public float volumenCogerDroga;
     public float distanciaDeInteraccion;
 
-    static Sonidosss cogerDrogaSonido = null;
+
     Interactuable master;
     LayerMask conQueColisiona;
 
     private void Start()
     {
-        if (cogerDrogaSonido == null) { 
+       /* if (cogerDrogaSonido == null) { 
             cogerDrogaSonido = new Sonidosss(cogerDroga, false, true, volumenCogerDroga, 1f, SoundManager.instance.VolumenSonidos);
             DontDestroyOnLoad(cogerDrogaSonido.gO);
-        }
+        }*/
         conQueColisiona = LayerMask.GetMask("Obstaculos", "Jugador");
         master = GetComponent<Interactuable>();
         master.Accion = (Jugador a) =>
         {
-            cogerDrogaSonido.Activar();
+            //cogerDrogaSonido.Activar();
             DrogaConsumida();
         };
         master.EsPosibleLaInteraccion = (Jugador a) =>

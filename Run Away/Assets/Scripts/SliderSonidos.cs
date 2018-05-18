@@ -15,6 +15,6 @@ public class SliderSonidos : MonoBehaviour {
 
     void OnEnable()
     {
-        slider.value = SoundManager.instance.VolumenSonidos;
+        slider.value = SoundManager.instance.PorcentajeVolumenEfectos();
     }
 }

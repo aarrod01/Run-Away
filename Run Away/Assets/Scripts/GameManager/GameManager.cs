@@ -154,7 +154,7 @@ public class GameManager : MonoBehaviour
         drogaConsumida++;
         jugador.Luz().IntensidadLuz(1f - (1f - intensidadLuzMaxima) * atenuacionDroga());
         jugador.AumentoVelocidad(1f - (1f - velocidadMaximaDroga) * atenuacionDroga());
-        SoundManager.instance.CambiarTonoCancionPrincipal(SoundManager.instance.tonoDrogado);
+        SoundManager.instance.CambiarTonoMusica(SoundManager.instance.tonoDrogado);
         Invoke("Bajonazo",TiempoSubidon());
         ControladorPalanca.instance.EncenderPalancas();
         Bajon = () =>
@@ -163,7 +163,7 @@ public class GameManager : MonoBehaviour
             drogado = false;
             jugador.Luz().IntensidadLuz(1f - (1f - intensidadLuzMinima) * atenuacionDroga());
             jugador.AumentoVelocidad(1f - (1f - velocidadMinimaDroga) * atenuacionDroga());
-            SoundManager.instance.CambiarTonoCancionPrincipal(SoundManager.instance.tonoPredeterminado);
+            SoundManager.instance.CambiarTonoMusica(SoundManager.instance.tonoPredeterminado);
         };
     }
 
