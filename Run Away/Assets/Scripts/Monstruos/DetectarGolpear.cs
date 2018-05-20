@@ -14,7 +14,7 @@ public class DetectarGolpear : MonoBehaviour
 
 	void OnTriggerStay2D(Collider2D other)
 	{
-		if (other.gameObject.tag == "Player" && !golpear.EstaGolpeando()) 
+		if (other.gameObject.tag == "Player" && !other.GetComponent<Jugador>().Invisible()&& !golpear.EstaGolpeando()) 
 		{
 			golpear.Golpeando ();
 		}
