@@ -99,12 +99,12 @@ public class Fantasma : MonoBehaviour
             vida.Invulnerable(true);
         };
 
-        este.EntrandoLuz = () =>
+        este.entrandoLuz = (GameObject gO) =>
         {
             generadorOndas.SumarLuz();
         };
 
-        este.SaliendoLuz = () =>
+        este.saliendoLuz = (GameObject gO) =>
         {
             generadorOndas.RestarLuz();
         };

@@ -8,7 +8,7 @@ namespace Monstruos
     public enum EstadosMonstruo { SiguiendoJugador, EnRuta, PensandoRuta, VolviendoARuta, Atacando ,Desorientado, Proyectado, BuscandoJugador, Huyendo, Quieto, Ninguno };
     public enum TipoMonstruo { Panzudo, Fantasma, Ninguno };
 }
-
+public delegate void funcionGameObject (GameObject gO);
 public class Monstruo : MonoBehaviour
 {
     TipoMonstruo tipo;
@@ -50,9 +50,21 @@ public class Monstruo : MonoBehaviour
 
     public funcionVacia FinalAtaque;
 
-    public funcionVacia EntrandoLuz = () => { };
+    public funcionGameObject entrandoLuz = (GameObject gO) => { };
 
-    public funcionVacia SaliendoLuz = () => { };
+    public void EntrandoLuz(GameObject gO)
+    {
+        Debug.Log("Entro");
+        entrandoLuz(gO);
+    }
+
+    public funcionGameObject saliendoLuz = (GameObject gO) => { };
+
+    public void SaliendoLuz(GameObject gO)
+    {
+        Debug.Log("Salgo");
+        saliendoLuz(gO);
+    }
 
 }
 
