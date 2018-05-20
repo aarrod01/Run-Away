@@ -36,4 +36,26 @@ public class LuzConica : MonoBehaviour {
         float _angulo = angulo * porcentaje;
         luz.RangeAngle = _angulo;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Monstruo aux;
+        if ((aux = collision.GetComponent<Monstruo>()) != null)
+        {
+            Vector2 posMon = aux.GetComponent<Rigidbody2D>().position;
+            if(Mathf.Abs(Vector2.Angle(transform.up, posMon-(Vector2)transform.position)) < angulo/2f)
+                aux.EntrandoLuz();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Monstruo aux;
+        if ((aux = collision.GetComponent<Monstruo>()) != null)
+        {
+            Vector2 posMon = aux.GetComponent<Rigidbody2D>().position;
+            if (Mathf.Abs(Vector2.Angle(Vector2.up, posMon - (Vector2)transform.position)) < angulo / 2f)
+                aux.SaliendoLuz();
+        }
+    }
 }

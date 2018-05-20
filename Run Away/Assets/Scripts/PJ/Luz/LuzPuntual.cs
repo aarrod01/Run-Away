@@ -36,4 +36,22 @@ public class LuzPuntual : MonoBehaviour {
             luces[i].LightRadius = _radio;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Monstruo aux;
+        if((aux=collision.GetComponent<Monstruo>())!=null)
+        {
+            aux.EntrandoLuz();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Monstruo aux;
+        if (collision!=null&&(aux = collision.GetComponent<Monstruo>()) != null)
+        {
+            aux.SaliendoLuz();
+        }
+    }
 }

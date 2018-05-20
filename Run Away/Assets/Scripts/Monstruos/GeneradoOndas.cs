@@ -13,6 +13,16 @@ public class GeneradoOndas : MonoBehaviour {
         numeroLuces = 0;
 	}
 
+    public void Entrar(GameObject caster)
+    {
+        ondas.enabled = false;
+    }
+
+    public void Salir(GameObject caster)
+    {
+        ondas.enabled = true;
+    }
+
     public void SumarLuz()
     {
         numeroLuces++;
