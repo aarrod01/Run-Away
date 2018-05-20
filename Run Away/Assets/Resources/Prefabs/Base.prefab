@@ -60,13 +60,14 @@ GameObject:
   - component: {fileID: 114468341314357464}
   - component: {fileID: 114020735954912296}
   - component: {fileID: 114006318259497116}
+  - component: {fileID: 114835967938482348}
   m_Layer: 5
   m_Name: Base
   m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &95585923691594588
 Animator:
   serializedVersion: 3
@@ -127,18 +128,19 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: f3ba79c65540a794da24e3815fb99a7b, type: 3}
-    m_FontSize: 14
+    m_FontSize: 10
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 1
+    m_MaxSize: 15
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: New Text
+    m_LineSpacing: 2
+  m_Text: "Ahi estan... puedo oirlos...\ndebo evitar que me vean... \xBFpodre encontrar
+    algun escondite?\n\xBFO enfrentarme a caso es una opcion?"
 --- !u!114 &114281270708816392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,6 +206,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114835967938482348
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1972074315809000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b33e392a033246409b3caf85d6611e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114934999884950124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -282,7 +295,7 @@ RectTransform:
   m_GameObject: {fileID: 1972074315809000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.851, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224535064637664584}
   - {fileID: 224467416600891796}
@@ -291,8 +304,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0000019073486, y: -54}
-  m_SizeDelta: {x: 0.0000038146973, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224467416600891796
 RectTransform:
@@ -307,10 +320,10 @@ RectTransform:
   m_Father: {fileID: 224346488805344264}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.9126289, y: 0}
-  m_AnchorMax: {x: 0.97200006, y: 0.09365605}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.9126289, y: 0.018350367}
+  m_AnchorMax: {x: 0.9473014, y: 0.11564964}
+  m_AnchoredPosition: {x: -0.5, y: -0.2000122}
+  m_SizeDelta: {x: 4.04, y: -0.3800001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224535064637664584
 RectTransform:
@@ -325,8 +338,8 @@ RectTransform:
   m_Father: {fileID: 224346488805344264}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.091000006, y: 0}
-  m_AnchorMax: {x: 0.90565675, y: 0.15737584}
-  m_AnchoredPosition: {x: 0, y: 0.49996948}
-  m_SizeDelta: {x: 0, y: 0.9999099}
+  m_AnchorMin: {x: 0.21426028, y: 0.033}
+  m_AnchorMax: {x: 0.7835206, y: 0.18815328}
+  m_AnchoredPosition: {x: 1.0000019, y: 0}
+  m_SizeDelta: {x: 0.55999756, y: -0.15999985}
   m_Pivot: {x: 0.5, y: 0.5}
