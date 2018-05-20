@@ -770,7 +770,7 @@ MonoBehaviour:
   factorGiro: 0.5
   fraccionMinimaVelocidadHaciaDetras: 0.7
   vidas: 1
-  fuerzaEmpujon: 5
+  fuerzaEmpujon: 500
 --- !u!114 &114394218749114680
 MonoBehaviour:
   m_ObjectHideFlags: 1

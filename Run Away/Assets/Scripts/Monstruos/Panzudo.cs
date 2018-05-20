@@ -10,12 +10,10 @@ public class Panzudo : MonoBehaviour {
     
     public AudioSource gritoCarga, pasos, respiracionBusqueda;
     bool cargando, andando;
+    Monstruo este;
 
     public float velMovRuta, velMovPerseguir, velMovHuida, velGiro, aceleracionAngular, tiempoAturdimiento = 1f, periodoGiro = 1f;
     public EstadosMonstruo estadoInicial;
-    
-    Rigidbody2D rb2D;
-    float cronometro = 0;
 
     private void Start()
     {
@@ -27,8 +25,7 @@ public class Panzudo : MonoBehaviour {
         DetectorParedes detectorParedes;
         Vida vida;
         Golpeable detectorGolpes;
-
-        rb2D = GetComponent<Rigidbody2D>();
+        
         jugadorRB = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         animador = GetComponent<Animator>();
         detectorRuta = GetComponentInChildren<DetectarRuta>();
@@ -37,7 +34,8 @@ public class Panzudo : MonoBehaviour {
         vida = GetComponent<Vida>();
         detectorGolpes = GetComponentInChildren<Golpeable>();
 
-        Monstruo este = GetComponent<Monstruo>();
+        este = GetComponent<Monstruo>();
+        este.Rb2D = GetComponent<Rigidbody2D>();
         este.Tipo(TipoMonstruo.Panzudo);
 
         este.CambiarEstadoMonstruo(estadoInicial);
@@ -59,7 +57,7 @@ public class Panzudo : MonoBehaviour {
                         cargando = true;
                         gritoCarga.Play();
                     }
-                    if ((campoVision.UltimaPosicionJugador() - rb2D.position).sqrMagnitude < Monstruo.MARGEN)
+                    if ((campoVision.UltimaPosicionJugador() - este.Rb2D.position).sqrMagnitude < Monstruo.MARGEN)
                     {
                         este.CambiarEstadoMonstruo(EstadosMonstruo.Desorientado);
                     }
@@ -83,8 +81,8 @@ public class Panzudo : MonoBehaviour {
                         cargando = false;
                         respiracionBusqueda.Play();
                     }
-                    giroInicial = rb2D.rotation;
-                    cronometro = Time.time;
+                    giroInicial = este.Rb2D.rotation;
+                    este.Cronometro = Time.time;
                     este.CambiarEstadoMonstruo(EstadosMonstruo.BuscandoJugador);
                     break;
                 case EstadosMonstruo.BuscandoJugador:
@@ -96,19 +94,22 @@ public class Panzudo : MonoBehaviour {
                         respiracionBusqueda.Play();
                     }
                     Pararse();
-                    Vector2 aux = new Vector2(Mathf.Sin(((Time.time - cronometro) / periodoGiro + giroInicial / 360f) * 2 * Mathf.PI), Mathf.Cos(((Time.time - cronometro) / periodoGiro + giroInicial / 360f) * 2 * Mathf.PI));
+                    Vector2 aux = new Vector2(Mathf.Sin(((Time.time - este.Cronometro) / periodoGiro + giroInicial / 360f) * 2 * Mathf.PI), Mathf.Cos(((Time.time - este.Cronometro) / periodoGiro + giroInicial / 360f) * 2 * Mathf.PI));
                     GiroInstantaneo(aux);
-                    if (Time.time - cronometro > periodoGiro)
+                    if (Time.time - este.Cronometro > periodoGiro)
                     {
                         este.CambiarEstadoMonstruo(EstadosMonstruo.PensandoRuta);
                     }
                     break;
                 case EstadosMonstruo.Proyectado:
-                    if (Time.time - cronometro > tiempoAturdimiento)
+                    if (Time.time - este.Cronometro > tiempoAturdimiento)
+                    {
                         este.CambiarEstadoMonstruo(EstadosMonstruo.Desorientado);
+                        vida.Invulnerable(false);
+                    }
                     break;
                 case EstadosMonstruo.Huyendo:
-                    MoverseHacia((2 * rb2D.position - jugadorRB.position), velMovHuida);
+                    MoverseHacia((2 * este.Rb2D.position - jugadorRB.position), velMovHuida);
                     GameManager.instance.MontruoHuye(TipoMonstruo.Panzudo);
                     GetComponent<Collider2D>().enabled = false;
                     Destroy(gameObject, 10f);
@@ -125,7 +126,7 @@ public class Panzudo : MonoBehaviour {
             GameManager.instance.MonstruoMuerto(TipoMonstruo.Panzudo);
             Destroy(detectorGolpes.gameObject);
             este.enabled = false;
-            rb2D.Sleep();
+            este.Rb2D.Sleep();
             GetComponent<Collider2D>().enabled = false;
             Destroy(gameObject, 5f);
         };
@@ -137,9 +138,10 @@ public class Panzudo : MonoBehaviour {
 
         este.Atacado = (Jugador a) =>
         {
-            Empujar(a.transform.position, a.fuerzaEmpujon);
+            este.Empujar(a.transform.position, a.fuerzaEmpujon);
             vida.Danyar(a.Danyo(), TipoMonstruo.Panzudo);
             este.CambiarEstadoMonstruo(EstadosMonstruo.Proyectado);
+            vida.Invulnerable(true);
         };
 
         este.FinalAtaque = () =>
@@ -148,41 +150,35 @@ public class Panzudo : MonoBehaviour {
         };
 
     }
-    void Empujar(Vector2 origen, float velocidadProyeccion)
-    {
-        rb2D.velocity = (rb2D.position - origen).normalized * velocidadProyeccion;
-        cronometro = Time.time;
-        
-    }
 
     //Seguir al jugador, moverse por la ruta y volver a la ruta.
     void MoverseHacia(Vector2 dir, float vel)
     {
         try
         {
-            rb2D.velocity = (dir - (Vector2)transform.position).normalized * vel;
+            este.Rb2D.velocity = (dir - (Vector2)transform.position).normalized * vel;
         }
         catch
         {
-            rb2D.velocity = Vector2.zero;
+            este.Rb2D.velocity = Vector2.zero;
         }
 
-        GiroInstantaneo(rb2D.velocity);
+        GiroInstantaneo(este.Rb2D.velocity);
     }
 
     void Giro(Vector2 dir)
     {
         if (dir != Vector2.zero)
-            rb2D.rotation = Mathf.LerpAngle(rb2D.rotation, Mathf.Atan2(-dir.x, dir.y) * 180f / Mathf.PI, aceleracionAngular);
+            este.Rb2D.rotation = Mathf.LerpAngle(este.Rb2D.rotation, Mathf.Atan2(-dir.x, dir.y) * 180f / Mathf.PI, aceleracionAngular);
     }
     void GiroInstantaneo(Vector2 dir)
     {
         if (dir != Vector2.zero)
-            rb2D.rotation = Mathf.Atan2(-dir.x, dir.y) * 180f / Mathf.PI;
+            este.Rb2D.rotation = Mathf.Atan2(-dir.x, dir.y) * 180f / Mathf.PI;
     }
 
     void Pararse()
     {
-        rb2D.velocity = Vector2.zero;
+        este.Rb2D.velocity = Vector2.zero;
     }
 }

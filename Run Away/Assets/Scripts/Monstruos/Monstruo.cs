@@ -13,11 +13,16 @@ public class Monstruo : MonoBehaviour
 {
     TipoMonstruo tipo;
     EstadosMonstruo estadoMonstruo;
+    Rigidbody2D rb2D;
+    float cronometro;
     public int prioridad;
+    
 
     public const float MARGEN = 0.001f;
 
     public funcionVacia Comportamiento;
+    public Rigidbody2D Rb2D { get { return rb2D; }set { rb2D = value; } }
+    public float Cronometro { get { return cronometro; } set { cronometro = value; } }
     void FixedUpdate()
     {
         Comportamiento();
@@ -40,6 +45,12 @@ public class Monstruo : MonoBehaviour
     public TipoMonstruo Tipo()
     {
         return tipo;
+    }
+
+    public void Empujar(Vector2 origen, float fuerzaProyeccion)
+    {
+        rb2D.AddForce((rb2D.position - origen).normalized * fuerzaProyeccion,ForceMode2D.Impulse);
+        cronometro = Time.time;
     }
 
     public funcionInteractuado Atacado;

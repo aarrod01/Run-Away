@@ -12,6 +12,7 @@ public delegate void funcionLuz(GameObject caster);
 public class Fantasma : MonoBehaviour
 {
     public EstadosMonstruo estadoInicial;
+    public float tiempoAturdimiento = 1f;
     public float velocidadPersecucion;
     public float velocidadHuida;
     public float cabreoMaximo;
@@ -20,17 +21,17 @@ public class Fantasma : MonoBehaviour
     public float tasaDescensoDeCabreo;
     public AudioSource audioGrito;
 
-    Rigidbody2D fantasmaRB;
+    Monstruo este;
 
     // Use this for initialization
     void Start ()
     {
-        fantasmaRB = GetComponent<Rigidbody2D>();
         Animator animador = GetComponent<Animator>();
         Vida vida = GetComponent<Vida>();
         DetectarRuta detectorRuta = GetComponent<DetectarRuta>();
         GeneradoOndas generadorOndas = GetComponentInChildren<GeneradoOndas>();
-        Monstruo este = GetComponent<Monstruo>();
+        este = GetComponent<Monstruo>();
+        este.Rb2D = GetComponent<Rigidbody2D>();
         Cabreo cabreometro = GetComponentInChildren<Cabreo>();
         Rigidbody2D jugadorP = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         cabreometro.Iniciar(cabreoMaximo, cabreoUmbral, tasaAumentoDeCabreo, tasaDescensoDeCabreo);
@@ -43,11 +44,15 @@ public class Fantasma : MonoBehaviour
             {
                 case EstadosMonstruo.Huyendo:
                     generadorOndas.GenerarOndas();
-                    MoverseHacia((2 * fantasmaRB.position - cabreometro.JugadorRB().position), velocidadHuida);
+                    MoverseHacia((2 * este.Rb2D.position - cabreometro.JugadorRB().position), velocidadHuida);
                     GameManager.instance.MontruoHuye(TipoMonstruo.Fantasma);
                     GetComponent<Collider2D>().enabled = false;
                     audioGrito.Stop();
                     Destroy(gameObject, 10f);
+                    break;
+                case EstadosMonstruo.Proyectado:
+                    if (Time.time - este.Cronometro > tiempoAturdimiento)
+                        este.CambiarEstadoMonstruo(EstadosMonstruo.Quieto);
                     break;
                 default:
                     este.CambiarEstadoMonstruo(cabreometro.CambioCabreo());
@@ -62,7 +67,6 @@ public class Fantasma : MonoBehaviour
                             MoverseHacia(cabreometro.JugadorRB().position, velocidadPersecucion);
                             generadorOndas.GenerarOndas();
                             break;
-
                     }
                     break;
             }
@@ -76,9 +80,10 @@ public class Fantasma : MonoBehaviour
             animador.SetTrigger("muriendo");
             GameManager.instance.MonstruoMuerto(TipoMonstruo.Fantasma);
             este.enabled = false;
-            fantasmaRB.Sleep();
-            fantasmaRB.simulated = false;
+            este.Rb2D.Sleep();
+            este.Rb2D.simulated = false;
             GetComponent<Collider2D>().enabled = false;
+            audioGrito.Stop();
             Destroy(gameObject, 5f);
         };
 
@@ -90,8 +95,10 @@ public class Fantasma : MonoBehaviour
 
         este.Atacado = (Jugador a) =>
         {
+            este.Empujar(a.transform.position, a.fuerzaEmpujon);
             vida.Danyar(a.Danyo(), TipoMonstruo.Panzudo);
             este.CambiarEstadoMonstruo(EstadosMonstruo.Proyectado);
+            cabreometro.Tranquilizar();
         };
 
         este.FinalAtaque = () =>
@@ -114,24 +121,24 @@ public class Fantasma : MonoBehaviour
     {
         try
         {
-            fantasmaRB.velocity = (dir - fantasmaRB.position).normalized * vel;
+            este.Rb2D.velocity = (dir - este.Rb2D.position).normalized * vel;
         }
         catch
         {
-            fantasmaRB.velocity = Vector2.zero;
+            este.Rb2D.velocity = Vector2.zero;
         }
-        GiroInstantaneo(fantasmaRB.velocity);
+        GiroInstantaneo(este.Rb2D.velocity);
     }
 
     void GiroInstantaneo(Vector2 dir)
     {
         if (dir != Vector2.zero)
-            fantasmaRB.rotation = Mathf.Atan2(-dir.x, dir.y) * 180f / Mathf.PI;
+            este.Rb2D.rotation = Mathf.Atan2(-dir.x, dir.y) * 180f / Mathf.PI;
     }
 
     void Parar()
     {
-        fantasmaRB.velocity = Vector2.zero;
+        este.Rb2D.velocity = Vector2.zero;
     }
 
     

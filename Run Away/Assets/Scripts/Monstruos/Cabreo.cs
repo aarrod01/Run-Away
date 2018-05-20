@@ -57,6 +57,11 @@ public class Cabreo : MonoBehaviour {
         return jugadorRB;
     }
 
+    public void Tranquilizar()
+    {
+        cabreo = 0f;
+    }
+
     public float Nivel()
     {
         return cabreo/cabreoMaximo;
