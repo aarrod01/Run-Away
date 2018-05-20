@@ -56,9 +56,9 @@ public class Jugador : MonoBehaviour
         float velocidadAngularPredicha;
         Vector2 direccionMovimientoObjetivo = puntero.position - jugador.position;
         float anguloPredicho = Vector2.SignedAngle(Vector2.up, direccionMovimientoObjetivo)- jugador.rotation;
-        if (anguloPredicho > 180f)
+        while (anguloPredicho > 180f)
             anguloPredicho -= 360f;
-        else if (anguloPredicho < -180f)
+        while (anguloPredicho < -180f)
             anguloPredicho += 360f;
         velocidadAngularPredicha = (anguloPredicho)/Time.fixedDeltaTime;
         jugador.angularVelocity = Mathf.Lerp(jugador.angularVelocity,Mathf.Max(Mathf.Min(velocidadAngularMaxima, velocidadAngularPredicha),-velocidadAngularMaxima),factorAceleracionAngular);
