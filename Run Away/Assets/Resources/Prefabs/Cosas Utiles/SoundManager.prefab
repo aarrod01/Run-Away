@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cancionPrincipal: {fileID: 82631772670230378}
   tonoPredeterminado: 0.3
-  tonoDrogado: 2
+  tonoDrogado: 3
   volumenPredeterminado: 0
   volumenMusicaPredeterminado: 0
   volumenSonidosPredeterminado: 0
