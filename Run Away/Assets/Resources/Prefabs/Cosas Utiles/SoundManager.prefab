@@ -53,7 +53,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 02bcca74f03d7724daea2f8b50fc2534, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.158
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
   cancionPrincipal: {fileID: 82631772670230378}
   tonoPredeterminado: 0.3
   tonoDrogado: 2
-  volumenPredeterminado: 1
-  volumenMusicaPredeterminado: 100
-  volumenSonidosPredeterminado: 43.79
+  volumenPredeterminado: 0
+  volumenMusicaPredeterminado: 0
+  volumenSonidosPredeterminado: 0
   mainMixer: {fileID: 24100000, guid: e431037ea50383f44a50163112953ff2, type: 2}
