@@ -493,16 +493,16 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 5
+  MaxDistance: 23.160585
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -510,20 +510,32 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      time: 0.31299096
+      value: 0.9996487
+      inSlope: -3.5291054
+      outSlope: -3.5291054
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.43176803
+      value: 0.7798157
+      inSlope: -1.1584923
+      outSlope: -1.1584923
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.86353606
+      value: 0.5298157
+      inSlope: -0.28962308
+      outSlope: -0.28962308
       tangentMode: 0
     - serializedVersion: 2
       time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      value: 0.4956997
+      inSlope: -0.21597035
+      outSlope: -0.21597035
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   panLevelCustomCurve:
     serializedVersion: 2
     m_Curve:
