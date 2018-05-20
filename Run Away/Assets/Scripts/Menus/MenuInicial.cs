@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MenuInicial : MonoBehaviour{
+public class MenuInicial : MonoBehaviour
+{
+    public GameObject menuPrincipal, menuOpciones;
 
+    void Start()
+    {
+        menuPrincipal.SetActive(true);
+    }
 
-	public void NuevaPartida(){
+	public void NuevaPartida()
+    {
 		GameManager.instance.CambiarEscena("Nivel1");
 	}
 
@@ -25,6 +32,18 @@ public class MenuInicial : MonoBehaviour{
 		}
 		//SceneManager.LoadScene (nivel.ToString());
 	}
+
+    public void EntrarOpciones()
+    {
+        menuPrincipal.SetActive(false);
+        menuOpciones.SetActive(true);
+    }
+
+    public void SalirOpciones()
+    {
+        menuPrincipal.SetActive(true);
+        menuOpciones.SetActive(false);
+    }
 
 	public void SalirDelJuego(){
 		Application.Quit ();
