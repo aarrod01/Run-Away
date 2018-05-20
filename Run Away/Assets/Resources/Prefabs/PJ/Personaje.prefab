@@ -763,7 +763,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invisible: 0
   movimientoLibre: 1
-  velocidadMaxima: 1.5
+  velocidadMaxima: 1.2
   factorAceleracion: 0.5
   velocidadAngularMaxima: 500
   factorAceleracionAngular: 0.7
