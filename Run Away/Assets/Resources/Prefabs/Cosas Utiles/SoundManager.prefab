@@ -136,9 +136,7 @@ MonoBehaviour:
   cancionPrincipal: {fileID: 82631772670230378}
   tonoPredeterminado: 0.3
   tonoDrogado: 2
-  volumenPredeterminado: 0.025
-  volumenMusicaPredeterminado: 0
-  volumenSonidosPredeterminado: 0
+  volumenPredeterminado: 1
+  volumenMusicaPredeterminado: 100
+  volumenSonidosPredeterminado: 43.79
   mainMixer: {fileID: 24100000, guid: e431037ea50383f44a50163112953ff2, type: 2}
-  musicMixer: {fileID: 24100000, guid: 003df90a53e7e904ab9b3a5b4f019694, type: 2}
-  effectMixer: {fileID: 24100000, guid: bf16d5b722dd53d469545cc1744f8675, type: 2}
