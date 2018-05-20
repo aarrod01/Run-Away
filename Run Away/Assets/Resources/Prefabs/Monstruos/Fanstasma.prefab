@@ -653,7 +653,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   estadoInicial: 9
   tiempoAturdimiento: 1
-  velocidadPersecucion: 5
+  velocidadPersecucion: 7
   velocidadHuida: 5
   cabreoMaximo: 20
   cabreoUmbral: 10
