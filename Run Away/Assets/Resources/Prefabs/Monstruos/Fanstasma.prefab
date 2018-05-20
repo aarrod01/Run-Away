@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 114042509893726240}
   - component: {fileID: 95336965552111772}
   - component: {fileID: 212688185068797890}
+  - component: {fileID: 58756909573860386}
   m_Layer: 0
   m_Name: GeneradorOndas
   m_TagString: Untagged
@@ -406,6 +407,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
+--- !u!58 &58756909573860386
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1818486248390448}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!58 &58880785492734946
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -500,7 +516,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 5
-  MaxDistance: 23.160585
+  MaxDistance: 23.137726
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0

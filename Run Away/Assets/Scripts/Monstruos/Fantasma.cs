@@ -134,5 +134,4 @@ public class Fantasma : MonoBehaviour
         fantasmaRB.velocity = Vector2.zero;
     }
 
-    
 }
