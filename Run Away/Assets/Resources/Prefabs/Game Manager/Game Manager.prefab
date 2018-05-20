@@ -54,8 +54,8 @@ MonoBehaviour:
   drogaConsumida: 0
   nivel: 0
   tiempoSubidon: 10
-  velocidadMinimaDroga: 0.5
-  velocidadMaximaDroga: 4
-  numeroDrogaMaxima: 17
-  intensidadLuzMaxima: 5
-  intensidadLuzMinima: 0.2
+  velocidadMinimaDroga: 0.2
+  velocidadMaximaDroga: 2.5
+  numeroDrogaMaxima: 31
+  intensidadLuzMaxima: 3
+  intensidadLuzMinima: 0.5

@@ -324,7 +324,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1362958359229634}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 1, y: 6, z: 0}
+  m_LocalPosition: {x: -11.82, y: -8.94, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4866651424240676}
@@ -711,36 +711,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DDLEvent_OnEnterFOV:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114042509893726240, guid: 470f7d2f01cdad74db413f3622856335,
-          type: 2}
-        m_MethodName: Entrar
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
     m_TypeName: DynamicLight2D.DynamicLightEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   DDLEvent_OnExitFOV:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114042509893726240, guid: 470f7d2f01cdad74db413f3622856335,
-          type: 2}
-        m_MethodName: Salir
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
     m_TypeName: DynamicLight2D.DynamicLightEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   DDLEvent_InsideFOV:
@@ -761,7 +737,7 @@ MonoBehaviour:
   Layer:
     serializedVersion: 2
     m_Bits: 4096
-  useEvents: 1
+  useEvents: 0
   objectsWithinSight: 0
   intelliderConvex: 0
   recalculateNormals: 0
@@ -819,36 +795,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DDLEvent_OnEnterFOV:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114042509893726240, guid: 470f7d2f01cdad74db413f3622856335,
-          type: 2}
-        m_MethodName: Entrar
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
     m_TypeName: DynamicLight2D.DynamicLightEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   DDLEvent_OnExitFOV:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114042509893726240, guid: 470f7d2f01cdad74db413f3622856335,
-          type: 2}
-        m_MethodName: Salir
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
     m_TypeName: DynamicLight2D.DynamicLightEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   DDLEvent_InsideFOV:
@@ -869,7 +821,7 @@ MonoBehaviour:
   Layer:
     serializedVersion: 2
     m_Bits: 4096
-  useEvents: 1
+  useEvents: 0
   objectsWithinSight: 0
   intelliderConvex: 0
   recalculateNormals: 0
@@ -895,36 +847,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DDLEvent_OnEnterFOV:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114042509893726240, guid: 470f7d2f01cdad74db413f3622856335,
-          type: 2}
-        m_MethodName: Entrar
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
     m_TypeName: DynamicLight2D.DynamicLightEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   DDLEvent_OnExitFOV:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114042509893726240, guid: 470f7d2f01cdad74db413f3622856335,
-          type: 2}
-        m_MethodName: Salir
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
     m_TypeName: DynamicLight2D.DynamicLightEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   DDLEvent_InsideFOV:
@@ -945,7 +873,7 @@ MonoBehaviour:
   Layer:
     serializedVersion: 2
     m_Bits: 4096
-  useEvents: 1
+  useEvents: 0
   objectsWithinSight: 0
   intelliderConvex: 0
   recalculateNormals: 0
@@ -993,36 +921,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DDLEvent_OnEnterFOV:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114042509893726240, guid: 470f7d2f01cdad74db413f3622856335,
-          type: 2}
-        m_MethodName: Entrar
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
     m_TypeName: DynamicLight2D.DynamicLightEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   DDLEvent_OnExitFOV:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114042509893726240, guid: 470f7d2f01cdad74db413f3622856335,
-          type: 2}
-        m_MethodName: Salir
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
     m_TypeName: DynamicLight2D.DynamicLightEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   DDLEvent_InsideFOV:
@@ -1043,8 +947,8 @@ MonoBehaviour:
   Layer:
     serializedVersion: 2
     m_Bits: 4096
-  useEvents: 1
-  objectsWithinSight: 0
+  useEvents: 0
+  objectsWithinSight: 1
   intelliderConvex: 0
   recalculateNormals: 0
   flipXYtoXZ: 0
@@ -1069,36 +973,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DDLEvent_OnEnterFOV:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114042509893726240, guid: 470f7d2f01cdad74db413f3622856335,
-          type: 2}
-        m_MethodName: Entrar
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
     m_TypeName: DynamicLight2D.DynamicLightEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   DDLEvent_OnExitFOV:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114042509893726240, guid: 470f7d2f01cdad74db413f3622856335,
-          type: 2}
-        m_MethodName: Salir
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
     m_TypeName: DynamicLight2D.DynamicLightEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   DDLEvent_InsideFOV:
@@ -1119,7 +999,7 @@ MonoBehaviour:
   Layer:
     serializedVersion: 2
     m_Bits: 4096
-  useEvents: 1
+  useEvents: 0
   objectsWithinSight: 0
   intelliderConvex: 0
   recalculateNormals: 0
