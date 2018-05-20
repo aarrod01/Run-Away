@@ -126,9 +126,6 @@ public class Panzudo : MonoBehaviour {
             Destroy(detectorGolpes.gameObject);
             este.enabled = false;
             rb2D.Sleep();
-            pasos.Stop();
-            gritoCarga.Stop();
-            respiracionBusqueda.Stop();
             GetComponent<Collider2D>().enabled = false;
             Destroy(gameObject, 5f);
         };
