@@ -34,7 +34,6 @@ public class MenuPausa : MonoBehaviour {
 
 	public void SalirAlMenu ()
     {
-		//Guardar
         SalirMenuPausa();
 		SaveLoadManager.SaveGame(GameManager.instance);
         GameManager.instance.CambiarEscena("Inicio");
@@ -55,8 +54,9 @@ public class MenuPausa : MonoBehaviour {
 
     public void ReiniciarNivel()
     {
-        GameManager GM = GameManager.instance;
-        GM.ResetarEscena();
+        //Cambiar musica si estas con la droga
+        SalirMenuPausa();
+        GameManager.instance.ResetarEscena();
     }
 
     public bool PausaActivada()
