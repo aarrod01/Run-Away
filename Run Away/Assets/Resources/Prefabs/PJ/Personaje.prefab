@@ -324,7 +324,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1362958359229634}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 1, y: 6, z: 0}
+  m_LocalPosition: {x: -12, y: -9, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4866651424240676}
@@ -763,7 +763,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invisible: 0
   movimientoLibre: 1
-  velocidadMaxima: 1.2
+  velocidadMaxima: 1.5
   factorAceleracion: 0.5
   velocidadAngularMaxima: 500
   factorAceleracionAngular: 0.7
