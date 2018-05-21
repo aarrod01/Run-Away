@@ -53,6 +53,12 @@ public class MenuPausa : MonoBehaviour {
         panelPausa.SetActive(false);
     }
 
+    public void ReiniciarNivel()
+    {
+        GameManager GM = GameManager.instance;
+        GM.ResetarEscena();
+    }
+
     public bool PausaActivada()
     {
         if (Time.timeScale == 0.0f)
