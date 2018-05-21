@@ -28,9 +28,9 @@ public class SoundManager : MonoBehaviour {
        if (instance == null)
         {
             instance = this;
-            CambiarVolumenGlobal(1f);
-            CambiarVolumenMusica(1f);
-            CambiarVolumenEfectos(1f);
+            CambiarVolumenGlobal(0f);
+            CambiarVolumenMusica(0f);
+            CambiarVolumenEfectos(0f);
             
             DontDestroyOnLoad(this.gameObject);
         }

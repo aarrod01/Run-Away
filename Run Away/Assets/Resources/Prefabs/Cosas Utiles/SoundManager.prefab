@@ -137,6 +137,6 @@ MonoBehaviour:
   tonoPredeterminado: 0.3
   tonoDrogado: 2
   volumenPredeterminado: 0
-  volumenMusicaPredeterminado: 0
+  volumenMusicaPredeterminado: -31
   volumenSonidosPredeterminado: 0
   mainMixer: {fileID: 24100000, guid: e431037ea50383f44a50163112953ff2, type: 2}
