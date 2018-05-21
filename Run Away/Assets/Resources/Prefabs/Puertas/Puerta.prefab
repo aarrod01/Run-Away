@@ -317,7 +317,7 @@ MonoBehaviour:
   color: 4
   abierta: 0
   sonido: {fileID: 82433362489473650}
-  intensidadDelSonido: 10
+  intensidadDelSonido: 12
 --- !u!212 &212385787866890036
 SpriteRenderer:
   m_ObjectHideFlags: 1

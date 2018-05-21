@@ -59,8 +59,7 @@ GameObject:
   - component: {fileID: 222075460416644932}
   - component: {fileID: 114468341314357464}
   - component: {fileID: 114020735954912296}
-  - component: {fileID: 114006318259497116}
-  - component: {fileID: 114835967938482348}
+  - component: {fileID: 114781227917670410}
   m_Layer: 5
   m_Name: Base
   m_TagString: Menu
@@ -85,17 +84,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114006318259497116
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1972074315809000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b33e392a033246409b3caf85d6611e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114020735954912296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -134,13 +122,12 @@ MonoBehaviour:
     m_MinSize: 1
     m_MaxSize: 15
     m_Alignment: 4
-    m_AlignByGeometry: 0
+    m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 2
-  m_Text: "Ahi estan... puedo oirlos...\ndebo evitar que me vean... \xBFpodre encontrar
-    algun escondite?\n\xBFO enfrentarme a caso es una opcion?"
+    m_LineSpacing: 1.5
+  m_Text: Bienvenido al tutorial de run away.
 --- !u!114 &114281270708816392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -206,7 +193,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114835967938482348
+--- !u!114 &114781227917670410
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -320,10 +307,10 @@ RectTransform:
   m_Father: {fileID: 224346488805344264}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.9126289, y: 0.018350367}
-  m_AnchorMax: {x: 0.9473014, y: 0.11564964}
-  m_AnchoredPosition: {x: -0.5, y: -0.2000122}
-  m_SizeDelta: {x: 4.04, y: -0.3800001}
+  m_AnchorMin: {x: 0.90565675, y: 0.022000002}
+  m_AnchorMax: {x: 0.95000005, y: 0.11564964}
+  m_AnchoredPosition: {x: 0.19998169, y: -0.3999939}
+  m_SizeDelta: {x: 1.9000001, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224535064637664584
 RectTransform:
@@ -338,8 +325,8 @@ RectTransform:
   m_Father: {fileID: 224346488805344264}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.21426028, y: 0.033}
-  m_AnchorMax: {x: 0.7835206, y: 0.18815328}
-  m_AnchoredPosition: {x: 1.0000019, y: 0}
-  m_SizeDelta: {x: 0.55999756, y: -0.15999985}
+  m_AnchorMin: {x: 0.20600002, y: 0.062248178}
+  m_AnchorMax: {x: 0.7904795, y: 0.13912766}
+  m_AnchoredPosition: {x: 0.61013985, y: 0.3999939}
+  m_SizeDelta: {x: 0.27999878, y: 1.2999992}
   m_Pivot: {x: 0.5, y: 0.5}
