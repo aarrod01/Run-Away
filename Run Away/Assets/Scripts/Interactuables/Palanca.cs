@@ -36,9 +36,9 @@ public class Palanca : MonoBehaviour
         palancaAnimacion.SetInteger("color",(int)color);
         conQueColisiona = LayerMask.GetMask("Obstaculos", "Jugador");
         master = GetComponent<Interactuable>();
-		master.Accion = (Jugador a) => {
+		master.Accion = (Jugador a) => 
+        {
             tiempo = Time.time;
-            //sonidoPalanca.Activar();
             a.Interactuar();
             posicionInicial = !posicionInicial;
                 palancaAnimacion.SetBool("activada", posicionInicial);
