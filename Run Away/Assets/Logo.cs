@@ -8,8 +8,15 @@ public class Logo : MonoBehaviour {
     public string nombreEscena;
     float tiempo;
 
-	void Start()
+    void Start()
     {
+        int width = 640; // or something else
+        int height = 480; // or something else
+        bool isFullScreen = false; // should be windowed to run in arbitrary resolution
+        int desiredFPS = 60; // or something else
+
+        Screen.SetResolution(width, height, isFullScreen, desiredFPS);
+        Screen.fullScreen = true;
         tiempo = Time.time;
         StartCoroutine(Transicion());
     }

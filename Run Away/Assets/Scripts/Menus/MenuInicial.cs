@@ -15,12 +15,12 @@ public class MenuInicial : MonoBehaviour
 
 	public void NuevaPartida()
     {
-		GameManager.instance.CambiarEscena("Inicio");
+		GameManager.instance.IrAEscena("NivelTutorial");
 	}
 
 	public void CargarPartida(){
 		SceneData loadedStats = SaveLoadManager.LoadGame ();
-        GameManager.instance.CambiarEscena (loadedStats.nivel);
+        GameManager.instance.IrAEscena (loadedStats.nivel);
         GameManager.instance.NumeroDeMuertes = loadedStats.numeroDeMuertes;
         GameManager.instance.drogaConsumida = loadedStats.numeroDeDroga;
         GameManager.instance.monstruosHuidos = loadedStats.monstruosHuidos;

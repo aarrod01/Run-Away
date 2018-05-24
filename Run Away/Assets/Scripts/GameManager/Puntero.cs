@@ -51,12 +51,12 @@ public class Puntero : MonoBehaviour
     public void PunteroMenu()
     {
         PunteroRetardo.instance.Invisible(true);
-        Cursor.SetCursor(punteroFueraJuego, Vector2.one * (((float)punterojuego.width) / 2f), CursorMode.Auto);
+        Cursor.SetCursor(punteroFueraJuego, Vector2.zero, CursorMode.Auto);
     }
     public void PunteroJuego()
     {
         PunteroRetardo.instance.Invisible(false);
-        Cursor.SetCursor(punterojuego, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(punterojuego, Vector2.one * (((float)punterojuego.width) / 2f), CursorMode.Auto);
     }
 
 }

@@ -93,7 +93,7 @@ public class ControladorRecorrido : MonoBehaviour
             if (padre == null)
                 numeroHijos = aux.Length;
             else
-                numeroHijos = aux.Length - 1;
+                numeroHijos = Mathf.Max(0,aux.Length - 1);
             hijos = new Nodo[numeroHijos];
             int indiceHijos = 0;
 

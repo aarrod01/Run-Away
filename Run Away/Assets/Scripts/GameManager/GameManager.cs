@@ -71,10 +71,6 @@ public class GameManager : MonoBehaviour
         }
 		jugador = GameObject.FindObjectOfType<Jugador>();
 	}
-    public void CambiarEscena(string nombreEscenaActual)
-    {
-        SceneManager.LoadScene(nombreEscenaActual);
-    }
     
     public void TerminarExitosamenteEscena()
     {
