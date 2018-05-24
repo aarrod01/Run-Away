@@ -73,21 +73,7 @@ public class GameManager : MonoBehaviour
 	}
     public void CambiarEscena(string nombreEscenaActual)
     {
-        switch (nombreEscenaActual)
-        {
-            case "Inicio":
-                SceneManager.LoadScene("NivelTutorial");
-                break;
-            case "NivelTutorial":
-                SceneManager.LoadScene("Nivel1");
-                break;
-            case "Nivel1":
-                SceneManager.LoadScene("Nivel2");
-                break;
-            case "Nivel2":
-                SceneManager.LoadScene("NivelFinal");
-                break;
-        }
+        SceneManager.LoadScene(nombreEscenaActual);
     }
     
     public void TerminarExitosamenteEscena()
