@@ -21,12 +21,12 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: -651
+        value: -504
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 30.033333
+        time: 44.916668
         value: 1430
         inSlope: 0
         outSlope: 0
@@ -59,7 +59,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 32.983334
+    m_StopTime: 46.383335
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -80,12 +80,12 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: -651
+        value: -504
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 30.033333
+        time: 44.916668
         value: 1430
         inSlope: 0
         outSlope: 0
@@ -102,7 +102,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
   m_Events:
-  - time: 32.983334
+  - time: 46.383335
     functionName: Fin
     data: 
     objectReferenceParameter: {fileID: 0}
