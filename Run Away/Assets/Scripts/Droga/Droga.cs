@@ -6,9 +6,7 @@ using UnityEngine;
 
 public class Droga : MonoBehaviour 
 {
-    public AudioClip cogerDroga;
-    [Range (0, 1)]
-    public float volumenCogerDroga;
+    public AudioSource cogerDroga;
     public float distanciaDeInteraccion;
 
 
@@ -25,7 +23,7 @@ public class Droga : MonoBehaviour
         master = GetComponent<Interactuable>();
         master.Accion += (Jugador a) =>
         {
-            //cogerDrogaSonido.Activar();
+            cogerDroga.Play();
             DrogaConsumida();
         };
         master.EsPosibleLaInteraccion = (Jugador a) =>
@@ -38,6 +36,8 @@ public class Droga : MonoBehaviour
     void DrogaConsumida()
     {
         GameManager.instance.ConsumirDroga();
-        Destroy(gameObject);
+        Destroy(this);
+        Destroy(GetComponent<SpriteRenderer>());
+        Destroy(gameObject, cogerDroga.clip.length);
     }
 }
