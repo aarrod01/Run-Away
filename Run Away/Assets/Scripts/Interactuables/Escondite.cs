@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Escondite: MonoBehaviour {
     ColisionArmario armario;
+    Collider2D collider;
     Interactuable master;
     public float distanciaDeInteraccion=1f;
     LayerMask conQueColisiona;
@@ -14,6 +15,7 @@ public class Escondite: MonoBehaviour {
     void Start () {
 
         armario = GetComponentInChildren<ColisionArmario>();
+        collider = GetComponent<Collider2D>();
         conQueColisiona = LayerMask.GetMask("Obstaculos", "Jugador");
         master = GetComponent<Interactuable>();
         master.Accion = (Jugador a) => {
@@ -34,7 +36,7 @@ public class Escondite: MonoBehaviour {
         };
         master.EsPosibleLaInteraccion = (Jugador a) =>
         {
-            return master.InteraccionPorLineaDeVision(a.transform, distanciaDeInteraccion, conQueColisiona);
+            return collider.bounds.Contains(a.transform.position)||master.InteraccionPorLineaDeVision(a.transform, distanciaDeInteraccion, conQueColisiona);
         };
         master.DistanciaDeInteraccion = () => { return distanciaDeInteraccion; };
     }

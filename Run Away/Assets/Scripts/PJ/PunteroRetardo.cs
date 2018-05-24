@@ -7,7 +7,7 @@ public class PunteroRetardo : MonoBehaviour {
 
     public static PunteroRetardo instance = null;
 
-    Interactuable objetoInteractuable = null;
+    List<Interactuable> objetoInteractuable ;
     Jugador jugador;
     bool muerto;
     Rigidbody2D puntero;
@@ -28,6 +28,7 @@ public class PunteroRetardo : MonoBehaviour {
 
     void Iniciar()
     {
+        objetoInteractuable = new List<Interactuable>();
         jugador = GameObject.FindObjectOfType<Jugador>();
         puntero = GetComponent<Rigidbody2D>();
         punteroAnimacion = GetComponent<Animator>();
@@ -39,14 +40,20 @@ public class PunteroRetardo : MonoBehaviour {
         puntero.MovePosition(Vector2.Lerp(puntero.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), lerp));
         if (!muerto)
         {
-            if (objetoInteractuable != null && objetoInteractuable.EsPosibleLaInteraccion(jugador))
+            bool encima = false;
+            foreach(Interactuable item in objetoInteractuable)
             {
-                punteroAnimacion.SetTrigger("Interactuar");
-                if (Input.GetMouseButtonDown(0))
-                    objetoInteractuable.Accion(jugador);
+                if(item.EsPosibleLaInteraccion(jugador))
+                {
+                    encima = true;
+                    if (Input.GetMouseButtonDown(0))
+                        item.Accion(jugador);
+                }
             }
+            if(encima)
+                punteroAnimacion.SetTrigger("Interactuar");
             else
-                punteroAnimacion.SetTrigger("Estatico");
+                punteroAnimacion.SetTrigger("Estatico");                
         }
             
     }
@@ -58,13 +65,14 @@ public class PunteroRetardo : MonoBehaviour {
         Interactuable aux = collision.gameObject.GetComponent<Interactuable>();
 
 		if (aux != null) 
-            objetoInteractuable = aux;
+            objetoInteractuable.Add(aux);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-		if (objetoInteractuable != null && objetoInteractuable.gameObject == collision.gameObject) 
-            objetoInteractuable = null;
+        Interactuable aux = collision.gameObject.GetComponent<Interactuable>();
+        if (aux != null)
+            objetoInteractuable.Remove(aux);
     }
     public void Muerto(bool m)
     {

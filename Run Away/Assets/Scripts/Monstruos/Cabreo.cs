@@ -5,6 +5,8 @@ using Monstruos;
 
 public class Cabreo : MonoBehaviour {
 
+    public float distanciaCabreo;
+
     Rigidbody2D jugadorRB = null;
 
     float cabreoMaximo;
@@ -25,6 +27,9 @@ public class Cabreo : MonoBehaviour {
 
     public EstadosMonstruo CambioCabreo()
     {
+        if (jugadorRB != null && (jugadorRB.position - (Vector2)transform.position).sqrMagnitude < distanciaCabreo)
+            cabreo = Mathf.Max(cabreoUmbral, cabreo);
+
         if (jugadorRB != null && jugadorRB.velocity.sqrMagnitude > MARGENESCUCHA)
             cabreo = Mathf.Min(cabreo + tasaAumentoDeCabreo * Time.fixedDeltaTime, cabreoMaximo);
         else

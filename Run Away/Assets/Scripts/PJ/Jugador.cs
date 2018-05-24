@@ -16,6 +16,7 @@ public class Jugador : MonoBehaviour
     Luz luz;
     GolpeJugador golpe;
     Piernas piernas;
+    Vida vida;
 
     public float velocidadMaxima = 1f,
                 factorAceleracion = 0.5f,
@@ -27,6 +28,7 @@ public class Jugador : MonoBehaviour
     int danyo = 1;
 
     void Start () {
+        vida = GetComponent<Vida>();
         AumentoVelocidad(1f);
         luz = GetComponentInChildren<Luz>();
         jugador = GetComponent<Rigidbody2D>();
@@ -95,13 +97,16 @@ public class Jugador : MonoBehaviour
     public void Invisible(bool a) 
 	{        
         invisible = a;
+        
     }
 
     public void Esconderse(bool a, Vector2 en)
     {
         transform.position = en;
         Invisible(a);
-        movimientoLibre=!a;
+        vida.Invulnerable(a);
+        jugador.isKinematic = a;
+        movimientoLibre =!a;
         jugador.Sleep();
         GetComponent<SpriteRenderer>().enabled = !a;
         piernas.Invisible(a);
@@ -134,8 +139,11 @@ public class Jugador : MonoBehaviour
 
     public void Atacar()
     {
-        animador.SetTrigger("atacando");
-        golpe.Golpear(0f, 1f, 1);
+        if (movimientoLibre)
+        {
+            animador.SetTrigger("atacando");
+            golpe.Golpear(0f, 1f, 1);
+        }
     }
 
     public void Andar()

@@ -40,9 +40,13 @@ public class Fantasma : MonoBehaviour
         este.CambiarEstadoMonstruo(estadoInicial);
         este.Comportamiento = () => {
             audioGrito.volume = cabreometro.Nivel();
+            
+            este.Rb2D.isKinematic = !(este.EstadoMonstruoActual() == EstadosMonstruo.SiguiendoJugador || este.EstadoMonstruoActual() == EstadosMonstruo.Proyectado);
+
             switch (este.EstadoMonstruoActual())
             {
                 case EstadosMonstruo.Huyendo:
+                    vida.Invulnerable(true);
                     generadorOndas.GenerarOndas();
                     MoverseHacia((2 * este.Rb2D.position - cabreometro.JugadorRB().position), velocidadHuida);
                     GameManager.instance.MontruoHuye(TipoMonstruo.Fantasma);
@@ -51,6 +55,7 @@ public class Fantasma : MonoBehaviour
                     Destroy(gameObject, 10f);
                     break;
                 case EstadosMonstruo.Proyectado:
+                    vida.Invulnerable(true);
                     if (Time.time - este.Cronometro > tiempoAturdimiento)
                         este.CambiarEstadoMonstruo(EstadosMonstruo.Quieto);
                     break;
@@ -60,10 +65,12 @@ public class Fantasma : MonoBehaviour
                     {
                         case EstadosMonstruo.Quieto:
                             Parar();
+                            vida.Invulnerable(true);
                             generadorOndas.PararOndas();
                             break;
 
                         case EstadosMonstruo.SiguiendoJugador:
+                            vida.Invulnerable(false);
                             MoverseHacia(cabreometro.JugadorRB().position, velocidadPersecucion);
                             generadorOndas.GenerarOndas();
                             break;
@@ -95,10 +102,13 @@ public class Fantasma : MonoBehaviour
 
         este.Atacado = (Jugador a) =>
         {
-            este.Empujar(a.transform.position, a.fuerzaEmpujon);
-            vida.Danyar(a.Danyo(), TipoMonstruo.Panzudo);
-            este.CambiarEstadoMonstruo(EstadosMonstruo.Proyectado);
-            cabreometro.Tranquilizar();
+            if (este.EstadoMonstruoActual() == EstadosMonstruo.SiguiendoJugador)
+            {
+                este.Empujar(a.transform.position, a.fuerzaEmpujon);
+                vida.Danyar(a.Danyo(), TipoMonstruo.Panzudo);
+                este.CambiarEstadoMonstruo(EstadosMonstruo.Proyectado);
+                cabreometro.Tranquilizar();
+            }
         };
 
         este.FinalAtaque = () =>
