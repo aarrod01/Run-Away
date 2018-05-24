@@ -111,7 +111,10 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene("Nivel2");
                 break;
             case "Nivel2":
-                SceneManager.LoadScene("Inicio");
+                SceneManager.LoadScene("NivelFinal");
+                break;
+            case "NivelFinal":
+                SceneManager.LoadScene("Creditos");
                 break;
         }
     }
@@ -161,6 +164,7 @@ public class GameManager : MonoBehaviour
         Invoke("Bajonazo",TiempoSubidon());
         ControladorPalanca.instance.EncenderPalancas();
         cronometro = Time.time;
+        GameObject.FindGameObjectWithTag("LuzDroga").GetComponent<LuzDroga>().Luces(drogado);
         Bajon += () =>
         {
             ControladorPalanca.instance.ApagarPalancas();
@@ -168,6 +172,7 @@ public class GameManager : MonoBehaviour
             jugador.Luz().IntensidadLuz(1f - (1f - intensidadLuzMinima) * atenuacionDroga());
             jugador.AumentoVelocidad(1f - (1f - velocidadMinimaDroga) * atenuacionDroga());
             SoundManager.instance.CambiarTonoMusica(SoundManager.instance.tonoPredeterminado);
+            GameObject.FindGameObjectWithTag("LuzDroga").GetComponent<LuzDroga>().Luces(drogado);
             Bajon = () => { };
         };
     }
