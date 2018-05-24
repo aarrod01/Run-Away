@@ -39,7 +39,7 @@ public class MenuPausa : MonoBehaviour {
         GameObject.FindObjectOfType<Puntero>().PunteroMenu();
         //SalirMenuPausa();
 		SaveLoadManager.SaveGame(GameManager.instance);
-        GameManager.instance.CambiarEscena("Inicio");
+        GameManager.instance.IrAEscena("Inicio");
 	}
 
     public void SalirOpciones()
