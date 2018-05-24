@@ -230,11 +230,11 @@ MonoBehaviour:
     Dur\xE1n Dom\xEDnguez\nMiriam Leis Baltan\xE1s\n\n<size=16>Artista Gr\xE1fica</size>\nMiriam
     Leis Baltan\xE1s\n\n<size=16>Compositor</size>\nAar\xF3n Rodr\xEDguez P\xE9rez\n\n<size=16>Testers</size>\nDavid
     Carmona Fauste\nIgnacio Ory Alonso\r\r\nPablo Joaqu\xEDn Rodr\xEDguez Hidalgo\r\nMario
-    Tabasco Vargas\n\n<size=18>Agradecimientos</size>\n\nA nuestras familias y amigos
-    que nos \nhan aguantado durante tantos a\xF1os,\nen especial a Ana, Carlos y Mart\xEDn
-    por su tiempo\ninvertido en este proyecto,\n\nA Guille por habernos orientado
-    y financiado.\n\nA Fede por haber soportado el aluvi\xF3n\nde preguntas de IA.\n\nA
-    Jaime que ha estado ah\xED escuchando\nbarbariades de programaci\xF3n."
+    Tabasco Vargas\nMartin Hern\xE1ndez Fern\xE1ndez\n\n<size=18>Agradecimientos</size>\n\nA
+    nuestras familias y amigos que nos \nhan aguantado durante tantos a\xF1os,\nen
+    especial a Ana, Carlos y Mart\xEDn por su tiempo\ninvertido en este proyecto,\n\nA
+    Guille por habernos orientado y financiado.\n\nA Fede por haber soportado el aluvi\xF3n\nde
+    preguntas de IA.\n\nA Jaime que ha estado ah\xED escuchando\nbarbariades de programaci\xF3n."
 --- !u!222 &74705941
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -273,8 +273,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -177.4, y: -892.4}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -157.6651, y: -982}
+  m_SizeDelta: {x: 222.6, y: 276.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &378224527
 MonoBehaviour:
@@ -341,7 +341,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 199, y: -896}
+  m_AnchoredPosition: {x: 199, y: -982}
   m_SizeDelta: {x: 640, y: 480}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &627647833
@@ -451,8 +451,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.2737368e-13, y: -898}
-  m_SizeDelta: {x: 4.5474735e-13, y: 0}
+  m_AnchoredPosition: {x: 9.78, y: -982}
+  m_SizeDelta: {x: 261.56, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &923351897
 MonoBehaviour:
@@ -669,8 +669,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.323788}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1546}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 9.78, y: -1519.9}
+  m_SizeDelta: {x: -75.29, y: 89.57}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1384726935
 MonoBehaviour:
