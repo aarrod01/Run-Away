@@ -21,7 +21,8 @@ GameObject:
   - component: {fileID: 4230753584508054}
   - component: {fileID: 114382947249343510}
   - component: {fileID: 61181173064249704}
-  m_Layer: 15
+  - component: {fileID: 114147035235780020}
+  m_Layer: 24
   m_Name: ZonaActivacionPalanca
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1248291907731688}
   m_LocalRotation: {x: 0, y: 0, z: 0.000008726646, w: 1}
-  m_LocalPosition: {x: -12, y: -6, z: 0}
+  m_LocalPosition: {x: -15, y: -8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -64,8 +65,19 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4, y: 4}
+  m_Size: {x: 2, y: 4}
   m_EdgeRadius: 0
+--- !u!114 &114147035235780020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1248291907731688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac91676b9e1e87a448286482a425a460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114382947249343510
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Guardado;
 
 public class MenuInicial : MonoBehaviour
 {
@@ -18,20 +19,14 @@ public class MenuInicial : MonoBehaviour
 	}
 
 	public void CargarPartida(){
-		int[] loadedStats = SaveLoadManager.LoadGame ();
-
-		switch (loadedStats [0]) {
-		case 0:
-			break;
-		case 1:
-			GameManager.instance.CambiarEscena ("Nivel1");
-			break;
-		case 2:
-			GameManager.instance.CambiarEscena ("Nivel2");
-			break;
-		}
-		//SceneManager.LoadScene (nivel.ToString());
-	}
+		SceneData loadedStats = SaveLoadManager.LoadGame ();
+        GameManager.instance.CambiarEscena (loadedStats.nivel);
+        GameManager.instance.NumeroDeMuertes = loadedStats.numeroDeMuertes;
+        GameManager.instance.drogaConsumida = loadedStats.numeroDeDroga;
+        GameManager.instance.monstruosHuidos = loadedStats.monstruosHuidos;
+        GameManager.instance.monstruosIgnorados = loadedStats.monstruosIgnorados;
+        GameManager.instance.monstruosMuertos = loadedStats.monstruosMuertos;
+    }
 
     public void EntrarOpciones()
     {

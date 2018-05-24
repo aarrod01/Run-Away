@@ -4,6 +4,8 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine;
+using Monstruos;
+using Guardado;
 
 public static class SaveLoadManager{
 
@@ -17,7 +19,7 @@ public static class SaveLoadManager{
 		stream.Close ();
 	}
 
-	public static int[] LoadGame(){
+	public static SceneData LoadGame(){
 		if (File.Exists (Path.GetFullPath(".") + "/scene.sav")) {
 			BinaryFormatter bf = new BinaryFormatter ();
 			FileStream stream = new FileStream (Path.GetFullPath(".") + "/scene.sav", FileMode.Open);
@@ -25,26 +27,48 @@ public static class SaveLoadManager{
 			SceneData data = bf.Deserialize (stream) as SceneData;
 
 			stream.Close ();
-			return data.stats;
+			return data;
 		} else {
 			Debug.LogError ("File does not exist.");
-			return new int[2];
+			return new SceneData();
 		}
 	}
 
 }
 
+namespace Guardado {
+    [Serializable]
+    public class SceneData
+    {
 
-[Serializable]
-public class SceneData {
+        public string nivel;
+        public int[] monstruosMuertos,
+            monstruosHuidos,
+            monstruosIgnorados;
+        public int numeroDeMuertes = 0, numeroDeDroga;
 
-	public int[] stats;
+        public SceneData()
+        {
+            nivel = "NivelTutorial";
+            int n = Enum.GetValues(typeof(TipoMonstruo)).Length;
+            monstruosMuertos = new int[n];
+            monstruosIgnorados = new int[n];
+            monstruosHuidos = new int[n];
+            numeroDeMuertes = 0;
+            numeroDeDroga = 0;
+        }
 
-	public SceneData(GameManager gm){
-		stats = new int[2];
-		stats[0] = gm.nivel;
-		stats[1] = gm.drogaConsumida;
-		//stats[2];
-	}
+        public SceneData(GameManager gm)
+        {
 
+            nivel = gm.Nivel;
+            monstruosMuertos = gm.monstruosMuertos;
+            monstruosIgnorados = gm.monstruosIgnorados;
+            monstruosHuidos = gm.monstruosHuidos;
+            numeroDeMuertes = gm.NumeroDeMuertes;
+            numeroDeDroga = gm.drogaConsumida;
+
+        }
+
+    }
 }

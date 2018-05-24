@@ -4,34 +4,36 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using Monstruos;
+using UnityEngine.SceneManagement;
+
 public delegate void funcionVacia();
 public class GameManager : MonoBehaviour
 {
     public funcionVacia Bajon = () => { };
     public static GameManager instance = null;
 
-    public int drogaConsumida = 0,
-	          nivel = 0;
+    public int drogaConsumida = 0;
     public float tiempoSubidon, 
                 velocidadMinimaDroga, 
                 velocidadMaximaDroga,
                 numeroDrogaMaxima,
                 intensidadLuzMaxima,
                 intensidadLuzMinima;
-    public int NumeroDeMuertes{ get { return numeroDeMuertes; } }
-
-    Jugador jugador = null;
-
-    bool drogado = false;
-
-    int[] monstruosMuertos,
+    public int[] monstruosMuertos,
         monstruosMuertosTemporales,
         monstruosHuidos,
         monstruosHuidosTemporales,
         monstruosIgnorados;
-    int numeroDeMuertes = 0;
+    public int NumeroDeMuertes = 0;
+    public string Nivel;
 
-    void Start()
+    Jugador jugador = null;
+
+    bool drogado = false;
+    float cronometro;
+    int drogaConsumidaTemporal = 0;
+
+    void Awake()
     {
         if (instance == null)
         {
@@ -47,10 +49,17 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         instance.IniciarEscena();
     }
-
-	public void IniciarEscena()
+    private void Update()
+    {
+        Bajonazo().MoveNext();
+    }
+    public void IniciarEscena()
 	{
-
+        Nivel = SceneManager.GetActiveScene().name;
+        cronometro = Time.time;
+        if(SoundManager.instance!=null)
+            SoundManager.instance.CambiarTonoMusica(SoundManager.instance.tonoPredeterminado);
+        Bajon = () => { };
         int n = Enum.GetValues(typeof(TipoMonstruo)).Length;
         monstruosMuertosTemporales = new int[n];
         monstruosHuidosTemporales = new int[n];
@@ -67,18 +76,12 @@ public class GameManager : MonoBehaviour
         switch (nombreEscenaActual)
         {
             case "Inicio":
-                nivel = 0;
-                Debug.Log("Se ha cambiado a la escena: " + nivel);
                 SceneManager.LoadScene("Inicio");
                 break;
             case "Nivel1":
-                nivel = 1;
-                Debug.Log("Se ha cambiado a la escena: " + nivel);
                 SceneManager.LoadScene("Nivel1");
                 break;
             case "Nivel2":
-                nivel = 2;
-                Debug.Log("Se ha cambiado a la escena: " + nivel);
                 SceneManager.LoadScene("Nivel2");
                 break;
         }
@@ -98,16 +101,16 @@ public class GameManager : MonoBehaviour
         {
             monstruosIgnorados[(int)monstruos[i].Tipo()]++;
         }
-
+        drogaConsumida += drogaConsumidaTemporal;
         switch (SceneManager.GetActiveScene().name)
         {
-            
+            case "NivelTutorial":
+                SceneManager.LoadScene("Nivel1");
+                break;
             case "Nivel1":
-                nivel = 2;
                 SceneManager.LoadScene("Nivel2");
                 break;
             case "Nivel2":
-                nivel = 0;
                 SceneManager.LoadScene("Inicio");
                 break;
         }
@@ -140,7 +143,7 @@ public class GameManager : MonoBehaviour
 	public void JugadorMuerto()
 	{
 		Invoke("ResetarEscena", 5f);
-        numeroDeMuertes++;
+        NumeroDeMuertes++;
 	}
 
 	public void ResetarEscena ()
@@ -151,30 +154,35 @@ public class GameManager : MonoBehaviour
     public void ConsumirDroga()
     {
         drogado = true;
-        drogaConsumida++;
+        drogaConsumidaTemporal++;
         jugador.Luz().IntensidadLuz(1f - (1f - intensidadLuzMaxima) * atenuacionDroga());
         jugador.AumentoVelocidad(1f - (1f - velocidadMaximaDroga) * atenuacionDroga());
         SoundManager.instance.CambiarTonoMusica(SoundManager.instance.tonoDrogado);
         Invoke("Bajonazo",TiempoSubidon());
         ControladorPalanca.instance.EncenderPalancas();
-        Bajon = () =>
+        cronometro = Time.time;
+        Bajon += () =>
         {
             ControladorPalanca.instance.ApagarPalancas();
             drogado = false;
             jugador.Luz().IntensidadLuz(1f - (1f - intensidadLuzMinima) * atenuacionDroga());
             jugador.AumentoVelocidad(1f - (1f - velocidadMinimaDroga) * atenuacionDroga());
             SoundManager.instance.CambiarTonoMusica(SoundManager.instance.tonoPredeterminado);
+            Bajon = () => { };
         };
     }
 
     float atenuacionDroga()
     {
-        return drogaConsumida / numeroDrogaMaxima;
+        return (drogaConsumida +drogaConsumidaTemporal)/ numeroDrogaMaxima;
     }
 
-    void Bajonazo()
+    IEnumerator Bajonazo()
     {
+        while (Time.time - cronometro < tiempoSubidon)
+            yield return 0;
         Bajon();
+        yield return null;
     }
 
     float TiempoSubidon()
@@ -189,7 +197,7 @@ public class GameManager : MonoBehaviour
 
     int PrioridadMaxima(TipoMonstruo tipo)
     {
-        return 6;//2*monstruosHuidos[(int)tipo] + monstruosIgnorados[(int)tipo];
+        return 2*monstruosHuidos[(int)tipo] + monstruosIgnorados[(int)tipo];
     }
 
 }

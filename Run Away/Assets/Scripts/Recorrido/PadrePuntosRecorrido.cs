@@ -179,7 +179,7 @@ public class PadrePuntosRecorrido : MonoBehaviour
 {
     TileBase[] casillas;
     BoundsInt limite;
-    Patron4[] patronesGenerales, patronesImposibles, patronesExcepciones;
+    Patron4[] patronesGenerales, patronesExcluyentes, patronesExcepciones, patronesImposibles;
     Vector2 posicionInferiorIzquierda;
     Vector2 vectorDesdeEsquinaInferiorIzquierdaACentro;
     float ancho;
@@ -205,8 +205,9 @@ public class PadrePuntosRecorrido : MonoBehaviour
     public void Inicializar()
     {
         patronesGenerales = PatronGeneral();
-        patronesImposibles = PatronExcluyente();
+        patronesExcluyentes = PatronExcluyente();
         patronesExcepciones = PatronExcepciones();
+        patronesImposibles = PatronImposible();
         Tilemap aux = GameObject.FindGameObjectWithTag("Pared").GetComponent<Tilemap>();
         limite = aux.cellBounds;
         posicionInferiorIzquierda = aux.LocalToWorld(aux.localBounds.min);
@@ -218,6 +219,16 @@ public class PadrePuntosRecorrido : MonoBehaviour
     private void Start()
     {
         Destroy(this);
+    }
+    Patron4[] PatronImposible()
+    {
+        Patron4[] ret = new Patron4[4];
+        for(int i = 0; i<ret.Length; i++)
+        {
+            ret[i] = new Patron4();
+            ret[i].RellenarCasilla(new Vector2Int(1 + i % 2, 1 + i / 2), Contenido.Lleno);
+        }
+        return ret;
     }
 
     Patron4[] PatronGeneral()
@@ -296,17 +307,24 @@ public class PadrePuntosRecorrido : MonoBehaviour
         if (i == patronesImposibles.Length)
         {
             i = 0;
-            while (i < patronesGenerales.Length && !EstaElPatronEn(x, y, patronesGenerales[i]))
+            while (i < patronesExcluyentes.Length && !EstaElPatronEn(x, y, patronesExcluyentes[i]))
                 i++;
-            return i != patronesGenerales.Length;
+            if (i == patronesExcluyentes.Length)
+            {
+                i = 0;
+                while (i < patronesGenerales.Length && !EstaElPatronEn(x, y, patronesGenerales[i]))
+                    i++;
+                return i != patronesGenerales.Length;
+            }
+            else
+            {
+                i = 0;
+                while (i < patronesExcepciones.Length && !EstaElPatronEn(x, y, patronesExcepciones[i]))
+                    i++;
+                return i < patronesExcepciones.Length; ;
+            }
         }
-        else
-        {
-            i = 0;
-            while (i < patronesExcepciones.Length && !EstaElPatronEn(x, y, patronesExcepciones[i]))
-                i++;
-            return i < patronesExcepciones.Length; ;
-        }
+        return false;
     }
 
     public GameObject CrearEn(int x, int y, GameObject prefab)

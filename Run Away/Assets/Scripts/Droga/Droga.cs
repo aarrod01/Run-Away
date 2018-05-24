@@ -23,7 +23,7 @@ public class Droga : MonoBehaviour
         }*/
         conQueColisiona = LayerMask.GetMask("Obstaculos", "Jugador");
         master = GetComponent<Interactuable>();
-        master.Accion = (Jugador a) =>
+        master.Accion += (Jugador a) =>
         {
             //cogerDrogaSonido.Activar();
             DrogaConsumida();

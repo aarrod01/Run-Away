@@ -44,6 +44,7 @@ TextureImporter:
     21300074: PuerFin3
     21300076: ArmCer
     21300078: ArmAb
+    21300080: Vacio
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -1023,6 +1024,20 @@ TextureImporter:
         - {x: -2, y: -54}
         - {x: 32, y: -54}
         - {x: 32, y: 54}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Vacio
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 220
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
       tessellationDetail: 0
     outline: []
     physicsShape: []
