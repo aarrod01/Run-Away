@@ -19,7 +19,8 @@ public class MenuPausa : MonoBehaviour {
 
 	public void PausarPartida()
     {
-			Time.timeScale = 0.0f;
+        GameObject.FindObjectOfType<Puntero>().PunteroMenu();
+        Time.timeScale = 0.0f;
 			panelPausa.SetActive (true);
 			Debug.Log (Application.persistentDataPath);
 			Debug.Log (Application.dataPath);
@@ -27,13 +28,15 @@ public class MenuPausa : MonoBehaviour {
 
 	public void MenuOpciones ()
     {
-		panelPausa.SetActive (false);
+        GameObject.FindObjectOfType<Puntero>().PunteroMenu();
+        panelPausa.SetActive (false);
         salirOpciones = false;
 		panelOpciones.SetActive (true);
 	}
 
 	public void SalirAlMenu ()
     {
+        GameObject.FindObjectOfType<Puntero>().PunteroMenu();
         SalirMenuPausa();
 		SaveLoadManager.SaveGame(GameManager.instance);
         GameManager.instance.CambiarEscena("Inicio");
@@ -41,6 +44,7 @@ public class MenuPausa : MonoBehaviour {
 
     public void SalirOpciones()
     {
+        GameObject.FindObjectOfType<Puntero>().PunteroMenu();
         panelOpciones.SetActive(false);
         salirOpciones = true;
         PausarPartida();
@@ -48,6 +52,7 @@ public class MenuPausa : MonoBehaviour {
 
     public void SalirMenuPausa()
     {
+        GameObject.FindObjectOfType<Puntero>().PunteroJuego();
         Time.timeScale = 1.0f;
         panelPausa.SetActive(false);
     }

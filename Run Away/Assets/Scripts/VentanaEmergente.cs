@@ -15,14 +15,18 @@ public class VentanaEmergente: MonoBehaviour {
     void Start()
     {
         Time.timeScale = 0.0f;
+        GameObject.FindObjectOfType<Puntero>().PunteroMenu();
         Activada = true;
     }
 
     public void Siguiente()
     {
         Time.timeScale = 1.0f;
+        
         if (siguiente != null)
             siguiente.SetActive(true);
+        else
+            GameObject.FindObjectOfType<Puntero>().PunteroJuego();
         gameObject.SetActive(false);
     }
 }

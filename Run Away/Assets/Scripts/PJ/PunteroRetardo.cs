@@ -70,4 +70,9 @@ public class PunteroRetardo : MonoBehaviour {
     {
         muerto = m;
     }
+
+    public void Invisible(bool a)
+    {
+        punteroAnimacion.GetComponent<SpriteRenderer>().enabled = !a;
+    }
 }

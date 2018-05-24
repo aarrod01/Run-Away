@@ -76,32 +76,37 @@ public class GameManager : MonoBehaviour
         switch (nombreEscenaActual)
         {
             case "Inicio":
-                SceneManager.LoadScene("Inicio");
+                SceneManager.LoadScene("NivelTutorial");
                 break;
-            case "Nivel1":
+            case "NivelTutorial":
                 SceneManager.LoadScene("Nivel1");
                 break;
-            case "Nivel2":
+            case "Nivel1":
                 SceneManager.LoadScene("Nivel2");
+                break;
+            case "Nivel2":
+                SceneManager.LoadScene("NivelFinal");
                 break;
         }
     }
     
     public void TerminarExitosamenteEscena()
     {
-
-        int n = Enum.GetValues(typeof(TipoMonstruo)).Length;
-        for(int i =0; i<n; i++)
+        if (SceneManager.GetActiveScene().name != "NivelTutorial")
         {
-            monstruosMuertos[i] += monstruosMuertosTemporales[i];
-            monstruosHuidos[i] += monstruosHuidosTemporales[i];
+            int n = Enum.GetValues(typeof(TipoMonstruo)).Length;
+            for (int i = 0; i < n; i++)
+            {
+                monstruosMuertos[i] += monstruosMuertosTemporales[i];
+                monstruosHuidos[i] += monstruosHuidosTemporales[i];
+            }
+            Monstruo[] monstruos = GameObject.FindObjectsOfType<Monstruo>();
+            for (int i = 0; i < monstruos.Length; i++)
+            {
+                monstruosIgnorados[(int)monstruos[i].Tipo()]++;
+            }
+            drogaConsumida += drogaConsumidaTemporal;
         }
-        Monstruo[] monstruos = GameObject.FindObjectsOfType<Monstruo>();
-        for(int i = 0; i<monstruos.Length; i++)
-        {
-            monstruosIgnorados[(int)monstruos[i].Tipo()]++;
-        }
-        drogaConsumida += drogaConsumidaTemporal;
         switch (SceneManager.GetActiveScene().name)
         {
             case "NivelTutorial":
@@ -143,11 +148,18 @@ public class GameManager : MonoBehaviour
     }
 
 
-	public void JugadorMuerto()
-	{
-		Invoke("ResetarEscena", 5f);
-        NumeroDeMuertes++;
-	}
+    public void JugadorMuerto()
+    {
+        if (SceneManager.GetActiveScene().name != "NivelFinal")
+        {
+            Invoke("ResetarEscena", 5f);
+            NumeroDeMuertes++;
+        }
+        else
+        {
+            GameObject.FindObjectOfType<FinalPartida>().Fin(jugador.transform);
+        }
+    }
 
 	public void ResetarEscena ()
 	{
@@ -203,6 +215,11 @@ public class GameManager : MonoBehaviour
     int PrioridadMaxima(TipoMonstruo tipo)
     {
         return 2*monstruosHuidos[(int)tipo] + monstruosIgnorados[(int)tipo];
+    }
+
+    public void IrAEscena(string nombre)
+    {
+        SceneManager.LoadScene(nombre);
     }
 
 }

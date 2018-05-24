@@ -343,7 +343,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1362958359229634}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: -12, y: -9, z: -0.1}
+  m_LocalPosition: {x: 1, y: 6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4866651424240676}
@@ -919,8 +919,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 348082d789964ed45b0894ef64c94042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimo: {r: 0, g: 0, b: 0, a: 0}
-  maximo: {r: 0, g: 0, b: 0, a: 0}
+  rMin: 0
+  rMax: 1
+  gMin: 0
+  gMax: 1
+  bMin: 0
+  bMax: 1
+  velocidadCambio: 5
 --- !u!114 &114623776048935260
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1029,7 +1034,7 @@ MonoBehaviour:
   light2DType: 0
   SortOrderID: -1
   strokeRender: 0
-  LightRadius: 20
+  LightRadius: 100
   Segments: 20
   Layer:
     serializedVersion: 2

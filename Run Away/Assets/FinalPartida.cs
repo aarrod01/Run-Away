@@ -46,11 +46,17 @@ public class FinalPartida : MonoBehaviour {
     {
         if(collision.tag=="Player")
         {
-            tiempo = Time.time;
-            StartCoroutine(Final());
+            Fin(collision.transform);
         }
     }
 
+    public void Fin(Transform tr)
+    {
+        GameObject.FindObjectOfType<Puntero>().PunteroMenu();
+        luz.transform.position = tr.position;
+        tiempo = Time.time;
+        StartCoroutine(Final());
+    }
     IEnumerator Final()
     {
         

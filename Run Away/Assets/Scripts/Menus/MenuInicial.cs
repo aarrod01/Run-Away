@@ -15,7 +15,7 @@ public class MenuInicial : MonoBehaviour
 
 	public void NuevaPartida()
     {
-		GameManager.instance.CambiarEscena("Nivel1");
+		GameManager.instance.CambiarEscena("Inicio");
 	}
 
 	public void CargarPartida(){

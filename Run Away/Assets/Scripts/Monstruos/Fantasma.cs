@@ -73,7 +73,7 @@ public class Fantasma : MonoBehaviour
         };
 
         audioGrito.Play();
-
+        audioGrito.volume = 0f;
         este.Morir = () =>
         {
             generadorOndas.enabled = false;

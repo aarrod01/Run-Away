@@ -48,12 +48,15 @@ public class Puntero : MonoBehaviour
         }
 	}
 
-    void Update()
+    public void PunteroMenu()
     {
-        if (enJuego)
-            if (menuPausa.PausaActivada() == true)
-                Cursor.SetCursor(punteroFueraJuego, Vector2.zero, CursorMode.Auto);
-            else
-                Cursor.SetCursor(punterojuego, Vector2.one * (((float)punterojuego.width) / 2f), CursorMode.Auto);
+        PunteroRetardo.instance.Invisible(true);
+        Cursor.SetCursor(punteroFueraJuego, Vector2.one * (((float)punterojuego.width) / 2f), CursorMode.Auto);
     }
+    public void PunteroJuego()
+    {
+        PunteroRetardo.instance.Invisible(false);
+        Cursor.SetCursor(punterojuego, Vector2.zero, CursorMode.Auto);
+    }
+
 }
