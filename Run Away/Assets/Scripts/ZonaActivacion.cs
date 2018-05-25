@@ -9,7 +9,7 @@ public class ZonaActivacion : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D otro)
     {
-        if (otro.tag == "Player"&& !objeto.Activada)
+        if (otro.tag == "Player"&& !objeto.Activada&&objeto!=null)
             objeto.gameObject.SetActive(true);
     }
 }

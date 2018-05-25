@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
     }
     public void IniciarEscena()
 	{
+        drogaConsumidaTemporal = 0;
         Nivel = SceneManager.GetActiveScene().name;
         cronometro = Time.time;
         if(SoundManager.instance!=null)
@@ -69,8 +70,15 @@ public class GameManager : MonoBehaviour
             if(monstruos[i].prioridad>PrioridadMaxima(monstruos[i].Tipo()))
                 Destroy(monstruos[i].gameObject);
         }
+        for(int i =0; i< monstruosHuidosTemporales.Length; i++)
+        {
+            monstruosHuidosTemporales[i] = 0;
+            monstruosMuertosTemporales[i] = 0;
+        }
+
 		jugador = GameObject.FindObjectOfType<Jugador>();
-	}
+        
+    }
     
     public void TerminarExitosamenteEscena()
     {
@@ -129,7 +137,14 @@ public class GameManager : MonoBehaviour
         monstruosIgnorados[(int)tipo]++;
     }
 
-
+    public void RestaurarJugador()
+    {
+        if (jugador != null)
+        {
+            jugador.Luz().IntensidadLuz(1f - (1f - intensidadLuzMinima) * atenuacionDroga());
+            jugador.AumentoVelocidad(1f - (1f - velocidadMinimaDroga) * atenuacionDroga());
+        }
+    }
     public void JugadorMuerto()
     {
         if (SceneManager.GetActiveScene().name != "NivelFinal")
@@ -196,7 +211,7 @@ public class GameManager : MonoBehaviour
 
     int PrioridadMaxima(TipoMonstruo tipo)
     {
-        return 10;// 2*monstruosHuidos[(int)tipo] + monstruosIgnorados[(int)tipo];
+        return 2*monstruosHuidos[(int)tipo] + monstruosIgnorados[(int)tipo];
     }
 
     public void IrAEscena(string nombre)

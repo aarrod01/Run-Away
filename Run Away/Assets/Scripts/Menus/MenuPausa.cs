@@ -9,8 +9,6 @@ public class MenuPausa : MonoBehaviour {
 	public GameObject panelPausa;
 	public GameObject panelOpciones;
 
-    bool salirOpciones = true;
-
 	void Update()
     {
 		if (Input.GetKeyDown(KeyCode.Escape))
@@ -30,7 +28,6 @@ public class MenuPausa : MonoBehaviour {
     {
         GameObject.FindObjectOfType<Puntero>().PunteroMenu();
         panelPausa.SetActive (false);
-        salirOpciones = false;
 		panelOpciones.SetActive (true);
 	}
 
@@ -46,7 +43,6 @@ public class MenuPausa : MonoBehaviour {
     {
         GameObject.FindObjectOfType<Puntero>().PunteroMenu();
         panelOpciones.SetActive(false);
-        salirOpciones = true;
         PausarPartida();
     }
 

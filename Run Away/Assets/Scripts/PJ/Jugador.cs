@@ -38,6 +38,7 @@ public class Jugador : MonoBehaviour
         golpe = GetComponentInChildren<GolpeJugador>();
         piernas = GetComponentInChildren<Piernas>();
         golpe.Iniciar();
+        GameManager.instance.RestaurarJugador();
     }
 		
 	void FixedUpdate () 

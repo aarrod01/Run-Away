@@ -48,10 +48,9 @@ public class Fantasma : MonoBehaviour
             {
                 case EstadosMonstruo.Huyendo:
                     vida.Invulnerable(true);
-                    generadorOndas.GenerarOndas();
-                    MoverseHacia((2 * este.Rb2D.position - cabreometro.JugadorRB().position), velocidadHuida);
+                    este.Rb2D.velocity=(2 * este.Rb2D.position - cabreometro.JugadorRB().position).normalized*velocidadHuida;
+                    GiroInstantaneo(este.Rb2D.position - jugadorP.position);
                     GameManager.instance.MontruoHuye(TipoMonstruo.Fantasma);
-                    GetComponent<Collider2D>().enabled = false;
                     audioGrito.Stop();
                     Destroy(gameObject, 10f);
                     break;

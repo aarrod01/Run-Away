@@ -11,6 +11,7 @@ public class CamaraPrincipal : MonoBehaviour
     public float frecuenciaLemniscata = 1f;
     public float velocidadGiro = 1f;
     public float anguloGiroMaximo = 10f;
+    public PostProcessingProfile perfil;
 
     Rigidbody2D rbJugador, cameraRb, punteroRb;
     Transform transformCamaraRelativo;
@@ -20,14 +21,18 @@ public class CamaraPrincipal : MonoBehaviour
 
     // Use this for initialization
     void Start () {
-        
-        GameObject player = GameObject.FindWithTag("Player");
-        rbJugador = player.GetComponent<Rigidbody2D>();
-        punteroRb = GameObject.FindObjectOfType<PunteroRetardo>().GetComponent<Rigidbody2D>();
-        jugador = player.GetComponent<Jugador>();
         cameraRb = GetComponent<Rigidbody2D>();
+        GameObject player = GameObject.FindWithTag("Player");
+        if(player != null){
+            rbJugador = player.GetComponent<Rigidbody2D>();
+            jugador = player.GetComponent<Jugador>();
+            cameraRb.position = rbJugador.position;
+        }
+        PunteroRetardo aux = GameObject.FindObjectOfType<PunteroRetardo>();
+        if(aux!=null)
+            punteroRb = aux.GetComponent<Rigidbody2D>();
+       
         transformCamaraRelativo = transform.GetChild(0);
-        cameraRb.position = rbJugador.position;
         velocidadTraslacionSimple = Vector2.zero;
     }
 		
@@ -49,25 +54,30 @@ public class CamaraPrincipal : MonoBehaviour
     }
     void TraslacionSimple(ref Vector2 velocidad)
 	{
+        if(rbJugador!=null)
 			Vector2.SmoothDamp (cameraRb.position,
                 rbJugador.position, ref velocidad, smoothTime, float.MaxValue, Time.deltaTime);
     }
 
     void CameraRoll()
     {
-        if(rbJugador.velocity.x>0f)
+        if (rbJugador != null)
         {
-            cameraRb.rotation = Mathf.Min(cameraRb.rotation + Time.deltaTime * velocidadGiro,anguloGiroMaximo);
-        }else if(rbJugador.velocity.x<0f)
-        {
-            cameraRb.rotation = Mathf.Max(cameraRb.rotation - Time.deltaTime * velocidadGiro, -anguloGiroMaximo);
+            if (rbJugador.velocity.x > 0f)
+            {
+                cameraRb.rotation = Mathf.Min(cameraRb.rotation + Time.deltaTime * velocidadGiro, anguloGiroMaximo);
+            }
+            else if (rbJugador.velocity.x < 0f)
+            {
+                cameraRb.rotation = Mathf.Max(cameraRb.rotation - Time.deltaTime * velocidadGiro, -anguloGiroMaximo);
+            }
         }
     }
-    /*
+    
     public void CambiarBrillo(float brillo)
     {
-       ColorGradingModel.Settings aux = a.colorGrading.settings;
+       ColorGradingModel.Settings aux = perfil.colorGrading.settings;
        aux.basic.postExposure = brillo;
-       a.colorGrading.settings = aux;
-    }*/
+       perfil.colorGrading.settings = aux;
+    }
 }

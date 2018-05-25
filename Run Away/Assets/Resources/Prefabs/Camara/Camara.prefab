@@ -245,6 +245,7 @@ MonoBehaviour:
   frecuenciaLemniscata: 0.2
   velocidadGiro: 0.5
   anguloGiroMaximo: 3
+  perfil: {fileID: 11400000, guid: d04532910be9dc54eba4894b02e490c3, type: 2}
 --- !u!124 &124956717684362218
 Behaviour:
   m_ObjectHideFlags: 1
