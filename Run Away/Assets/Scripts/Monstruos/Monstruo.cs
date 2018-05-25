@@ -18,7 +18,7 @@ public class Monstruo : MonoBehaviour
     public int prioridad;
     
 
-    public const float MARGEN = 0.001f;
+    public const float MARGEN = 0.1f;
 
     public funcionVacia Comportamiento;
     public Rigidbody2D Rb2D { get { return rb2D; }set { rb2D = value; } }

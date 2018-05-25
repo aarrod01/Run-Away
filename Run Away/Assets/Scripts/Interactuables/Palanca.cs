@@ -17,9 +17,7 @@ public class Palanca : MonoBehaviour
 	public  Colores.Colores color;
 	public float distanciaDeInteraccion=0.3f;
     public bool posicionInicial;
-    public AudioClip sonido;
-    [Range(0,1)]
-    public float volumen;
+    public AudioSource sonido;
     public float tiempoDeReactivacion;
 
 	void Start () {
@@ -38,6 +36,7 @@ public class Palanca : MonoBehaviour
         master = GetComponent<Interactuable>();
 		master.Accion = (Jugador a) => 
         {
+            sonido.Play();
             tiempo = Time.time;
             a.Interactuar();
             posicionInicial = !posicionInicial;

@@ -9,7 +9,7 @@ public class LuzPuntual : MonoBehaviour {
     CircleCollider2D circuloColision;
     float radio;
 
-    private void Start()
+    private void Awake()
     {
         luces = GetComponentsInChildren<DynamicLight>();
         circuloColision = GetComponent<CircleCollider2D>();
