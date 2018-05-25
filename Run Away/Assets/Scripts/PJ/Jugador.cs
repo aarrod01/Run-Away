@@ -25,7 +25,8 @@ public class Jugador : MonoBehaviour
                 factorGiro = 0.5f,
                 fraccionMinimaVelocidadHaciaDetras = 0.5f,
                 vidas = 1, fuerzaEmpujon = 200f;
-    int danyo = 1;
+    public int danyo;
+    public float retardoAtaque, duracionAtaque;
 
     void Start () {
         vida = GetComponent<Vida>();
@@ -142,7 +143,7 @@ public class Jugador : MonoBehaviour
         if (movimientoLibre)
         {
             animador.SetTrigger("atacando");
-            golpe.Golpear(0f, 1f, 1);
+            golpe.Golpear(retardoAtaque, duracionAtaque, danyo);
         }
     }
 

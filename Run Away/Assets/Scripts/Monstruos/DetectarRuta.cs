@@ -13,7 +13,7 @@ public class DetectarRuta : MonoBehaviour
     [SerializeField]
     public PuntoRecorrido[] ruta;
 
-    const float MARGEN = 0.1f;
+    const float MARGEN = 0.3f;
     
 	void Start(){
 

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4712025710227350}
   - component: {fileID: 70600801635399068}
   - component: {fileID: 114406659005751022}
+  - component: {fileID: 58965018675712230}
   m_Layer: 27
   m_Name: Golpe
   m_TagString: Untagged
@@ -173,7 +174,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4467511898277440}
   - component: {fileID: 212862165102912222}
-  - component: {fileID: 58316965585319404}
   - component: {fileID: 50625482416017964}
   - component: {fileID: 114285776430727976}
   - component: {fileID: 95515249368347766}
@@ -376,21 +376,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.42
---- !u!58 &58316965585319404
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1931954430778334}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.42
 --- !u!58 &58436161288254808
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -436,6 +421,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 9
+--- !u!58 &58965018675712230
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1265418894636736}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!60 &60073936518459524
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -628,7 +628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a495da7edd0c841acb88f80b631121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanciaCabreo: 1
+  distanciaCabreo: 2
 --- !u!114 &114197063692782818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -661,6 +661,7 @@ MonoBehaviour:
   tasaAumentoDeCabreo: 1
   tasaDescensoDeCabreo: 1
   audioGrito: {fileID: 82386679920051570}
+  fuerza: 2000
 --- !u!114 &114406659005751022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -753,7 +754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   danyo: 1
-  golpeRetardo: 2
+  golpeRetardo: 0.2
 --- !u!212 &212688185068797890
 SpriteRenderer:
   m_ObjectHideFlags: 1

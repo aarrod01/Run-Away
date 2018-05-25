@@ -20,6 +20,7 @@ public class Fantasma : MonoBehaviour
     public float tasaAumentoDeCabreo;
     public float tasaDescensoDeCabreo;
     public AudioSource audioGrito;
+    public float fuerza=300f;
 
     Monstruo este;
 
@@ -89,7 +90,7 @@ public class Fantasma : MonoBehaviour
             este.enabled = false;
             este.Rb2D.Sleep();
             este.Rb2D.simulated = false;
-            GetComponent<Collider2D>().enabled = false;
+            Destroy(generadorOndas.gameObject);
             audioGrito.Stop();
             Destroy(gameObject, 5f);
         };
@@ -127,17 +128,16 @@ public class Fantasma : MonoBehaviour
         };
     }
 
-    void MoverseHacia(Vector2 dir, float vel)
+    void MoverseHacia(Vector2 dir, float velocidadMaxima)
     {
-        try
+        este.Rb2D.AddForce((dir - este.Rb2D.position).normalized * fuerza);
+
+        if (este.Rb2D.velocity.sqrMagnitude > velocidadMaxima)
         {
-            este.Rb2D.velocity = (dir - este.Rb2D.position).normalized * vel;
+            este.Rb2D.velocity = este.Rb2D.velocity.normalized * velocidadMaxima;
         }
-        catch
-        {
-            este.Rb2D.velocity = Vector2.zero;
-        }
-        GiroInstantaneo(este.Rb2D.velocity);
+
+        GiroInstantaneo(dir - este.Rb2D.position);
     }
 
     void GiroInstantaneo(Vector2 dir)

@@ -845,6 +845,9 @@ MonoBehaviour:
   fraccionMinimaVelocidadHaciaDetras: 0.7
   vidas: 1
   fuerzaEmpujon: 500
+  danyo: 1
+  retardoAtaque: 0
+  duracionAtaque: 1.5
 --- !u!114 &114394218749114680
 MonoBehaviour:
   m_ObjectHideFlags: 1

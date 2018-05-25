@@ -191,46 +191,41 @@ public class ControladorRecorrido : MonoBehaviour
         //Introduce los nodos en la lista que se encuentren en el punto y los que esten proyectando un raycast en las cuatro direcciones cardinales.
         public void IntroducirNodosEnCruz(Vector2 posicion, PuntoRecorrido[] puntosDistanciaManhattan)
         {
-            funcionVacia LlamadaDesactivar;
-            LlamadaDesactivar = () => { };
+            //funcionVacia LlamadaDesactivar;
+            //LlamadaDesactivar = () => { };
             //Comprobamos que el punto no este dentro de uno de los puntos de la red.
-            int i = 0, puntosDentro = 0;
-            while (i < puntosTotales.Length)
+            int i = 0;
+            while (i < puntosTotales.Length&&!puntosTotales[i].GetComponent<Collider2D>().bounds.Contains(posicion))
             {
-                if (puntosTotales[i].GetComponent<Collider2D>().bounds.Contains(posicion))
-                {
-                    float distancia = puntosTotales[i].DistanciaHasta(posicion);
-                    IntroducirNodo(new Nodo(null, puntosTotales[i], null, distancia, distancia + ControladorRecorrido.instance.DistanciaMasCorta(posicion, puntosDistanciaManhattan)));
-                    puntosTotales[i].gameObject.SetActive(false);
-                    funcionVacia auxf =() => { puntosTotales[i].gameObject.SetActive(true); };
-                    LlamadaDesactivar += auxf;
-                    puntosDentro++;
-                }
                 i++;
             }
-
-            //Creamos 4 rayos hacia las cuatro direcciones cardinales(debido a que el mapa tiene pasillos ortogonales).
-            RaycastHit2D[] hit = new RaycastHit2D[4];
-            hit[0] = Physics2D.Raycast(posicion, Vector2.up, Mathf.Infinity, ControladorRecorrido.instance.conQueColisiona);
-            Debug.DrawRay(posicion, Vector2.up, Color.green, 10f);
-            hit[1] = Physics2D.Raycast(posicion, Vector2.right, Mathf.Infinity, ControladorRecorrido.instance.conQueColisiona);
-            Debug.DrawRay(posicion, Vector2.right, Color.green, 10f);
-            hit[2] = Physics2D.Raycast(posicion, Vector2.down, Mathf.Infinity, ControladorRecorrido.instance.conQueColisiona);
-            Debug.DrawRay(posicion, Vector2.down, Color.green, 10f);
-            hit[3] = Physics2D.Raycast(posicion, Vector2.left, Mathf.Infinity, ControladorRecorrido.instance.conQueColisiona);
-            Debug.DrawRay(posicion, Vector2.left, Color.green, 10f);
-
-            PuntoRecorrido aux = null;
-            for (int j = 0; j < 4; j++)
+            if(i!=puntosTotales.Length)
             {
-                if (hit[j].collider != null && (aux = hit[j].collider.GetComponent<PuntoRecorrido>()) != null)
-                {
-                    float distancia = aux.DistanciaHasta(posicion);
-                    IntroducirNodo(new Nodo(null, aux, null, distancia, distancia + ControladorRecorrido.instance.DistanciaMasCorta(posicion, puntosDistanciaManhattan)));
-                }
+                float distancia = puntosTotales[i].DistanciaHasta(posicion);
+                IntroducirNodo(new Nodo(null, puntosTotales[i], null, distancia ,distancia + ControladorRecorrido.instance.DistanciaMasCorta(posicion, puntosDistanciaManhattan)));
             }
+            else
+            {
+                RaycastHit2D[] hit = new RaycastHit2D[4];
+                hit[0] = Physics2D.Raycast(posicion, Vector2.up, Mathf.Infinity, ControladorRecorrido.instance.conQueColisiona);
+                Debug.DrawRay(posicion, Vector2.up, Color.green, 10f);
+                hit[1] = Physics2D.Raycast(posicion, Vector2.right, Mathf.Infinity, ControladorRecorrido.instance.conQueColisiona);
+                Debug.DrawRay(posicion, Vector2.right, Color.green, 10f);
+                hit[2] = Physics2D.Raycast(posicion, Vector2.down, Mathf.Infinity, ControladorRecorrido.instance.conQueColisiona);
+                Debug.DrawRay(posicion, Vector2.down, Color.green, 10f);
+                hit[3] = Physics2D.Raycast(posicion, Vector2.left, Mathf.Infinity, ControladorRecorrido.instance.conQueColisiona);
+                Debug.DrawRay(posicion, Vector2.left, Color.green, 10f);
+                PuntoRecorrido aux = null;
+                for (int j = 0; j < 4; j++)
+                {
+                    if (hit[j].collider != null && (aux = hit[j].collider.GetComponent<PuntoRecorrido>()) != null)
+                    {
+                        float distancia = aux.DistanciaHasta(posicion);
+                        IntroducirNodo(new Nodo(null, aux, null, distancia, distancia + ControladorRecorrido.instance.DistanciaMasCorta(posicion, puntosDistanciaManhattan)));
+                    }
+                }
 
-            LlamadaDesactivar();
+            }
         }
     }
 

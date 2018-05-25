@@ -196,7 +196,7 @@ public class GameManager : MonoBehaviour
 
     int PrioridadMaxima(TipoMonstruo tipo)
     {
-        return 2*monstruosHuidos[(int)tipo] + monstruosIgnorados[(int)tipo];
+        return 10;// 2*monstruosHuidos[(int)tipo] + monstruosIgnorados[(int)tipo];
     }
 
     public void IrAEscena(string nombre)

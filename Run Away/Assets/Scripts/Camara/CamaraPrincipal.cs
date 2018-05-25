@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.PostProcessing;
 
 
 public class CamaraPrincipal : MonoBehaviour 
@@ -16,9 +16,11 @@ public class CamaraPrincipal : MonoBehaviour
     Transform transformCamaraRelativo;
 	Jugador jugador;
 	Vector2 velocidadTraslacionSimple;
+    ColorGradingModel a;
 
     // Use this for initialization
     void Start () {
+        
         GameObject player = GameObject.FindWithTag("Player");
         rbJugador = player.GetComponent<Rigidbody2D>();
         punteroRb = GameObject.FindObjectOfType<PunteroRetardo>().GetComponent<Rigidbody2D>();
@@ -61,4 +63,11 @@ public class CamaraPrincipal : MonoBehaviour
             cameraRb.rotation = Mathf.Max(cameraRb.rotation - Time.deltaTime * velocidadGiro, -anguloGiroMaximo);
         }
     }
+    /*
+    public void CambiarBrillo(float brillo)
+    {
+       ColorGradingModel.Settings aux = a.colorGrading.settings;
+       aux.basic.postExposure = brillo;
+       a.colorGrading.settings = aux;
+    }*/
 }
