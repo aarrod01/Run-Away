@@ -5,17 +5,36 @@ using UnityEngine;
 public class DetectorParedes : MonoBehaviour {
 
     public float longitudRayo = 1f;
+    public float fuerza = 500f;
     LayerMask conQueColisiona;
     float distanciaAlCentro;
+    Rigidbody2D rb;
 
 	// Use this for initialization
 	void Start ()
     {
+        rb = GetComponentInParent<Rigidbody2D>();
         conQueColisiona = LayerMask.GetMask("Obstaculos");
         Collider2D aux = GetComponentInParent<Collider2D>();
         distanciaAlCentro = (aux.bounds.max.x - aux.bounds.min.x)/2f;
 	}
 
+    public void EvitarColision(Vector2 destino)
+    {
+        Vector2 origen = transform.position;
+        Vector2 direccionAPunto = destino - origen;
+        RaycastHit2D[] hit = new RaycastHit2D[] { Physics2D.Raycast(origen, GirarVector(direccionAPunto,30f), longitudRayo, conQueColisiona),
+            Physics2D.Raycast(origen, GirarVector(direccionAPunto,-30f), longitudRayo, conQueColisiona)};
+        if(hit[0].collider!=null)
+        {
+            rb.AddForce(hit[0].normal * fuerza);
+        }
+        else if(hit[1].collider != null)
+        {
+            rb.AddForce(hit[1].normal * fuerza);
+        }
+    }
+    /*
     public Vector2 EvitarColision(Vector2 destino)
     {
         Vector2 origen = transform.position;
@@ -45,7 +64,7 @@ public class DetectorParedes : MonoBehaviour {
 
         } else
             return destino;
-    }
+    }*/
 
     public Vector2 GirarVector(Vector2 v, float giro)
     {

@@ -13,6 +13,7 @@ public class Panzudo : MonoBehaviour {
     Monstruo este;
 
     public float velMovRuta, velMovPerseguir, velMovHuida, velGiro, aceleracionAngular, tiempoAturdimiento = 1f, periodoGiro = 1f;
+    public float fuerza;
     public EstadosMonstruo estadoInicial;
 
     private void Start()
@@ -48,8 +49,9 @@ public class Panzudo : MonoBehaviour {
                         pasos.Play();
                         andando = true;
                         respiracionBusqueda.Stop();
-                        }
-                    MoverseHacia(detectorParedes.EvitarColision(detectorRuta.PosicionPuntoRuta()), velMovRuta);
+                    }
+                    detectorParedes.EvitarColision(detectorRuta.PosicionPuntoRuta());
+                    MoverseHacia(detectorRuta.PosicionPuntoRuta(), velMovRuta);
                     break;
                 case EstadosMonstruo.SiguiendoJugador:
                     if (!cargando)
@@ -61,7 +63,8 @@ public class Panzudo : MonoBehaviour {
                     {
                         este.CambiarEstadoMonstruo(EstadosMonstruo.Desorientado);
                     }
-                    MoverseHacia(detectorParedes.EvitarColision(campoVision.UltimaPosicionJugador()), velMovPerseguir);
+                    detectorParedes.EvitarColision(campoVision.UltimaPosicionJugador());
+                    MoverseHacia(campoVision.UltimaPosicionJugador(), velMovPerseguir);
                     break;
                 case EstadosMonstruo.VolviendoARuta:
                     if (!andando)
@@ -70,7 +73,8 @@ public class Panzudo : MonoBehaviour {
                         andando = !andando;
                         respiracionBusqueda.Stop();
                     }
-                    MoverseHacia(detectorParedes.EvitarColision(detectorRuta.PosicionPuntoRuta()), velMovRuta);
+                    detectorParedes.EvitarColision(detectorRuta.PosicionPuntoRuta());
+                    MoverseHacia(detectorRuta.PosicionPuntoRuta(), velMovRuta);
                     break;
                 case EstadosMonstruo.Desorientado:
                     Pararse();
@@ -152,15 +156,13 @@ public class Panzudo : MonoBehaviour {
     }
 
     //Seguir al jugador, moverse por la ruta y volver a la ruta.
-    void MoverseHacia(Vector2 dir, float vel)
+    void MoverseHacia(Vector2 dir, float velocidadMaxima)
     {
-        try
+        este.Rb2D.AddForce((dir-este.Rb2D.position).normalized * fuerza);
+
+        if(este.Rb2D.velocity.sqrMagnitude > velocidadMaxima)
         {
-            este.Rb2D.velocity = (dir - (Vector2)transform.position).normalized * vel;
-        }
-        catch
-        {
-            este.Rb2D.velocity = Vector2.zero;
+            este.Rb2D.velocity = este.Rb2D.velocity.normalized * velocidadMaxima;
         }
 
         GiroInstantaneo(este.Rb2D.velocity);

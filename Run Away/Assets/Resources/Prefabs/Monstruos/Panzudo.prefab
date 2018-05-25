@@ -263,8 +263,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1988119876634904}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -18, y: 24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4327284371687704}
@@ -296,7 +296,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1145096457434140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.6681595}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4208278081786364}
@@ -824,6 +824,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114159634796186558
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -836,6 +840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   longitudRayo: 1
+  fuerza: 1500
 --- !u!114 &114190152946335632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -871,12 +876,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdf93efd175b4c44c8a4248ea9acdbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numeroDePuntos: 4
+  numeroDePuntos: 8
   puntos:
-  - {x: 16, y: -24}
-  - {x: 16, y: -30}
-  - {x: 32, y: -30}
-  - {x: 16, y: -30}
+  - {x: -8, y: 12}
+  - {x: -8, y: 6}
+  - {x: -12, y: 6}
+  - {x: -12, y: 0}
+  - {x: 4, y: 0}
+  - {x: -12, y: 0}
+  - {x: -12, y: 6}
+  - {x: -8, y: 6}
 --- !u!114 &114273796460615538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -979,6 +988,7 @@ MonoBehaviour:
   aceleracionAngular: 1
   tiempoAturdimiento: 1
   periodoGiro: 5
+  fuerza: 1000
   estadoInicial: 1
 --- !u!114 &114917484888687942
 MonoBehaviour:
