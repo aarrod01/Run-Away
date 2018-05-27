@@ -305,6 +305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224193326025024830}
   - component: {fileID: 114061876141317662}
+  - component: {fileID: 114092850713453128}
   m_Layer: 5
   m_Name: BrightSlider
   m_TagString: Untagged
@@ -867,10 +868,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 224279934408915938}
   m_HandleRect: {fileID: 224884102147914032}
   m_Direction: 0
-  m_MinValue: -2
-  m_MaxValue: 2
+  m_MinValue: -10
+  m_MaxValue: 10
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -888,6 +889,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114092850713453128
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1508343779905074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794a1b8f48a3f6143b6a1eafa4645e56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perfil: {fileID: 11400000, guid: d04532910be9dc54eba4894b02e490c3, type: 2}
 --- !u!114 &114127563755176076
 MonoBehaviour:
   m_ObjectHideFlags: 1

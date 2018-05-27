@@ -754,7 +754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   danyo: 1
-  golpeRetardo: 0.2
+  golpeRetardo: 0.3
 --- !u!212 &212688185068797890
 SpriteRenderer:
   m_ObjectHideFlags: 1
