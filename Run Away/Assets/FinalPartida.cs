@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DynamicLight2D;
+using UnityEngine.SceneManagement;
 
 public class FinalPartida : MonoBehaviour {
 
@@ -53,6 +54,14 @@ public class FinalPartida : MonoBehaviour {
         boton.colors = aux0;
         boton.transform.GetChild(0).GetComponent<CambioColorBoton>().ColorAlEntrar = (negro + blanco) / 2f;
         boton.transform.GetChild(0).GetComponent<Text>().color = bien ? negro: blanco;
+        if(bien)
+        {
+            boton.onClick.AddListener(() => { SceneManager.LoadScene("Creditos"); });
+        }
+        else
+        {
+            boton.onClick.AddListener(() => { SceneManager.LoadScene("Nivel1"); Camera.main.GetComponentInParent<MenuInicial>().NuevaPartida(); });
+        }
         luz.LightColor = bien ? blanco : negro;
         foreach (Text t in textos)
         {
